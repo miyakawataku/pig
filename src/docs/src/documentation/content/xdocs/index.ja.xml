@@ -25,24 +25,24 @@
       <p>Pig ドキュメンテーションは Pig を使い始めるために必要な情報を提供します。</p>
       
       <p>
-        まずは<a href="start.html">はじめよう</a>から読み始めてください。このガイドは Pig の設定方法と単純な Pig Latin 文の書き方を示しています。そうしてスクリプトを書くための準備ができたら、 Pig Latin の演算子とデータ型に親しむために、 <a href="basic.html">Pig Latin の基本</a>マニュアルをご覧ください。
+        まずは <a href="start.html">Overview</a> から読み始めてください。このガイドは Pig の設定方法と単純な Pig Latin 文の書き方を示しています。そうしてスクリプトを書くための準備ができたら、 Pig Latin の演算子とデータ型に親しむために、 <a href="basic.html">Pig Latin Basics</a> マニュアルをご覧ください。
       </p>
         
       <p>
-        関数はほとんどすべての Pig の演算子の部品になることができます。<a href="func.html">組み込み関数</a>ガイドは Pig の組み込み関数について記述しています。<a href="udf.html">ユーザ定義関数</a>マニュアルは、あなた自身が関数を書く方法と、 Piggy Bank リポジトリの関数にアクセスし、貢献する方法について記述します。
+        関数はほとんどすべての Pig の演算子の部品になることができます。 <a href="func.html">Built In Functions</a> ガイドは Pig の組み込み関数について記述しています。 <a href="udf.html">User Defined Functions</a> マニュアルは、あなた自身が関数を書く方法と、 Piggy Bank リポジトリの関数にアクセスし、貢献する方法について記述します。
       </p>
        
       <p>
-        <a href="cont.html">制御構造</a>ガイドで話題となっている仕組みは、あなたの Pig スクリプトの構成、実行を制御するために役立ちます。<a href="perf.html">性能と効率</a>ガイドは、あなたのコードを最適化するために価値のある例示とアドバイスを含んでいます。
+        <a href="cont.html">Control Structures</a> ガイドで話題となっている仕組みは、あなたの Pig スクリプトの構成、実行を制御するために役立ちます。 <a href="perf.html">Performance and Efficiency</a> ガイドは、あなたのコードを最適化するために価値のある例示とアドバイスを含んでいます。
       </p>
        
       <p>
-        最後に、プログラムを実行するためには、<a href="cmds.html">シェルとユーティリティ・コマンド</a>を使ってください。また、プログラムをテストしデバッグするためには、<a href="test.html">テストと診断</a>ツールを使ってください。
+        最後に、プログラムを実行するためには、 <a href="cmds.html">Shell and Utililty Commands</a> を使ってください。また、プログラムをテストしデバッグするためには、 <a href="test.html">Testing and Diagnostics</a> ツールを使ってください。
       </p>
       
       <p>
         質問がある場合は、
-        <a href="http://hadoop.apache.org/pig/mailing_lists.html">Pig メーリングリスト群</a>で聞いてください。
+        <a href="http://hadoop.apache.org/pig/mailing_lists.html">Pig のメーリングリスト群</a>で聞いてください。
       </p>
   </body>
 </document>
