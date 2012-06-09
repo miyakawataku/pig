@@ -18,7 +18,7 @@
 <!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
 <document>
   <header>
-    <title>Getting Started</title>
+    <title>Getting Started (はじめよう！)</title>
   </header>
   <body>
   
@@ -54,26 +54,26 @@
    
 <!-- ++++++++++++++++++++++++++++++++++ -->        
  <section id="download">
- <title>Download Pig</title>
-	<p>To get a Pig distribution, do the following:</p>
+ <title>Pig のダウンロード</title>
+	<p>Pig を入手するには、次のようにしてください:</p>
 	
 	<ol>
-	<li>Download a recent stable release from one of the Apache Download Mirrors 
-	(see <a href="http://hadoop.apache.org/pig/releases.html"> Pig Releases</a>).</li>
+	<li>Apache ダウンロードミラーから新しめの安定バージョンをダウンロードしてください
+	(<a href="http://hadoop.apache.org/pig/releases.html">Pig Releases</a> を見てください).</li>
 	
-    <li>Unpack the downloaded Pig distribution, and then note the following:
+    <li>ダウンロードした Pig のアーカイブを解凍して、次のことを確認してください:
 	    <ul>
-	    <li>The Pig script file, pig, is located in the bin directory (/pig-n.n.n/bin/pig). 
-	    The Pig environment variables are described in the Pig script file.</li>
-	    <li>The Pig properties file, pig.properties, is located in the conf directory (/pig-n.n.n/conf/pig.properties). 
-	    You can specify an alternate location using the PIG_CONF_DIR environment variable.</li>
+	    <li>Pig を実行するためのシェルスクリプト pig が bin ディレクトリに配置されていること (/pig-n.n.n/bin/pig)。
+        Pig 実行のための環境変数についてシェルスクリプト内に説明があります。</li>
+	    <li>Pig のプロパティファイル pig.properties が conf ディレクトリ (/pig-n.n.n/conf/pig.properties) に配置されていること。
+        他の場所に設定ファイルを置く時は、 PIG_CONF_DIR 環境変数にディレクトリを指定する必要があります。</li>
 	</ul>	
 	</li>
-	<li>Add /pig-n.n.n/bin to your path. Use export (bash,sh,ksh) or setenv (tcsh,csh). For example: <br></br>
+	<li>/pig-n.n.n/bin をパスに追加してください。bash, sh, ksh では export コマンドを、 tcsh, csh では setenv コマンドを使ってください。例: <br></br>
 	<code>$ export PATH=/&lt;my-path-to-pig&gt;/pig-n.n.n/bin:$PATH</code>
 </li>
 <li>
-Test the Pig installation with this simple command: <code>$ pig -help</code>
+次のコマンドで、 Pig がインストールできているかどうか確かめてください: <code>$ pig -help</code>
 </li>
 </ol>
 
