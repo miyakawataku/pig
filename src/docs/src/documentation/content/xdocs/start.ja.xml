@@ -81,13 +81,13 @@
 
 <!-- ++++++++++++++++++++++++++++++++++ -->
 <section id="build">
-<title>Build Pig</title>
-      <p>To build pig, do the following:</p>
+<title>Pig のビルド</title>
+      <p>Pig のビルドは、次のようにしてください:</p>
      <ol>
-	  <li> Check out the Pig code from SVN: <code>svn co http://svn.apache.org/repos/asf/pig/trunk</code> </li>
-	  <li> Build the code from the top directory: <code>ant</code> <br></br>
-	  If the build is successful, you should see the pig.jar file created in that directory. </li>	
-	  <li> Validate the pig.jar  by running a unit test: <code>ant test</code></li>
+	  <li>Subversion リポジトリから Pig をチェックアウト: <code>svn co http://svn.apache.org/repos/asf/pig/trunk</code> </li>
+      <li>トップディレクトリでビルドを実行: <code>ant</code> <br></br>
+      トップディレクトリに pig.jar が作られていたら成功</li>	
+	  <li>pig.jar をテスト: <code>ant test</code></li>
      </ol>
  </section>
 </section>
