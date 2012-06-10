@@ -63,7 +63,7 @@
 	
     <li>ダウンロードした Pig のアーカイブを解凍して、次のことを確認してください:
 	    <ul>
-	    <li>Pig を実行するためのシェルスクリプト pig が bin ディレクトリに配置されていること (/pig-n.n.n/bin/pig)。
+	    <li>Pig を実行するためのシェルスクリプト pig が bin ディレクトリに配置されていること (/pig-n.n.n/bin/pig) 。
         Pig 実行のための環境変数についてシェルスクリプト内に説明があります。</li>
 	    <li>Pig のプロパティファイル pig.properties が conf ディレクトリ (/pig-n.n.n/conf/pig.properties) に配置されていること。
         他の場所に設定ファイルを置く時は、 PIG_CONF_DIR 環境変数にディレクトリを指定する必要があります。</li>
@@ -96,21 +96,21 @@
     
    <!-- RUNNING PIG  -->
    <section id="run">
-	<title>Running Pig </title> 
-	<p>You can run Pig (execute Pig Latin statements and Pig commands) using various modes.</p>
+	<title>Pig の実行</title> 
+	<p>Pig はいくつかのモードで実行できます。</p>
 	<table>
 	<tr>
 	<td></td>
-    <td><strong>Local Mode</strong></td>
-    <td><strong>Mapreduce Mode</strong></td>
+    <td><strong>ローカルモード</strong></td>
+    <td><strong>Mapreduce モード</strong></td>
 	</tr>
 	<tr>
-	<td><strong>Interactive Mode </strong></td>
+	<td><strong>対話モード</strong></td>
     <td>yes</td>
     <td>yes</td>
 	</tr>
 	<tr>
-	<td><strong>Batch Mode</strong> </td>
+	<td><strong>バッチモード</strong> </td>
     <td>yes</td>
     <td>yes</td>
 	</tr>
@@ -118,44 +118,44 @@
 	
 	<!-- ++++++++++++++++++++++++++++++++++ -->
 	   <section id="execution-modes">
-	<title>Execution Modes</title> 
-<p>Pig has two execution modes or exectypes: </p>
+	<title>実行モード</title> 
+<p>Pig には二種類の実行モードがあります: </p>
 <ul>
-<li><strong>Local Mode</strong> - To run Pig in local mode, you need access to a single machine; all files are installed and run using your local host and file system. Specify local mode using the -x flag (pig -x local).
+<li><strong>ローカルモード</strong> - Pig をローカルモードで実行するのに必要なのはマシンが一台だけです。全ファイルがローカルマシンに配置され、ローカルマシン上で実行されます。ローカルモードで実行するには -x フラグをつけてください (pig -x local) 。
 </li>
-<li><strong>Mapreduce Mode</strong> - To run Pig in mapreduce mode, you need access to a Hadoop cluster and HDFS installation. Mapreduce mode is the default mode; you can, <em>but don't need to</em>, specify it using the -x flag (pig OR pig -x mapreduce).
+  <li><strong>MapReduce モード</strong> - Pig を MapReduceモードで実行するには Hadoop クラスタが必要です。MapReduce モードはデフォルトのモードです。 -x フラグで MapReduce モードでの実行を指定できますが、<em>必須ではありません</em> (pig あるいは pig -x mapreduce).
 </li>
 </ul>
 <p></p>
 
-<p>You can run Pig in either mode using the "pig" command (the bin/pig Perl script) or the "java" command (java -cp pig.jar ...).
+<p>どちらのモードも "pig" コマンドで実行できます (実体は Perl スクリプト bin/pig) 。または、 "java" コマンドで実行することも可能です (java -cp pig.jar ...) 。
 </p>
 
 
 <section>
-<title>Examples</title>
+<title>例</title>
 
-<p>This example shows how to run Pig in local and mapreduce mode using the pig command.</p>
+<p>pig コマンドでローカルモードと MapReduce モードの双方で実行する例。</p>
 <source>
-/* local mode */
+/* ローカルモード */
 $ pig -x local ...
  
  
-/* mapreduce mode */
+/* MapReduce モード */
 $ pig ...
-or
+あるいは
 $ pig -x mapreduce ...
 </source>
 
-<p>This example shows how to run Pig in local and mapreduce mode using the java command.</p>
+<p>java コマンドでローカルモードと MapReduce モードの双方で実行する例。</p>
 <source>
-/* local mode */
+/* ローカルモード */
 $ java -cp pig.jar org.apache.pig.Main -x local ...
 
 
-/* mapreduce mode */
+/* MapReduce モード */
 $ java -cp pig.jar org.apache.pig.Main ...
-or
+あるいは
 $ java -cp pig.jar org.apache.pig.Main -x mapreduce ...
 </source>
 
@@ -164,33 +164,33 @@ $ java -cp pig.jar org.apache.pig.Main -x mapreduce ...
 
 <!-- ++++++++++++++++++++++++++++++++++ -->
 <section id="interactive-mode">
-<title>Interactive Mode</title>
-<p>You can run Pig in interactive mode using the Grunt shell. Invoke the Grunt shell using the "pig" command (as shown below) and then enter your Pig Latin statements and Pig commands interactively at the command line.
+<title>対話モード</title>
+<p>Grunt シェルは Pig の対話モードです。Grunt シェルを起動するには下記のように "pig" コマンドを実行します。 Grunt シェルでは Pig Latin 文と Pig コマンドを対話的に実行できます。
 </p>
 
 <section>
-<title>Example</title>
-<p>These Pig Latin statements extract all user IDs from the /etc/passwd file. First, copy the /etc/passwd file to your local working directory. Next, invoke the Grunt shell by typing the "pig" command (in local or hadoop mode). Then, enter the Pig Latin statements interactively at the grunt prompt (be sure to include the semicolon after each statement). The DUMP operator will display the results to your terminal screen.</p>
+<title>例</title>
+<p>下記の Pig Latin は /etc/passwd ファイルからすべてのユーザ ID を列挙します。はじめに /etc/passwd ファイルを作業ディレクトリにコピーしてください。次に、 "pig" コマンドで Grunt シェルを起動してください (ローカルモードあるいは MapReduce モードで) 。次に、Grunt シェルのプロンプトで Pig Latin 文を対話的に入力してください (その際、文ごとにセミコロンを忘れないように) 。 DUMP 演算子を打つと結果が端末に表示されます</p>
 <source>
 grunt&gt; A = load 'passwd' using PigStorage(':'); 
 grunt&gt; B = foreach A generate $0 as id; 
 grunt&gt; dump B; 
 </source>
 
-<p><strong>Local Mode</strong></p>
+<p><strong>ローカルモード</strong></p>
 <source>
 $ pig -x local
 ... - Connecting to ...
 grunt> 
 </source>
 
-<p><strong>Mapreduce Mode</strong> </p>
+<p><strong>MapReduce モード</strong> </p>
 <source>
 $ pig -x mapreduce
 ... - Connecting to ...
 grunt> 
 
-or
+あるいは
 
 $ pig 
 ... - Connecting to ...
@@ -201,30 +201,30 @@ grunt>
 
 <!-- ++++++++++++++++++++++++++++++++++ -->
 <section id="batch-mode">
-<title>Batch Mode</title>
+<title>バッチモード</title>
 
-<p>You can run Pig in batch mode using <a href="#pig-scripts">Pig scripts</a> and the "pig" command (in local or hadoop mode).</p>
+<p><a href="#pig-scripts">Pig スクリプト</a> と "pig" コマンド (ローカルモードあるいは MapReduce モード) を使って Pig をバッチモードで実行できます。</p>
 
 <section>
-<title>Example</title>
+<title>例</title>
 
-<p>The Pig Latin statements in the Pig script (id.pig) extract all user IDs from the /etc/passwd file. First, copy the /etc/passwd file to your local working directory. Next, run the Pig script from the command line (using local or mapreduce mode). The STORE operator will write the results to a file (id.out).</p>
+<p>下記の Pig スクリプト (id.pig) は /etc/passwd ファイルから全ユーザ ID を列挙します。はじめに /etc/passwd ファイルを作業ディレクトリにコピーしてください。次に、コマンドラインから Pig スクリプトを実行してください (ローカルモードあるいは MapReduce モードで) 。最後の STORE 演算子で結果がファイル (id.out) に出力されます。</p>
 <source>
 /* id.pig */
 
-A = load 'passwd' using PigStorage(':');  -- load the passwd file 
-B = foreach A generate $0 as id;  -- extract the user IDs 
-store B into ‘id.out’;  -- write the results to a file name id.out
+A = load 'passwd' using PigStorage(':');  -- パスワードファイルをロード
+B = foreach A generate $0 as id;  -- ユーザ ID を抜き出す
+store B into 'id.out'; -- 結果を id.out に書き込む
 </source>
 
-<p><strong>Local Mode</strong></p>
+<p><strong>ローカルモード</strong></p>
 <source>
 $ pig -x local id.pig
 </source>
-<p><strong>Mapreduce Mode</strong> </p>
+<p><strong>MapReduce モード</strong> </p>
 <source>
 $ pig id.pig
-or
+あるいは
 $ pig -x mapreduce id.pig
 </source>
 </section>
@@ -233,43 +233,43 @@ $ pig -x mapreduce id.pig
     
    <!-- PIG SCRIPTS -->
    <section id="pig-scripts">
-	<title>Pig Scripts</title>
+	<title>Pig スクリプト</title>
 	
-<p>Use Pig scripts to place Pig Latin statements and Pig commands in a single file. While not required, it is good practice to identify the file using the *.pig extension.</p>	
+<p>Pig Latin 文と Pig コマンドは Pig スクリプトとして 1 ファイルにまとめられます。特に必要でない限り、 Pig スクリプトの拡張子は *.pig とするのがよい習慣です。</p>	
 	
-<p>You can run Pig scripts from the command line and from the Grunt shell
-(see the <a href="cmds.html#run">run</a> and <a href="cmds.html#exec">exec</a> commands). </p>
+<p>Pig スクリプトはコマンドラインからも Grunt シェルからも実行できます
+(詳しくは <a href="cmds.html#run">run</a> コマンドと <a href="cmds.html#exec">exec</a> コマンドを見てください) 。</p>
 	
-<p>Pig scripts allow you to pass values to parameters using <a href="cont.html#Parameter-Sub">parameter substitution</a>. </p>
+<p><a href="cont.html#Parameter-Sub">パラメータ置換</a>を使うとコマンドラインパラメータから値が渡せます。</p>
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++ -->	
-   <p id="comments"><strong>Comments in Scripts</strong></p>
+   <p id="comments"><strong>スクリプト中のコメント</strong></p>
    
-   <p>You can include comments in Pig scripts:</p>
+   <p>Pig スクリプトの中にはコメントを書くことができます:</p>
    <ul>
       <li>
-         <p>For multi-line comments use /* …. */</p>
+        <p>複数行コメントは 「/* ... */」</p>
       </li>
       <li>
-         <p>For single-line comments use --</p>
+        <p>単一行コメントは 「-- ...」</p>
       </li>
    </ul>
 <source>
 /* myscript.pig
-My script is simple.
-It includes three Pig Latin statements.
+単純なスクリプトです
+3 つの Pig Latin 文で構成されています
 */
 
-A = LOAD 'student' USING PigStorage() AS (name:chararray, age:int, gpa:float); -- loading data
-B = FOREACH A GENERATE name;  -- transforming data
-DUMP B;  -- retrieving results
+A = LOAD 'student' USING PigStorage() AS (name:chararray, age:int, gpa:float); -- データをロード
+B = FOREACH A GENERATE name;  -- データ変換
+DUMP B;  -- 結果を取得
 </source>   
 	
 <!-- +++++++++++++++++++++++++++++++++++++++++++ -->		
 
-<p id="dfs"><strong>Scripts and Distributed File Systems</strong></p>
+<p id="dfs"><strong>スクリプトと分散ファイルシステム</strong></p>
 
-<p>Pig supports running scripts (and Jar files) that are stored in HDFS, Amazon S3, and other distributed file systems. The script's full location URI is required (see <a href="basic.html#REGISTER">REGISTER</a> for information about Jar files). For example, to run a Pig script on HDFS, do the following:</p>
+<p>Pig は HDFS, Amazon S3 といったような分散ファイルシステム上の Pig スクリプトの実行 (および Jar ファイルの登録) をサポートしています。実行の際にはスクリプトのフル URI が必要です (Jar ファイルについては <a href="basic.html#register">REGISTER</a> を見てください) 。たとえば、 HDFS 上の Pig スクリプトを実行するためには、次のようにします:</p>
 <source>
 $ pig hdfs://nn.mydomain.com:9020/myscripts/script.pig
 </source> 
