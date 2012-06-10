@@ -280,39 +280,33 @@ $ pig hdfs://nn.mydomain.com:9020/myscripts/script.pig
     
    <!-- PIG LATIN STATEMENTS -->
    <section id="pl-statements">
-	<title>Pig Latin Statements</title>	
-   <p>Pig Latin statements are the basic constructs you use to process data using Pig. 
-   A Pig Latin statement is an operator that takes a <a href="basic.html#relations">relation</a> as input and produces another relation as output. 
-   (This definition applies to all Pig Latin operators except LOAD and STORE which read data from and write data to the file system.) 
-   Pig Latin statements may include <a href="basic.html#Expressions">expressions</a> and <a href="basic.html#Schemas">schemas</a>. 
-   Pig Latin statements can span multiple lines and must end with a semi-colon ( ; ).  
-   By default, Pig Latin statements are processed using <a href="perf.html#multi-query-execution">multi-query execution</a>.  
- </p>
+	<title>Pig Latin 文</title>	
+   <p>Pig Latin 文は Pig によるデータ処理の基本構成物です。 Pig Latin 文は<a href="basic.html#relations">関係</a>を入力に取り、別の関係を出力する演算子です (この定義は、ファイルシステムからデータを読み込む LOAD と、ファイルシステムにデータを書き出す STORE を除く、すべての Pig Latin 演算子にあてはまります) 。 Pig Latin の文は<a href="basic.html#expressions">式</a>と<a href="basic.html#Schemas">スキーマ</a>を含むことがあります。 Pig Latin の文は複数行に渡ることがあります。また、 Pig Latin の文はセミコロン (「;」) で終わる必要があります。デフォルトでは、 Pig Latin の文は<a href="perf.html#multi-query-execution">複数クエリ実行</a> で処理されます。</p>
    
-   <p>Pig Latin statements are generally organized as follows:</p>
+   <p>Pig Latin は通常次のように構成されます:</p>
    <ul>
       <li>
-         <p>A LOAD statement to read data from the file system. </p>
+         <p>LOAD 文でファイルシステムからデータを読み込む</p>
       </li>
       <li>
-         <p>A series of "transformation" statements to process the data. </p>
+         <p>データを処理する一連の変換処理</p>
       </li>
       <li>
-         <p>A DUMP statement to view results or a STORE statement to save the results.</p>
+         <p>結果を表示する DUMP 文、あるいは結果を保存するための STORE 文</p>
       </li>
    </ul>
 <p></p>
-   <p>Note that a DUMP or STORE statement is required to generate output.</p>
+   <p>出力を行うためには DUMP 文か STORE 文が必要です。</p>
 <ul>
 <li>
-<p>In this example Pig will validate, but not execute, the LOAD and FOREACH statements.</p>
+<p>次の例では、 Pig は LOAD 文と FOREACH の妥当性検証を行いますが、実行はしません。</p>
 <source>
 A = LOAD 'student' USING PigStorage() AS (name:chararray, age:int, gpa:float);
 B = FOREACH A GENERATE name;
 </source> 
 </li>
 <li>
-<p>In this example, Pig will validate and then execute the LOAD, FOREACH, and DUMP statements.</p>
+<p>次の例では、 Pig は LOAD 文、 FOREACH 文、 DUMP 文の妥当性検証を行ったのちに、実行します。</p>
 <source>
 A = LOAD 'student' USING PigStorage() AS (name:chararray, age:int, gpa:float);
 B = FOREACH A GENERATE name;
