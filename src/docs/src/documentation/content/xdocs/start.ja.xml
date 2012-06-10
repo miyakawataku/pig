@@ -58,22 +58,21 @@
 	<p>Pig を入手するには、次のようにしてください:</p>
 	
 	<ol>
-	<li>Apache ダウンロードミラーから新しめの安定バージョンをダウンロードしてください
-	(<a href="http://hadoop.apache.org/pig/releases.html">Pig Releases</a> を見てください).</li>
+	<li>Apache ダウンロードミラーから新しめの安定バージョンをダウンロード
+	(<a href="http://hadoop.apache.org/pig/releases.html">Pig Releases</a> を見てください) 。</li>
 	
-    <li>ダウンロードした Pig のアーカイブを解凍して、次のことを確認してください:
+    <li>ダウンロードした Pig のアーカイブを解凍して、次のことを確認:
 	    <ul>
 	    <li>Pig を実行するためのシェルスクリプト pig が bin ディレクトリに配置されていること (/pig-n.n.n/bin/pig) 。
         Pig 実行のための環境変数についてシェルスクリプト内に説明があります。</li>
-	    <li>Pig のプロパティファイル pig.properties が conf ディレクトリ (/pig-n.n.n/conf/pig.properties) に配置されていること。
-        他の場所に設定ファイルを置く時は、 PIG_CONF_DIR 環境変数にディレクトリを指定する必要があります。</li>
+	    <li>Pig のプロパティファイル pig.properties が conf ディレクトリ (/pig-n.n.n/conf/pig.properties) に配置されていること。他の場所に設定ファイルを置く時は、 PIG_CONF_DIR 環境変数にディレクトリを指定する必要があります。</li>
 	</ul>	
 	</li>
-	<li>/pig-n.n.n/bin をパスに追加してください。bash, sh, ksh では export コマンドを、 tcsh, csh では setenv コマンドを使ってください。例: <br></br>
+	<li>/pig-n.n.n/bin をパスに追加。 bash, sh, ksh では export コマンドを、 tcsh, csh では setenv コマンドを使ってください。例: <br></br>
 	<code>$ export PATH=/&lt;my-path-to-pig&gt;/pig-n.n.n/bin:$PATH</code>
 </li>
 <li>
-次のコマンドで、 Pig がインストールできているかどうか確かめてください: <code>$ pig -help</code>
+次のコマンドで、 Pig がインストールできていることを確認: <code>$ pig -help</code>
 </li>
 </ol>
 
