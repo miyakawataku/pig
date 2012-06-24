@@ -299,14 +299,14 @@ $ pig hdfs://nn.mydomain.com:9020/myscripts/script.pig
    <p>出力を行うためには DUMP 文か STORE 文が必要です。</p>
 <ul>
 <li>
-<p>次の例では、 Pig は LOAD 文と FOREACH の妥当性検証を行いますが、実行はしません。</p>
+<p>次の例は、 LOAD 文と FOREACH の妥当性検証を行いますが、実行はしません。</p>
 <source>
 A = LOAD 'student' USING PigStorage() AS (name:chararray, age:int, gpa:float);
 B = FOREACH A GENERATE name;
 </source> 
 </li>
 <li>
-<p>次の例では、 Pig は LOAD 文、 FOREACH 文、 DUMP 文の妥当性検証を行ったのちに、実行します。</p>
+<p>次の例は、 LOAD 文、 FOREACH 文、 DUMP 文の妥当性検証を行ったのちに、実行します。</p>
 <source>
 A = LOAD 'student' USING PigStorage() AS (name:chararray, age:int, gpa:float);
 B = FOREACH A GENERATE name;
