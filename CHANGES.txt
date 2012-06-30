@@ -28,6 +28,12 @@ PIG-2727: PigStorage Source tagging does not need pig.splitCombination to be tur
 
 BUG FIXES
 
+PIG-2761: With hadoop23 importing modules inside python script does not work (rohini via daijy)
+
+PIG-2759: Typo in document "Built In Functions" (daijy)
+
+PIG-2745: Pig e2e test RubyUDFs fails in MR mode when running from tarball (cheolsoo via daijy)
+
 PIG-2741: Python script throws an NameError: name 'Configuration' is not defined in case cache dir is not created
 (knoguchi via daijy)
 
@@ -211,6 +217,8 @@ PIG-2228: support partial aggregation in map task (thejas)
 
 BUG FIXES
 
+PIG-2775: Register jar does not goes to classpath in some cases (daijy)
+
 PIG-2195: AvroStorage fails to STORE when LOADing via PigStorage (billgraham via gates)
 
 PIG-2202: AvroStorage doesn't work with Avro 1.5.1 (billgraham via gates)
@@ -373,6 +381,8 @@ inclusion of test classes (cos via gates)
 Release 0.9.3
 
 IMPROVEMENT
+
+PIG-2766: Pig-HCat Usability (vikram.dixit via daijy)
 
 PIG-2619: HBaseStorage constructs a Scan with cacheBlocks = false (andy lindeman via jcoveney)
 
