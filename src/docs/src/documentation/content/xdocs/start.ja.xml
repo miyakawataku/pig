@@ -321,67 +321,56 @@ DUMP B;
   
    <!-- ++++++++++++++++++++++++++++++++++ -->   
    <section id="data-load">
-   <title>Loading Data</title>
-   <p>Use the  <a href="basic.html#LOAD">LOAD</a> operator and the <a href="udf.html#load-store-functions">load/store functions</a> to read data into Pig (PigStorage is the default load function).</p>
+   <title>データ読み込み</title>
+   <p>データを読み込むには、 <a href="basic.html#LOAD">LOAD 演算子</a>と<a href="udf.html#load-store-functions">ロード関数 (デフォルトは PigStorage 関数) </a>を使ってください。</p>
    </section>
   
    <!-- ++++++++++++++++++++++++++++++++++ -->   
    <section id="data-work-with">
-   <title>Working with Data</title>
-   <p>Pig allows you to transform data in many ways. As a starting point, become familiar with these operators:</p>
+   <title>データ処理</title>
+   <p>Pig では様々な方法でデータを変換できます。まずは、次に挙げる演算子に慣れるのがよいでしょう:</p>
    <ul>
       <li>
-         <p>Use the <a href="basic.html#FILTER">FILTER</a> operator to work with tuples or rows of data. 
-         Use the <a href="basic.html#FOREACH">FOREACH</a> operator to work with columns of data.</p>
+         <p>データのタプル (すなわち行) を処理するには <a href="basic.html#filter">FILTER</a> 演算子を使います。列を処理するには <a href="basic.html#foreach">FOREACH</a> 演算子を使います。</p>
       </li>
       <li>
-         <p>Use the <a href="basic.html#GROUP ">GROUP</a> operator to group data in a single relation. 
-         Use the <a href="basic.html#COGROUP ">COGROUP</a>,
-         <a href="basic.html#join-inner">inner JOIN</a>, and
-         <a href="basic.html#join-outer">outer JOIN</a>
-         operators  to group or join data in two or more relations.</p>
+         <p>一つの関係の中でデータをグループ化するためには <a href="basic.html#GROUP">GROUP</a> 演算子を使います。複数の関係のデータを結合・グループ化するためには、 <a href="basic.html#COGROUP">COGROUP</a> 演算子、 <a href="basic.html#join-inner">内部 JOIN</a> 演算子、 <a href="basic.html#join-outer">外部 JOIN</a> 演算子を使います。</p>
       </li>
       <li>
-         <p>Use the <a href="basic.html#UNION">UNION</a> operator to merge the contents of two or more relations. 
-         Use the <a href="basic.html#SPLIT">SPLIT</a> operator to partition the contents of a relation into multiple relations.</p>
+         <p>複数の関係をマージするためには <a href="basic.html#UNION">UNION</a> 演算子を使います。一つの関係を複数の関係に分割するためには <a href="basic.html#SPLIT">SPLIT</a> 演算子を使います。</p>
       </li>
    </ul>
    </section>
    
 <!-- ++++++++++++++++++++++++++++++++++ --> 
       <section id="data-store">
-   <title>Storing Intermediate Results</title>
+   <title>中間データの保管</title>
 
-      <p>Pig stores the intermediate data generated between MapReduce jobs in a temporary location on HDFS. 
-   This location must already exist on HDFS prior to use. 
-   This location can be configured using the pig.temp.dir property. The property's default value is "/tmp" which is the same 
-   as the hardcoded location in Pig 0.7.0 and earlier versions. </p>
+      <p>MapReduce ジョブの中間データは HDFS 上の一時領域に保管されます。この一時領域はあらかじめ HDFS 上に存在している必要があります。一時領域の場所は pig.temp.dir プロパティで設定可能です。プロパティのデフォルト値は "/tmp" です。これは Pig 0.7.0 以前のバージョンでハードコードされていた値と同じです。</p>
       </section>
    
     <section id="data-results">
-   <title>Storing Final Results</title>
-   <p>Use the  <a href="basic.html#STORE">STORE</a> operator and the <a href="udf.html#load-store-functions">load/store functions</a> 
-   to write results to the file system (PigStorage is the default store function). </p>
-<p><strong>Note:</strong> During the testing/debugging phase of your implementation, you can use DUMP to display results to your terminal screen. 
-However, in a production environment you always want to use the STORE operator to save your results (see <a href="perf.html#Store-Dump">Store vs. Dump</a>).</p>   
+   <title>最終結果の保管</title>
+   <p>ファイルシステムをに結果を書き込むには、 <a href="basic.html#store">STORE</a> 演算子と<a href="udf.html#load-store-functions">ストア関数 (デフォルトは PigStorage 関数) </a>を使います。</p>
+   <p><strong>注記:</strong> テスト段階やデバッグ段階では、 DUMP を使って端末に結果を表示することができます。しかし、本番環境では STORE 演算子を使うべきです (<a href="perf.html#store-dump">Store 対 Dump</a> を読んでください) 。</p>
    </section> 
 
  <!-- ++++++++++++++++++++++++++++++++++ -->     
    <section id="debug">
-   <title>Debugging Pig Latin</title>
-   <p>Pig Latin provides operators that can help you debug your Pig Latin statements:</p>
+   <title>Pig Latin のデバッグ</title>
+   <p>Pig Latin にはデバッグ支援のための演算子があります:</p>
    <ul>
       <li>
-         <p>Use the  <a href="test.html#DUMP">DUMP</a> operator to display results to your terminal screen. </p>
+         <p><a href="test.html#DUMP">DUMP 演算子:</a> 結果を端末に表示します。</p>
       </li>
       <li>
-         <p>Use the  <a href="test.html#DESCRIBE">DESCRIBE</a> operator to review the schema of a relation.</p>
+         <p><a href="test.html#DESCRIBE">DESCRIBE 演算子:</a> 関係のスキーマを表示します。</p>
       </li>
       <li>
-         <p>Use the  <a href="test.html#EXPLAIN">EXPLAIN</a> operator to view the logical, physical, or map reduce execution plans to compute a relation.</p>
+         <p><a href="test.html#EXPLAIN">EXPLAIN 演算子:</a> 論理実行計画、物理実行計画、 MapReduce 実行計画を表示します。</p>
       </li>
       <li>
-         <p>Use the  <a href="test.html#ILLUSTRATE">ILLUSTRATE</a> operator to view the step-by-step execution of a series of statements.</p>
+         <p><a href="test.html#ILLUSTRATE">ILLUSTRATE 演算子:</a> 文が実行される過程をステップ・バイ・ステップで表示します。</p>
       </li>
    </ul>
 </section> 
