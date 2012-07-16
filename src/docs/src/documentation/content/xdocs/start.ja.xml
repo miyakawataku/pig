@@ -428,27 +428,27 @@ $ export PATH=/&lt;my-path-to-pig&gt;/pig-0.9.0/bin:$PATH
 <source>
 $ export PIG_HOME=/&lt;my-path-to-pig&gt;/pig-0.9.0 
 </source></li>
-<li>Create the pigtutorial.tar.gz file:
+<li>pigtutorial.tar.gz ファイルを作成:
 <ul>
-    <li>Move to the Pig tutorial directory (.../pig-0.9.0/tutorial).</li>
-	<li>Edit the build.xml file in the tutorial directory. 
+    <li>Pig チュートリアルのディレクトリに移動 (.../pig-0.9.0/tutorial) 。</li>
+	<li>チュートリアルディレクトリ内の build.xml ファイルを編集。
 <source>
-Change this:   &lt;property name="pigjar" value="../pig.jar" /&gt;
-To this:       &lt;property name="pigjar" value="../pig-0.9.0-core.jar" /&gt;
+変更前:   &lt;property name="pigjar" value="../pig.jar" /&gt;
+変更後:   &lt;property name="pigjar" value="../pig-0.9.0-core.jar" /&gt;
 </source>
 	</li>
-	<li>Run the "ant" command from the tutorial directory. This will create the pigtutorial.tar.gz file.
+	<li>チュートリアルディレクトリ内で "ant" コマンドを実行。これで pigtutorial.tar.gz ファイルが作成される。
 	</li>
 </ul>
 
 </li>
-<li>Copy the pigtutorial.tar.gz file from the Pig tutorial directory to your local directory. </li>
-<li>Unzip the pigtutorial.tar.gz file.
+<li>作成された pigtutorial.tar.gz ファイルを作業用のディレクトリに移動。</li>
+<li>pigtutorial.tar.gz ファイルを展開。
 <source>
 $ tar -xzf pigtutorial.tar.gz
 </source>
 </li>
-<li>A new directory named pigtmp is created. This directory contains the <a href="#Pig+Tutorial+Files">Pig Tutorial Files</a>. These files work with Hadoop 0.20.2 and include everything you need to run <a href="#pig-script-1">Pig Script 1</a> and <a href="#pig-script-2">Pig Script 2</a>.</li>
+<li>pigtmp という名前の新しいディレクトリが作成されます。このディレクトリは <a href="#Pig+Tutorial+Files">Pig チュートリアルファイル</a> を含んでいます。これらのファイルは Hadoop 0.20.2 で動作します。また、 <a href="#pig-script-1">Pig スクリプト 1</a> と <a href="#pig-script-2">Pig スクリプト 2</a> を実行するのに必要なものすべてが含まれています。</li>
 </ol>
 
 
