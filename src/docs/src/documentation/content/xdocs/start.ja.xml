@@ -457,18 +457,18 @@ $ tar -xzf pigtutorial.tar.gz
 
  <!-- ++++++++++++++++++++++++++++++++++ --> 
 <section>
-<title> Running the Pig Scripts in Local Mode</title>
+<title>ローカルモードで Pig スクリプトを実行</title>
 
-<p>To run the Pig scripts in local mode, do the following: </p>
+<p>ローカルモードで Pig スクリプトを実行するためには次のようにします:</p>
 <ol>
-<li>Move to the pigtmp directory.</li>
-<li>Execute the following command (using either script1-local.pig or script2-local.pig). 
+<li>pigtmp ディレクトリに移動</li>
+<li>次のコマンドを実行 (script1-local.pig か script2-local.pig のどちらかを利用)
 <source>
 $ pig -x local script1-local.pig
 </source>
 </li>
-<li>Review the result files, located in the part-r-00000 directory.
-<p>The output may contain a few Hadoop warnings which can be ignored:</p>
+<li>part-r-00000 ディレクトリに格納された結果ファイルの内容を確認。
+<p>次のような Hadoop の警告メッセージが出力されていますが、無視して構いません:</p>
 <source>
 2010-04-08 12:55:33,642 [main] INFO  org.apache.hadoop.metrics.jvm.JvmMetrics 
 - Cannot initialize JVM Metrics with processName=JobTracker, sessionId= - already initialized
@@ -479,18 +479,18 @@ $ pig -x local script1-local.pig
 
  <!-- ++++++++++++++++++++++++++++++++++ --> 
 <section>
-<title> Running the Pig Scripts in Mapreduce Mode</title>
+<title>MapReduce モードで Pig スクリプトを実行</title>
 
-<p>To run the Pig scripts in mapreduce mode, do the following: </p>
+<p>Pig スクリプトを MapReduce モードで実行するためには、次のようにします:</p>
 <ol>
-<li>Move to the pigtmp directory.</li>
-<li>Copy the excite.log.bz2 file from the pigtmp directory to the HDFS directory.
+<li>pigtmp ディレクトリに移動。</li>
+<li>excite.log.bz2 ファイルを HDFS 上のディレクトリにコピー。
 <source>
 $ hadoop fs –copyFromLocal excite.log.bz2 .
 </source>
 </li>
 
-<li>Set the PIG_CLASSPATH environment variable to the location of the cluster configuration directory (the directory that contains the core-site.xml, hdfs-site.xml and mapred-site.xml files):
+<li>PIG_CLASSPATH 環境変数にクラスタ設定ファイルが格納されたディレクトリを指定 (core-site.xml, hdfs-site.xml, mapred-site.xml を含むディレクトリ):
 <source>
 export PIG_CLASSPATH=/mycluster/conf
 </source></li>
@@ -499,13 +499,13 @@ export PIG_CLASSPATH=/mycluster/conf
 export HADOOP_CONF_DIR=/mycluster/conf
 </source></li>
 
-<li>Execute the following command (using either script1-hadoop.pig or script2-hadoop.pig):
+<li>次のコマンドを実行 (script1-hadoop.pig か script2-hadoop.pig のどちらかを利用):
 <source>
 $ pig script1-hadoop.pig
 </source>
 </li>
 
-<li>Review the result files, located in the script1-hadoop-results or script2-hadoop-results HDFS directory:
+<li>HDFS 上の script1-hadoop-results あるいは script2-hadoop-results ディレクトリに格納された結果ファイルの内容を確認:
 <source>
 $ hadoop fs -ls script1-hadoop-results
 $ hadoop fs -cat 'script1-hadoop-results/*' | less
