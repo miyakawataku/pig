@@ -516,17 +516,17 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 
  <!-- ++++++++++++++++++++++++++++++++++ -->   
 <section>
-<title> Pig Tutorial Files</title>
+<title>Pig チュートリアルファイル</title>
 
-<p>The contents of the Pig tutorial file (pigtutorial.tar.gz) are described here. </p>
+<p>Pig チュートリアルファイル (pigtutorial.tar.gz) の内容は次のとおりです。</p>
 
 <table>
 <tr>
 <td>
-<p> <strong>File</strong> </p>
+<p> <strong>ファイル</strong> </p>
 </td>
 <td>
-<p> <strong>Description</strong></p>
+<p> <strong>説明</strong></p>
 </td>
 </tr>
 <tr>
@@ -534,7 +534,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> pig.jar </p>
 </td>
 <td>
-<p> Pig JAR file </p>
+<p>Pig の JAR ファイル</p>
 </td>
 </tr>
 <tr>
@@ -542,7 +542,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> tutorial.jar </p>
 </td>
 <td>
-<p> User defined functions (UDFs) and Java classes </p>
+<p>ユーザ定義関数 (UDF) と Java クラス</p>
 </td>
 </tr>
 <tr>
@@ -550,7 +550,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> script1-local.pig </p>
 </td>
 <td>
-<p> Pig Script 1, Query Phrase Popularity (local mode) </p>
+<p>Pig スクリプト 1, 検索文字列の人気度 (ローカルモード)</p>
 </td>
 </tr>
 <tr>
@@ -558,7 +558,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> script1-hadoop.pig </p>
 </td>
 <td>
-<p> Pig Script 1, Query Phrase Popularity (mapreduce mode) </p>
+<p>Pig スクリプト 1, 検索文字列の人気度 (MapReduce モード)</p>
 </td>
 </tr>
 <tr>
@@ -566,7 +566,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> script2-local.pig </p>
 </td>
 <td>
-<p> Pig Script 2, Temporal Query Phrase Popularity (local mode)</p>
+<p>Pig スクリプト 2, 検索文字列の人気度の時系列変化 (ローカルモード)</p>
 </td>
 </tr>
 <tr>
@@ -574,7 +574,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> script2-hadoop.pig </p>
 </td>
 <td>
-<p> Pig Script 2, Temporal Query Phrase Popularity (mapreduce mode) </p>
+<p>Pig スクリプト 2, 検索文字列の人気度の時系列変化 (MapReduce モード) </p>
 </td>
 </tr>
 <tr>
@@ -582,7 +582,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> excite-small.log </p>
 </td>
 <td>
-<p> Log file, Excite search engine (local mode) </p>
+<p>Excite 検索エンジンのログファイル (ローカルモード)</p>
 </td>
 </tr>
 <tr>
@@ -590,13 +590,13 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> excite.log.bz2 </p>
 </td>
 <td>
-<p> Log file, Excite search engine (mapreduce) </p>
+<p>Excite 検索エンジンのログファイル (MapReduce モード)</p>
 </td>
 </tr>
 </table>
 
 
-<p>The user defined functions (UDFs) are described here. </p>
+<p>ユーザ定義関数 (UDF) は次のとおりです。</p>
 
 <table>
 <tr>
@@ -604,7 +604,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> <strong>UDF</strong> </p>
 </td>
 <td>
-<p> <strong>Description</strong></p>
+<p> <strong>説明</strong></p>
 </td>
 </tr>
 <tr>
@@ -612,7 +612,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> ExtractHour </p>
 </td>
 <td>
-<p> Extracts the hour from the record.</p>
+<p>レコードから時刻を抽出。</p>
 </td>
 </tr>
 <tr>
@@ -620,7 +620,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> NGramGenerator </p>
 </td>
 <td>
-<p> Composes n-grams from the set of words. </p>
+<p>単語群から n-gram を作成。</p>
 </td>
 </tr>
 <tr>
@@ -628,7 +628,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> NonURLDetector </p>
 </td>
 <td>
-<p> Removes the record if the query field is empty or a URL. </p>
+<p>検索文字列が空であるか URL であるレコードを削除。</p>
 </td>
 </tr>
 <tr>
@@ -636,7 +636,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> ScoreGenerator </p>
 </td>
 <td>
-<p> Calculates a "popularity" score for the n-gram.</p>
+<p>N-gram の人気度を計算。</p>
 </td>
 </tr>
 <tr>
@@ -644,7 +644,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> ToLower </p>
 </td>
 <td>
-<p> Changes the query field to lowercase. </p>
+<p>検索文字列を小文字に変換。</p>
 </td>
 </tr>
 <tr>
@@ -652,7 +652,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> TutorialUtil </p>
 </td>
 <td>
-<p> Divides the query string into a set of words.</p>
+<p>検索文字列を単語に分解。</p>
 </td>
 </tr>
 </table>
