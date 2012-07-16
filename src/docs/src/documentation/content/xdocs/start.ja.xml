@@ -380,50 +380,51 @@ DUMP B;
 <!-- ================================================================== -->
 <!-- PIG PROPERTIES -->
 <section id="properties">
-<title>Pig Properties</title>
-   <p>Pig supports a number of Java properties that you can use to customize Pig behavior. You can retrieve a list of the properties using the <a href="cmds.html#help">help properties</a> command. All of these properties are optional; none are required. </p>
+<title>Pig のプロパティ</title>
+   <p>Pig の動作をカスタマイズするための Java プロパティは数多くあります。Pig のプロパティの一覧は <a href="cmds.html#help">help properties</a> コマンドで確認できます。すべてのプロパティは省略可能であり、必須のものはありません。</p>
 <p></p>
-<p id="pig-properties">To specify Pig properties use one of these mechanisms:</p>
+<p id="pig-properties">Pig のプロパティを指定するためには次の仕組みが使えます:</p>
 <ul>
-	<li>The pig.properties file (add the directory that contains the pig.properties file to the classpath)</li>
-	<li>The -D command line option and a Pig property (pig -Dpig.tmpfilecompression=true)</li>
-	<li>The -P command line option and a properties file (pig -P mypig.properties)</li>
-	<li>The <a href="cmds.html#set">set</a> command (set pig.exec.nocombiner true)</li>
+	<li>pig.properties ファイル (pig.properties ファイルを含むディレクトリをクラスパスに追加)</li>
+        <li>コマンドラインオプション -D にプロパティを指定 (例: pig -Dpig.tmpfilecompression=true)</li>
+	<li>コマンドラインオプション -P にプロパティファイルを指定 (例: pig -P mypig.properties)</li>
+	<li><a href="cmds.html#set">set</a> コマンド (例: set pig.exec.nocombiner true)</li>
 </ul>
-<p><strong>Note:</strong> The properties file uses standard Java property file format.</p>
-<p>The following precedence order is supported: pig.properties &lt; -D Pig property &lt; -P properties file &lt; set command. This means that if the same property is provided using the –D command line option as well as the –P command line option and a properties file, the value of the property in the properties file will take precedence.</p>
+<p><strong>注記:</strong> プロパティファイルの書式は Java 標準の書式です。</p>
+<p>優先順位は次のとおりです: pig.properties &lt; -D プロパティ &lt; -P プロパティファイル &lt; set コマンド。これはつまり、 -D オプション、 -P オプション、プロパティファイルで同じプロパティか指定されたら、 -P オプションで指定したプロパティファイルに記載された値が優先されます。</p>
 
-<p id="hadoop-properties">To specify Hadoop properties you can use the same mechanisms:</p>
+<p id="hadoop-properties">Hadoop のプロパティを指定するためには、次の仕組みが使えます:</p>
 <ul>
-	<li>The hadoop-site.xml file (add the directory that contains the hadoop-site.xml file to the classpath)</li>
-	<li>The -D command line option and a Hadoop property (pig –Dmapreduce.task.profile=true) </li>
-	<li>The -P command line option and a property file (pig -P property_file)</li>
-	<li>The <a href="cmds.html#set">set</a> command (set mapred.map.tasks.speculative.execution false)</li>
+	<li>hadoop-site.xml ファイル (hadoop-site.xml ファイルを含むディレクトリをクラスパスに追加)</li>
+	<li>コマンドラインオプション -D にプロパティを指定 (例: pig –Dmapreduce.task.profile=true)</li>
+	<li>コマンドラインオプション -P にプロパティファイルを指定 (例: pig -P property_file)</li>
+	<li><a href="cmds.html#set">set</a> コマンド (例: set mapred.map.tasks.speculative.execution false)</li>
 </ul>
 <p></p>
-<p>The same precedence holds: hadoop-site.xml &lt; -D Hadoop property &lt; -P properties_file &lt; set command.</p>
+<p>優先順位は Pig のプロパティと同様です: hadoop-site.xml &lt; -D Hadoop プロパティ &lt; -P プロパティファイル &lt; set コマンド。</p>
 <p>Hadoop properties are not interpreted by Pig but are passed directly to Hadoop. Any Hadoop property can be passed this way. </p>
-<p>All properties that Pig collects, including Hadoop properties, are available to any UDF via the UDFContext object. To get access to the properties, you can call the getJobConf method.</p>
+<p>Pig は Hadoop のプロパティを解釈せず、 Hadoop にそのまま引き渡します。すべての Hadoop プロパティが同じやり方で引き渡されます。</p>
+<p>Pig が収集するすべてのプロパティ (Hadoop プロパティを含む) は、 UDFContext オブジェクトを介して UDF からアクセス可能です。プロパティを取得するためには、 getJobConf メソッドを使います。</p>
 </section>  
 
 
   <!-- ==================================================================== -->
   <!-- PIG TUTORIAL -->
   <section id="tutorial">
-<title>Pig Tutorial </title>
+<title>Pig チュートリアル </title>
 
-<p>The Pig tutorial shows you how to run Pig scripts using Pig's local mode and mapreduce mode (see <a href="#execution-modes">Execution Modes</a>).</p>
+<p>ローカルモードや MapReduce モードでどのように Pig スクリプトを走らせるか、 Pig チュートリアルによって学ぶことができます (<a href="#execution-modes">実行モード</a> を参照)。</p>
 
-<p>To get started, do the following preliminary tasks:</p>
+<p>チュートリアルをはじめるためには、次の準備作業が必要です:</p>
 
 <ol>
-<li>Make sure the JAVA_HOME environment variable is set the root of your Java installation.</li>
-<li>Make sure your PATH includes bin/pig (this enables you to run the tutorials using the "pig" command). 
+<li>JAVA_HOME 環境変数が Java のインストール場所を指していることを確認</li>
+<li>PATH 環境変数が pig コマンドのあるディレクトリを含んでいることを確認 (これによって pig コマンドでチュートリアルが実行できるようになります)
 <source>
 $ export PATH=/&lt;my-path-to-pig&gt;/pig-0.9.0/bin:$PATH 
 </source>
 </li>
-<li>Set the PIG_HOME environment variable:
+<li>PIG_HOME 環境変数を設定:
 <source>
 $ export PIG_HOME=/&lt;my-path-to-pig&gt;/pig-0.9.0 
 </source></li>
