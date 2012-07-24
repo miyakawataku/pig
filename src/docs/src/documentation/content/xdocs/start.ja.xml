@@ -566,7 +566,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> script2-local.pig </p>
 </td>
 <td>
-<p>Pig スクリプト 2, 検索文字列の人気度の時系列変化 (ローカルモード)</p>
+<p>Pig スクリプト 2, 検索文字列の人気度の時系列比較 (ローカルモード)</p>
 </td>
 </tr>
 <tr>
@@ -574,7 +574,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p> script2-hadoop.pig </p>
 </td>
 <td>
-<p>Pig スクリプト 2, 検索文字列の人気度の時系列変化 (MapReduce モード) </p>
+<p>Pig スクリプト 2, 検索文字列の人気度の時系列比較 (MapReduce モード) </p>
 </td>
 </tr>
 <tr>
@@ -666,7 +666,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 <p>検索文字列の人気度スクリプト (script1-local.pig または script1-hadoop.pig) は Excite 検索エンジンの検索ログファイルを処理して、ある一日の特定の時間帯に、高い頻度で出現する検索文字列を探し出します。</p>
 <p>スクリプトの内容は次のとおりです:</p>
 <ul>
-<li><p>チュートリアルの JAR ファイルを登録し、含まれる UDF がスクリプトから呼び出せるようにします。</p>
+<li><p>チュートリアルの JAR ファイルを登録し、 UDF がスクリプトから呼び出せるようにします。</p>
 </li>
 </ul>
 
@@ -674,7 +674,7 @@ $ hadoop fs -cat 'script1-hadoop-results/*' | less
 REGISTER ./tutorial.jar; 
 </source>
 <ul>
-<li><p>PigStorage 関数を使って、 Excite のログファイル (excite.log or excite-small.log) を、 <strong>user</strong>, <strong>time</strong>, <strong>query</strong> 列を持つレコードの連なりとしてバッグ「raw」にロードします。</p>
+<li><p>PigStorage 関数を使って、 Excite のログファイル (excite.log または excite-small.log) を、 <strong>user</strong>, <strong>time</strong>, <strong>query</strong> 列を持つレコードの連なりとしてバッグ「raw」にロードします。</p>
 </li>
 </ul>
 
@@ -738,7 +738,7 @@ hour_frequency1 = GROUP ngramed2 BY (ngram, hour);
 hour_frequency2 = FOREACH hour_frequency1 GENERATE flatten($0), COUNT($1) as count;
 </source>
 <ul>
-<li><p>GROUP 演算子を使ってレコードを ngram 列のみでグループ化します。それぞれのグループは個々の n-gram に対応し、時刻ごとの出現回数を含んでいます。</p>
+<li><p>GROUP 演算子を使ってレ、コードを ngram 列のみでグループ化します。それぞれのグループは個々の n-gram に対応し、時刻ごとの出現回数を含んでいます。</p>
 </li>
 </ul>
 
@@ -788,12 +788,12 @@ STORE ordered_uniq_frequency INTO '/tmp/tutorial-results' USING PigStorage();
 
  <!-- ++++++++++++++++++++++++++++++++++ -->   
 <section id="pig-script-2">
-<title>Pig Script 2: Temporal Query Phrase Popularity</title>
+<title>Pig スクリプト 2: 検索文字列の人気度の時系列比較</title>
 
-<p>The Temporal Query Phrase Popularity script (script2-local.pig or script2-hadoop.pig) processes a search query log file from the Excite search engine and compares the occurrence of frequency of search phrases across two time periods separated by twelve hours. </p>
-<p>The script is shown here: </p>
+<p>検索文字列の人気度の時系列比較スクリプト (script2-local.pig または script2-hadoop.pig) は Excite 検索エンジンの検索ログファイルを処理して、 12 時間離れた 2 時点間で、検索文字列の出現頻度を比較します。</p>
+<p>スクリプトの内容は次のとおりです:</p>
 <ul>
-<li><p> Register the tutorial JAR file so that the user defined functions (UDFs) can be called in the script. </p>
+<li><p>チュートリアルの JAR ファイルを登録し、 UDF がスクリプトから呼び出せるようにします。</p>
 </li>
 </ul>
 
@@ -801,7 +801,7 @@ STORE ordered_uniq_frequency INTO '/tmp/tutorial-results' USING PigStorage();
 REGISTER ./tutorial.jar;
 </source>
 <ul>
-<li><p> Use the PigStorage function to load the excite log file (excite.log or excite-small.log) into the “raw” bag as an array of records with the fields <strong>user</strong>, <strong>time</strong>, and <strong>query</strong>. </p>
+<li><p>PigStorage 関数を使って、 Excite のログファイル (excite.log または excite-small.log) を、 user, time, query 列を持つレコードの連なりとしてバッグ「raw」にロードします。</p>
 </li>
 </ul>
 
@@ -809,7 +809,7 @@ REGISTER ./tutorial.jar;
 raw = LOAD 'excite.log' USING PigStorage('\t') AS (user, time, query);
 </source>
 <ul>
-<li><p> Call the NonURLDetector UDF to remove records if the query field is empty or a URL. </p>
+<li><p>ユーザ定義関数 NonURLDetector を使って、 query 列が空であるか URL であるレコードを削除します。</p>
 </li>
 </ul>
 
@@ -817,7 +817,7 @@ raw = LOAD 'excite.log' USING PigStorage('\t') AS (user, time, query);
 clean1 = FILTER raw BY org.apache.pig.tutorial.NonURLDetector(query);
 </source>
 <ul>
-<li><p> Call the ToLower UDF to change the query field to lowercase. </p>
+<li><p>ユーザ定義関数 ToLower を使って、 query 列を小文字に変換します。</p>
 </li>
 </ul>
 
@@ -825,7 +825,7 @@ clean1 = FILTER raw BY org.apache.pig.tutorial.NonURLDetector(query);
 clean2 = FOREACH clean1 GENERATE user, time, org.apache.pig.tutorial.ToLower(query) as query;
 </source>
 <ul>
-<li><p> Because the log file only contains queries for a single day, we are only interested in the hour. The excite query log timestamp format is YYMMDDHHMMSS. Call the ExtractHour UDF to extract the hour from the time field. </p>
+<li><p>ログファイルに含まれているのは一日分の検索データだけなので、時刻だけに注意します。 Excite 検索ログのタイムスタンプ書式は YYMMDDHHMMSS です。ユーザ定義関数 ExtractHour を使って time 列から時刻 (HH) を抜き出します。</p>
 </li>
 </ul>
 
@@ -833,7 +833,7 @@ clean2 = FOREACH clean1 GENERATE user, time, org.apache.pig.tutorial.ToLower(que
 houred = FOREACH clean2 GENERATE user, org.apache.pig.tutorial.ExtractHour(time) as hour, query;
 </source>
 <ul>
-<li><p> Call the NGramGenerator UDF to compose the n-grams of the query. </p>
+<li><p>ユーザ定義関数 NGramGenerator を使って検索文字列の n-gram を作成します。</p>
 </li>
 </ul>
 
@@ -841,7 +841,7 @@ houred = FOREACH clean2 GENERATE user, org.apache.pig.tutorial.ExtractHour(time)
 ngramed1 = FOREACH houred GENERATE user, hour, flatten(org.apache.pig.tutorial.NGramGenerator(query)) as ngram;
 </source>
 <ul>
-<li><p> Use the DISTINCT operator to get the unique n-grams for all records.  </p>
+<li><p>DISTINCT 演算子を使って、重複のない n-gram 群を生成します。</p>
 </li>
 </ul>
 
@@ -849,7 +849,7 @@ ngramed1 = FOREACH houred GENERATE user, hour, flatten(org.apache.pig.tutorial.N
 ngramed2 = DISTINCT ngramed1;
 </source>
 <ul>
-<li><p> Use the GROUP operator to group the records by n-gram and hour.  </p>
+<li><p>GROUP 演算子を使って、 ngram 列と hour 列でレコードをグループ化します。</p>
 </li>
 </ul>
 
@@ -857,7 +857,7 @@ ngramed2 = DISTINCT ngramed1;
 hour_frequency1 = GROUP ngramed2 BY (ngram, hour);
 </source>
 <ul>
-<li><p> Use the COUNT function to get the count (occurrences) of each n-gram.  </p>
+<li><p>COUNT 関数を使って、それぞれの n-gram の出現回数を数えます。</p>
 </li>
 </ul>
 
@@ -865,7 +865,7 @@ hour_frequency1 = GROUP ngramed2 BY (ngram, hour);
 hour_frequency2 = FOREACH hour_frequency1 GENERATE flatten($0), COUNT($1) as count;
 </source>
 <ul>
-<li><p> Use the FOREACH-GENERATE operator to assign names to the fields. </p>
+<li><p>FOREACH-GENERATE 演算子を使って、列に名前をつけます。</p>
 </li>
 </ul>
 
@@ -873,7 +873,7 @@ hour_frequency2 = FOREACH hour_frequency1 GENERATE flatten($0), COUNT($1) as cou
 hour_frequency3 = FOREACH hour_frequency2 GENERATE $0 as ngram, $1 as hour, $2 as count;
 </source>
 <ul>
-<li><p> Use the  FILTERoperator to get the n-grams for hour ‘00’  </p>
+<li><p>FILTER 演算子を使って、 時刻が 0 時台である n-gram を選択します。</p>
 </li>
 </ul>
 
@@ -881,7 +881,7 @@ hour_frequency3 = FOREACH hour_frequency2 GENERATE $0 as ngram, $1 as hour, $2 a
 hour00 = FILTER hour_frequency2 BY hour eq '00';
 </source>
 <ul>
-<li><p> Uses the FILTER operators to get the n-grams for hour ‘12’ </p>
+<li><p>FILTER 演算子を使って、 時刻が 12 時台である n-gram を選択します。</p>
 </li>
 </ul>
 
@@ -889,7 +889,7 @@ hour00 = FILTER hour_frequency2 BY hour eq '00';
 hour12 = FILTER hour_frequency3 BY hour eq '12';
 </source>
 <ul>
-<li><p> Use the JOIN operator to get the n-grams that appear in both hours. </p>
+<li><p>JOIN 演算子を使って、両方の時刻の n-gram を集めます。</p>
 </li>
 </ul>
 
@@ -897,7 +897,7 @@ hour12 = FILTER hour_frequency3 BY hour eq '12';
 same = JOIN hour00 BY $0, hour12 BY $0;
 </source>
 <ul>
-<li><p> Use the FOREACH-GENERATE operator to record their frequency. </p>
+<li><p>FOREACH-GENERATE 演算子を使って、それぞれの出現頻度を記録します。</p>
 </li>
 </ul>
 
@@ -905,7 +905,7 @@ same = JOIN hour00 BY $0, hour12 BY $0;
 same1 = FOREACH same GENERATE hour_frequency2::hour00::group::ngram as ngram, $2 as count00, $5 as count12;
 </source>
 <ul>
-<li><p> Use the PigStorage function to store the results. The output file contains a list of n-grams with the following fields: <strong>hour</strong>, <strong>count00</strong>, <strong>count12</strong>. </p>
+<li><p>PigStorage 関数を使って結果を保存します。出力ファイルは次の列からなる n-gram のリストです:  <strong>ngram</strong>, <strong>count00</strong>, <strong>count12</strong></p>
 </li>
 </ul>
 
