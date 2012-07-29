@@ -127,8 +127,8 @@
 
  <!-- KEYWORDS -->
    <section id="reserved-keywords">
-   <title>Reserved Keywords</title>
-   <p>Pig reserved keywords are listed here.</p>
+   <title>予約語</title>
+   <p>Pig の予約語は次のとおりです。</p>
    <table>
          <tr>
             <td> <p>-- A </p> </td>
