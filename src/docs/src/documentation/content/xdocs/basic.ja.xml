@@ -459,17 +459,17 @@ Out of bound access. Trying to access non-existent  : 3. Schema {f1: bytearray,f
    
    <!-- +++++++++++++++++++++++++++++++++++++++++++++++ -->
    <section id="ref-field-complex">
-   <title>Referencing Fields that are Complex Data Types</title>
-   <p>As noted, the fields in a tuple can be any data type, including the complex data types: bags, tuples, and maps. </p>
+   <title>複合データ型のフィールドへの参照</title>
+   <p>前述したように、タプル中のフィールドは、複合型 (バッグ、タプル、マップ) を含む任意のデータ型であることが可能です。</p>
    <ul>
       <li>
-         <p>Use the schemas for complex data types to name fields that are complex data types. </p>
+         <p>複合データ型のフィールドには、複合データ型のスキーマを使います。</p>
       </li>
       <li>
-         <p>Use the dereference operators to reference and work with fields that are complex data types.</p>
+         <p>複合データ型のフィールドを使うためには、参照外し (参照先の取得) 演算子を使います。</p>
       </li>
    </ul>
-   <p>In this example the data file contains tuples. A schema for complex data types (in this case, tuples) is used to load the data. Then, dereference operators (the dot in t1.t1a and t2.$0) are used to access the fields in the tuples. Note that when you assign names to fields you can still refer to these fields using positional notation.</p>
+   <p>次の例では、データファイルにはネストしたタプルが格納されています。データをロードするためには、複合データ型のスキーマ (この場合はタプル) を使います。そして、タプル中のフィールドにアクセスするためには、参照外し演算子 (t1.t1a, t2.$0 のようなドット) を使います。フィールドに名前を割り当てた場合でも、位置表記を使ってフィールドにアクセスできます。</p>
 
    
    <source>
