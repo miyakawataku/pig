@@ -247,26 +247,24 @@
  <!-- ++++++++++++++++++++++++++++++++++ --> 
  <!-- CASE SENSITIVITY -->
    <section id="case-sensitivity">
-   <title>Case Sensitivity</title>
-   <p>The names (aliases) of relations and fields are case sensitive. The names of Pig Latin functions are case sensitive. 
-   The names of parameters (see <a href="cont.html#Parameter-Sub">Parameter Substitution</a>) and all other Pig Latin keywords (see <a href="#Reserved-Keywords">Reserved Keywords</a>) are case insensitive.</p>
-   <p>In the example below, note the following:</p>
+   <title>大文字・小文字の区別</title>
+   <p>関係やフィールドの名前 (別名) は大文字・小文字が区別されます。 Pig Latin の関数は大文字・小文字が区別されます。パラメータの名前 (<a href="cont.html#parameter-sub">パラメータ置換</a>を参照) と Pig Latin のキーワード (<a href="#reserved-keywords">予約語</a> を参照) は大文字・小文字が区別されません。</p>
+   <p>下の例では、次のようになります:</p>
    <ul>
       <li>
-         <p>The names (aliases) of relations A, B, and C are case sensitive.</p>
+         <p>関係の名前 (別名) A, B, C は大文字・小文字が区別されます。</p>
       </li>
       <li>
-         <p>The names (aliases) of fields f1, f2, and f3 are case sensitive.</p>
+         <p>フィールドの名前 (別名) f1, f2, f3 は大文字・小文字が区別されます。</p>
       </li>
       <li>
-         <p>Function names PigStorage and COUNT are case sensitive.</p>
+         <p>関数の名前 PigStorage, COUNT は大文字・小文字が区別されます。</p>
       </li>
       <li>
-         <p>Keywords LOAD, USING, AS, GROUP, BY, FOREACH, GENERATE, and DUMP are case insensitive. 
-         They can also be written as load, using, as, group, by, etc.</p>
+         <p>キーワード LOAD, USING, AS, GROUP, BY, FOREACH, GENERATE, DUMP は大文字・小文字が区別されません。つまり、それぞれ load, using, as, group, by のように書くこともできます。</p>
       </li>
       <li>
-         <p>In the FOREACH statement, the field in relation B is referred to by positional notation ($0).</p>
+         <p>FOREACH 文の中で、関係 B のフィールドは位置表記 ($0) で参照されています。</p>
       </li>
    </ul>
    <p/>
