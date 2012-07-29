@@ -326,8 +326,8 @@ A!B
    <p>リレーションは順序付けされていません。したがって、タプルが何らかの順序で処理されるということは保証されません。さらに言うと、タプルがなんらかの全順序にしたがって処理されるのでない限り、処理は並列化される可能性があります。</p>
    
    <section id="ref-relation">
-   <title>Referencing Relations</title>
-   <p>Relations are referred to by name (or alias). Names are assigned by you as part of the Pig Latin statement. In this example the name (alias) of the relation is A.</p>
+   <title>関係への参照</title>
+   <p>関係は名前 (別名) によって参照されます。名前は Pig Latin 文で代入されます。次の例では、関係の名前 (別名) は A です。</p>
    
    <source>
 A = LOAD 'student' USING PigStorage() AS (name:chararray, age:int, gpa:float);
@@ -338,12 +338,13 @@ DUMP A;
 (Joe,18,3.8F)
 </source>
 
-  <p>You an assign an alias to another alias. The new alias can be used in the place of the original alias to refer the original relation. </p>
+  <p>別名は他の別名に代入できます。新しい別名は、元の別名が元の関係を指しているところで、同じように使えます。</p>
+
   <source>
-  A = LOAD 'student' USING PigStorage() AS (name:chararray, age:int, gpa:float);
-  B = A;
-  DUMP B;
-  </source>
+A = LOAD 'student' USING PigStorage() AS (name:chararray, age:int, gpa:float);
+B = A;
+DUMP B;
+</source>
 </section>
    
    
