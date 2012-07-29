@@ -306,25 +306,24 @@ A!B
 
 <!-- RELATIONS, BAGS, TUPLES, FIELDS-->
    <section id="relations">
-   <title>Relations, Bags, Tuples, Fields</title>
-      <p><a href="start.html#pl-Statements">Pig Latin statements</a> work with relations. A relation can be defined as follows:</p>
+   <title>関係、バッグ、タプル、フィールド</title>
+      <p><a href="start.html#pl-statements">Pig Latin の文</a>は関係を操作します。関係は次のように定義されます:</p>
    <ul>
       <li>
-         <p>A relation is a bag (more specifically, an outer bag).</p>
+         <p>関係はバッグです (より正確に言えば、外部バッグです) 。</p>
       </li>
       <li>
-         <p>A bag is a collection of tuples. </p>
+         <p>バッグはタプルのコレクションです。</p>
       </li>
       <li>
-         <p>A tuple is an ordered set of fields.</p>
+         <p>タプルはフィールドの順序付き集合です。</p>
       </li>
       <li>
-         <p>A field is a piece of data.</p>
+         <p>フィールドは単体のデータです。</p>
       </li>
    </ul>
-   <p></p>
-   <p>A Pig relation is a bag of tuples. A Pig relation is similar to a table in a relational database, where the tuples in the bag correspond to the rows in a table. Unlike a relational table, however, Pig relations don't require that every tuple contain the same number of fields or that the fields in the same position (column) have the same type.</p>
-   <p>Also note that relations are unordered which means there is no guarantee that tuples are processed in any particular order. Furthermore, processing may be parallelized in which case tuples are not processed according to any total ordering.</p>
+   <p>Pig の関係はタプルのバッグです。 Pig の関係は関係データベースにおけるテーブルと同一のものです。タプルはテーブルの行に対応します。関係データベースのテーブルとは異なり、 Pig の関係では、すべてのタプルが同じ数のフィールドを持っている必要はなく、また同じ位置のフィールド (列) が同じ型である必要もありません。</p>
+   <p>リレーションは順序付けされていません。したがって、タプルが何らかの順序で処理されるということは保証されません。さらに言うと、タプルがなんらかの全順序にしたがって処理されるのでない限り、処理は並列化される可能性があります。</p>
    
    <section id="ref-relation">
    <title>Referencing Relations</title>
