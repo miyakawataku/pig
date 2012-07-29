@@ -829,11 +829,11 @@ DUMP X;
    </section>
    
    <section id="map">
-   <title>Map</title>
-   <p>A map is a set of key/value pairs.</p>
+   <title>マップ</title>
+   <p>マップはキーと値のペアの集合です。</p>
    
    <section>
-   <title>Syntax (&lt;&gt; denotes optional)</title>
+   <title>文法 (&lt;&gt; 内は省略可能)</title>
    <table>
       <tr>
             <td>
@@ -844,14 +844,14 @@ DUMP X;
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>[ ]</p>
             </td>
             <td>
-               <p>Maps are enclosed in straight brackets [ ].</p>
+               <p>Map は角括弧 [ ] で囲います。</p>
             </td>
          </tr>
          <tr>
@@ -859,7 +859,7 @@ DUMP X;
                <p>#</p>
             </td>
             <td>
-               <p>Key value pairs are separated by the pound sign #.</p>
+               <p>キーと値はハッシュ記号 # で区切ります。</p>
             </td>
          </tr>
          <tr>
@@ -867,7 +867,7 @@ DUMP X;
                <p>key</p>
             </td>
             <td>
-               <p>Must be chararray data type. Must be a unique value.</p>
+               <p>マップ中で重複しない chararray 型の値です。</p>
             </td>
          </tr>
          <tr>
@@ -875,22 +875,22 @@ DUMP X;
                <p>value</p>
             </td>
             <td>
-               <p>Any data type (the defaults to bytearray).</p>
+               <p>任意のデータ型の値です (デフォルトは bytearray) 。</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>Key values within a relation must be unique.</p>
+   <title>使用法</title>
+   <p>マップ中のキーは重複しない値です。</p>
 
-   <p>Also see <a href="#map-schema">map schemas</a>.</p>
+   <p><a href="#map-schema">マップのスキーマ</a>も参照してください。</p>
    </section>
    
    <section>
-   <title>Example</title>
-   <p>In this example the map includes two key value pairs.</p>
+   <title>例</title>
+   <p>次の例では、マップはキーと値のペアを 2 つ含みます。</p>
 <source>[name#John,phone#5551212]</source>
 </section></section></section> 
    
