@@ -1039,15 +1039,15 @@ DUMP X;
    
    <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section id="nulls-constants">
-   <title>Nulls and Constants</title>
-   <p>Nulls can be used as constant expressions in place of expressions of any type.</p>
-   <p>In this example a and null are projected.</p>
+   <title>null と定数</title>
+   <p>null は任意の型の式の位置で、定数として書くことができます。</p>
+   <p>次の例では、 a と null が結果になります。</p>
 <source>
 A = LOAD 'data' AS (a, b, c).
 B = FOREACH A GENERATE a, null;
 </source>
   
-   <p>In this example of an outer join, if the join key is missing from a table it is replaced by null.</p>
+   <p>次の外部結合の例では、どちらかのテーブルに結合キーが存在しなかった場合、 null に置換します。</p>
 <source>
 A = LOAD 'student' AS (name: chararray, age: int, gpa: float);
 B = LOAD 'votertab10k' AS (name: chararray, age: int, registration: chararray, donation: float);
@@ -1055,14 +1055,14 @@ C = COGROUP A BY name, B BY name;
 D = FOREACH C GENERATE FLATTEN((IsEmpty(A) ? null : A)), FLATTEN((IsEmpty(B) ? null : B));
 </source>
    
-   <p>Like any other expression, null constants can be implicitly or explicitly cast. </p>
-   <p>In this example both a and null will be implicitly cast to double.</p>
+   <p>他の式と同じように、 null 定数は暗黙的に、また明示的にキャストできます。</p>
+   <p>次の例では、 a と null はいずれも暗黙的に double 型にキャストされます。</p>
 <source>
 A = LOAD 'data' AS (a, b, c).
 B = FOREACH A GENERATE a + null;
 </source>
    
-   <p>In this example  both a and null will be cast to int, a implicitly, and null explicitly.</p>
+   <p>次の例では、 a と null はいずれも int 型にキャストされます。 a は暗黙的に、 null は明示的にキャストされます。</p>
 <source>
 A = LOAD 'data' AS (a, b, c).
 B = FOREACH A GENERATE a + (int)null;
