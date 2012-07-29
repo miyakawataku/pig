@@ -725,7 +725,7 @@ B = FOREACH A GENERATE name + gpa;
    </section>
    
    <section>
-   <title>用途</title>
+   <title>使用法</title>
    <p>タプルは 1 個以上のフィールドを含む行だと考えられます。それぞれのフィールドは任意の型であり、またフィールドはデータを持つこともあれば持たないこともあります。フィールドがデータを持たない場合、次のようになります:</p>
    <ul>
       <li>
@@ -746,11 +746,11 @@ B = FOREACH A GENERATE name + gpa;
    </section></section>
    
    <section id="bag">
-   <title>Bag</title>
-   <p>A bag is a collection of tuples.</p>
+   <title>バッグ</title>
+   <p>バッグはタプルのコレクションです。</p>
    
    <section>
-   <title>Syntax: Inner bag</title>
+   <title>文法: 内部バッグ</title>
    <table>
       <tr>
             <td>
@@ -761,14 +761,14 @@ B = FOREACH A GENERATE name + gpa;
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>{  }</p>
             </td>
             <td>
-               <p>An inner bag is enclosed in curly brackets { }.</p>
+               <p>内部バッグは波括弧 { } で囲われます。</p>
             </td>
          </tr>
          <tr>
@@ -776,35 +776,34 @@ B = FOREACH A GENERATE name + gpa;
                <p>tuple</p>
             </td>
             <td>
-               <p>A tuple.</p>
+               <p>タプル。</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section>
-   <title>Usage </title>
-   <p>Note the following about bags:</p>
+   <title>使用法</title>
+   <p>バッグについては次のルールが適用されます:</p>
    <ul>
       <li>
-         <p>A bag can have duplicate tuples.</p>
+         <p>バッグは重複したタプルを含むことができます。</p>
       </li>
       <li>
-         <p>A bag can have tuples with differing numbers of fields. However, if Pig tries to access a field that does not exist, a null value is substituted.</p>
+         <p>バッグはフィールド数の異なるタプルを含むことができます。ただし、アクセスしたフィールドが存在しない場合には、 null 値が生成されます。</p>
       </li>
       <li>
-         <p>A bag can have tuples with fields that have different data types. However, for Pig to effectively process bags, the schemas of the tuples within those bags should be the same. For example, if half of the tuples include chararray fields and while the other half include float fields, only half of the tuples will participate in any kind of computation because the chararray fields will be converted to null.</p>
-         <p></p>
-         <p>Bags have two forms: outer bag (or relation) and inner bag.</p>
+         <p>バッグは型の異なるタプルを含むことができます。ただし、バッグを実際に処理する際には、処理対象のタプルのスキーマは同一である必要があります。たとえば、半数のタプルが chararray のフィールドを持ち、もう半数のタプルが float のフィールドを持っていた時に、数値計算の対象とするタプルはどちらか半数である必要があります。なぜなら、 chararray のフィールドは null に変換されてしまうからです。</p>
+         <p>バッグには、外部バッグ (あるいは関係) と内部バッグの 2 つの形式があります。</p>
       </li>
    </ul>
    <p></p>
-   <p>Also see <a href="#bag-schema">bag schemas</a>.</p>
+   <p><a href="#bag-schema">バッグのスキーマ</a>も参照してください。</p>
    </section>
    
    <section>
-   <title>Example: Outer Bag</title>
-   <p>In this example A is a relation or bag of tuples. You can think of this bag as an outer bag.</p>
+   <title>例: 外部バッグ</title>
+   <p>次の例では、 A はタプルのバッグ (関係) です。このバッグを、外部バッグと呼びます。</p>
 <source>
 A = LOAD 'data' as (f1:int, f2:int, f3;int);
 DUMP A;
@@ -816,9 +815,9 @@ DUMP A;
    </section>
    
    <section>
-   <title>Example: Inner Bag</title>
-   <p>Now, suppose we group relation A by the first field to form relation X. </p>
-   <p>In this example X is a relation or bag of tuples. The tuples in relation X have two fields. The first field is type int. The second field is type bag; you can think of this bag as an inner bag.</p>
+   <title>例: 内部バッグ</title>
+   <p>関係 A を最初のフィールドでグループ化して、関係 X を作ったとします。</p>
+   <p>次の例では、 X はタプルの外部バッグ (関係) です。関係 X のタプルは 2 つのフィールドを持っています。最初のフィールドの型は int, 2 つ目のフィールドの型はバッグです。後者のフィールドのバッグを、内部バッグと呼びます。</p>
 <source>
 X = GROUP A BY f1;
 DUMP X;
