@@ -319,7 +319,7 @@ A!B
          <p>タプルはフィールドの順序付き集合です。</p>
       </li>
       <li>
-         <p>フィールドは単体のデータです。</p>
+         <p>フィールドはデータの一片です。</p>
       </li>
    </ul>
    <p>Pig の関係はタプルのバッグです。 Pig の関係は関係データベースにおけるテーブルと同一のものです。タプルはテーブルの行に対応します。関係データベースのテーブルとは異なり、 Pig の関係では、すべてのタプルが同じ数のフィールドを持っている必要はなく、また同じ位置のフィールド (列) が同じ型である必要もありません。</p>
@@ -688,11 +688,11 @@ B = FOREACH A GENERATE name + gpa;
    </section>
    
    <section id ="tuple">
-   <title>Tuple</title>
-   <p>A tuple is an ordered set of fields.</p>
+   <title>タプル</title>
+   <p>タプルはフィールドの順序付き集合です。</p>
    
    <section>
-   <title>Syntax </title>
+   <title>文法</title>
    <table>
         <tr>
             <td>
@@ -703,14 +703,14 @@ B = FOREACH A GENERATE name + gpa;
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>(  )</p>
             </td>
             <td>
-               <p>A tuple is enclosed in parentheses ( ).</p>
+               <p>タプルは丸括弧 ( ) によって囲われます。</p>
             </td>
          </tr>
          <tr>
@@ -718,30 +718,30 @@ B = FOREACH A GENERATE name + gpa;
                <p>field</p>
             </td>
             <td>
-               <p>A piece of data. A field can be any data type (including tuple and bag).</p>
+               <p>データの一片。フィールドはタプルやバッグを含む任意のデータ型であることが可能です。</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>You can think of a tuple as a row with one or more fields, where each field can be any data type and any field may or may not have data. If a field has no data, then the following happens:</p>
+   <title>用途</title>
+   <p>タプルは 1 個以上のフィールドを含む行だと考えられます。それぞれのフィールドは任意の型であり、またフィールドはデータを持つこともあれば持たないこともあります。フィールドがデータを持たない場合、次のようになります:</p>
    <ul>
       <li>
-         <p>In a load statement, the loader will inject null into the tuple. The actual value that is substituted for null is loader specific; for example, PigStorage substitutes an empty field for null.</p>
+         <p>Load 文では、 null がタプルのフィールドに注入されます。実際にどのような値が null に変換されるのかは、ロード関数固有のルールによります。たとえば、 PigStorage 関数では、空のフィールドが null に変換されます。</p>
       </li>
       <li>
-         <p>In a non-load statement, if a requested field is missing from a tuple, Pig will inject null.</p>
+         <p>Load 文以外では、要求されるフィールドがタプル中に存在しない場合、 null になります。</p>
       </li>
    </ul>
    <p></p>
-   <p>Also see <a href="#tuple-schema">tuple schemas</a>.</p>
+   <p><a href="#tuple-schema">タプルのスキーマ</a>も参照してください。</p>
    </section>
    
    <section>
    <title>Example</title>
-   <p>In this example the tuple contains three fields.</p>
+   <p>次の例では、タプルは 3 つのフィールドを含みます。</p>
    <source>(John,18,4.0F)</source>
    </section></section>
    
