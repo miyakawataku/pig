@@ -497,22 +497,22 @@ DUMP X;
 
 <!-- ++++++++++++++++++++++++++++++++++ --> 
 <section id="data-types">
-<title>Data Types</title>
+<title>データ型</title>
 
 <section>
-<title>Simple and Complex</title>
+<title>単純型と複合型</title>
 <p></p>
 
    <table>
       <tr>
             <td>
-               <p><strong>Simple Types</strong></p>
+               <p><strong>単純型</strong></p>
             </td>
             <td>
-               <p>Description</p>
+               <p>説明</p>
             </td>
             <td>
-               <p>Example </p>
+               <p>例</p>
             </td>
          </tr>
          <tr>
@@ -520,7 +520,7 @@ DUMP X;
                <p>int</p>
             </td>
             <td>
-               <p>Signed 32-bit integer</p>
+               <p>32 ビットの符号付き整数</p>
             </td>
             <td>
                <p>10</p>
@@ -531,11 +531,11 @@ DUMP X;
                <p>long</p>
             </td>
             <td>
-               <p>Signed 64-bit integer</p>
+               <p>64 ビットの符号付き整数</p>
             </td>
             <td>
-               <p>Data:     10L or 10l </p>
-               <p>Display: 10L </p>
+               <p>データ:     10L あるいは 10l </p>
+               <p>ディスプレイ: 10L </p>
             </td>
          </tr>
          <tr>
@@ -543,11 +543,11 @@ DUMP X;
                <p>float</p>
             </td>
             <td>
-               <p>32-bit floating point</p>
+               <p>32 ビットの浮動小数点数</p>
             </td>
             <td>
-               <p>Data:     10.5F or 10.5f or 10.5e2f or 10.5E2F</p>
-               <p>Display: 10.5F or 1050.0F</p>
+               <p>データ:     10.5F あるいは 10.5f あるいは 10.5e2f あるいは 10.5E2F</p>
+               <p>表示: 10.5F あるいは 1050.0F</p>
             </td>
          </tr>
          <tr>
@@ -555,11 +555,11 @@ DUMP X;
                <p>double</p>
             </td>
             <td>
-               <p>64-bit floating point</p>
+               <p>64 ビットの浮動小数点数</p>
             </td>
             <td>
-               <p>Data:     10.5 or 10.5e2 or 10.5E2</p>
-               <p>Display: 10.5 or 1050.0</p>
+               <p>Data:     10.5 あるいは 10.5e2 あるいは 10.5E2</p>
+               <p>Display: 10.5 あるいは 1050.0</p>
             </td>
          </tr>
          <tr>
@@ -567,7 +567,7 @@ DUMP X;
                <p>chararray</p>
             </td>
             <td>
-               <p>Character array (string) in Unicode UTF-8 format</p>
+               <p>UTF-8 エンコーディングの文字の配列 (文字列)</p>
             </td>
             <td>
                <p>hello world</p>
@@ -578,7 +578,7 @@ DUMP X;
                <p>bytearray</p>
             </td>
             <td>
-               <p>Byte array (blob)</p>
+               <p>バイト列 (blob)</p>
             </td>
             <td>
                <p></p>
@@ -592,12 +592,12 @@ DUMP X;
                <p>boolean</p>
             </td>
             <td>
-               <p>true/false (case insensitive)</p>
+               <p>true/false (大文字・小文字を区別しない)</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p><strong>Complex Types</strong></p>
+               <p><strong>複合型</strong></p>
             </td>
             <td>
                <p></p>
@@ -608,10 +608,10 @@ DUMP X;
          </tr>
          <tr>
             <td>
-               <p>tuple</p>
+               <p>タプル</p>
             </td>
             <td>
-               <p>An ordered set of fields.</p>
+               <p>フィールドの順序付き集合</p>
             </td>
             <td>
                <p>(19,2)</p>
@@ -619,10 +619,10 @@ DUMP X;
          </tr>
          <tr>
             <td>
-               <p>bag</p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>An collection of tuples.</p>
+               <p>タプルのコレクション</p>
             </td>
             <td>
                <p>{(19,2), (18,1)}</p>
@@ -630,10 +630,10 @@ DUMP X;
          </tr>
          <tr>
             <td>
-               <p>map</p>
+               <p>マップ</p>
             </td>
             <td>
-               <p>A set of key value pairs.</p>
+               <p>キーと値のペアの集合</p>
             </td>
             <td>
                <p>[open#apache]</p>
@@ -641,10 +641,10 @@ DUMP X;
          </tr>
    </table>
    
-   <p>Note the following general observations about data types:</p>
+   <p>データ型については一般に次の原則が適用されます:</p>
    <ul>
       <li>
-         <p>Use schemas to assign types to fields.  If you don't assign types, fields default to type bytearray and implicit conversions are applied to the data depending on the context in which that data is used. For example, in relation B, f1 is converted to integer because 5 is integer. In relation C, f1 and f2 are converted to double because we don't know the type of either f1 or f2.</p>
+         <p>フィールドに型を割り当てるにはスキーマを使います。もし型が割り当てられていない場合は、フィールドはデフォルトで bytearray と解釈され、また使用される際の文脈に従って暗黙の型変換が行われます。たとえば、関係 B では、 f1 は整数に変換されます。これは加算対象の 5 が整数だからです。関係 C では、 f1 と f2 どちらも型が分からないため、 double 型に変換されます。</p>
       <source>
 A = LOAD 'data' AS (f1,f2,f3);
 B = FOREACH A GENERATE f1 + 5;
@@ -655,7 +655,7 @@ C = FOREACH A generate f1 + f2;
 
    <ul>
       <li>
-         <p>If a schema is defined as part of a load statement, the load function will attempt to enforce the schema. If the data does not conform to the schema, the loader will generate a null value or an error.</p>
+         <p>load 文でスキーマが定義される場合は、ロード関数はスキーマを矯正しようと試みます。データがスキーマに合わない場合は、 null 値になるか、エラーが発生します。</p>
       <source>
 A = LOAD 'data' AS (name:chararray, age:int, gpa:float);
 </source>
@@ -664,28 +664,27 @@ A = LOAD 'data' AS (name:chararray, age:int, gpa:float);
    <p></p>
    <ul>
       <li>
-         <p>If an explicit cast is not supported, an error will occur. For example, you cannot cast a chararray to int.</p>
+         <p>サポートされていない明示的キャストを使った場合は、エラーが発生します。たとえば、 chararray は int にキャストできません。</p>
          <source>
 A = LOAD 'data' AS (name:chararray, age:int, gpa:float);
 B = FOREACH A GENERATE (int)name;
 
-This will cause an error …</source>
+エラーが発生します …</source>
       </li>
    </ul>
 
    <p></p>
    <ul>
       <li>
-         <p>If Pig cannot resolve incompatible types through implicit casts, an error will occur. For example, you cannot add chararray and float (see the Types Table for addition and subtraction).</p>
+         <p>Pig が型の不一致を暗黙キャストによって解決できない場合は、エラーが発生します。たとえば、 chararray と float を足し合わせることはできません (<a href="#types-table-add">加算・減算演算子の型テーブル</a> を参照) 。</p>
       <source>
 A = LOAD 'data' AS (name:chararray, age:int, gpa:float);
 B = FOREACH A GENERATE name + gpa;
 
-This will cause an error …</source>
+エラーが発生します …</source>
       </li>
    </ul>
-   <p></p>
-   <p>All data types have corresponding <a href="#schemas">schemas</a>.</p>
+   <p>すべての型には対応する<a href="#Schemas">スキーマ</a>があります。</p>
    </section>
    
    <section id ="tuple">
