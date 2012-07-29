@@ -280,28 +280,26 @@ grunt> DUMP C;
  <!-- ++++++++++++++++++++++++++++++++++ -->   
 <!-- DATA TYPES AND MORE-->
 <section>
-<title>Data Types and More</title>
+<title>データ型その他</title>
 
 <!-- IDENTIFIERS-->
 <section id="identifiers">
-<title>Identifiers</title>
-<p>Identifiers include the names of relations (aliases), fields, variables, and so on. 
-In Pig, identifiers start with a letter and can be followed by any number of letters, digits, or underscores.</p>
+<title>識別子</title>
+<p>識別子には関係の名前 (別名), フィールドの名前 (別名), 変数の名前などが含まれます。 Pig では、識別子はアルファベットから始まって、任意個数のアルファベット、数字、アンダースコアが後ろに続きます。</p>
 
-<p>Valid identifiers:</p>
+<p>有効な識別子:</p>
 <source>
 A
 A123
 abc_123_BeX_
 </source>
-<p></p>
-<p>Invalid identifiers: </p>
+
+<p>無効な識別子:</p>
 <source>
 _A123
 abc_$
 A!B
 </source>
-
 
 </section>
 
