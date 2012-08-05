@@ -1071,29 +1071,29 @@ B = FOREACH A GENERATE a + (int)null;
    
       <!-- ++++++++++++++++++++++++++++++++++ -->  
    <section id="nulls-ops-produce">
-   <title>Operations That Produce Nulls</title>
-   <p>As noted, nulls can be the result of an operation. These operations can produce null values: </p>
+   <title>結果が null になる演算</title>
+   <p>上述の通り、ある種の演算の結果は null になる可能性があります。結果が null になる可能性がある演算は次のとおりです:</p>
    <ul>
       <li>
-         <p>Division by zero</p>
+         <p>0 による除算</p>
       </li>
       <li>
-         <p>Returns from user defined functions (UDFs) </p>
+         <p>ユーザ定義関数 (UDF) の戻り値</p>
       </li>
       <li>
-         <p>Dereferencing a field that does not exist.</p>
+         <p>存在しないフィールドの参照外し (参照先の取得)</p>
       </li>
       <li>
-         <p>Dereferencing a key that does not exist in a map. For example, given a map, info, containing [name#john, phone#5551212] if a user tries to use info#address a null is returned.</p>
+         <p>マップ中の存在しないキーの参照外し (参照先の取得) 。たとえば、 info というマップの中身が [name#john, phone#5551212] だった時、 info#address という値を使おうとすると、 null が戻ります。</p>
       </li>
       <li>
-         <p>Accessing a field that does not exist in a tuple.</p>
+         <p>タプル中の存在しないフィールドへのアクセス。</p>
       </li>
    </ul>
    
    <section>
-   <title>Example: Accessing a field that does not exist in a tuple</title>
-   <p>In this example nulls are injected if fields do not have data.</p>
+   <title>例: タプル中の存在しないフィールドへのアクセス</title>
+   <p>次の例で、フィールドのデータが存在しない場合、フィールドへのアクセスの結果は null になります。</p>
 <source>
 cat data;
     2   3
