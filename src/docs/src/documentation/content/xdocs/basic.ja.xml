@@ -726,10 +726,10 @@ B = FOREACH A GENERATE name + gpa;
    
    <section>
    <title>使用法</title>
-   <p>タプルは 1 個以上のフィールドを含む行だと考えられます。それぞれのフィールドは任意の型であり、またフィールドはデータを持つこともあれば持たないこともあります。フィールドがデータを持たない場合、次のようになります:</p>
+   <p>タプルは 1 個以上のフィールドを含む行だと考えられます。それぞれのフィールドは任意の型であり、またフィールドにはデータが存在する場合と存在しない場合があります。フィールドのデータが存在しない場合、次のようになります:</p>
    <ul>
       <li>
-         <p>Load 文では、 null がタプルのフィールドに注入されます。実際にどのような値が null に変換されるのかは、ロード関数固有のルールによります。たとえば、 PigStorage 関数では、空のフィールドが null に変換されます。</p>
+         <p>Load 文では、結果のタプルのフィールドの値は null になります。値が存在しないとみなされて null に変換される条件は、ロード関数ごとに異なります。たとえば、 PigStorage 関数では、空のフィールドが null に変換されます。</p>
       </li>
       <li>
          <p>Load 文以外では、要求されるフィールドがタプル中に存在しない場合、 null になります。</p>
@@ -1120,11 +1120,11 @@ DUMP B;
    
       <!-- ++++++++++++++++++++++++++++++++++ -->  
    <section id="nulls-load">
-   <title>Nulls and Load Functions</title>
-   <p>As noted, nulls can occur naturally in the data. If nulls are part of the data, it is the responsibility of the load function to handle them correctly. Keep in mind that what is considered a null value is loader-specific; however, the load function should always communicate null values to Pig by producing Java nulls.</p>
-   <p>The Pig Latin load functions (for example, PigStorage and TextLoader) produce null values wherever data is missing. For example, empty strings (chararrays) are not loaded; instead, they are replaced by nulls.</p>
+   <title>null とロード関数</title>
+   <p>上述の通り、 null は元々データに存在している可能性があります。 null がデータの一部として存在している場合、 null を正しく取り扱うことはロード関数の責任範囲です。何が null に変換されるのかはロード関数に依存します。ただし、ロード関数は null を常に Java の null 値に変換する必要があります。</p>
+   <p>Pig Latin のロード関数 (PigStorage や TextLoader 等) はデータが存在しない時に null を生成します。たとえば、空文字列 (chararray) はロードされず、代わりに null に置き換えられます。</p>
    
-   <p>PigStorage is the default load function for the LOAD operator. In this example the is not null operator is used to filter names with null values.</p>
+   <p>PigStorage は LOAD 演算子を使う際のデフォルトのロード関数です。次の例では、名前が null であるレコードをフィルタするのに is not null 演算子を用いています。</p>
 
  <source>
 A = LOAD 'student' AS (name, age, gpa); 
