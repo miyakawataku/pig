@@ -1425,23 +1425,23 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 &gt; f1));
 
    <!-- ++++++++++++++++++++++++++++++++++ --> 
       <section id="sexp">
-          <title>Star Expressions</title>
-          <p>Star expressions ( * ) can be used to represent all the fields of a tuple. It is equivalent to writing out the fields explicitly. In the following example the definition of B and C are exactly the same, and MyUDF will be invoked with exactly the same arguments in both cases.</p>
+          <title>スター演算子</title>
+          <p>スター演算子 ( * ) はタプル中のすべてのフィールドを表現するのに使えます。フィールドを明示的に書き出すのと同じ意味になります。次の例で、 B と C の定義は正確に同一です。また、 MyUDF 関数はどちらの場合でも正確に同じ引数をともなって呼び出されます。</p>
           <source>
 A = LOAD 'data' USING MyStorage() AS (name:chararray, age: int);
 B = FOREACH A GENERATE *, MyUDF(name, age);
 C = FOREACH A GENERATE name, age, MyUDF(*);
-          </source>
-          <p>A common error when using the star expression is shown below. In this example, the programmer really wants to count the number of elements in the bag in the second field: COUNT($1).</p>
+</source>
+          <p>次の例はスター演算子を使う場合によくある間違いです。次の例で、プログラマが本当に数えたかったのはバッグの中の 2 番目のフィールドの数 (COUNT($1)) です。</p>
           <source>
 G = GROUP A BY $0;
 C = FOREACH G GENERATE COUNT(*)
-          </source>
+</source>
         
-<p>There are some restrictions on use of the star expression when the input schema is unknown (null):</p>
+<p>入力のスキーマが不明 (null) の時には、スター演算子の使用にいくつかの制限があります:</p>
 <ul>
-<li>For GROUP/COGROUP, you can't include a star expression in a GROUP BY column. </li>
-<li>For ORDER BY, if you have project-star as ORDER BY column, you can’t have any other ORDER BY column in that statement. </li>
+<li>GROUP/COGROUP 演算子では、グループ化列の式にスター演算子を使うことはできません。</li>
+<li>ORDER BY 演算子では、 ORDER BY 列としてスター演算子を使った場合、他の ORDER BY 列を指定することはできません。</li>
 </ul>
       </section>
 
