@@ -1989,12 +1989,12 @@ b: {int}
    
       <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section id="schema-multi">
-   <title>Schemas for Multiple Types</title>
-   <p>You can define schemas for data that includes multiple types.</p>
+   <title>複数の型のスキーマ</title>
+   <p>複数の型を含むデータのスキーマも定義できます。</p>
    
    <section>
-   <title>Example</title>
-   <p>In this example the schema defines a tuple, bag, and map.</p>
+   <title>例</title>
+   <p>次の例で、スキーマはタプル、バッグ、マップのフィールドを定義しています。</p>
 <source>
 A = LOAD 'mydata' AS (T1:tuple(f1:int, f2:int), B:bag{T2:tuple(t1:float,t2:float)}, M:map[] );
 
