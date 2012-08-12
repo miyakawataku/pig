@@ -1616,7 +1616,7 @@ X = FOREACH A GENERATE f1 as user, f2 as age, f3 as gpa;
   
      <!-- ++++++++++++++++++++++++++++++++++ -->  
    <section  id="schema-simple">
-   <title>単純データ型に対するスキーマ</title>
+   <title>単純データ型のスキーマ</title>
    <p>単純データ型は int, long, float, double, chararray, bytearray, boolean からなります。</p>
    
    <section>
@@ -1706,8 +1706,8 @@ DUMP A;
  
     <!-- ++++++++++++++++++++++++++++++++++ -->   
    <section id="schema-complex">
-   <title>Schemas for Complex Data Types</title>
-   <p>Complex data types include tuples, bags, and maps.</p></section>
+   <title>複合データ型のスキーマ</title>
+   <p>複合データ型はタプル、バッグ、マップからなります。</p></section>
    
       <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section id="tuple-schema">
