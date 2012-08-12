@@ -1189,23 +1189,23 @@ dump X;
   
    <!-- ++++++++++++++++++++++++++++++++++ -->  
    <section id="constants">
-   <title>Constants</title>
-   <p>Pig provides constant representations for all data types except bytearrays.</p>
+   <title>定数</title>
+   <p>Pig は bytearray 以外のすべてのデータ型について定数表現を用意しています。</p>
    <table>
       <tr>
             <td>
                <p></p>
             </td>
             <td>
-               <p><strong>Constant Example</strong></p>
+               <p><strong>定数の例</strong></p>
             </td>
             <td>
-               <p><strong>Notes</strong></p>
+               <p><strong>説明</strong></p>
             </td>
          </tr>
          <tr>
             <td>
-               <p><strong>Simple Data Types</strong></p>
+               <p><strong>単純データ型</strong></p>
             </td>
             <td>
                <p></p>
@@ -1277,7 +1277,7 @@ dump X;
                <p></p>
             </td>
             <td>
-               <p>Not applicable.</p>
+               <p>存在しません。</p>
             </td>
          </tr>
          <tr>
@@ -1288,12 +1288,12 @@ dump X;
                <p>true/false</p>
             </td>
             <td>
-               <p>Case insensitive.</p>
+               <p>大文字・小文字を区別しません。</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p><strong>Complex Data Types</strong></p>
+               <p><strong>複合データ型</strong></p>
             </td>
             <td>
                <p></p>
@@ -1304,66 +1304,66 @@ dump X;
          </tr>
          <tr>
             <td>
-               <p>tuple</p>
+               <p>タプル</p>
             </td>
             <td>
                <p>(19, 2, 1)</p>
             </td>
             <td>
-               <p>A constant in this form creates a tuple.</p>
+               <p>この形式の定数はタプルを表します。</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>bag</p>
+               <p>バッグ</p>
             </td>
             <td>
                <p>{ (19, 2), (1, 2) }</p>
             </td>
             <td>
-               <p>A constant in this form creates a bag.</p>
+               <p>この形式の定数はバッグを表します。</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>map</p>
+               <p>マップ</p>
             </td>
             <td>
                <p>[ 'name' # 'John', 'ext' # 5555 ]</p>
             </td>
             <td>
-               <p>A constant in this form creates a map.</p>
+               <p>この形式の定数はマップを表します。</p>
             </td>
          </tr>
    </table>
    <p></p>
-   <p>Please note the following:</p>
+   <p>次の点に注意してください:</p>
    <ul>
       <li>
-         <p>On UTF-8 systems you can specify string constants consisting of printable ASCII characters such as 'abc'; you can specify control characters such as '\t'; and, you can specify a character in Unicode by starting it with '\u', for instance, '\u0001' represents Ctrl-A in hexadecimal (see Wikipedia <a href="http://en.wikipedia.org/wiki/ASCII">ASCII</a>, <a href="http://en.wikipedia.org/wiki/Unicode">Unicode</a>, and <a href="http://en.wikipedia.org/wiki/UTF-8">UTF-8</a>). In theory, you should be able to specify non-UTF-8 constants on non-UTF-8 systems but as far as we know this has not been tested.</p>
+         <p>UTF-8 のシステムでは 'abc' のように印字可能な ASCII 文字を含む文字列が指定できます。また、 '\t' のように制御文字が指定できます。ユニコードに含まれる文字は '\u' から始まる記法で指定できます。たとえば、 '\u0001' は Ctrl-A を 16 進表記で表しています (Wikipedia の記事 <a href="http://ja.wikipedia.org/wiki/ASCII">ASCII</a>, <a href="http://ja.wikipedia.org/wiki/Unicode">Unicode</a>, <a href="http://ja.wikipedia.org/wiki/UTF-8">UTF-8</a> を参照。) 。理屈の上では、 UTF-8 以外のシステム上では UTF-8 でない文字列定数が指定できるはずですが、我々が知る限りこれはテストされていません。</p>
       </li>
       <li>
-         <p>To specify a long constant, l or L must be appended to the number (for example, 12345678L). If the l or L is not specified, but the number is too large to fit into an int, the problem will be detected at parse time and the processing is terminated. </p>
+         <p>long の定数を指定するためには、 l か L を数値の末尾につけます (12345678L のように) 。もし数値が int に収まり切らないにも関わらず l も L も指定されていなければ、パース時に問題が検出されて処理が止まります。</p>
       </li>
       <li>
          <p>Any numeric constant with decimal point (for example, 1.5) and/or exponent (for example, 5e+1) is treated as double unless it ends with f or F in which case it is assigned type float (for example,  1.5f). </p>
+         <p>小数点を含む数値定数 (例: 1.5) や指数部定数を含む数値定数 (例: 5e+1) は double 型の値として扱われます。末尾に f か F が付いている場合は float 型の値として扱われます (例: 1.5f) 。</p>
       </li>
    </ul>
-   <p></p>
-   <p>The data type definitions for tuples, bags, and maps apply to constants:</p>
+   <p>タプル、バッグ、マップのデータ型の定義は定数にも適用されます。</p>
    <ul>
       <li>
-         <p>A tuple can contain fields of any data type</p>
+         <p>タプルは任意の型のフィールドを含むことができます</p>
       </li>
       <li>
-         <p>A bag is a collection of tuples</p>
+         <p>バッグはタプルのコレクションです</p>
       </li>
       <li>
-         <p>A map key must be a scalar; a map value can be any data type</p>
+         <p>マップのキーは単純データ型の値である必要があります。キーに紐づく値は任意のデータ型であることができます</p>
       </li>
    </ul>
    <p></p>
-   <p>Complex constants (either with or without values) can be used in the same places scalar constants can be used; that is, in FILTER and GENERATE statements.</p>
+   <p>複合データ型の定数は、値を含むかどうかに関わらず、単純データ型の定数と同じ場所で使うことができます。つまり、 FILTER 演算子と GENERATE 演算子です。</p>
 
 <source>
 A = LOAD 'data' USING MyStorage() AS (T: tuple(name:chararray, age: int));
