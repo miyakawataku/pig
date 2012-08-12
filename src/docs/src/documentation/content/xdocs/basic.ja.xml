@@ -1711,15 +1711,15 @@ DUMP A;
    
       <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section id="tuple-schema">
-   <title>Tuple Schemas</title>
-   <p>A tuple is an ordered set of fields.</p>
+   <title>タプルのスキーマ</title>
+   <p>タプルはフィールドの順序付き集合です。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr>
             <td>
-               <p>alias[:tuple] (alias[:type]) [, (alias[:type]) …] )</p>
+               <p>alias:[tuple] (alias[:type]) [, (alias[:type]) …] )</p>
             </td>
          </tr>
    </table>
@@ -1733,15 +1733,23 @@ DUMP A;
                <p>alias</p>
             </td>
             <td>
-               <p>The name assigned to the tuple.</p>
+               <p>タプルに割り当てる名前。</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>:tuple</p>
+               <p>:</p>
             </td>
             <td>
-               <p>(Optional) The data type, tuple (case insensitive).</p>
+               <p>alias とスキーマはコロンで区切ります。</p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p>tuple</p>
+            </td>
+            <td>
+               <p>(省略可能) タプル型 (大文字・小文字を区別しません) 。</p>
             </td>
          </tr>
          <tr>
@@ -1749,7 +1757,7 @@ DUMP A;
                <p>( )</p>
             </td>
             <td>
-               <p>The designation for a tuple, a set of parentheses.</p>
+               <p>タプルを指定するには丸括弧を使います。</p>
             </td>
          </tr>
          <tr>
@@ -1757,13 +1765,13 @@ DUMP A;
                <p>alias[:type]</p>
             </td>
             <td>
-               <p>The constituents of the tuple, where the schema definition rules for the corresponding type applies to the constituents of the tuple:</p>
+               <p>タプルの中身。スキーマ定義のルールがタプルの中身にも適用されます:</p>
                <ul>
                   <li>
-                     <p>alias – the name assigned to the field</p>
+                     <p>alias - フィールドに割り当てられる名前</p>
                   </li>
                   <li>
-                     <p>type (optional) – the simple or complex data type assigned to the field</p>
+                     <p>type (省略可能) - フィールドに割り当てられる単純データ型あるいは複合データ型</p>
                   </li>
                </ul>
             </td>
@@ -1772,8 +1780,8 @@ DUMP A;
    </section>
    
    <section>
-   <title>Examples</title>
-   <p>In this example the schema defines one tuple. The load statements are equivalent.</p>
+   <title>例</title>
+   <p>次の例で、スキーマはタプルを定義しています。 2 つの LOAD 文は同一です。</p>
 
  <source>
 cat data;
@@ -1793,7 +1801,7 @@ DUMP A;
 ((2,5,8))
 </source>
    
-   <p>In this example the schema defines two tuples.</p>
+   <p>次の例で、スキーマは 2 つのタプルを定義しています。</p>
 <source>
 cat data;
 (3,8,9) (mary,19)
