@@ -1532,14 +1532,13 @@ SORT = order IN by $2 .. $3, $6 ..;
    
     <!-- ================================================== --> 
    <section id="Schemas">
-   <title>Schemas</title>
+   <title>スキーマ</title>
 
-   <p>Schemas enable you to assign names to fields and declare types for fields. Schemas are optional but we encourage you to use them whenever possible; type declarations result in better parse-time error checking and more efficient code execution.</p>  
+   <p>スキーマによってフィールドに名前を割り当て、フィールドの型を宣言することができます。スキーマの使用は必須ではありませんが、可能な限り使用することをお勧めします。型宣言によってパース時のエラーチェックが厳密になり、また実行時の効率も上がるからです。</p>
    
-   <p>Schemas for <a href="#schema-simple">simple types</a> and <a href="#schema-complex">complex types</a> can be used anywhere a schema definition is appropriate.</p>   
+   <p>スキーマ定義が可能な所ではどこでも、<a href="#schema-simple">単純データ型のスキーマ</a>と<a href="#schema-complex">複合データ型のスキーマ</a>を書くことができます。</p>
    
-   <p>Schemas are defined with the <a href="#LOAD">LOAD</a>, <a href="#STREAM">STREAM</a>, and <a href="#FOREACH">FOREACH</a> operators using the AS clause. If you define a schema using the LOAD operator, then it is the load function that enforces the schema 
-   (see <a href="#LOAD">LOAD</a> and <a href="udf.html">User Defined Functions</a> for more information).</p>
+   <p>スキーマは <a href="#load">LOAD</a> 演算子、 <a href="#stream">STREAM</a> 演算子、 <a href="#foreach">FOREACH</a> 演算子の AS 節で定義できます。 LOAD 演算子でスキーマを定義する時、スキーマを適用するのはロード関数の責任です (<a href="#load">LOAD</a> と <a href="udf.html">ユーザ定義関数</a> を参照) 。</p>
 
    <p></p>
    <p><strong>Known Schema Handling</strong></p>
