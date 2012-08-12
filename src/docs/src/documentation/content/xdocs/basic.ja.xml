@@ -1419,8 +1419,8 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 &gt; f1));
 
    <!-- ++++++++++++++++++++++++++++++++++ --> 
       <section id="fexp">
-          <title>Field Expressions</title>
-          <p>Field expressions represent a field or a <a href="#deref">dereference operator</a> applied to a field.</p>
+          <title>フィールド式</title>
+          <p>フィールド式はフィールドを表します。正確に言えばフィールドに対する<a href="#deref">参照外し演算子</a>の適用です。</p>
       </section>
 
    <!-- ++++++++++++++++++++++++++++++++++ --> 
