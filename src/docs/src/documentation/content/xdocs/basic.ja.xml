@@ -1168,9 +1168,8 @@ dump X;
    
       <!-- ++++++++++++++++++++++++++++++++++ -->  
    <section id="nulls_join">
-   <title>Nulls and JOIN Operator</title>
-   <p>The JOIN operator - when performing inner joins - adheres to the SQL standard and disregards (filters out) null values. 
-   (See also <a href="perf.html#nulls">Drop Nulls Before a Join</a>.)</p>
+   <title>null と JOIN 演算子</title>
+   <p>JOIN 演算子は、内部結合の場合、 SQL の標準にしたがって null を除外します (<a href="perf.html#nulls">結合の前に null を除外する</a> を参照)。</p>
 <source>
 A = load 'student' as (name:chararray, age:int, gpa:float);
 B = load 'student' as (name:chararray, age:int, gpa:float);
