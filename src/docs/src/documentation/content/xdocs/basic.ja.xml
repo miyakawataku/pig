@@ -1570,20 +1570,20 @@ a = load '1.txt';
 a: Schema for a unknown
 </source>
 
-   <p><strong>How Pig Handles Schema</strong></p>
+   <p><strong>Pig はスキーマをどのように扱うか</strong></p>
    
-   <p>As shown above, with a few exceptions Pig can infer the schema of a relationship up front. You can examine the schema of particular relation using <a href="test.html#DESCRIBE">DESCRIBE</a>. Pig enforces this computed schema during the actual execution by casting the input data to the expected data type. If the process is successful the results are returned to the user; otherwise, a warning is generated for each record that failed to convert.  Note that Pig does not know the actual types of the fields in the input data prior to the execution; rather, Pig determines the data types and performs the right conversions on the fly.</p>
+   <p>上に示したとおり、いくつかの例外を除いて Pig は関係のスキーマを前もって推論します。関係のスキーマを調べるには <a href="test.html#describe">DESCRIBE</a> 演算子が使えます。 Pig は入力データを実行時に期待する型にキャストすることによってスキーマを適用します。キャストがうまく行けばユーザに結果が戻されます。うまく行かなければ、変換に失敗したレコードごとに警告が表示されます。 Pig は入力データ中のフィールドの実際の型を知らないことに注意してください。その代わり、 Pig は実行時に型を判断し、適切な変換を行います。</p>
   
-<p>Having a deterministic schema is very powerful; however, sometimes it comes at the cost of performance. Consider the following example:</p>  
+<p>非決定論的なスキーマはとても強力ですが、時に性能に悪影響を与えます。次の例を考えてください:</p>  
   
 <source>
 A = load ‘input’ as (x, y, z);
 B = foreach A generate x+y;
 </source>
 
- <p>If you do <a href="test.html#DESCRIBE">DESCRIBE</a> on B, you will see a single column of type double. This is because Pig makes the safest choice and uses the largest numeric type when the schema is not know. In practice, the input data could contain integer values; however, Pig will cast the data to double and make sure that a double result is returned.</p>
+ <p>B に対して <a href="test.html#describe">DESCRIBE</a> 演算子を適用すると、 double 型の列が一つのスキーマが表示されます。これは、スキーマが不明の場合に、 Pig が最も安全な選択として最大の数値型を選択するからです。実際の入力データは整数値だけを含んでいるのかも知れませんが、 Pig はデータを double にキャストし、 double 型の結果が戻るようにします。</p>
 
- <p>If the schema of a relationship can’t be inferred, Pig will just use the runtime data as is and propagate it through the pipeline.</p>
+ <p>関係のスキーマが推論できない時は、 Pig は実行時の型をパイプラインを通して伝播します。</p>
 
 
    <!-- ++++++++++++++++++++++++++++++++++ -->     
