@@ -1822,15 +1822,15 @@ DUMP A;
 
    <!-- ++++++++++++++++++++++++++++++++++ -->    
    <section id="bag-schema">
-   <title>Bag Schemas</title>
-   <p>A bag is a collection of tuples.</p>
+   <title>バッグのスキーマ</title>
+   <p>バッグはタプルのコレクションです。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr>
             <td>
-               <p>alias[:bag] {tuple} </p>
+               <p>alias:[bag] {tuple} </p>
             </td>
          </tr>
    </table>
@@ -1844,15 +1844,23 @@ DUMP A;
                <p>alias</p>
             </td>
             <td>
-               <p>The name assigned to the bag.</p>
+               <p>バッグに割り当てる名前です。</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>:bag</p>
+               <p>:</p>
             </td>
             <td>
-               <p>(Optional) The data type, bag (case insensitive).</p>
+               <p>alias とスキーマはコロンで区切ります。</p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p>bag</p>
+            </td>
+            <td>
+               <p>(省略可能) バッグ型 (大文字・小文字を区別しません) 。</p>
             </td>
          </tr>
          <tr>
@@ -1860,7 +1868,7 @@ DUMP A;
                <p>{ }</p>
             </td>
             <td>
-               <p>The designation for a bag, a set of curly brackets.</p>
+               <p>バッグを指定するには波括弧を使います。</p>
             </td>
          </tr>
          <tr>
@@ -1868,15 +1876,15 @@ DUMP A;
                <p>tuple</p>
             </td>
             <td>
-               <p>A tuple (see Tuple Schema).</p>
+               <p>タプル (タプルのスキーマを参照) 。</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section>
-   <title>Examples</title>
-   <p>In this example the schema defines a bag. The two load statements are equivalent.</p>
+   <title>例</title>
+   <p>次の例で、スキーマはバッグを定義しています。 2 つの LOAD 文は同一です。</p>
 <source>
 cat data;
 {(3,8,9)}
