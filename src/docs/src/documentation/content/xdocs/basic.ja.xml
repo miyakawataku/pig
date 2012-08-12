@@ -1375,36 +1375,34 @@ D = FOREACH B GENERATE T.name, [25#5.6], {(1, 5, 18)};
    
     <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section id="expressions">
-   <title>Expressions</title>
-   <p>In Pig Latin, expressions are language constructs used with the FILTER, FOREACH, GROUP, and SPLIT operators as well as the eval functions.</p>
-   <p>Expressions are written in conventional mathematical infix notation and are adapted to the UTF-8 character set. Depending on the context, expressions can include:</p>
+   <title>式</title>
+   <p>Pig Latin において、式は FILTER, FOREACH, GROUP, SPLIT 演算子、そして評価関数の中で使える言語構造です。</p>
+   <p>式は数学において伝統的な中置記法で書けます。文脈に応じて、式は次のものを含む可能性があります。</p>
    <ul>
       <li>
-         <p>Any Pig data type (simple data types, complex data types)</p>
+         <p>任意の Pig データ型 (単純データ型および複合データ型) の値</p>
       </li>
       <li>
-         <p>Any Pig operator (arithmetic, comparison, null, boolean, dereference, sign, and cast)</p>
+         <p>任意の PIg 演算子 (算術演算子、比較演算子、 null, 条件演算子、符号演算子、キャスト演算子)</p>
       </li>
       <li>
-         <p>Any Pig built in function.</p>
+         <p>任意の Pig 組み込み関数</p>
       </li>
       <li>
-         <p>Any user defined function (UDF) written in Java. </p>
+         <p>Java で書かれた任意のユーザ定義関数 (UDF)</p>
        </li>
         </ul>
-        <p></p>
-       <p>In Pig Latin,</p>
+       <p>Pig Latin では、</p>
         <ul>
        <li>
-         <p>An arithmetic expression could look like this:</p>
+         <p>算術演算子は次のようになります:</p>
          <source>
 X = GROUP A BY f2*f3;
 </source>
       </li>
 
       <li>
-         <p></p>
-         <p>A string expression could look like this, where a and b are both chararrays:</p>
+         <p>文字列型の式は次のようになります。 a と b はいずれも chararray だと思ってください:</p>
          <source>
 X = FOREACH A GENERATE CONCAT(a,b);
 </source>
@@ -1412,7 +1410,7 @@ X = FOREACH A GENERATE CONCAT(a,b);
 
       <li>
          <p></p>
-         <p>A boolean expression could look like this:</p>
+         <p>ブーリアン型の式は次のようになります:</p>
          <source>
 X = FILTER A BY (f1==8) OR (NOT (f2+f3 &gt; f1));
 </source>
