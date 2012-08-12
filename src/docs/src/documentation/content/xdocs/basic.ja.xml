@@ -1588,9 +1588,9 @@ B = foreach A generate x+y;
 
    <!-- ++++++++++++++++++++++++++++++++++ -->     
    <section id="schema-load">
-   <title>Schemas with LOAD and STREAM </title>
-   <p>With LOAD and STREAM operators, the schema following the AS keyword must be enclosed in parentheses.</p>
-   <p>In this example the LOAD statement includes a schema definition for simple data types.</p>
+   <title>LOAD 演算子と STREAM 演算子におけるスキーマ</title>
+   <p>LOAD 演算子と STREAM 演算子では、スキーマは AS キーワードに後続して、括弧でくくる必要があります。</p>
+   <p>次の例で、 LOAD 文は単純データ型からなるスキーマを含んでいます。</p>
 <source>
 A = LOAD 'data' AS (f1:int, f2:int);
 </source>   
@@ -1598,17 +1598,17 @@ A = LOAD 'data' AS (f1:int, f2:int);
  
     <!-- ++++++++++++++++++++++++++++++++++ -->   
    <section id="schemaforeach">
-   <title>Schemas with FOREACH </title>
-   <p>With FOREACH operators, the schema following the AS keyword must be enclosed in parentheses when the FLATTEN operator is used. Otherwise, the schema should not be enclosed in parentheses.</p>
-   <p>In this example the FOREACH statement includes FLATTEN and a schema for simple data types.</p>
+   <title>FOREACH 演算子におけるスキーマ</title>
+   <p>FOREACH 演算子で FLATTEN 演算子を使う場合、スキーマは AS キーワードに後続して、括弧でくくる必要があります。 FLATTEN 演算子を使わない場合は、スキーマを括弧でくくる必要はありません。</p>
+   <p>次の例で、 FOREACH 文は FLATTEN 演算子を使っており、また単純データ型からなるスキーマを適用しています。</p>
 <source>
 X = FOREACH C GENERATE FLATTEN(B) AS (f1:int, f2:int, f3:int), group;
 </source>  
-   <p>In this example the FOREACH statement includes a schema for simple expression.</p>
+   <p>次の例で、 FOREACH 文は単純な式に対するスキーマを適用しています。</p>
 <source>
 X = FOREACH A GENERATE f1+f2 AS x1:int;
 </source>   
-   <p>In this example the FOREACH statement includes a schemas for multiple fields.</p>
+   <p>次の例で、 FOREACH 文は複数のフィールドに対してスキーマを適用しています。</p>
 <source>
 X = FOREACH A GENERATE f1 as user, f2 as age, f3 as gpa;
 </source> 
