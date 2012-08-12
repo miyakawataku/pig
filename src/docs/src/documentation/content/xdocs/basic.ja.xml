@@ -1447,27 +1447,27 @@ C = FOREACH G GENERATE COUNT(*)
 
    <!-- ++++++++++++++++++++++++++++++++++ --> 
 <section id="prexp">
-<title>Project-Range Expressions</title>
-<p>Project-range ( .. ) expressions can be used to project a range of columns from input. For example:</p>
+<title>範囲射影式</title>
+<p>範囲射影 ( .. ) 式は入力からある範囲の式を抜き出すのに使えます。たとえば:</p>
 <ul>
-<li>.. $x : projects columns $0 through $x, inclusive </li>
-<li>$x .. : projects columns through end, inclusive </li>
-<li>$x .. $y : projects columns through $y, inclusive </li>
+<li>.. $x : $0 から $x までの列を抜き出します ($0 と $x を含む)</li>
+<li>$x .. : $x から最後までの列を抜き出します ($x と 最後の列を含む)</li>
+<li>$x .. $y : $x から $y までの列を抜き出します ($x と $y を含む)</li>
 </ul>
 <p></p>
 
-<p>If the input relation has a schema, you can refer to columns by alias rather than by column position. You can also combine aliases and column positions in an expression; for example, "col1 .. $5" is valid. </p>
+<p>入力の関係がスキーマを持っている場合、列を位置で指定する代わりに別名で指定できます。別名と位置表記を組み合わせることもできます。たとえば "col1 .. $5" は正しい範囲射影式です。</p>
 
-<p>Project-range can be used in all cases where the <a href="#sexp">star expression</a> ( * ) is allowed.</p>
+<p>範囲射影は<a href="#sexp">スター式</a> ( * ) が使える場所であればどこでも使えます。</p>
 
-<p>Project-range can be used in the following statements:
-<a href="#FOREACH">FOREACH</a>, 
-<a href="#JOIN+%28inner%29">JOIN</a>,  
-<a href="#GROUP">GROUP</a>, 
-<a href="#COGROUP">COGROUP</a>, and  
-<a href="#ORDER+BY">ORDER BY</a> (also when ORDER BY is used within a nested FOREACH block).</p>
+<p>範囲射影は次の文の中で使えます:
+<a href="#foreach">FOREACH</a>, 
+<a href="#join+%28inner%29">JOIN</a>,  
+<a href="#group">GROUP</a>, 
+<a href="#cogroup">COGROUP</a>,
+<a href="#order+by">ORDER BY</a> (ネストされた FOREACH ブロック中の ORDER BY でも使えます) 。</p>
 
-<p>A few examples are shown here:</p>
+<p>いくつかの例です:</p>
 <source>
 ..... 
 grunt> F = foreach IN generate (int)col0, col1 .. col3; 
@@ -1485,10 +1485,10 @@ g = group l1 by b .. c;
 ..... 
 </source>
 
-<p>There are some restrictions on the use of project-to-end form of project-range (eg "x .. ") when the input schema is unknown (null): </p>
+<p>入力のスキーマが不明 (null) の場合、最後の列までの範囲射影 (例: "x ..") の使用にはいくつかの制限があります:</p>
 <ul>
-<li>For GROUP/COGROUP, the project-to-end form of project-range is not allowed.</li>
-<li>For ORDER BY, the project-to-end form of project-range is supported only as the last sort column.
+<li>GROUP/COGROUP 演算子では、グループ化列の式に最後の列までの範囲射影を使うことはできません。</li>
+<li>ORDER BY 演算子で、最後の列までの範囲射影はソート列の最後でのみ使えます。
 <source>
 ..... 
 grunt> describe IN; 
