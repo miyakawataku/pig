@@ -1541,16 +1541,15 @@ SORT = order IN by $2 .. $3, $6 ..;
    <p>スキーマは <a href="#load">LOAD</a> 演算子、 <a href="#stream">STREAM</a> 演算子、 <a href="#foreach">FOREACH</a> 演算子の AS 節で定義できます。 LOAD 演算子でスキーマを定義する時、スキーマを適用するのはロード関数の責任です (<a href="#load">LOAD</a> と <a href="udf.html">ユーザ定義関数</a> を参照) 。</p>
 
    <p></p>
-   <p><strong>Known Schema Handling</strong></p>
-   <p>Note the following:</p>
+   <p><strong>既知のスキーマの扱い</strong></p>
+   <p>次のことに注意してください:</p>
    <ul>
-      <li>You can define a schema that includes both the field name and field type.</li>
-      <li>You can define a schema that includes the field name only; in this case, the field type defaults to bytearray.</li>
-      <li>You can choose not to define a schema; in this case, the field is un-named and the field type defaults to bytearray.</li>
+      <li>フィールド名とフィールドの型の両方を含むスキーマが定義できます。</li>
+      <li>フィールド名だけを含むスキーマが定義できます。この場合、フィールドの型はデフォルトで bytearray になります。</li>
+      <li>スキーマを定義しないことも可能です。この場合、フィールドは無名になり、またフィールドの型はデフォルトで bytearray になります。</li>
    </ul>
-   <p>If you assign a name to a field, you can refer to that field using the name or by positional notation. If you don't assign a name to a field (the field is un-named) you can only refer to the field using positional notation.</p>
-   <p>If you assign a type to a field, you can subsequently change the type using the cast operators. If you don't assign a type to a field, the field defaults to bytearray; you can change the default type using the cast operators.</p>
-      <p></p>
+   <p>フィールドに名前を割り当てると、名前と位置表記の両方でフィールドが参照できるようになります。名前を割り当てない場合 (つまりフィールドが無名の時) 、フィールドは位置表記のみで参照できます。</p>
+   <p>フィールドに型を割り当てると、その後キャスト演算子を使って型を変えることができます。型を割り当てない場合、フィールドの型はデフォルトで bytearray になります。デフォルトの型はキャスト演算子で変更できます。</p>
    <p id="unknown-schema"><strong>Unknown Schema Handling</strong></p>
       <p>Note the following:</p>
    <ul>
