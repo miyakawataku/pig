@@ -1906,47 +1906,55 @@ DUMP A;
    
       <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section id="map-schema">
-   <title>Map Schemas</title>
-   <p>A map is a set of key value pairs.</p>
+   <title>マップのスキーマ</title>
+   <p>マップはキーと値のペアです。</p>
    
    <section>
-   <title>Syntax (&lt;&gt; demotes optional)</title>
+   <title>文法 (&lt;&gt; は省略可能であることを表します)</title>
    <table>
       <tr>
             <td>
-               <p>alias&lt;:map&gt; [ &lt;type&gt; ] </p>
+               <p>alias:&lt;map&gt; [ &lt;type&gt; ] </p>
             </td>
          </tr>
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
          <tr>
             <td><p>alias</p></td>
-            <td><p>The name assigned to the map.</p></td>
+            <td><p>マップに割り当てる名前です。</p></td>
          </tr>
          <tr>
-            <td><p>:map</p></td>
-            <td><p>(Optional) The data type, map (case insensitive).</p></td>
+            <td>
+               <p>:</p>
+            </td>
+            <td>
+               <p>alias とスキーマはコロンで区切ります。</p>
+            </td>
+         </tr>
+         <tr>
+            <td><p>map</p></td>
+            <td><p>(省略可能) マップ型 (大文字と小文字を区別しません) 。</p></td>
          </tr>
          <tr>
             <td><p>[ ]</p></td>
-            <td><p>The designation for a map, a set of straight brackets [ ].</p></td>
+            <td><p>マップ型を表すには角括弧 [ ] を使います。</p></td>
          </tr>
          <tr>
             <td><p>type</p></td>
-            <td><p>(Optional) The datatype (all types allowed, bytearray is the default).</p>
-            <p>The type applies to the map value only; the map key is always type chararray (see <a href="#Map">Map</a>).</p>
-            <p>If a type is declared then ALL values in the map must be of this type.</p>
+            <td><p>(省略可能) データ型 (どのデータ型でも許容されます。デフォルトは bytearray です) 。</p>
+            <p>型はマップの値にのみ適用されます。マップのキーは常に chararray 型です (<a href="#map">マップ</a> を参照) 。</p>
+	    <p>型が宣言された場合、マップのすべての値はこの型である必要があります。</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section>
-   <title>Examples</title>
-   <p>In this example the schema defines an untyped map (the map values default to bytearray). The load statements are equivalent.</p>
+   <title>例</title>
+   <p>次の例で、スキーマは型付けされないマップを定義します (マップの値はデフォルトで bytearray になります) 。 2 つの LOAD 文は同一です。</p>
 <source>
 cat data;
 [open#apache]
@@ -1963,20 +1971,19 @@ DUMP A;
 ([apache#hadoop])
 </source>
 
-<p>This example shows the use of a typed maps.</p>
+<p>次の例は、型付きのマップを定義しています。</p>
 <source>
-/* Map types are declared*/
+/* マップの型を宣言する */
 a = load '1.txt' as(map[int]); --Map value is int
 b = foreach a generate (map[(i:int)])a0; -- Map value is tuple
 b = stream a through `cat` as (m:map[{(i:int,j:chararray)}]); -- Map value is bag
 
-/* The MapLookup of a typed map will result in a datatype of the map value */
+/* 型付けされたマップの値の参照は、マップの値の型になる */
 a = load '1.txt' as(map[int]);
 b = foreach a generate $0#'key';
 
-/* Schema for b */
+/* b のスキーマ */
 b: {int}
-
 </source>
  </section></section>
    
