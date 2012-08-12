@@ -1550,27 +1550,26 @@ SORT = order IN by $2 .. $3, $6 ..;
    </ul>
    <p>フィールドに名前を割り当てると、名前と位置表記の両方でフィールドが参照できるようになります。名前を割り当てない場合 (つまりフィールドが無名の時) 、フィールドは位置表記のみで参照できます。</p>
    <p>フィールドに型を割り当てると、その後キャスト演算子を使って型を変えることができます。型を割り当てない場合、フィールドの型はデフォルトで bytearray になります。デフォルトの型はキャスト演算子で変更できます。</p>
-   <p id="unknown-schema"><strong>Unknown Schema Handling</strong></p>
-      <p>Note the following:</p>
+   <p id="unknown-schema"><strong>未知のスキーマの扱い</strong></p>
+      <p>次のことに注意してください:</p>
    <ul>
-      <li>When you JOIN/COGROUP/CROSS multiple relations, if any relation has an unknown schema (or no defined schema, also referred to as a null schema), the schema for the resulting relation is null. </li>
-      <li>If you FLATTEN a bag with empty inner schema, the schema for the resulting relation is null.</li>
-      <li>If you UNION two relations with incompatible schema, the schema for resulting relation is null.</li>
-      <li>If the schema is null, Pig treats all fields as bytearray (in the backend, Pig will determine the real type for the fields dynamically) </li>
+      <li>複数の関係に JOIN/COGROUP/CROSS 演算子を適用する際、どれか一つの関係のスキーマが未知であれば (つまり、定義されたスキーマがない場合。 null スキーマとも呼ぶ) 、結果の関係のスキーマは null になります。</li>
+      <li>要素のスキーマが定義されていないバッグに対して FLATTEN 演算子を適用すると、結果の関係のスキーマは null になります。</li>
+      <li>スキーマが合致しない二つの関係を UNION すると、結果の関係のスキーマは null になります。</li>
+      <li>スキーマが null の場合、 Pig はすべてのフィールドを bytearray として扱います (内部的には、 Pig は実際の型を動的に決定します) 。</li>
     </ul>      
-    <p>See the examples below. If a field's data type is not specified, Pig will use bytearray to denote an unknown type. If the number of fields is not known, Pig will derive an unknown schema.</p>
+    <p>次の例を見てください。フィールドの型が指定されていない時、 Pig は未知の型を表すのに bytearray を使います。フィールドの数がわからない時、 Pig は未知のスキーマを導出します。</p>
     
  <source>
-/* The field data types are not specified ... */
+/* フィールドの型を指定しない ... */
 a = load '1.txt' as (a0, b0);
 a: {a0: bytearray,b0: bytearray}
 
-/* The number of fields is not known ... */
+/* フィールドの数が不明 ... */
 a = load '1.txt';
 a: Schema for a unknown
 </source>
 
-   <p></p>
    <p><strong>How Pig Handles Schema</strong></p>
    
    <p>As shown above, with a few exceptions Pig can infer the schema of a relationship up front. You can examine the schema of particular relation using <a href="test.html#DESCRIBE">DESCRIBE</a>. Pig enforces this computed schema during the actual execution by casting the input data to the expected data type. If the process is successful the results are returned to the user; otherwise, a warning is generated for each record that failed to convert.  Note that Pig does not know the actual types of the fields in the input data prior to the execution; rather, Pig determines the data types and performs the right conversions on the fly.</p>
