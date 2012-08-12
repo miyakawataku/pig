@@ -1616,11 +1616,11 @@ X = FOREACH A GENERATE f1 as user, f2 as age, f3 as gpa;
   
      <!-- ++++++++++++++++++++++++++++++++++ -->  
    <section  id="schema-simple">
-   <title>Schemas for Simple Data Types</title>
-   <p>Simple data types include int, long, float, double, chararray, bytearray, and boolean.</p>
+   <title>単純データ型に対するスキーマ</title>
+   <p>単純データ型は int, long, float, double, chararray, bytearray, boolean からなります。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr>
             <td>
@@ -1630,14 +1630,14 @@ X = FOREACH A GENERATE f1 as user, f2 as age, f3 as gpa;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias</p>
             </td>
             <td>
-               <p>The name assigned to the field.</p>
+               <p>フィールドに割り当てる名前。</p>
             </td>
          </tr>
          <tr>
@@ -1645,9 +1645,9 @@ X = FOREACH A GENERATE f1 as user, f2 as age, f3 as gpa;
                <p>type</p>
             </td>
             <td>
-               <p>(Optional) The simple data type assigned to the field.</p>
-               <p>The alias and type are separated by a colon ( : ).</p>
-               <p>If the type is omitted, the field defaults to type bytearray.</p>
+               <p>(省略可能) フィールドに割り当てられる単純データ型。</p>
+               <p>aliad と type はコロン ( : ) によって区切ります。</p>
+               <p>type が省略された時には、フィールドの型はデフォルトで bytearray になります。</p>
             </td>
          </tr>
          <tr>
@@ -1655,14 +1655,14 @@ X = FOREACH A GENERATE f1 as user, f2 as age, f3 as gpa;
                <p>( , )</p>
             </td>
             <td>
-               <p>Multiple fields are enclosed in parentheses and separated by commas.</p>
+               <p>複数のフィールドはカンマで区切ります。</p>
             </td>
          </tr>
    </table></section>
    
    <section>
-   <title>Examples</title>
-   <p>In this example the schema defines multiple types.</p>
+   <title>例</title>
+   <p>次の例で、スキーマは複数の型を定義しています。</p>
 <source>
 cat student;
 John	18	4.0
@@ -1682,7 +1682,7 @@ DUMP A;
 (Joe,18,3.8F)
 </source>
    
-   <p>In this example field "gpa" will default to bytearray because no type is declared. </p>
+   <p>次の例で "gpa" フィールドは型が宣言されていないため、デフォルトで bytearray になります。</p>
 <source>
 cat student;
 John	18	4.0
