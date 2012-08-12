@@ -1509,23 +1509,22 @@ SORT = order IN by $2 .. $3, $6 ..;
       
       <!-- ++++++++++++++++++++++++++++++++++ -->    
       <section id="bexp">
-          <title>Boolean Expressions</title>
-          <p>Boolean expressions can be made up of UDFs that return a boolean value or boolean operators 
-          (see <a href="#boolops">Boolean Operators</a>). 
+          <title>ブーリアン式</title>
+          <p>ブーリアン式はブーリアン型の値を戻す UDF によって構成できます (<a href="#boolops">ブーリアン演算子</a>を参照) 。
           </p>
       </section>
 
    <!-- ++++++++++++++++++++++++++++++++++ -->            
       <section id="texp">
-          <title>Tuple Expressions</title>
-          <p>Tuple expressions form subexpressions into tuples. The tuple expression has the form (expression [, expression …]), where expression is a general expression. The simplest tuple expression is the star expression, which represents all fields.
+          <title>タプル式</title>
+          <p>タプル式は部分式をタプルにまとめあげます。タプル式は (expression, [, expression …]) という形式です。ここで expression は一般式です。もっとも単純な形態のタプル式はすべてのフィールドを表すスター式です。
           </p>
       </section>
 
    <!-- ++++++++++++++++++++++++++++++++++ --> 
     <section id="gexp">
-          <title>General Expressions</title>
-          <p>General expressions can be made up of UDFs and almost any operator. Since Pig does not consider boolean a base type, the result of a general expression cannot be a boolean. Field expressions are the simpliest general expressions.
+          <title>一般式</title>
+          <p>一般式は UDF とほとんどの演算子によって構成できます。 Pig は boolean を基本型とみなさないので、一般式の値が boolean になることはできません。最も単純な形態の一般式はフィールド式です。
           </p>
       </section>
    </section>
