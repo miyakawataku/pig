@@ -1133,8 +1133,8 @@ B = FILTER A BY name is not null;
    </section>
    
    <section id="nulls_group">
-   <title>Nulls and GROUP/COGROUP Operators</title>
-   <p>When using the GROUP operator with a single relation, records with a null group key are grouped together.</p>
+   <title>null と GROUP/COGROUP 演算子</title>
+   <p>1 つの関係を GROUP 演算子でグループ化するとき、グループ化キーが null であるレコードは 1 つにまとめてグループ化されます。</p>
    <source>
 A = load 'student' as (name:chararray, age:int, gpa:float);
 dump A;
@@ -1148,7 +1148,7 @@ dump X;
 (,{(sam,,3.0),(bob,,3.5)})
    </source>
    
-<p>When using the GROUP (COGROUP) operator with multiple relations, records with a null group key are considered different and are grouped separately. In the example below note that there are two tuples in the output corresponding to the null group key: one that contains tuples from relation A (but not relation B) and one that contains tuples from relation B (but not relation A).</p>
+<p>複数の関係を GROUP (COGROUP) 演算子でグループ化するとき、グループ化キーが null であるレコードは、関係ごとに別々にグループ化されます。次の例で、結果の関係には null をグループ化キーとするタプルが 2 つあります。 1 つは関係 A のタプルのみを含み、もう 1 つは関係 B のタプルのみを含みます。</p>
    
 <source>
 A = load 'student' as (name:chararray, age:int, gpa:float);
