@@ -2848,20 +2848,20 @@ DUMP X;
    
 <!-- =================================================================== --> 
    <section id="boolops">
-   <title>Boolean Operators</title>
+   <title>ブーリアン演算子</title>
       
       <section>
-      <title>Description</title>
+      <title>説明</title>
    <table>
       <tr>
             <td>
-               <p>Operator</p>
+               <p>演算子</p>
             </td>
             <td>
-               <p>Symbol</p>
+               <p>記法</p>
             </td>
             <td>
-               <p> Notes</p>
+               <p>注記</p>
             </td>
          </tr>
          <tr>
@@ -2869,7 +2869,7 @@ DUMP X;
                <p>AND       </p>
             </td>
             <td>
-               <p>and</p>
+               <p>論理積</p>
             </td>
             <td>
                <p></p>
@@ -2880,7 +2880,7 @@ DUMP X;
                <p>OR  </p>
             </td>
             <td>
-               <p>or</p>
+               <p>論理和</p>
             </td>
             <td>
                <p></p>
@@ -2891,17 +2891,17 @@ DUMP X;
                <p>NOT</p>
             </td>
             <td>
-               <p>not</p>
+               <p>否定</p>
             </td>
             <td>
                <p></p>
             </td>
          </tr>
    </table>
-   <p>The result of a boolean expression (an expression that includes boolean and comparison operators) is always of type boolean (true or false).</p>
+   <p>ブーリアン式 (ブーリアン値と比較演算子を含む式) の結果は常にブーリアン値 (true か false) になります。</p>
    
    <section>
-   <title>Example</title>
+   <title>例</title>
 <source>
 X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
 </source>
