@@ -5153,10 +5153,10 @@ DUMP X;
    <section id="define">
    <title>DEFINE</title>
    
-   <p>See:</p>
+   <p>次の節を参照してください。</p>
    <ul>
-   <li><a href="basic.html#define-udfs">DEFINE (UDFs, streaming)</a></li>
-   <li><a href="cont.html#define-macros">DEFINE (macros)</a></li>
+   <li><a href="basic.html#define-udfs">DEFINE (UDF, ストリーミング)</a></li>
+   <li><a href="cont.html#define-macros">DEFINE (マクロ)</a></li>
    </ul>
    </section>
  
