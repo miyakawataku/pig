@@ -4830,22 +4830,14 @@ D = foreach C generate y; -- which y?
 
     <!-- =================================================================== -->  
    <section  id="flatten">
-   <title>Flatten Operator</title>
-   <p>The FLATTEN operator looks like a UDF syntactically, but it is actually an operator that changes the structure of tuples 
-   and bags in a way that a UDF cannot. Flatten un-nests tuples as well as bags. The idea is the same, but the operation and 
-   result is different for each type of structure.</p>
+   <title>FLATTEN 演算子</title>
+   <p>FLATTEN 演算子は文法上 UDF に似ている見えますが、実際には UDF には不可能なやり方でタプルとバッグの構造に変更を加えるものです。 FLATTEN はタプルとバッグのネストを外します。どちらのデータ構造でも、考え方は同じですが、動作と結果は異なります。</p>
 
-   <p>For tuples, flatten substitutes the fields of a tuple in place of the tuple. For example, consider a relation that has a tuple 
-   of the form (a, (b, c)). The expression GENERATE $0, flatten($1), will cause that tuple to become (a, b, c).</p>
+   <p>タプルに対して FLATTEN を適用すると、タプル中のフィールド群をタプルそのものと入れ替えます。たとえば、ある関係が (a, (b, c)) というタプルで構成されているものとします。この時、 GENERATE $0, flatten($1) の結果は (a, b, c) になります。</p>
 
-   <p>For bags, the situation becomes more complicated. When we un-nest a bag, we create new tuples. If we have a 
-   relation that is made up of tuples of the form ({(b,c),(d,e)}) and we apply GENERATE flatten($0), we end up with two 
-   tuples (b,c) and (d,e). When we remove a level of nesting in a bag, sometimes we cause a cross product to happen. 
-   For example, consider a relation that has a tuple of the form (a, {(b,c), (d,e)}), commonly produced by the GROUP operator. 
-   If we apply the expression GENERATE $0, flatten($1) to this tuple, we will create new tuples: (a, b, c) and (a, d, e).</p>
+   <p>バッグに対する FLATTEN の適用は、もっと込み入っています。バッグのネストを外すと、新しいタプルが作られます。 ({(b,c),(d,e)}) という形の、複数のタプルからなる関係がある時に GENERATE flatten($0) の結果は (b, c) および (d, e) という 2 つのタプルになります。バッグのネストを外す時に、直積が行われる場合があります。たとえば、 (a, {(b,c), (d,e)}) という形のタプルからなる関係を考えてみてください。これは GROUP 演算子の結果として通常現れる形です。このタプルに対して GENERATE $0, flatten($1) を適用すると、新しいタプル (a, b, c) と (a, d, e) が作られます。</p>
    
-   <p>Also note that the flatten of empty bag will result in that row being discarded; no output is generated. 
-   (See also <a href="perf.html#nulls">Drop Nulls Before a Join</a>.) </p>
+   <p>また、空のバッグに対して FLATTEN を適用すると、その行に対応する出力はなくなることに注意してください (<a href="perf.html#nulls">結合の前に null を除外する</a> を参照) 。</p>
    
    <source>
 grunt> cat empty.bag
@@ -4856,7 +4848,7 @@ grunt> DUMP B;
 grunt>
 </source>
    
-   <p>For examples using the FLATTEN operator, see <a href="#flatten-example">FOREACH</a>.</p>
+   <p>FLATTEN 演算子を使う例については、 <a href="#flatten-example">FOREACH</a> を見てください。</p>
    </section>
 
   <!-- =================================================================== -->    
