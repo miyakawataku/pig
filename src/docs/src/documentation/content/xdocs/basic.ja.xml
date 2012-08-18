@@ -4853,25 +4853,25 @@ grunt>
 
   <!-- =================================================================== -->    
 <section id="null_operators">
-   <title>Null Operators</title>
+   <title>null 演算子</title>
      
    <section>
-   <title>Description</title>
+   <title>説明</title>
    <table>
       <tr>
             <td>
-               <p>Operator</p>
+               <p>演算子</p>
             </td>
             <td>
-               <p>Symbol</p>
+               <p>表記</p>
             </td>
             <td>
-               <p> Notes</p>
+               <p>注記</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p id="is-null">is null </p>
+               <p id="is-null">null かどうか？</p>
             </td>
             <td>
                <p>is null</p>
@@ -4882,7 +4882,7 @@ grunt>
          </tr>
          <tr>
             <td>
-               <p id="is-not-null">is not null  </p>
+               <p id="is-not-null">null でないか？</p>
             </td>
             <td>
                <p>is not null  </p>
@@ -4893,13 +4893,13 @@ grunt>
          </tr>
    </table>
    <p></p>
-   <p>For a detailed discussion of nulls see <a href="#nulls">Nulls and Pig Latin</a>.</p>
+   <p>null に関する詳細は <a href="#nulls">Pig Latin における null</a> を参照してください。</p>
       </section>
       
    <section>
-   <title>Examples</title>
+   <title>例</title>
    
-   <p>In this example, values that are not null are obtained.</p>
+   <p>次の例では、フィールド f1 の値が null でないレコードだけが得られます。</p>
 <source>
 X = FILTER A BY f1 is not null;
 </source>
