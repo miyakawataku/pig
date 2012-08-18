@@ -4906,8 +4906,8 @@ X = FILTER A BY f1 is not null;
    </section>
 
    <section id="types-table-nulls">
-   <title>Types Table</title>
-   <p>The null operators can be applied to all data types (see <a  href="#nulls">Nulls and Pig Latin</a>). </p>
+   <title>型テーブル</title>
+   <p>null 演算子は任意の型の値に対して適用できます。詳細は <a href="#nulls">Pig Latin における null</a> を参照してください。</p>
    </section>
    </section>
    
