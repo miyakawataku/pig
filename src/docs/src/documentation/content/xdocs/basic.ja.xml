@@ -4479,72 +4479,72 @@ X = FILTER A BY (f1 matches '.*apache.*');
 
   <!-- =================================================================== -->    
    <section id="type-construction">
-   <title>Type Construction Operators</title>
+   <title>型構築演算子</title>
    
    <section>
-   <title>Description</title>
+   <title>説明</title>
    <table>
       <tr>
             <td>
-               <p>Operator</p>
+               <p>演算子</p>
             </td>
             <td>
-               <p>Symbol</p>
+               <p>表記</p>
             </td>
             <td>
-               <p> Notes</p>
+               <p>注記</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>tuple constructor </p>
+               <p>タプル構築子</p>
             </td>
             <td>
                <p> ( ) </p>
             </td>
             <td>
-               <p>Use to construct a tuple from the specified elements. Equivalent to <a href="func.html#totuple">TOTUPLE</a>.</p>
+               <p>指定した要素からタプルを構築します。 <a href="func.html#totuple">TOTUPLE</a> 関数と同一です。</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>bag constructor</p>
+               <p>バッグ構築子</p>
             </td>
             <td>
                <p> { }</p>
             </td>
             <td>
-               <p>Use to construct a bag from the specified elements. Equivalent to <a href="func.html#tobag">TOBAG</a>.</p>
+               <p>指定した要素からバッグを構築します。 <a href="func.html#tobag">TOBAG</a> 関数と同一です。</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>map constructor</p>
+               <p>マップ構築子</p>
             </td>
             <td>
                <p> [ ]</p>
             </td>
             <td>
-               <p>Use to construct a bag from the specified elements. Equivalent to <a href="func.html#tomap">TOMAP</a>.</p>
+               <p>指定した要素からマップを構築します。 <a href="func.html#tomap">TOMAP</a> 関数と同一です。</p>
             </td>
          </tr>
    </table>
 
 <p></p>   
-<p>Note the following:</p>  
+<p>次の点に注意してください:</p>  
 <ul>
-<li>These operators can be used anywhere where the expression of the corresponding type is acceptable including FOREACH GENERATE, FILTER, etc.</li>
-<li>A single element enclosed in parens ( ) like (5) is not considered to be a tuple but rather an arithmetic operator.</li>
-<li>For bags, every element is put in the bag; if the element is not a tuple Pig will create a tuple for it:
+<li>これら演算子は、 FOREACH GENERATE, FILTER など、対応する型の値が使える場所ならどこでも使えます。</li>
+<li>(5) の様に、単一の要素が丸括弧 ( ) にくくられている時は、タプルとはみなされず、優先順位変更のための括弧とみなされます。</li>
+<li>バッグについては、要素がタプルでない場合は、自動的にタプルが作られます:
 <ul>
-<li> Given this {$1, $2}  Pig creates this {($1), ($2)} a bag with two tuples
-<p>... neither $1 and $2 are tuples so Pig creates a tuple around each item</p> <p>&nbsp;</p></li>
+<li>{$1, $2} の場合、 Pig はタプル 2 つのバッグ {($1), ($2)} を作ります
+<p>... $1 も $2 もタプルではないので、 Pig はそれぞれの要素についてタプルを作ります</p></li>
 
-<li> Given this {($1), $2} Pig creates this {($1), ($2)} a bag with two tuples
-<p>... since ($1) is treated as $1 (one cannot create a single element tuple using this syntax), {($1), $2} becomes {$1, $2} and Pig creates a tuple around each item</p><p>&nbsp;</p></li>
+<li>{($1), $2} の場合、 Pig はタプル 2 つのバッグ {($1), ($2)} を作ります
+<p>... ($1) は $1 と解釈されるので (この文法では 1 要素のタプルは作れない) 、 {($1), $2} は {$1, $2} となり、 Pig はそれぞれの要素についてタプルを作ります。</p></li>
 
-<li> Given this {($1, $2)} Pig creates this {($1, $2)} a bag with a single tuple
-<p>... Pig creates a tuple ($1, $2) and then puts this tuple into the bag</p><p>&nbsp;</p></li>
+<li>{($1, $2)} の場合、 Pig はタプル 1 つのバッグ {($1, $2)} を作ります
+<p>... Pig はタプル ($1, $2) を作って、それをバッグの要素とします</p></li>
 
 </ul> 
 </li>
@@ -4553,55 +4553,55 @@ X = FILTER A BY (f1 matches '.*apache.*');
    
 <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section>
-   <title>Examples</title>
-<p><strong>Tuple Construction</strong></p>
+   <title>例</title>
+<p><strong>タプル構築子</strong></p>
 <source>
 A = load 'students' as (name:chararray, age:int, gpa:float);
 B = foreach A generate (name, age);
 store B into ‘results’;
 
-Input (students):
+入力 (students):
 joe smith  20  3.5
 amy chen   22  3.2
 leo allen  18  2.1
 
-Output (results):
+出力 (results):
 (joe smith,20)
 (amy chen,22)
 (leo allen,18)
 </source>   
    
 <!-- ++++++++++++++++++++++++++++++++++ --> 
-<p><strong>Bag Construction</strong></p>
+<p><strong>バッグ構築子</strong></p>
 <source>
 A = load 'students' as (name:chararray, age:int, gpa:float);
 B = foreach A generate {(name, age)}, {name, age};
 store B into ‘results’;
 
-Input (students):
+入力 (students):
 joe smith  20  3.5
 amy chen   22  3.2
 leo allen  18  2.1
 
-Output (results):
+出力 (results):
 {(joe smith,20)}   {(joe smith),(20)}
 {(amy chen,22)}    {(amy chen),(22)}
 {(leo allen,18)}   {(leo allen),(18)}
 </source>   
 
 <!-- ++++++++++++++++++++++++++++++++++ -->    
-<p><strong>Map Construction</strong></p>
+<p><strong>マップ構築子</strong></p>
 <source>
 A = load 'students' as (name:chararray, age:int, gpa:float);
 B = foreach A generate [name, gpa];
 store B into ‘results’;
 
-Input (students):
+入力 (students):
 joe smith  20  3.5
 amy chen   22  3.2
 leo allen  18  2.1
 
-Output (results):
+出力 (results):
 [joe smith#3.5]
 [amy chen#3.2]
 [leo allen#2.1]
