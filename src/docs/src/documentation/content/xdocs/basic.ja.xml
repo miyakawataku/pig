@@ -4612,53 +4612,53 @@ leo allen  18  2.1
 
   <!-- =================================================================== -->    
    <section id="deref">
-   <title>Dereference Operators</title>
+   <title>参照外し演算子</title>
    
    <section>
-   <title>Description</title>
+   <title>説明</title>
    <table>
       <tr>
             <td>
-               <p>Operator</p>
+               <p>演算子</p>
             </td>
             <td>
-               <p>Symbol</p>
+               <p>表記</p>
             </td>
             <td>
-               <p> Notes</p>
-            </td>
-         </tr>
-         <tr>
-            <td>
-               <p>tuple dereference      </p>
-            </td>
-            <td>
-               <p>tuple.id or tuple.(id,…)</p>
-            </td>
-            <td>
-               <p>Tuple dereferencing can be done by name (tuple.field_name) or position (mytuple.$0). If a set of fields are dereferenced (tuple.(name1, name2) or tuple.($0, $1)), the expression represents a tuple composed of the specified fields. Note that if the dot operator is applied to a bytearray, the bytearray will be assumed to be a tuple.</p>
+               <p>注記</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>bag dereference</p>
+               <p>タプル参照外し</p>
             </td>
             <td>
-               <p>bag.id or bag.(id,…)</p>
+               <p>tuple.id あるいは tuple.(id,…)</p>
             </td>
             <td>
-               <p>Bag dereferencing can be done by name (bag.field_name) or position (bag.$0). If a set of fields are dereferenced (bag.(name1, name2) or bag.($0, $1)), the expression represents a bag composed of the specified fields.</p>
+               <p>タプルの参照外し (参照先の取得) は名前 (tuple.field_name) か位置 (mytuple.$0) を使って行います。フィールドをまとめて参照外しすると (tuple.(name1, name2) あるいは tuple($0, $1)) 、式の結果は指定したフィールドからなるタプルになります。また、 bytearray に対してドット演算子を用いると、 bytearray はタプルとして扱われます。</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>map dereference</p>
+               <p>バッグ参照外し</p>
+            </td>
+            <td>
+               <p>bag.id あるいは bag.(id,…)</p>
+            </td>
+            <td>
+               <p>バッグの参照外し (参照先の取得) は名前 (bag.field_name) か位置 (bag.$0) を使って行います。フィールドをまとめて参照外しすると (bag.(name1, name2) あるいは bag.($0, $1)) 、式の結果は指定したフィールドからなるバッグになります。</p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p>マップ参照外し</p>
             </td>
             <td>
                <p>map#'key'</p>
             </td>
             <td>
-               <p>Map dereferencing must be done by key (field_name#key or $0#key). If the pound operator is applied to a bytearray, the bytearray is assumed to be a map. If the key does not exist, the empty string is returned.</p>
+               <p>マップの参照外し (参照先の取得) はキー (field_name#key あるいは $0#key) を使って行います。また、ハッシュ演算子 (#) を bytearray に対して適用すると、 bytearray はマップとして扱われます。キーが存在しない場合は、空の文字列が戻ります。</p>
             </td>
          </tr>
    </table>
@@ -4666,12 +4666,12 @@ leo allen  18  2.1
    
 <!-- ++++++++++++++++++++++++++++++++++++ -->    
 <section>
-<title>Examples</title> 
+<title>例</title> 
   
-<p><strong>Tuple Example</strong></p>   
-<p>Suppose we have relation A.</p>
+<p><strong>タプルの例</strong></p>   
+<p>次のような関係 A があるとします。</p>
 <source>
-LOAD 'data' as (f1:int, f2:tuple(t1:int,t2:int,t3:int));
+A = LOAD 'data' as (f1:int, f2:tuple(t1:int,t2:int,t3:int));
 
 DUMP A;
 (1,(1,2,3))
@@ -4681,7 +4681,7 @@ DUMP A;
 (5,(2,5,8))
 </source>
    
-   <p>In this example dereferencing is used to retrieve two fields from tuple f2.</p>
+   <p>次の例では、タプル f2 から 2 つのフィールドを取り出しています。</p>
 <source>
 X = FOREACH A GENERATE f2.t1,f2.t3;
 
@@ -4695,9 +4695,9 @@ DUMP X;
 
    
 <!-- ++++++++++++++++++++++++++++++++++++ --> 
-<p><strong>Bag Example</strong></p>   
+<p><strong>バッグの例</strong></p>   
    
-<p>Suppose we have relation B, formed by grouping relation A (see the GROUP operator for information about the field names in relation B).</p>
+<p>次のように、関係 A をグループ化した関係 B があるとします (関係 B のフィールドの名前については <a href="#GROUP">GROUP</a> 演算子の解説を見てください) 。</p>
 <source>
 A = LOAD 'data' AS (f1:int, f2:int,f3:int);
 
@@ -4718,13 +4718,13 @@ DUMP B;
 (8,{(8,3,4),(8,4,3)})
 
 ILLUSTRATE B;
-<em>etc …</em>
+<em>色々…</em>
 ----------------------------------------------------------
 | b   | group: int | a: bag({f1: int,f2: int,f3: int}) |
 ----------------------------------------------------------
 </source>
    
-<p>In this example dereferencing is used with relation X to project the first field (f1) of each tuple in the bag (a).</p>
+<p>次の例では、バッグ a のそれぞれのタプルからから最初のフィールド f1 を取り出すために参照外しを行なっています。</p>
 <source>
 X = FOREACH B GENERATE a.f1;
 
@@ -4737,9 +4737,9 @@ DUMP X;
    
 
 <!-- ++++++++++++++++++++++++++++++++++++ --> 
-<p><strong>Tuple/Bag Example</strong></p>
+<p><strong>タプルとバッグの例</strong></p>
 
-<p>Suppose we have relation B, formed by grouping relation A  (see the GROUP operator for information about the field names in relation B).</p>
+<p>次のように、関係 A をグループ化した関係 B があるとします (関係 B のフィールドの名前については <a href="#GROUP">GROUP</a> 演算子の解説を見てください) 。</p>
 
 <source>
 A = LOAD 'data' AS (f1:int, f2:int, f3:int);
@@ -4763,7 +4763,7 @@ DUMP B;
 ((8,4),{(8,4,3)})
 
 ILLUSTRATE B;
-<em>etc …</em>
+<em>色々 …</em>
 -------------------------------------------------------------------------------
 | b     | group: tuple({f1: int,f2: int}) | a: bag({f1: int,f2: int,f3: int}) |
 -------------------------------------------------------------------------------
@@ -4771,7 +4771,7 @@ ILLUSTRATE B;
 -------------------------------------------------------------------------------
 </source>   
    
-   <p>In this example dereferencing is used to project a field (f1) from a tuple (group) and a field (f1) from a bag (a).</p>
+   <p>次の例では、タプル group からフィールド f1 を、バッグ a からフィールド f1 を取り出すために参照外しを使っています。</p>
 <source>
 X = FOREACH B GENERATE group.f1, a.f1;
 
@@ -4785,8 +4785,8 @@ DUMP X;
 </source>
 
 <!-- ++++++++++++++++++++++++++++++++++++ -->     
-<p><strong>Map Example</strong></p>
- <p>Suppose we have relation A. </p>
+<p><strong>マップの例</strong></p>
+ <p>次のような関係 A があるとします。</p>
 
 <source>
 A = LOAD 'data' AS (f1:int, f2:map[]);
@@ -4798,7 +4798,7 @@ DUMP A;
 (4,[pig#grunt])
 </source>
 
-   <p>In this example dereferencing is used to look up the value of key 'open'.</p>
+   <p>次の例では、キー 'open' に対応付けられた値を取り出すために参照外しを使っています</p>
 
 <source>
 X = FOREACH A GENERATE f2#'open';
