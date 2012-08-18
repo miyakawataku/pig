@@ -676,7 +676,7 @@ B = FOREACH A GENERATE (int)name;
    <p></p>
    <ul>
       <li>
-         <p>Pig が型の不一致を暗黙キャストによって解決できない場合は、エラーが発生します。たとえば、 chararray と float を足し合わせることはできません (<a href="#types-table-add">加算・減算演算子の型テーブル</a> を参照) 。</p>
+         <p>Pig が型の不一致を暗黙キャストによって解決できない場合は、エラーが発生します。たとえば、 chararray と float を足し合わせることはできません (<a href="#types-table-add">加算演算子 (+) 減算演算子 (-) の型テーブル</a> を参照) 。</p>
       <source>
 A = LOAD 'data' AS (name:chararray, age:int, gpa:float);
 B = FOREACH A GENERATE name + gpa;
@@ -2006,28 +2006,28 @@ A = LOAD 'mydata' AS (T1:(f1:int, f2:int), B:{T2:(t1:float,t2:float)}, M:[] );
 <!-- =================================================================== -->    
 <!-- ARITHMETIC OPERATORS, ETC -->
 <section id="artichmetic-ops">
-	<title>Arithmetic Operators and More</title>
+	<title>算術演算子その他</title>
 
 <section id="arithmetic">
-<title>Arithmetic Operators</title>
+<title>算術演算子</title>
 
 <section>
-<title>Description</title>
+<title>説明</title>
    <table>
       <tr>
             <td>
-               <p>Operator</p>
+               <p>演算子</p>
             </td>
             <td>
-               <p>Symbol</p>
+               <p>記法</p>
             </td>
             <td>
-               <p> Notes</p>
+               <p>注記</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>addition </p>
+               <p>加算</p>
             </td>
             <td>
                <p>+</p>
@@ -2038,7 +2038,7 @@ A = LOAD 'mydata' AS (T1:(f1:int, f2:int), B:{T2:(t1:float,t2:float)}, M:[] );
          </tr>
          <tr>
             <td>
-               <p>subtraction </p>
+               <p>減算</p>
             </td>
             <td>
                <p>-</p>
@@ -2049,7 +2049,7 @@ A = LOAD 'mydata' AS (T1:(f1:int, f2:int), B:{T2:(t1:float,t2:float)}, M:[] );
          </tr>
          <tr>
             <td>
-               <p>multiplication  </p>
+               <p>乗算</p>
             </td>
             <td>
                <p>*</p>
@@ -2060,7 +2060,7 @@ A = LOAD 'mydata' AS (T1:(f1:int, f2:int), B:{T2:(t1:float,t2:float)}, M:[] );
          </tr>
          <tr>
             <td>
-               <p>division  </p>
+               <p>除算</p>
             </td>
             <td>
                <p>/</p>
@@ -2071,35 +2071,35 @@ A = LOAD 'mydata' AS (T1:(f1:int, f2:int), B:{T2:(t1:float,t2:float)}, M:[] );
          </tr>
          <tr>
             <td>
-               <p>modulo  </p>
+               <p>剰余</p>
             </td>
             <td>
                <p>%</p>
             </td>
             <td>
-               <p>Returns the remainder of a divided by b (a%b).</p>
-               <p>Works with integral numbers (int, long). </p>
+               <p>a を b で割った余りを戻します (a%b) 。</p>
+               <p>整数値 (int, long) に対して使います。</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>bincond </p>
+               <p>条件</p>
             </td>
             <td>
                <p>? :</p>
             </td>
             <td>
-               <p>(condition ? value_if_true : value_if_false) </p>
-               <p>The bincond should be enclosed in parenthesis. </p>
-               <p>The schemas for the two conditional outputs of the bincond should match.</p>
-               <p>Use expressions  only (relational operators are not allowed).</p>
+               <p>(条件 ? 真の時の結果値 : 偽の時の結果値) </p>
+               <p>条件演算子は括弧でくくる必要があります。</p>
+               <p>2 つの結果値のスキーマは一致する必要があります。</p>
+               <p>項になれるのは式のみです (関係演算は項になれません) 。</p>
             </td>
           </tr>
    </table>
 
    <section>
-   <title>Examples </title>
-   <p>Suppose we have relation A.</p>
+   <title>例</title>
+   <p>次のような関係 A があるとします。</p>
 <source>
 A = LOAD 'data' AS (f1:int, f2:int, B:bag{T:tuple(t1:int,t2:int)});
 
@@ -2109,7 +2109,7 @@ DUMP A;
 (10,6,{(2,3),(4,6),(5,7)})
 </source>
 
-  <p>In this example the modulo operator is used with fields f1 and f2.</p>
+  <p>次の例ではフィールド f1 と f2 に対して剰余演算子を使っています。</p>
 <source>
 X = FOREACH A GENERATE f1, f2, f1%f2;
 
@@ -2119,7 +2119,7 @@ DUMP X;
 (10,6,4)
 </source>
    
-   <p>In this example the bincond operator is used with fields f2 and B. The condition is "f2 equals 1"; if the condition is true, return 1; if the condition is false, return the count of the number of tuples in B.</p>
+   <p>次の例ではフィールド f2 と B に対して条件演算子を使っています。条件は「 f2 が 1 の時」です。条件が真の時は 1 が戻ります。条件が偽の時は B の中のタプルの数が戻ります。</p>
 <source>
 X = FOREACH A GENERATE f2, (f2==1?1:COUNT(B));
 
@@ -2131,7 +2131,7 @@ DUMP X;
    </section>
    
    <section id="types-table-add">
-   <title> Types Table: addition (+) and subtraction (-) operators</title>
+   <title>加算演算子 (+) 減算演算子 (-) の型テーブル</title>
    <p>* bytearray cast as this data type</p>
    <table>
          <tr>
@@ -2139,13 +2139,13 @@ DUMP X;
                <p></p>
             </td>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>tuple </p>
+               <p>タプル</p>
             </td>
             <td>
-               <p>map </p>
+               <p>マップ</p>
             </td>
             <td>
                <p>int </p>
@@ -2168,71 +2168,71 @@ DUMP X;
          </tr>
          <tr>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
-            </td>
-         </tr>
-         <tr>
-            <td>
-               <p>tuple </p>
-            </td>
-            <td>
-               <p></p>
-            </td>
-            <td>
-               <p>not yet </p>
-            </td>
-            <td>
-               <p>error </p>
-            </td>
-            <td>
-               <p>error </p>
-            </td>
-            <td>
-               <p>error </p>
-            </td>
-            <td>
-               <p>error </p>
-            </td>
-            <td>
-               <p>error </p>
-            </td>
-            <td>
-               <p>error </p>
-            </td>
-            <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>map </p>
+               <p>タプル</p>
+            </td>
+            <td>
+               <p></p>
+            </td>
+            <td>
+               <p>未実装</p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p>マップ</p>
             </td>
             <td>
                <p></p>
@@ -2241,25 +2241,25 @@ DUMP X;
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -2288,10 +2288,10 @@ DUMP X;
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as int </p>
+               <p>int にキャスト</p>
             </td>
          </tr>
          <tr>
@@ -2320,10 +2320,10 @@ DUMP X;
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as long  </p>
+               <p>long にキャスト</p>
             </td>
          </tr>
          <tr>
@@ -2352,10 +2352,10 @@ DUMP X;
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as float  </p>
+               <p>float にキャスト</p>
             </td>
          </tr>
          <tr>
@@ -2384,10 +2384,10 @@ DUMP X;
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as double   </p>
+               <p>double にキャスト</p>
             </td>
          </tr>
          <tr>
@@ -2416,10 +2416,10 @@ DUMP X;
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -2451,14 +2451,14 @@ DUMP X;
                <p></p>
             </td>
             <td>
-               <p>cast as double </p>
+               <p>double にキャスト</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section id="types-table-mult">
-   <title>Types Table: multiplication (*) and division (/) operators</title>
+   <title>乗算演算子 (*) 除算演算子 (/) の型テーブル</title>
    <p>* bytearray cast as this data type</p>
    <table>
          <tr>
@@ -2466,13 +2466,13 @@ DUMP X;
                <p></p>
             </td>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>tuple </p>
+               <p>タプル</p>
             </td>
             <td>
-               <p>map </p>
+               <p>マップ</p>
             </td>
             <td>
                <p>int </p>
@@ -2495,71 +2495,71 @@ DUMP X;
          </tr>
          <tr>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>not yet </p>
+               <p>未実装</p>
             </td>
             <td>
-               <p>not yet </p>
+               <p>未実装</p>
             </td>
             <td>
-               <p>not yet </p>
+               <p>未実装</p>
             </td>
             <td>
-               <p>not yet </p>
+               <p>未実装</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
-            </td>
-         </tr>
-         <tr>
-            <td>
-               <p>tuple </p>
-            </td>
-            <td>
-               <p></p>
-            </td>
-            <td>
-               <p>error </p>
-            </td>
-            <td>
-               <p>error </p>
-            </td>
-            <td>
-               <p>not yet </p>
-            </td>
-            <td>
-               <p>not yet </p>
-            </td>
-            <td>
-               <p>not yet </p>
-            </td>
-            <td>
-               <p>not yet </p>
-            </td>
-            <td>
-               <p>error </p>
-            </td>
-            <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>map </p>
+               <p>タプル</p>
+            </td>
+            <td>
+               <p></p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+            <td>
+               <p>未実装</p>
+            </td>
+            <td>
+               <p>未実装</p>
+            </td>
+            <td>
+               <p>未実装</p>
+            </td>
+            <td>
+               <p>未実装</p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+            <td>
+               <p>エラー</p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p>マップ</p>
             </td>
             <td>
                <p></p>
@@ -2568,25 +2568,25 @@ DUMP X;
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -2615,10 +2615,10 @@ DUMP X;
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as int </p>
+               <p>int にキャスト</p>
             </td>
          </tr>
          <tr>
@@ -2647,10 +2647,10 @@ DUMP X;
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as long </p>
+               <p>long にキャスト</p>
             </td>
          </tr>
          <tr>
@@ -2679,10 +2679,10 @@ DUMP X;
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as float </p>
+               <p>float にキャスト</p>
             </td>
          </tr>
          <tr>
@@ -2711,10 +2711,10 @@ DUMP X;
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as double  </p>
+               <p>double にキャスト</p>
             </td>
          </tr>
          <tr>
@@ -2743,10 +2743,10 @@ DUMP X;
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -2778,14 +2778,14 @@ DUMP X;
                <p></p>
             </td>
             <td>
-               <p>cast as double  </p>
+               <p>double にキャスト</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section>
-   <title>Types Table: modulo (%) operator</title>
+   <title>乗算演算子 (*) 除算演算子 (/) の型テーブル</title>
    <table>
          <tr>
             <td>
@@ -2812,7 +2812,7 @@ DUMP X;
                <p>long </p>
             </td>
             <td>
-               <p>cast as int </p>
+               <p>int にキャスト</p>
             </td>
          </tr>
          <tr>
@@ -2826,7 +2826,7 @@ DUMP X;
                <p>long </p>
             </td>
             <td>
-               <p>cast as long </p>
+               <p>long にキャスト</p>
             </td>
          </tr>
          <tr>
@@ -2840,7 +2840,7 @@ DUMP X;
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
    </table>
