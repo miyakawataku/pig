@@ -2848,7 +2848,7 @@ DUMP X;
    
 <!-- =================================================================== --> 
    <section id="boolops">
-   <title>ブーリアン演算子</title>
+   <title>論理演算子</title>
       
       <section>
       <title>説明</title>
