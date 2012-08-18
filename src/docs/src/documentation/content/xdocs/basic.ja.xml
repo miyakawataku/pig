@@ -3529,24 +3529,24 @@ dump E;
    
    <!-- =================================================================== --> 
    <section id="comparison">
-   <title>Comparison Operators</title>
+   <title>比較演算子</title>
       
-    <section><title>Description</title>
+    <section><title>説明</title>
    <table>
       <tr>
             <td>
-               <p>Operator</p>
+               <p>演算子</p>
             </td>
             <td>
-               <p>Symbol</p>
+               <p>記法</p>
             </td>
             <td>
-               <p> Notes</p>
+               <p>注記</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>equal  </p>
+               <p>等値</p>
             </td>
             <td>
                <p>==</p>
@@ -3557,7 +3557,7 @@ dump E;
          </tr>
          <tr>
             <td>
-               <p>not equal </p>
+               <p>不等値</p>
             </td>
             <td>
                <p>!=</p>
@@ -3568,7 +3568,7 @@ dump E;
          </tr>
          <tr>
             <td>
-               <p>less than  </p>
+               <p>〜より小さい</p>
             </td>
             <td>
                <p>&lt;</p>
@@ -3579,7 +3579,7 @@ dump E;
          </tr>
          <tr>
             <td>
-               <p>greater than </p>
+               <p>〜より大きい</p>
             </td>
             <td>
                <p>&gt;</p>
@@ -3590,7 +3590,7 @@ dump E;
          </tr>
          <tr>
             <td>
-               <p>less than or equal to  </p>
+               <p>〜以下</p>
             </td>
             <td>
                <p>&lt;=</p>
@@ -3601,7 +3601,7 @@ dump E;
          </tr>
          <tr>
             <td>
-               <p>greater than or equal to</p>
+               <p>〜以上</p>
             </td>
             <td>
                <p>&gt;=</p>
@@ -3612,57 +3612,56 @@ dump E;
          </tr>
          <tr>
             <td>
-               <p>pattern matching  </p>
+               <p>正規表現マッチ</p>
             </td>
             <td>
                <p>matches</p>
             </td>
             <td>
-            <p>Takes an expression on the left and a string constant on the right.</p>
+            <p>左辺に式を、右辺に文字列定数を取ります。</p>
             <p><em>expression</em> matches <em>string-constant</em></p>
-            <p>Use the Java <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/regex/Pattern.html">format</a> for regular expressions.</p>
+            <p><a href="http://docs.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Java の正規表現の書式</a>を使います。</p>
 
             </td>
          </tr>
    </table>
-   <p>Use the comparison operators with numeric and string data.</p>
+   <p>比較演算子は数値か文字列に対して用います。</p>
     </section>
     
    <section>
-   <title>Examples</title>
+   <title>例</title>
 
-<p><strong>Numeric Example</strong></p>
+<p><strong>数値比較の例</strong></p>
 <source>
 X = FILTER A BY (f1 == 8);
 </source>
 
-<p><strong>String Example</strong></p>   
+<p><strong>文字列比較の例</strong></p>   
 <source>
 X = FILTER A BY (f2 == 'apache');
 </source>
 
- <p><strong>Matches Example</strong></p>    
+ <p><strong>正規表現マッチの例</strong></p>    
 <source>
 X = FILTER A BY (f1 matches '.*apache.*');
 </source>
    </section>
    
    <section id="types-table-equal">
-   <title>Types Table: equal (==) operator</title>
-   <p></p>
+   <title>等値演算子 (==) の型テーブル</title>
    <table>
          <tr>
             <td>
                <p></p>
             </td>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>tuple </p>
+               <p>タプル</p>
             </td>
             <td>
-               <p>map </p>
+               <p>マップ</p>
             </td>
             <td>
                <p>int </p>
@@ -3688,78 +3687,78 @@ X = FILTER A BY (f1 matches '.*apache.*');
          </tr>
          <tr>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>tuple </p>
+               <p>タプル</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
                <p>boolean </p>
-               <p>(see Note 1) </p>
+               <p>(注 1) </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>map </p>
+               <p>マップ</p>
             </td>
             <td>
                <p></p>
@@ -3769,28 +3768,28 @@ X = FILTER A BY (f1 matches '.*apache.*');
             </td>
             <td>
                <p>boolean </p>
-               <p>(see Note 2)</p>
+               <p>(注 2)</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -3819,13 +3818,13 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as boolean </p>
+               <p>boolean にキャスト</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -3854,13 +3853,13 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as boolean </p>
+               <p>boolean にキャスト</p>
             </td>
              <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -3889,13 +3888,13 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as boolean  </p>
+               <p>boolean にキャスト</p>
             </td>
              <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -3924,13 +3923,13 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as boolean  </p>
+               <p>boolean にキャスト</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -3962,10 +3961,10 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>cast as boolean </p>
+               <p>boolean にキャスト</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -4000,7 +3999,7 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
                   <tr>
@@ -4039,26 +4038,26 @@ X = FILTER A BY (f1 matches '.*apache.*');
             </td>
          </tr>
    </table>
-   <p>Note 1: boolean (Tuple A is equal to tuple B if they have the same size s, and for all 0 &lt;= i &lt; s A[i] = = B[i])</p>
-   <p>Note 2: boolean (Map A is equal to map B if A and B have the same number of entries, and for every key k1 in A with a value of v1, there is a key k2 in B with a value of v2, such that k1 = = k2 and v1 = = v2)</p>
+   <p>注 1: boolean (タプル A とタプル B が同じサイズ s で、すべての i (0 &lt;= i &lt; s) に対して A[i] == B[i] が成り立つ時、 A と B は等しい)</p>
+   <p>注 2: boolean (Map A is equal to map B if A and B have the same number of entries, and for every key k1 in A with a value of v1, there is a key k2 in B with a value of v2, such that k1 = = k2 and v1 = = v2)</p>
+   <p>注 2: boolean (マップ A とマップ B が同じ数のエントリを持っていて、 A のすべてのキー k1 および対応する値 v1 について、 k1 == k2 および v1 == v2 を満たすような B のキー k2 と対応する値 v2 が存在する時、 A と B は等しい)</p>
 </section>
 
    <section id="types-table-not-equal">
-   <title>Types Table: not equal (!=) operator</title>
-     <p></p>
+   <title>不等値演算子 (!=) の型テーブル</title>
    <table>
          <tr>
             <td>
                <p></p>
             </td>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>tuple </p>
+               <p>タプル</p>
             </td>
             <td>
-               <p>map </p>
+               <p>マップ</p>
             </td>
             <td>
                <p>int </p>
@@ -4084,77 +4083,77 @@ X = FILTER A BY (f1 matches '.*apache.*');
          </tr>
          <tr>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
           <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>tuple </p>
+               <p>タプル</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>map </p>
+               <p>マップ</p>
             </td>
             <td>
                <p></p>
@@ -4163,28 +4162,28 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -4213,13 +4212,13 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>boolean (bytearray cast as int) </p>
+               <p>boolean (bytearray は int にキャストされる) </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -4248,13 +4247,13 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>boolean (bytearray cast as long) </p>
+               <p>boolean (bytearray は long にキャストされる) </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -4283,13 +4282,13 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>boolean (bytearray cast as float) </p>
+               <p>boolean (bytearray は float にキャストされる) </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -4318,13 +4317,13 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>boolean (bytearray cast as double) </p>
+               <p>boolean (bytearray は double にキャストされる) </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -4356,10 +4355,10 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>boolean (bytearray cast as chararray) </p>
+               <p>boolean (bytearray は chararray にキャストされる) </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -4394,7 +4393,7 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -4429,15 +4428,15 @@ X = FILTER A BY (f1 matches '.*apache.*');
                <p></p>
             </td>
             <td>
-               <p>error</p>
+               <p>エラー</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section id="types-table-matches">
-   <title>Types Table: matches operator</title>
-   <p>*Cast as chararray (the second argument must be chararray)</p>
+   <title>matches 演算子の型テーブル</title>
+   <p>* chararray にキャスト (2 番目の項は chararray でなければならない)</p>
    <table>
          <tr>
             <td>
