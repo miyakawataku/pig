@@ -2891,7 +2891,7 @@ DUMP X;
                <p>NOT</p>
             </td>
             <td>
-               <p>否定</p>
+               <p>論理否定</p>
             </td>
             <td>
                <p></p>
@@ -4913,50 +4913,50 @@ X = FILTER A BY f1 is not null;
    
   <!-- =================================================================== -->    
    <section id="sign">
-   <title>Sign Operators</title>
+   <title>符号演算子</title>
    
    <section>
-   <title>Description</title>
+   <title>説明</title>
    <table>
       <tr>
             <td>
-               <p>Operator</p>
+               <p>演算子</p>
             </td>
             <td>
-               <p>Symbol</p>
+               <p>表記</p>
             </td>
             <td>
-               <p> Notes</p>
+               <p>注記</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>positive       </p>
+               <p>正符号</p>
             </td>
             <td>
                <p>+</p>
             </td>
             <td>
-               <p> Has no effect.</p>
+               <p>効果なし。</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>negative (negation)</p>
+               <p>負符号</p>
             </td>
             <td>
-               <p> -</p>
+               <p>-</p>
             </td>
             <td>
-               <p> Changes the sign of a positive or negative number.</p>
+               <p>正負の符号を反転します。</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section>
-   <title>Examples</title>
-<p>In this example, the negation operator is applied to the "x" values.</p>   
+   <title>例</title>
+<p>次の例では、負符号演算子を x に対して適用しています。</p>   
 <source>
 A = LOAD 'data' as (x, y, z);
 
@@ -4967,30 +4967,30 @@ B = FOREACH A GENERATE -x, y;
    </section>
    
    <section id="types-table-negative">
-   <title>Types Table: negative ( - ) operator</title>
+   <title>負符号演算子 (-) の型テーブル</title>
    <table>
       <tr>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>error </p>
-            </td>
-         </tr>
-         <tr>
-            <td>
-               <p>tuple </p>
-            </td>
-            <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>map </p>
+               <p>タプル</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p>マップ</p>
+            </td>
+            <td>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -5030,7 +5030,7 @@ B = FOREACH A GENERATE -x, y;
                <p>chararray </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -5038,7 +5038,7 @@ B = FOREACH A GENERATE -x, y;
                <p>bytearray </p>
             </td>
             <td>
-               <p>double (as double) </p>
+               <p>double (double にキャストされる) </p>
             </td>
          </tr>
    </table>
