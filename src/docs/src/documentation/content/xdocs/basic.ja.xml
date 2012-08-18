@@ -4964,8 +4964,6 @@ B = FOREACH A GENERATE -x, y;
 </source>
 </section>
    
-   </section>
-   
    <section id="types-table-negative">
    <title>負符号演算子 (-) の型テーブル</title>
    <table>
@@ -5042,6 +5040,7 @@ B = FOREACH A GENERATE -x, y;
             </td>
          </tr>
    </table>
+   </section>
    </section>
   
 </section>   
