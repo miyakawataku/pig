@@ -2910,24 +2910,24 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
    
    <!-- =================================================================== -->
    <section id="cast">
-   <title>Cast Operators</title>
+   <title>キャスト演算子</title>
    
    <section>
-   <title>Description</title>
-   <p>Pig Latin supports casts as shown in this table. </p>
+   <title>説明</title>
+   <p>Pig Latin では次の表に挙げるキャストが可能です</p>
    <table>
        <tr>
             <td>
-               <p><strong>from /  to</strong></p>
+               <p><strong>キャスト元 / キャスト先</strong></p>
             </td>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
-               <p>tuple </p>
+               <p>タプル</p>
             </td>
             <td>
-               <p>map </p>
+               <p>マップ</p>
             </td>
             <td>
                <p>int </p>
@@ -2953,107 +2953,107 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
          </tr>
          <tr>
             <td>
-               <p>bag </p>
+               <p>バッグ</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error</p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>tuple </p>
+               <p>タプル</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error</p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
             <td>
-               <p>map </p>
+               <p>マップ</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error</p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -3061,34 +3061,34 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
                <p>int </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
            <td>
-               <p>error</p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -3096,34 +3096,34 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
                <p>long </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
            <td>
-               <p>error</p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -3131,34 +3131,34 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
                <p>float </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error</p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -3166,34 +3166,34 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error</p>
+               <p>エラー</p>
             </td>
          </tr>
          <tr>
@@ -3201,34 +3201,34 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
                <p>chararray </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>yes</p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes</p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes</p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes</p>
+               <p>可能</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
            <td>
-               <p>yes</p>
+               <p>可能</p>
             </td>
          </tr>
          <tr>
@@ -3236,34 +3236,34 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
                <p>bytearray </p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
-               <p>yes </p>
+               <p>可能</p>
             </td>
             <td>
                <p></p>
             </td>
             <td>
-               <p>yes</p>
+               <p>可能</p>
             </td>
          </tr>
                   <tr>
@@ -3271,31 +3271,31 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
                <p>boolean </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>error</p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>yes</p>
+               <p>可能</p>
             </td>
             <td>
-               <p>error</p>
+               <p>エラー</p>
             </td>
             <td>
                <p></p>
@@ -3304,7 +3304,7 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
    </table>
 
    <section>
-   <title>Syntax  </title>
+   <title>文法</title>
    <table>
       <tr>
             <td>
@@ -3315,14 +3315,14 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>(data_type)</p>
             </td>
             <td>
-               <p>The data type you want to cast to, enclosed in parentheses. You can cast to any data type except bytearray (see the table above).</p>
+               <p>キャスト先のデータ型。括弧にくくります。 bytearray を除く任意の型へのキャストができます (上表を参照) 。</p>
             </td>
          </tr>
          <tr>
@@ -3330,20 +3330,20 @@ X = FILTER A BY (f1==8) OR (NOT (f2+f3 > f1));
                <p>field</p>
             </td>
             <td>
-               <p>The field whose type you want to change. </p>
-               <p>The field can be represented by positional notation or by name (alias). For example, if f1 is the first field and type int, you can cast to type long using (long)$0 or (long)f1.</p>
+               <p>型を変換したいフィールド。</p>
+               <p>フィールドは位置表記と名前 (別名) の両方で表せます。たとえば、最初のフィールドが f1 で型が int だったら、 (long)$0 と (long)f1 のどちらでも long にキャストできます。</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>Cast operators enable you to cast or convert data from one type to another, as long as conversion is supported (see the table above). For example, suppose you have an integer field, myint, which you want to convert to a string. You can cast this field from int to chararray using (chararray)myint.</p>
+   <title>使用方法</title>
+   <p>キャスト演算子を使うことで、変換がサポートされている限り (上表を参照) 、データをある型から別の型に変換できます。たとえば、 myint という整数フィールドを文字列に変換したいとします。この場合、 (chararray)myint によって chararray にキャストできます。</p>
    <p>Please note the following:</p>
    <ul>
       <li>
-         <p>A field can be explicitly cast. Once cast, the field remains that type (it is not automatically cast back). In this example $0 is explicitly cast to int.</p>
+         <p>フィールドは明示的にキャストできます。一度キャストしたら、フィールドはその型で在り続けます (自動的に元に戻ることはありません) 。¬¡の例で、 $0 は明示的に int にキャストされています。</p>
 <source>
 B = FOREACH A GENERATE (int)$0 + 1;
 </source>
@@ -3352,7 +3352,7 @@ B = FOREACH A GENERATE (int)$0 + 1;
    <p></p>
    <ul>
       <li>
-         <p>Where possible, Pig performs implicit casts. In this example $0 is cast to int (regardless of underlying data) and $1 is cast to double.</p>
+         <p>可能であれば、 Pig は暗黙のキャストを行います。次の例では、 $0 は int にキャストされ、 $1 は double にキャストされます (いずれもデータの中身によらず) 。</p>
 <source>
 B = FOREACH A GENERATE $0 + 1, $1 + 1.0
 </source>
@@ -3360,10 +3360,10 @@ B = FOREACH A GENERATE $0 + 1, $1 + 1.0
    </ul>
    <ul>
       <li>
-         <p>When two bytearrays are used in arithmetic expressions or with built in aggregate functions (such as SUM) they are implicitly cast to double. If the underlying data is really int or long, you’ll get better performance by declaring the type or explicitly casting the data.</p>
+         <p>2 つのbytearray 値に対して算術演算を行ったり、 bytearray 値に対して集計演算を行ったりした場合、暗黙的に double にキャストされます。中身のデータが実際には int や long なのであれば、型を宣言したり、明示的にデータをキャストしたりすることにより、よりよい性能が得られます。</p>
       </li>
       <li>
-         <p>Downcasts may cause loss of data. For example casting from long to int may drop bits.</p>
+         <p>ダウンキャストによって情報が落ちる可能性があります。たとえば、 long から int へのキャストでは上位ビットが落ちます。</p>
       </li>
    </ul>
    </section>
@@ -3371,8 +3371,8 @@ B = FOREACH A GENERATE $0 + 1, $1 + 1.0
    
    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <section>
-   <title>Examples</title>
-   <p>In this example an int is cast to type chararray (see relation X).</p>
+   <title>例</title>
+   <p>次の例で、 int は chararray 型にキャストされます (関係 X において) 。</p>
 <source>
 A = LOAD 'data' AS (f1:int,f2:int,f3:int);
 
@@ -3406,7 +3406,7 @@ X: {group: int,total: chararray}
 </source>
    
    
-<p>In this example a bytearray (fld in relation A) is cast to type tuple.</p>
+<p>次の例で、関係 A の bytearray 型のフィールド fld はタプル型にキャストされます。</p>
 <source>
 cat data;
 (1,2,3)
@@ -3434,7 +3434,7 @@ DUMP B;
 ((8,3,4))
 </source>
    
-   <p>In this example a bytearray (fld in relation A) is cast to type bag.</p>
+   <p>次の例で、関係 A の bytearray 型のフィールド flt はバッグ型にキャストされます。</p>
 <source>
 cat data;
 {(4829090493980522200L)}
@@ -3463,7 +3463,7 @@ DUMP B;
 </source>
 
 
-   <p>In this example a bytearray (fld in relation A) is cast to type map.</p>
+   <p>次の例で、関係 A のフィールド flt はマップ型にキャストされます。</p>
 <source>
 cat data;
 [open#apache]
@@ -3498,17 +3498,14 @@ DUMP B;
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
    <section id="cast-relations">
-   <title>Casting Relations to Scalars</title>
-<p>Pig allows you to cast the elements of a single-tuple relation into a scalar value. 
-The tuple can be a single-field or multi-field tulple. 
-If the relation contains more than one tuple, however, a runtime error is generated: "Scalar has more than one row in the output". 
-</p>
+   <title>関係からスカラ値へのキャスト</title>
+<p>Pig ではタプルを 1 つだけ含む関係をスカラ値にキャストすることができます。タプルのフィールドは 1 つでも複数でも構いません。もし関係が複数のタプルを持っていたら、次の実行時エラーが発生します:  "Scalar has more than one row in the output" 。</p>
 
-<p>The cast relation can be used in any place where an expression of the type would make sense, including FOREACH, FILTER, and SPLIT. Note that if an explicit cast is not used an implict cast will be inserted according to Pig rules. Also, when the schema can't be inferred bytearray is used.</p>  
+<p>この種のキャストは、 FOREACH, FILTER, SPLIT など、普通に式が使える場所ならどこでも使えます。もし明示的なキャストがない場合は、 Pig のルールにしたがって暗黙的キャストが行われます。また、スキーマが推論できないときには、 bytearray 型が使われます。</p>  
  
-<p>The primary use case for casting relations to scalars is the ability to use the values of global aggregates in follow up computations. </p> 
+<p>関係からスカラ値へのキャストのもっとも典型的な使い道は、集計した値を後続の計算で使うことです。</p> 
  
-<p>In this example the percentage of clicks belonging to a particular user are computed. For the FOREACH statement, an explicit cast if used. If the SUM is not given a name, a position can be used as well (userid, clicks/(double)C.$0). </p>
+<p>次の例では、各ユーザのクリックが全体に占める割合を求めています。 FOREACH 文の中では、明示的キャストを行なっています。 SUM の結果に名前を割り当てない場合には、位置表記が使えます (userid, clicks/(double)C.$0) 。</p>
 
 <source>
 A = load 'mydata' as (userid, clicks); 
@@ -3518,8 +3515,7 @@ D = foreach A generate userid, clicks/(double)C.total;
 dump D;
 </source>
    
-<p>In this example a multi-field tuple is used. For the FILTER statement, Pig performs an implicit cast. For the FOREACH statement, 
-an explicit cast is used.</p>
+<p>次の例では、複数のフィールドを持つタプルを扱っています。 FILTER 文では暗黙的キャストが行われています。 FOREACH 文では、明示的キャストが行われています。</p>
 <source>
 A = load 'mydata' as (userid, clicks); 
 B = group A all; 
