@@ -5252,10 +5252,10 @@ DUMP X;
 <!-- =================================================================== -->   
    <section id="filter">
    <title>FILTER </title>
-   <p>Selects tuples from a relation based on some condition.</p>
+   <p>関係の中から条件を満たすタプルを選択します。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -5265,14 +5265,14 @@ DUMP X;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias</p>
             </td>
             <td>
-               <p>The name of the relation.</p>
+               <p>関係の名前。</p>
             </td>
          </tr>
          <tr>
@@ -5280,7 +5280,7 @@ DUMP X;
                <p>BY</p>
             </td>
             <td>
-               <p>Required keyword.</p>
+               <p>必須キーワード。</p>
             </td>
          </tr>
          <tr>
@@ -5288,21 +5288,21 @@ DUMP X;
                <p>expression</p>
             </td>
             <td>
-               <p>A boolean expression.</p>
+               <p>ブーリアン式。</p>
             </td>
          </tr> 
    </table>
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the FILTER operator to work with tuples or rows of data (if you want to work with columns of data, use the FOREACH...GENERATE operation).</p>
-   <p>FILTER is commonly used to select the data that you want; or, conversely, to filter out (remove) the data you don’t want.</p>
+   <title>用法</title>
+   <p>データのタプル (レコード) を処理するために FILTER を使います。データの列を処理するには、 FOREACH ... GENERATE を使います。</p>
+   <p>FILTER は必要なデータを選択するために使います。逆に言えば、不要なデータを削除するために使います。</p>
    </section>
    
    <section>
-   <title>Examples</title>
-   <p>Suppose we have relation A.</p>
+   <title>例</title>
+   <p>次のような関係 A があるとします。</p>
 <source>
 A = LOAD 'data' AS (a1:int,a2:int,a3:int);
 
@@ -5315,7 +5315,7 @@ DUMP A;
 (8,4,3)
 </source>
    
-   <p>In this example the condition states that if the third field equals 3, then include the tuple with relation X.</p>
+   <p>次の例では、 3 番目のフィールドの値が 3 であるタプルを関係 X に含めています。</p>
 <source>
 X = FILTER A BY f3 == 3;
 
@@ -5325,7 +5325,7 @@ DUMP X;
 (8,4,3)
 </source>
    
-<p>In this example the condition states that if the first field equals 8 or if the sum of fields f2 and f3 is not greater than first field, then include the tuple relation X.</p>
+<p>次の例では、最初のフィールドが 8 であるか、あるいは f2 と f3 の和が最初のフィールドよりも大きいタプルを関係 X に含めています。</p>
 <source>
 X = FILTER A BY (f1 == 8) OR (NOT (f2+f3 > f1));
 
