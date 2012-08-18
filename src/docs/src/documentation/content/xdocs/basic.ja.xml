@@ -5163,10 +5163,10 @@ DUMP X;
  <!-- =================================================================== -->  
    <section id="distinct">
    <title>DISTINCT </title>
-   <p>Removes duplicate tuples in a relation.</p>
+   <p>関係から重複するタプルを削除します。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -5177,14 +5177,14 @@ DUMP X;
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
         <tr> 
             <td>
                <p>alias</p>
             </td>
             <td>
-               <p>The name of the relation.</p>
+               <p>関係の名前です。</p>
             </td>
         </tr>
       
@@ -5193,13 +5193,13 @@ DUMP X;
                <p id="partition-by-distinct">PARTITION BY partitioner</p>
             </td>
             <td>
-             <p>Use this feature to specify the Hadoop Partitioner. The partitioner controls the partitioning of the keys of the intermediate map-outputs. </p>
+             <p>Hadoop の Partitioner を指定するために使います。 Partitioner は Mapper の中間出力のキーの分割を制御します。</p>
              <ul>
              <li>
-             <p>For more details, see http://hadoop.apache.org/common/docs/r0.20.2/api/org/apache/hadoop/mapred/Partitioner.html</p>
+             <p>詳しくは、 http://hadoop.apache.org/common/docs/r0.20.2/api/org/apache/hadoop/mapred/Partitioner.html を参照してください。</p>
              </li>
              <li>
-              <p>For usage, see <a href="#partitionby">Example: PARTITION BY</a>.</p>
+             <p>使い方については、 <a href="#partitionby">PARTITION BY の例</a> を参照してください。</p>
              </li>
              </ul>
          </td>
@@ -5210,21 +5210,21 @@ DUMP X;
                <p>PARALLEL n</p>
             </td>
             <td>
-               <p>Increase the parallelism of a job by specifying the number of reduce tasks, n.</p>
-               <p>For more information, see <a href="perf.html#Parallel">Use the Parallel Features</a>.</p>
+               <p>Reduce タスクの並列度を n に指定します。</p>
+               <p>詳しくは <a href="perf.html#parallel">並列化機能の使用</a> を参照してください。</p>
             </td>
          </tr> 
    </table>
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the DISTINCT operator to remove duplicate tuples in a relation. DISTINCT does not preserve the original order of the contents (to eliminate duplicates, Pig must first sort the data). You cannot use DISTINCT on a subset of fields; to do this, use FOREACH and a nested block to first select the fields and then apply DISTINCT  (see <a href="#nestedblock">Example: Nested Block</a>).</p>
+   <title>用法</title>
+   <p>DISTINCT 演算子は関係から重複したタプルを削除するのに使います。 DISTINCT は元の順序を保持しません (重複を取り除くために、 Pig はまずデータを整列する必要があるからです) 。一部のフィールドに対して DISTINCT を使うことはできません。そうするためには、まず FOREACH とネストしたブロックを使って一部のフィールドを選択し、その後に DISTINCT を適用します (<a href="#nestedblock">ネストしたブロックの例</a> を参照してください) 。</p>
    </section>
    
    <section>
-   <title>Example</title>
-   <p>Suppose we have relation A.</p>
+   <title>例</title>
+   <p>次のような関係 A があるとします。</p>
 <source>
 A = LOAD 'data' AS (a1:int,a2:int,a3:int);
 
@@ -5236,7 +5236,7 @@ DUMP A;
 (1,2,3) 
 </source>
    
-   <p>In this example all duplicate tuples are removed.</p>
+   <p>次の例では、重複した行をすべて削除します。</p>
 <source>
 X = DISTINCT A;
 
