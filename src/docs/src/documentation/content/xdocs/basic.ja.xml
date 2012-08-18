@@ -4814,11 +4814,11 @@ DUMP X;
   
   <!-- =================================================================== -->    
 <section id="disambiguate">
-<title>Disambiguate Operator</title>
+<title>脱曖昧化演算子</title>
 
-<p>Use the disambiguate operator ( :: ) to identify field names after JOIN, COGROUP, CROSS, or FLATTEN operators.</p>
+<p>脱曖昧化演算子 ( :: ) は JOIN, COGROUP, CROSS, FLATTEN の後でフィールドを特定するために用います。</p>
 
-<p>In this example, to disambiguate y,  use A::y or B::y.  In cases where there is no ambiguity, such as z, the :: is not necessary but is still supported.</p>
+<p>次の例で、 y を脱曖昧化するためには、 A::y あるいは B::y を使います。 z のように曖昧でない場合でも、 :: を使うことは可能ですが、必須ではありません。</p>
 
 <source>
 A = load 'data1' as (x, y);
