@@ -5706,13 +5706,11 @@ DUMP X;
 <!-- =================================================================== -->
    <section id="GROUP">
    <title>GROUP</title>
-   <p>Groups the data in one or more relations.</p>
-   <p>Note: The GROUP and COGROUP operators are identical. Both operators work with one or more relations. 
-   For readability GROUP is used in statements involving one relation and COGROUP is used in statements involving two or more relations. 
-   You can COGROUP up to but no more than 127 relations at a time.</p>   
+   <p>1 つ以上の関係をグループ化します。</p>
+   <p>注記: GROUP 演算子と COGROUP 演算子は同一です。どちらの演算子も 1 つ以上の関係に対して用いることができます。ただし、可読性の向上のために、 GROUP は 1 つの関係に対して用い、 COGROUP は複数の関係に対して用いられることが多いです。 GROUP/COGROUP は最大で 127 までの関係に対して適用できます。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -5722,15 +5720,15 @@ DUMP X;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias </p>
             </td>
             <td>
-               <p>The name of a relation.</p>
-               <p>You can COGROUP up to but no more than 127 relations at a time.</p>
+               <p>関係の名前。</p>
+	       <p>最大で 127 までの関係に対して GROUP/COGROUP を適用することができます。</p>
             </td>
          </tr>
                   <tr>
@@ -5738,7 +5736,7 @@ DUMP X;
                <p>ALL</p>
             </td>
             <td>
-               <p>Keyword. Use ALL if you want all tuples to go to a single group; for example, when doing aggregates across entire relations.</p>
+               <p>キーワード。すべてのタプルを 1 つのグループに押し込みたい時に使います。たとえば、関係の全体に対する集計を行いたい時に使います。</p>
                <p>B = GROUP A ALL;</p>
             </td>
          </tr>
@@ -5747,7 +5745,7 @@ DUMP X;
                <p>BY</p>
             </td>
             <td>
-               <p>Keyword. Use this clause to group the relation by field, tuple or expression.</p>
+               <p>キーワード。フィールド、タプル、式のいずれかによってグループ化したい時に使います。</p>
                <p>B = GROUP A BY f1;</p>
             </td>
          </tr>
@@ -5756,7 +5754,7 @@ DUMP X;
                <p>expression</p>
             </td>
             <td>
-               <p>A tuple expression. This is the group key or key field. If the result of the tuple expression is a single field, the key will be the value of the first field rather than a tuple with one field. To group using multiple keys, enclose the keys in parentheses:</p>
+               <p>グループ化キーとなるタプル式。タプル式の結果が 1 要素のタプルの場合、タプルではなく最初のフィールドがグループ化キーとなります。複数のキーでグループ化するためには、キーを丸括弧でくくります。</p>
                <p>B = GROUP A BY (key1,key2);</p>
             </td>
          </tr>
@@ -5766,7 +5764,7 @@ DUMP X;
                <p>USING</p>
             </td>
             <td>
-               <p>Keyword</p>
+               <p>キーワード。</p>
             </td>
          </tr>
          <tr>
@@ -5776,19 +5774,18 @@ DUMP X;
   
             <td>
 
-            <p>Use the ‘collected’ clause with the GROUP operation (works with one relation only).</p>
-            <p>The following conditions apply:</p>
+            <p>'collected' 節は単一の関係に対する GROUP 演算の時に使えます。</p>
+            <p>次の条件を満たしている必要があります:</p>
                <ul>
                <li>
-               <p>The loader must implement the {CollectableLoader} interface.</p>
+	       <p>ローダが CollectableLoader インタフェースを実装していること。</p>
                </li>
                <li>
-               <p>Data must be sorted on the group key.</p>
+               <p>データがグループ化キーでソートされていること。</p>
                </li>
                </ul>
                <p></p>
-               <p>If your data and loaders satisfy these conditions, use the ‘collected’ clause to perform an optimized version of GROUP; 
-            the operation will execute on the map side and avoid running the reduce phase.</p>
+               <p>これらの条件が満たされる時には、 GROUP 演算の実行を最適化するために 'collected' 節が指定できます。処理が Map 側で行われ、 Reduce フェーズの実行が避けられます。</p>
                <p></p>
             </td>
          </tr>    
@@ -5799,31 +5796,30 @@ DUMP X;
             </td>
             <td>
 
-               <p>Use the ‘merge’ clause with the COGROUP operation (works with two or more relations only).</p>
-               <p>The following conditions apply:</p>
+               <p>'merge' 節は複数の関係に対する COGROUP 演算の時に使えます。</p>
+               <p>次の条件を満たしている必要があります:</p>
                <ul>
                <li>
-               <p>No other operations can be done between the LOAD and COGROUP statements.</p>
+               <p>LOAD と COGROUP の間に他の操作がないこと。</p>
                </li>
                <li>
-               <p>Data must be sorted on the COGROUP key for all tables in ascending (ASC) order.</p>
+               <p>すべての関係がグループ化キーで昇順 (ASC) にソートされていること。</p>
                </li> 
                 <li>
-               <p>Nulls are considered smaller than evertyhing. If data contains null keys, they should occur before anything else.</p>
+               <p>null は他のどんな値よりも小さいとみなされるため、データが null を含んでいる場合には、他のデータよりも前に出現していること。</p>
                </li>
                <li>
-               <p>Left-most loader must implement the {CollectableLoader} interface as well as {OrderedLoadFunc} interface.</p>
+               <p>左端の関係のローダが CollectableLoader インタフェースと OrderedLoadFunc インタフェースを実装していること。</p>
                </li>
                <li>
-               <p>All other loaders must implement IndexableLoadFunc.</p>
+               <p>すべての関係のローダが IndexableLoadFunc を実装していること。</p>
                </li>
                 <li>
-               <p>Type information must be provided in the schema for all the loaders.</p>
+               <p>すべての関係について、ロード時にスキーマの型情報が与えられていること。</p>
                </li>              
                </ul>
                <p></p>
-               <p>If your data and loaders satisfy these conditions, the ‘merge’ clause to perform an optimized version of COGROUP; 
-               the operation will execute on the map side and avoid running the reduce phase.</p>
+               <p>これらの条件が満たされるときには、 COGROUP 演算の実行を最適化するために 'merge' 節が指定できます。処理が Map 側で行われ、 Reduce フェーズの実行が避けられます。</p>
             </td>
             
          </tr>     
@@ -5833,13 +5829,13 @@ DUMP X;
                <p id="partition-by-group">PARTITION BY partitioner</p>
             </td>
             <td>
-             <p>Use this feature to specify the Hadoop Partitioner. The partitioner controls the partitioning of the keys of the intermediate map-outputs. </p>
+             <p>Hadoop の Partitioner を指定するために使います。 Partitioner は Mapper の中間出力のキーの分割を制御します。</p>
              <ul>
              <li>
-             <p>For more details, see http://hadoop.apache.org/common/docs/r0.20.2/api/org/apache/hadoop/mapred/Partitioner.html</p>
+             <p>詳しくは、 http://hadoop.apache.org/common/docs/r0.20.2/api/org/apache/hadoop/mapred/Partitioner.html を参照してください。</p>
              </li>
              <li>
-             <p>For usage, see <a href="#partitionby">Example: PARTITION BY</a></p>
+             <p>使い方については、 <a href="#partitionby">PARTITION BY の例</a> を参照してください。</p>
              </li>
              </ul>
          </td>
@@ -5850,43 +5846,43 @@ DUMP X;
                <p>PARALLEL n</p>
             </td>
             <td>
-               <p>Increase the parallelism of a job by specifying the number of reduce tasks, n.</p>
-               <p>For more information, see <a href="perf.html#Parallel">Use the Parallel Features</a>.</p>
+               <p>Reduce タスクの並列度を n に指定します。</p>
+               <p>詳しくは <a href="perf.html#parallel">並列化機能の使用</a> を参照してください。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>The GROUP operator groups together tuples that have the same group key (key field). The key field will be a tuple if the group key has more than one field, otherwise it will be the same type as that of the group key. The result of a GROUP operation is a relation that includes one tuple per group. This tuple contains two fields: </p>
+   <title>用法</title>
+   <p>GROUP 演算子は同じグループ化キー (キーフィールド) を持っているタプルを 1 つにグループ化します。グループ化キーが複数のフィールドである場合は、キーフィールドはタプルになります。それ以外の場合は、キーフィールドはグループ化キーと同じ型になります。 GROUP 演算の結果は、グループごとに 1つのタプルを持つ関係になります。このタプルは 2 つのフィールドからなります:</p>
    <ul>
       <li>
-         <p>The first field is named "group" (do not confuse this with the GROUP operator) and is the same type as the group key.</p>
+         <p>最初のフィールドの名前は "group" と名付けられ (GROUP 演算子それ自体と混同しないでください) 、グループ化キーと同じ型になります。</p>
       </li>
       <li>
-         <p>The second field takes the name of the original relation and is type bag.</p>
+         <p>2 番目のフィールドは元の関係と同じ名前になり、型はバッグになります。</p>
      </li>
      <li>
-         <p>The names of both fields are generated by the system as shown in the example below.</p>
+         <p>どちらのフィールドの名前も、下の例で示すように、システムによって生成されます。</p>
       </li>
    </ul>
    <p></p>
    
-   <p>Note the following about the GROUP/COGROUP and JOIN operators:</p>
+   <p>GROUP/COGROUP と JOIN については、次の点に注意してください:</p>
       <ul>
       <li>
-         <p>The GROUP and JOIN operators perform similar functions. GROUP creates a nested set of output tuples while JOIN creates a flat set of output tuples</p>
+         <p>GROUP と JOIN 演算子は似たような動作をします。ただし、 GROUP の結果がネストしたタプルになるのに対して、 JOIN の結果は平坦でネストしていないタプルになります。</p>
       </li>
       <li>
-         <p>The GROUP/COGROUP and JOIN operators handle null values differently (see <a href="#nulls_group">Nulls and GROUP/COGROUP Operataors</a>).</p>
+         <p>GROUP/COGROUP と JOIN では null の扱いに違いがあります (<a href="#nulls_group">null と GROUP/COGROUP 演算子</a> を参照してください) 。</p>
      </li>
    </ul>
    
    </section>
    
    <section>
-   <title>Example</title>
-<p>Suppose we have relation A.</p>
+   <title>例</title>
+<p>次のような関係 A があるとします。</p>
 
 <source>
 A = load 'student' AS (name:chararray,age:int,gpa:float);
@@ -5901,7 +5897,7 @@ DUMP A;
 (Joe,18,3.8F)
 </source>
    
-   <p>Now, suppose we group relation A on field "age" for form relation B. We can use the DESCRIBE and ILLUSTRATE operators to examine the structure of relation B. Relation B has two fields. The first field is named "group" and is type int, the same as field "age" in relation A. The second field is name "A"  after relation A and is type bag.</p>
+   <p>関係 A をフィールド "age" でグループ化し、関係 B と名付けます。 DESCRIBE 演算子や ILLUSTRATE 演算子を使って、関係 B の構造を確かめることができます。関係 B は 2 つのフィールドを持っています。最初のフィールドは "group" という名前で、 int 型です。この型は関係 A のフィールド "age" と同じです。 2 番目のフィールドの名前は "A" で、バッグ型です。</p>
 <source>
 B = GROUP A BY age;
 
@@ -5924,7 +5920,7 @@ DUMP B;
 </source>
    
 
-   <p>Continuing on, as shown in these FOREACH statements, we can refer to the fields in relation B by names "group" and "A" or by positional notation.</p>
+   <p>次の FOREACH 文で見るように、フィールド名 "group", "A" および位置表記を使って、関係 B のフィールドが参照できます。</p>
 
 <source>
 C = FOREACH B GENERATE group, COUNT(A);
@@ -5944,9 +5940,9 @@ DUMP C;
 </section>
    
    <section>
-   <title>Example</title>
+   <title>例</title>
    
-   <p>Suppose we have relation A.</p>
+   <p>次のような関係 A があるとします。</p>
 <source>
 A = LOAD 'data' as (f1:chararray, f2:int, f3:int);
 
@@ -5957,7 +5953,7 @@ DUMP A;
 (r4,4,4)
 </source>
    
-<p>In this example the tuples are grouped using an expression, f2*f3.</p>
+<p>次の例で、タプルは式 (f2*f3) の値によってグループ化されます。</p>
 <source>
 X = GROUP A BY f2*f3;
 
@@ -5968,8 +5964,8 @@ DUMP X;
 </section>
 
    <section>
-   <title>Example</title>
-   <p>Suppose we have two relations, A and B.</p>
+   <title>例</title>
+   <p>次のような関係 A, B があるとします。</p>
 <source>
 A = LOAD 'data1' AS (owner:chararray,pet:chararray);
 
@@ -5989,7 +5985,7 @@ DUMP B;
 (Paul,Jane)
 </source>
    
-   <p>In this example tuples are co-grouped using field “owner” from relation A and field “friend2” from relation B as the key fields. The DESCRIBE operator shows the schema for relation X, which has two fields, "group" and "A" (see the GROUP operator for information about the field names).</p>
+   <p>次の例では、タプルは関係 A のフィールド "owner" と関係 B のフィールド "friend2" をグループ化キーとして相互にグループ化されます。 DESCRIBE 演算子によって関係 X のスキーマを見ると、 3 つのフィールド "group", "A", "B" を持っていることが分かります (フィールド名については GROUP 演算子の説明を見てください) 。</p>
 <source>
 X = COGROUP A BY owner, B BY friend2;
 
@@ -5997,27 +5993,18 @@ DESCRIBE X;
 X: {group: chararray,A: {owner: chararray,pet: chararray},b: {firend1: chararray,friend2: chararray}}
 </source>
    
-   <p>Relation X looks like this. A tuple is created for each unique key field. The tuple includes the key field and two bags. The first bag is the tuples from the first relation with the matching key field. The second bag is the tuples from the second relation with the matching key field. If no tuples match the key field, the bag is empty.</p>
+   <p>関係 X の中身は次のように、ユニークなキーフィールドごとにタプルが生成されます。タプルにはキーフィールドと 2 つのバッグが含まれます。最初のバッグは、関係 A の中でキーフィールドに合致するタプルを含んでいます。 2 番目のバッグは、関係 B の中でキーフィールドに合致するタプルを含んでいます。キーフィールドに合致するタプルがない場合は、バッグは空になります。</p>
 <source>
 (Alice,{(Alice,turtle),(Alice,goldfish),(Alice,cat)},{(Cindy,Alice),(Mark,Alice)})
 (Bob,{(Bob,dog),(Bob,cat)},{(Paul,Bob)})
 (Jane,{},{(Paul,Jane)})
 </source>
    
-   <p>In this example tuples are co-grouped and the INNER keyword is used asymmetrically on only one of the relations.</p>
-<source>
-X = COGROUP A BY owner, B BY friend2 INNER;
-
-DUMP X;
-(Bob,{(Bob,dog),(Bob,cat)},{(Paul,Bob)})
-(Jane,{},{(Paul,Jane)})
-(Alice,{(Alice,turtle),(Alice,goldfish),(Alice,cat)},{(Cindy,Alice),(Mark,Alice)})
-</source>
    </section>
    
    <section>
-   <title>Example</title>
-<p>This example shows how to group using multiple keys.</p>   
+   <title>例</title>
+<p>次の例は、複数のキーでグループ化を行なっています。</p>   
 <source>
  A = LOAD 'allresults' USING PigStorage() AS (tcid:int, tpid:int, date:chararray, result:chararray, tsid:int, tag:chararray);
  B = GROUP A BY (tcid, tpid); 
@@ -6025,13 +6012,13 @@ DUMP X;
     </section>   
      
    <section id="partitionby">
-   <title>Example: PARTITION BY</title>
-<p>To use the Hadoop Partitioner add PARTITION BY clause to the appropriate operator: </p>
+   <title>PARTITION BY の例</title>
+<p>Hadoop の Partitioner を使うためには PARTITION BY 節を追加します:</p>
 <source>
 A = LOAD 'input_data'; 
 B = GROUP A BY $0 PARTITION BY org.apache.pig.test.utils.SimpleCustomPartitioner PARALLEL 2;
 </source>
-<p>Here is the code for SimpleCustomPartitioner:</p>
+<p>SimpleCustomPartitioner のコード:</p>
 <source>
 public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable, Writable&gt; { 
      //@Override 
