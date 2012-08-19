@@ -6398,7 +6398,6 @@ DUMP X;
 
    <section>
    <title>例</title>
-<p>This example shows a left outer join.</p>
 <p>次の例は左外部結合を行なっています。</p>
 <source>
 A = LOAD 'a.txt' AS (n:chararray, a:int); 
