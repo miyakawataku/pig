@@ -6432,10 +6432,10 @@ C = JOIN A BY name FULL, B BY name USING 'skewed';
 
    <section id="limit">
    <title>LIMIT </title>
-   <p>Limits the number of output tuples.</p>
+   <p>結果のタプルの数に上限を設けて、必要であれば切り捨てます。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -6445,14 +6445,14 @@ C = JOIN A BY name FULL, B BY name USING 'skewed';
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias</p>
             </td>
             <td>
-               <p>The name of a relation.</p>
+               <p>関係の名前。</p>
             </td>
          </tr>
          <tr>
@@ -6460,30 +6460,29 @@ C = JOIN A BY name FULL, B BY name USING 'skewed';
                <p>n</p>
             </td>
             <td>
-               <p>The number of output tuples, either:</p>
+	       <p>結果のタプルの数。次の内どちらか:</p>
                <ul>
-					<li>a constant (for example, 3)</li>
-					<li>a scalar used in an expression (for example, c.sum/100)</li>
+					<li>定数 (例: 3)</li>
+					<li>式の中で使われるスカラ値 (例: c.sum/100)</li>
 				</ul>
-				<p></p>
-				<p>Note: The expression can consist of constants or scalars; it cannot contain any columns from the input relation.</p>
-				<p>Note: Using a scalar instead of a constant in LIMIT automatically disables most optimizations (only push-before-foreach is performed).</p>
+				<p>注記: 式は定数あるいはスカラ値から構成できます。ただし、入力となる関係の列は含むことができません。</p>
+				<p>注記: 定数でなくスカラ値をを使うと、ほとんどの最適化が自動的に無効になります (push-before-foreach だけが機能します) 。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the LIMIT operator to limit the number of output tuples.</p> 
+   <title>用法</title>
+   <p>LIMIT 演算子は出力のタプルの数に上限を設けるために使います。</p> 
    
-   <p>If the specified number of output tuples is equal to or exceeds the number of tuples in the relation, all tuples in the relation are returned.</p>
-   <p>If the specified number of output tuples is less than the number of tuples in the relation, then n tuples are returned. There is no guarantee which n tuples will be returned, and the tuples that are returned can change from one run to the next. A particular set of tuples can be requested using the ORDER operator followed by LIMIT.</p>
-   <p>Note: The LIMIT operator allows Pig to avoid processing all tuples in a relation. In most cases a query that uses LIMIT will run more efficiently than an identical query that does not use LIMIT. It is always a good idea to use limit if you can.</p>
+   <p>指定した数が関係の中に含まれるタプルの数以上である場合は、すべてのタプルが結果として戻ります。</p>
+   <p>指定した数 n が関係の中に含まれるタプルの数よりも小さい場合は、 n 個のタプルが戻ります。どの n 個が選ばれるかは保証されません。また、結果として戻るタプルは実行するごとに変わる可能性があります。特定のタプル群が必要な場合は、 ORDER 演算子の後に LIMIT 演算子を使います。</p>
+   <p>注記: LIMIT を使うことで、 Pig はすべてのタプルを処理する必要がなくなります。ほとんどの場合、 LIMIT を使った処理は使わない場合に比べて効率的になります。したがって、使える場合にはできるだけ LIMIT を使うのがよいでしょう。</p>
    </section>
    
    <section>
-   <title>Examples</title>
-   <p>In this example the lmit is express as a scalar.</p>
+   <title>例</title>
+   <p>次の例で、上限値はスカラ値として与えられています。</p>
  <source>
 a = load 'a.txt';
 b = group a all;
@@ -6492,7 +6491,7 @@ d = order a by $0;
 e = limit d c.sum/100;
 </source>
 <p></p>
-   <p>Suppose we have relation A.</p>
+   <p>次のような関係 A があるとします。</p>
 <source>
 A = LOAD 'data' AS (a1:int,a2:int,a3:int);
 
@@ -6505,7 +6504,7 @@ DUMP A;
 (8,4,3)
 </source>
    
-   <p>In this example output is limited to 3 tuples. Note that there is no guarantee which three tuples will be output.</p>
+   <p>次の例では、結果のタプル数を 3 つに制限しています。どの 3 つのタプルが出力されるかは不明であることに注意してください。</p>
 <source>
 X = LIMIT A 3;
 
@@ -6515,7 +6514,7 @@ DUMP X;
 (7,2,5)
 </source>
    
-   <p>In this example the ORDER operator is used to order the tuples and the LIMIT operator is used to output the first three tuples.</p>
+   <p>次の例では、 ORDER 演算子がタプルの順番を決め、 LIMIT 演算子は最初の 3 つのタプルを出力しています。</p>
 <source>
 B = ORDER A BY f1 DESC, f2 ASC;
 
