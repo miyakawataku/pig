@@ -6046,11 +6046,11 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
 <!-- =========================================================================== -->     
    
    <section id="join-inner">
-   <title>JOIN (inner) </title>
-   <p>Performs an inner join of two or more relations based on common field values.</p>
+   <title>JOIN (内部結合) </title>
+   <p>2 つ以上の関係について内部結合を行います。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -6060,14 +6060,14 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias</p>
             </td>
             <td>
-               <p>The name of a relation.</p>
+               <p>関係の名前。</p>
             </td>
          </tr>
          <tr>
@@ -6075,7 +6075,7 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
                <p>BY</p>
             </td>
             <td>
-               <p>Keyword</p>
+               <p>キーワード。</p>
             </td>
          </tr>
          <tr>
@@ -6083,8 +6083,8 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
                <p>expression</p>
             </td>
             <td>
-               <p>A field expression.</p>
-               <p>Example: X = JOIN A BY fieldA, B BY fieldB, C BY fieldC;</p>
+               <p>フィールド式。</p>
+               <p>例: X = JOIN A BY fieldA, B BY fieldB, C BY fieldC;</p>
             </td>
          </tr>
          <tr>
@@ -6092,7 +6092,7 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
                <p>USING</p>
             </td>
             <td>
-               <p>Keyword</p>
+               <p>キーワード。</p>
             </td>
          </tr>
          <tr>
@@ -6100,7 +6100,7 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
                <p>'replicated'</p>
             </td>
             <td>
-               <p>Use to perform replicated joins (see <a href="perf.html#Replicated-Joins">Replicated Joins</a>).</p>
+               <p>断片複製結合を行うために指定します (<a href="perf.html#replicated-joins">断片複製結合 ('replicated')</a> を参照してください) 。</p>
             </td>
          </tr>
          
@@ -6109,7 +6109,7 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
                <p>'skewed'</p>
             </td>
             <td>
-               <p>Use to perform skewed joins (see <a href="perf.html#Skewed-Joins">Skewed Joins</a>).</p>
+               <p>非平衡結合を行うために指定します (<a href="perf.html#skewed-joins">非平衡結合 ('skewed')</a> を参照してください) 。</p>
             </td>
          </tr>
          
@@ -6118,7 +6118,7 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
                <p>'merge'</p>
             </td>
             <td>
-               <p>Use to perform merge joins (see <a href="perf.html#Merge-Joins">Merge Joins</a>).</p>
+               <p>マージ結合を行うために指定します (<a href="perf.html#merge-joins">マージ結合 ('merge')</a> を参照してください) 。</p>
             </td>
          </tr>
          
@@ -6127,7 +6127,7 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
                <p>'merge-sparse'</p>
             </td>
             <td>
-               <p>Use to perform merge-sparse joins (see <a href="perf.html#Merge-sparse-Joins">Merge-Sparse Joins</a>).</p>
+               <p>疎マージ結合を行うために指定します (<a href="perf.html#merge-sparse-joins">疎マージ結合 ('merge')</a> を参照してください) 。</p>
             </td>
          </tr>         
          
@@ -6136,17 +6136,16 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
                <p id="partition-by-join-inner">PARTITION BY partitioner</p>
             </td>
             <td>
-             <p>Use this feature to specify the Hadoop Partitioner. The partitioner controls the partitioning of the keys of the intermediate map-outputs. </p>
+             <p>Hadoop の Partitioner を指定するために使います。 Partitioner は Mapper の中間出力のキーの分割を制御します。</p>
              <ul>
              <li>
-             <p>For more details, see http://hadoop.apache.org/common/docs/r0.20.2/api/org/apache/hadoop/mapred/Partitioner.html</p>
+             <p>詳しくは、 http://hadoop.apache.org/common/docs/r0.20.2/api/org/apache/hadoop/mapred/Partitioner.html を参照してください。</p>
              </li>
              <li>
-              <p>For usage, see <a href="#partitionby">Example: PARTITION BY</a></p>
+             <p>使い方については、 <a href="#partitionby">PARTITION BY の例</a> を参照してください。</p>
              </li>
              </ul>
-             <p></p>
-             <p>This feature CANNOT be used with skewed joins.</p>
+             <p>この機能は非平衡結合では使えません。</p>
          </td>
      </tr> 
 
@@ -6155,30 +6154,29 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
                <p>PARALLEL n</p>
             </td>
             <td>
-               <p>Increase the parallelism of a job by specifying the number of reduce tasks, n. </p>
-               <p>For more information, see <a href="perf.html#Parallel">Use the Parallel Features</a>.</p>
+               <p>Reduce タスクの並列度を n に指定します。</p>
+               <p>詳しくは <a href="perf.html#parallel">並列化機能の使用</a> を参照してください。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the JOIN operator to perform an inner, equijoin join of two or more relations based on common field values. 
-   The JOIN operator always performs an inner join. Inner joins ignore null keys, so it makes sense to filter them out before the join.</p>
+   <title>用法</title>
+   <p>JOIN 演算子は、複数の関係について、共通するフィールドの値にもとづき、内部等価結合を行うために事えます。内部結合は null を排除します。そのため、結合の前にあらかじめ null を排除することで性能向上が期待できます。</p>
    
-   <p>Note the following about the GROUP/COGROUP and JOIN operators:</p>
+   <p>GROUP/COGROUP と JOIN については次の点に注意してください:</p>
       <ul>
       <li>
-         <p>The GROUP and JOIN operators perform similar functions. GROUP creates a nested set of output tuples while JOIN creates a flat set of output tuples.</p>
+         <p>GROUP と JOIN 演算子は似たような動作をします。ただし、 GROUP の結果がネストしたタプルになるのに対して、 JOIN の結果は平坦でネストしていないタプルになります。</p>
       </li>
       <li>
-         <p>The GROUP/COGROUP and JOIN operators handle null values differently (see <a href="#nulls_join">Nulls and JOIN Operator</a>).</p>
+         <p>GROUP/COGROUP と JOIN では null の扱いに違いがあります (<a href="#nulls_group">null と GROUP/COGROUP 演算子</a> を参照してください) 。</p>
      </li>
    </ul>
    <p></p>
-   <p id="self-joins"><strong>Self Joins</strong></p>
-   <p>To perform self joins in Pig load the same data multiple times, under different aliases, to avoid naming conflicts.</p>  
-   <p>In this example the same data is loaded twice using aliases A and B.</p>
+   <p id="self-joins"><strong>自己結合</strong></p>
+   <p>Pig で自己結合を行うためには、名前の衝突を避けるため、同じデータを違う別名で複数回ロードしてください。</p>  
+   <p>次の例では、同じデータを A と B という別名で二度読み込んでいます。</p>
    <source>
 grunt> A = load 'mydata';
 grunt> B = load 'mydata';
@@ -6188,8 +6186,8 @@ grunt> explain C;
     </section>
 
    <section>
-   <title>Example</title>
-   <p>Suppose we have relations A and B.</p>
+   <title>例</title>
+   <p>次のような関係 A と B があるとします。</p>
 <source>
 A = LOAD 'data1' AS (a1:int,a2:int,a3:int);
 
@@ -6213,7 +6211,7 @@ DUMP B;
 (4,9)
 </source>
    
-   <p>In this example relations A and B are joined by their first fields.</p>
+   <p>次の例では、 A と B をそれぞれの最初のフィールドで結合しています。</p>
 <source>
 X = JOIN A BY a1, B BY b1;
 
