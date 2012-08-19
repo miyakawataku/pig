@@ -6162,7 +6162,7 @@ public class SimpleCustomPartitioner extends Partitioner &lt;PigNullableWritable
    
    <section>
    <title>用法</title>
-   <p>JOIN 演算子は、複数の関係について、共通するフィールドの値にもとづき、内部等価結合を行うために事えます。内部結合は null を排除します。そのため、結合の前にあらかじめ null を排除することで性能向上が期待できます。</p>
+   <p>JOIN 演算子は、複数の関係について、共通するフィールドの値にもとづき、内部等価結合を行うために使えます。内部結合は null を排除します。そのため、結合の前にあらかじめ null を排除することで性能向上が期待できます。</p>
    
    <p>GROUP/COGROUP と JOIN については次の点に注意してください:</p>
       <ul>
@@ -6231,11 +6231,11 @@ DUMP X;
 <!-- =========================================================================== -->  
 
 <section id="join-outer">
-   <title>JOIN (outer) </title>
-   <p>Performs an outer join of two or more relations based on common field values.</p>
+   <title>JOIN (外部結合)</title>
+   <p>2 つの関係に対して、共通するフィールドの値にもとづく外部結合を行います。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -6247,23 +6247,23 @@ DUMP X;
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
 
    <table>
       <tr>
             <td>
-               <p>alias</p>
+               <p>left-alias, right-alias</p>
             </td>
             <td>
-               <p>The name of a relation. Applies to alias, left-alias and right-alias.</p>
+               <p>関係の名前。</p>
             </td>
         </tr>
         <tr>
             <td>
-               <p>alias-column</p>
+               <p>left-alias-column, right-alias-column</p>
             </td>
             <td>
-               <p>The name of the join column for the corresponding relation. Applies to left-alias-column and right-alias-column.</p>
+               <p>それぞれの関係について結合に使う列の名前。</p>
             </td>
          </tr>
          <tr>
@@ -6271,7 +6271,7 @@ DUMP X;
                <p>BY</p>
             </td>
             <td>
-               <p>Keyword</p>
+               <p>キーワード。</p>
             </td>
          </tr>
 
@@ -6280,7 +6280,7 @@ DUMP X;
                <p>LEFT</p>
             </td>
             <td>
-               <p>Left outer join.</p>
+               <p>左外部結合。</p>
             </td>
          </tr>
          
@@ -6289,7 +6289,7 @@ DUMP X;
                <p>RIGHT</p>
             </td>
             <td>
-               <p>Right outer join.</p>
+               <p>右外部結合。</p>
             </td>
          </tr>
          
@@ -6298,7 +6298,7 @@ DUMP X;
                <p>FULL</p>
             </td>
             <td>
-               <p>Full outer join.</p>
+               <p>全外部結合。</p>
             </td>
          </tr>
 
@@ -6307,7 +6307,7 @@ DUMP X;
                <p>OUTER</p>
             </td>
             <td>
-               <p>(Optional) Keyword </p>
+               <p>キーワード (必須でない) 。</p>
             </td>
          </tr>
 
@@ -6316,7 +6316,7 @@ DUMP X;
                <p>USING</p>
             </td>
             <td>
-               <p>Keyword</p>
+               <p>キーワード。</p>
             </td>
          </tr>
          <tr>
@@ -6324,8 +6324,8 @@ DUMP X;
                <p>'replicated'</p>
             </td>
             <td>
-               <p>Use to perform replicated joins (see <a href="perf.html#Replicated-Joins">Replicated Joins</a>).</p>
-               <p>Only left outer join is supported for replicated joins.</p>
+               <p>断片複製結合を行うために指定します (<a href="perf.html#replicated-joins">断片複製結合 ('replicated')</a> を参照してください) 。</p>
+               <p>断片複製結合は左外部結合でのみ使えます。</p>
             </td>
          </tr>
          
@@ -6334,7 +6334,7 @@ DUMP X;
                <p>'skewed'</p>
             </td>
             <td>
-               <p>Use to perform skewed joins (see <a href="perf.html#Skewed-Joins">Skewed Joins</a>).</p>
+               <p>非平衡結合を行うために指定します (<a href="perf.html#skewed-joins">非平衡結合 ('skewed')</a> を参照してください) 。</p>
             </td>
          </tr>
 
@@ -6343,7 +6343,7 @@ DUMP X;
                <p>'merge'</p>
             </td>
             <td>
-               <p>Use to perform merge joins (see <a href="perf.html#Merge-Joins">Merge Joins</a>).</p>
+               <p>マージ結合を行うために指定します (<a href="perf.html#merge-joins">マージ結合 ('merge')</a> を参照してください) 。</p>
             </td>
          </tr>
          
@@ -6353,17 +6353,16 @@ DUMP X;
                <p id="partition-by-join-outer">PARTITION BY partitioner</p>
             </td>
             <td>
-             <p>Use this feature to specify the Hadoop Partitioner. The partitioner controls the partitioning of the keys of the intermediate map-outputs. </p>
+             <p>Hadoop の Partitioner を指定するために使います。 Partitioner は Mapper の中間出力のキーの分割を制御します。</p>
              <ul>
              <li>
-             <p>For more details, see http://hadoop.apache.org/common/docs/r0.20.2/api/org/apache/hadoop/mapred/Partitioner.html</p>
+             <p>詳しくは、 http://hadoop.apache.org/common/docs/r0.20.2/api/org/apache/hadoop/mapred/Partitioner.html を参照してください。</p>
              </li>
              <li>
-              <p>For usage, see <a href="#partitionby">Example: PARTITION BY</a></p>
+             <p>使い方については、 <a href="#partitionby">PARTITION BY の例</a> を参照してください。</p>
              </li>
              </ul>
-             <p></p>
-             <p>This feature CANNOT be used with skewed joins.</p>
+             <p>この機能は非平衡結合では使えません。</p>
          </td>
      </tr> 
 
@@ -6372,8 +6371,8 @@ DUMP X;
                <p>PARALLEL n</p>
             </td>
             <td>
-               <p>Increase the parallelism of a job by specifying the number of reduce tasks, n. </p>
-               <p>For more information, see <a href="perf.html#Parallel">Use the Parallel Features</a>.</p>
+               <p>Reduce タスクの並列度を n に指定します。</p>
+               <p>詳しくは <a href="perf.html#parallel">並列化機能の使用</a> を参照してください。</p>
             </td>
          </tr>
     
@@ -6382,47 +6381,46 @@ DUMP X;
 </section>
    
  <section>
-   <title>Usage</title>
-   <p>Use the JOIN operator with the corresponding keywords to perform left, right, or full outer joins.  
-   The keyword OUTER is optional for outer joins; the keywords LEFT, RIGHT and FULL will imply left outer, right outer and full outer joins respectively when OUTER is omitted. 
-   The Pig Latin syntax closely adheres to the SQL standard.</p>
-    <p>
-   Please note the following:
-    </p>
+   <title>用法</title>
+   <p>JOIN 演算子は左外部結合、右外部結合、全外部結合のために使えます。キーワード OUTER を省略しても、キーワード LEFT, RIGHT, FULL が指定されてさえいれば、それぞれ左外部結合、右外部結合、全外部結合が行われます。外部結合に関する Pig Latin の文法は SQL の標準を踏襲しています。</p>
+
+    <p>次の点に気をつけてください:</p>
+
     <ul>
 		<li>
-			<p>Outer joins will only work provided the relations which need to produce nulls (in the case of non-matching keys) have schemas.</p>
+			<p>外部結合は一致するキーが無い時に null になる側の関係が、スキーマを持っている場合にのみ機能します</p>
 		</li>
 		<li>
-			<p>Outer joins will only work for two-way joins; to perform a multi-way outer join, you will need to perform multiple two-way outer join statements.</p>
+			<p>外部結合で結合できる関係は 2 つだけです。 3 つ以上の関係の外部結合を行いたい場合は、複数回外部結合を行う必要があります。</p>
 		</li>
     </ul>
 </section>
 
    <section>
-   <title>Examples</title>
+   <title>例</title>
 <p>This example shows a left outer join.</p>
+<p>次の例は左外部結合を行なっています。</p>
 <source>
 A = LOAD 'a.txt' AS (n:chararray, a:int); 
 B = LOAD 'b.txt' AS (n:chararray, m:chararray);
 C = JOIN A by $0 LEFT OUTER, B BY $0;
 </source>
 
-<p>This example shows a full outer join.</p>
+<p>次の例は全外部結合を行なっています。</p>
 <source>
 A = LOAD 'a.txt' AS (n:chararray, a:int); 
 B = LOAD 'b.txt' AS (n:chararray, m:chararray);
 C = JOIN A BY $0 FULL, B BY $0;
 </source>
 
-<p>This example shows a replicated left outer join.</p>
+<p>次の例は断片複製左外部結合を行なっています。</p>
 <source>
 A = LOAD 'large';
 B = LOAD 'tiny';
 C= JOIN A BY $0 LEFT, B BY $0 USING 'replicated';
 </source>
 
-<p>This example shows a skewed full outer join.</p>
+<p>次の例は非平衡全外部結合を行なっています。</p>
 <source>
 A = LOAD 'studenttab' as (name, age, gpa);
 B = LOAD 'votertab' as (name, age, registration, contribution);
