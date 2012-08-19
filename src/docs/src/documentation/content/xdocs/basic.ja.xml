@@ -4039,7 +4039,6 @@ X = FILTER A BY (f1 matches '.*apache.*');
          </tr>
    </table>
    <p>注 1: boolean (タプル A とタプル B が同じサイズ s で、すべての i (0 &lt;= i &lt; s) に対して A[i] == B[i] が成り立つ時、 A と B は等しい)</p>
-   <p>注 2: boolean (Map A is equal to map B if A and B have the same number of entries, and for every key k1 in A with a value of v1, there is a key k2 in B with a value of v2, such that k1 = = k2 and v1 = = v2)</p>
    <p>注 2: boolean (マップ A とマップ B が同じ数のエントリを持っていて、 A のすべてのキー k1 および対応する値 v1 について、 k1 == k2 および v1 == v2 を満たすような B のキー k2 と対応する値 v2 が存在する時、 A と B は等しい)</p>
 </section>
 
