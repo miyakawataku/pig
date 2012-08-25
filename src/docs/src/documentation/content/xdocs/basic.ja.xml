@@ -6671,10 +6671,10 @@ ILLUSTRATE A;
 <!-- =================================================================== -->
 <section id="mapreduce">
    <title>MAPREDUCE</title>
-   <p>Executes native MapReduce jobs inside a Pig script.</p>      
+   <p>Pig スクリプトからネイティブの MapReduce ジョブを実行します。</p>      
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
       <table>
       <tr> 
             <td>
@@ -6686,14 +6686,14 @@ ILLUSTRATE A;
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias1, alias2</p>
             </td>
             <td>
-               <p>The names of relations.</p>
+               <p>関係の名前。</p>
             </td>
      </tr>
      <tr>
@@ -6701,9 +6701,10 @@ ILLUSTRATE A;
                <p>mr.jar</p>
             </td>
             <td>
-                <p>The MapReduce jar file (enclosed in single quotes).</p>
-               <p>You can specify any MapReduce jar file that can be run through the <code>hadoop jar mymr.jar params</code> command. </p>
-               <p>The values for inputLocation and outputLocation can be passed in the params. </p>
+                <p>MapReduce の JAR ファイル (単一引用符でくくります) 。</p>
+               <p><code>hadoop jar mymr.jar [params...]</code> という形のコマンドで MapReduce ジョブが起動できる JAR ファイルを指定します。</p>
+               <p>普通は、 inputLocation と outputLocation の値をパラメータ経由で渡します。</p>
+               <p></p>
             </td>
      </tr>
 
@@ -6712,8 +6713,8 @@ ILLUSTRATE A;
                <p>STORE ... INTO ... USING</p>
             </td>
             <td>
-               <p>See <a href="basic.html#STORE">STORE</a></p>
-               <p>Store alias2 into the inputLocation using storeFunc, which is then used by the MapReduce job to read its data.</p>
+               <p><a href="basic.html#store">STORE</a> を参照してください。</p>
+               <p>alias2 を storeFunc を使って inputLocation に書き出します。その後、このディレクトリから MapReduce ジョブがデータを読み出します。</p>
                 
             </td>
      </tr>
@@ -6723,8 +6724,8 @@ ILLUSTRATE A;
                <p>LOAD ... USING ... AS </p>
             </td>
             <td>
-               <p>See <a href="basic.html#LOAD">LOAD</a></p>
-               <p>After running mr1.jar's MapReduce job, load back the data from outputLocation into alias1 using loadFunc as schema.</p>
+               <p><a href="basic.html#load">LOAD</a> を参照してください。</p>
+               <p>mr.jar の MapReduce ジョブを実行し終えた後に、 outputLocation から loadFunc をスキーマを使って alias1 にデータを読み出します。</p>
             </td>
      </tr>
 
@@ -6733,7 +6734,7 @@ ILLUSTRATE A;
                <p>`params, ...`</p>
             </td>
             <td>
-               <p>Extra parameters required for the mapreduce job (enclosed in back tics). </p>
+               <p>MapReduce ジョブに渡すパラメータ (バッククオートでくくります) 。</p>
             </td>
      </tr>
        
@@ -6741,18 +6742,15 @@ ILLUSTRATE A;
 </section>
 
 <section>
-<title>Usage</title>
-<p>Use the MAPREDUCE operator to run native MapReduce jobs from inside a Pig script.</p>
+<title>用法</title>
+<p>MAPREDUCE 演算子は Pig スクリプトの内部でネイティブの MapReduce ジョブを実行するために使います。</p>
 
-<p>The input and output locations for the MapReduce program are conveyed to Pig using the STORE/LOAD clauses.  
-Pig, however, does not pass this information (nor require that this information be passed) to the MapReduce program. 
-If you want to pass the input and output locations to the MapReduce program you can use the params clause or you can hardcode the locations in the MapReduce program.</p>
+<p>MapReduce プログラムの入力と出力のパスは、 STORE/LOAD 節を通じて Pig に伝えます。ただし、 Pig はこのパス情報を MapReduce プログラムに伝えることはしません。入力と出力のパスを MapReduce プログラムに伝えるためには、引数の節で指定するか、 MapReduce プログラムにパスをハードコードします。</p>
 </section>
 
 <section>
-<title>Example</title>
-<p>This example demonstrates how to run the wordcount MapReduce progam from Pig.
-Note that the files specified as input and output locations in the MAPREDUCE statement will NOT be deleted by Pig automatically. You will need to delete them manually. </p>
+<title>例</title>
+<p>次の例では、 Pig から MapReduce のワードカウントプログラムを起動しています。 MAPREDUCE 文の入力ファイルと出力ファイルを、 Pig が自動的に削除することはありません。別途手動で削除する必要があります。</p>
 <source>
 A = LOAD 'WordcountInput.txt';
 B = MAPREDUCE 'wordcount.jar' STORE A INTO 'inputDir' LOAD 'outputDir' 
