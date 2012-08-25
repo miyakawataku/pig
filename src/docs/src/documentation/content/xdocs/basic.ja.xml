@@ -6763,10 +6763,10 @@ B = MAPREDUCE 'wordcount.jar' STORE A INTO 'inputDir' LOAD 'outputDir'
  <!-- =================================================================== -->     
       <section id="order-by">
       <title>ORDER BY</title>
-   <p>Sorts a relation based on one or more fields.</p>
+   <p>関係を 1 個以上のフィールドによってソートします。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -6776,14 +6776,14 @@ B = MAPREDUCE 'wordcount.jar' STORE A INTO 'inputDir' LOAD 'outputDir'
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias</p>
             </td>
             <td>
-               <p>The name of a relation.</p>
+               <p>関係の名前。</p>
             </td>
          </tr>
          <tr>
@@ -6791,7 +6791,7 @@ B = MAPREDUCE 'wordcount.jar' STORE A INTO 'inputDir' LOAD 'outputDir'
                <p>*</p>
             </td>
             <td>
-               <p>The designator for a tuple.</p>
+               <p>タプル全体。</p>
             </td>
          </tr>
                   <tr>
@@ -6799,7 +6799,7 @@ B = MAPREDUCE 'wordcount.jar' STORE A INTO 'inputDir' LOAD 'outputDir'
                <p>field_alias</p>
             </td>
             <td>
-               <p>A field in the relation. The field must be a simple type.</p>
+               <p>関係のなかのフィールド。フィールドは単純型である必要があります。</p>
             </td>
          </tr>
          <tr>
@@ -6807,7 +6807,7 @@ B = MAPREDUCE 'wordcount.jar' STORE A INTO 'inputDir' LOAD 'outputDir'
                <p>ASC</p>
             </td>
             <td>
-               <p>Sort in ascending order.</p>
+               <p>昇順でソートします。</p>
             </td>
          </tr>
          <tr>
@@ -6815,7 +6815,7 @@ B = MAPREDUCE 'wordcount.jar' STORE A INTO 'inputDir' LOAD 'outputDir'
                <p>DESC</p>
             </td>
             <td>
-               <p>Sort in descending order.</p>
+               <p>降順でソートします。</p>
             </td>
          </tr>
 
@@ -6824,41 +6824,41 @@ B = MAPREDUCE 'wordcount.jar' STORE A INTO 'inputDir' LOAD 'outputDir'
                <p>PARALLEL n</p>
             </td>
             <td>
-               <p>Increase the parallelism of a job by specifying the number of reduce tasks, n.</p>
-               <p>For more information, see <a href="perf.html#Parallel">Use the Parallel Features</a>.</p>
+               <p>Reduce タスクの並列度を n に指定します。</p>
+               <p>詳しくは <a href="perf.html#parallel">並列化機能の使用</a> を参照してください。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p><strong>Note:</strong> ORDER BY is NOT stable; if multiple records have the same ORDER BY key, the order in which these records are returned is not defined and is not guarantted to be the same from one run to the next.</p>
+   <title>用法</title>
+   <p><strong>注記:</strong> ORDER BY によるソートは安定ソートではありません。複数のレコードの ORDER BY キーが同じ値である場合、結果として現れる順番は定義されませんし、複数回実行した時に同じ順序になることも保証されません。</p>
    
-   <p>In Pig, relations are unordered (see <a href="#relations">Relations, Bags, Tuples, Fields</a>):</p>
+   <p>Pig では、関係は整列されていません (<a href="#relations">関係、バッグ、タプル、フィールド</a> を参照してください) 。</p>
    <ul>
       <li>
-         <p>If you order relation A to produce relation X (X = ORDER A BY * DESC;) relations A and X still contain the same data. </p>
+         <p>A をソートして X に入れた場合 (X = ORDER A BY * DESC;) 、関係 A と X は同じデータを保持しています。</p>
       </li>
       <li>
-         <p>If you retrieve relation X (DUMP X;) the data is guaranteed to be in the order you specified (descending).</p>
+         <p>関係 X からデータを抽出した場合 (DUMP X;) 、データは指定した通り降順でソートされていることが保証されます。</p>
       </li>
       <li>
-         <p>However, if you further process relation X (Y = FILTER X BY $0 &gt; 1;) there is no guarantee that the data will be processed in the order you originally specified (descending).</p>
+         <p>しかしながら、関係 X をさらに処理した場合 (Y = FILTER X BY $0 &gt; 1;) 、データが ORDER BY で指定したとおり降順でソートされるという保証はありません。</p>
       </li>
    </ul>
    <p></p>
-      <p>Pig currently supports ordering on fields with simple types or by tuple designator (*). You cannot order on fields with complex types or by expressions. </p>
+      <p>Pig では現在のところ、単純型のフィールドによるソートとタプル全体 (*) によるソートのみが可能です。複合型のフィールドによるソートや、式によるソートはできません。</p>
      <source>
 A = LOAD 'mydata' AS (x: int, y: map[]);     
-B = ORDER A BY x; -- this is allowed because x is a simple type
-B = ORDER A BY y; -- this is not allowed because y is a complex type
-B = ORDER A BY y#'id'; -- this is not allowed because y#'id' is an expression
+B = ORDER A BY x; -- x は単純型なので可能
+B = ORDER A BY y; -- y は複合型なので不可能
+B = ORDER A BY y#'id'; -- y#'id' は式なので不可能
 </source> 
    </section>
 
    <section>
-   <title>Examples</title>
-   <p>Suppose we have relation A.</p>
+   <title>例</title>
+   <p>次のような関係 A があるとします。</p>
 <source>
 A = LOAD 'data' AS (a1:int,a2:int,a3:int);
 
@@ -6871,7 +6871,7 @@ DUMP A;
 (8,4,3)
 </source>
    
-   <p>In this example relation A is sorted by the third field, f3 in descending order. Note that the order of the three tuples ending in 3 can vary.</p>
+   <p>次の例で、関係 A は 3 番目のフィールド f3 で降順にソートされています。 3 番目のフィールドが 3 である 3 つのタプルが現れる順番は不定であることに注意してください。</p>
 <source>
 X = ORDER A BY a3 DESC;
 
