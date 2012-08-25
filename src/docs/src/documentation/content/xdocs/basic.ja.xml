@@ -6891,10 +6891,10 @@ DUMP X;
 <!-- =========================================================================== -->
    <section id="sample">
    <title>SAMPLE</title>
-   <p>Partitions a relation into two or more relations.</p>
+   <p>ランダムにデータのサンプルを選択します。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -6904,14 +6904,14 @@ DUMP X;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias</p>
             </td>
             <td>
-               <p>The name of a relation.</p>
+               <p>関係の名前。</p>
             </td>
          </tr>
          <tr>
@@ -6919,33 +6919,30 @@ DUMP X;
                <p>size</p>
             </td>
             <td>
-               <p>Sample size, either</p>
+               <p>サンプルのサイズ。次のうちのどちらか:</p>
                <ul>
-               <li>a constant, rage 0 to 1 (for example, enter 0.1 for 10%)</li>
-                <li>a scalar used in an expression</li>
+               <li>0 から 1 までの定数 (例: 0.1, 10%)</li>
+                <li>式の中で使われるスカラ値</li>
                </ul>
-               <p></p>
-               <p>Note: The expression can consist of constants or scalars; it cannot contain any columns from the input relation.</p>
+               <p>注記: 式は定数あるいはスカラ値から構成できます。ただし、入力となる関係の列は含むことができません。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-     <title>Usage</title>
-     <p>Use the SAMPLE operator to select a random data sample with the stated sample size. 
-     SAMPLE is a probabalistic operator; there is no guarantee that the exact same number of tuples will be returned for a particular sample size
-     each time the operator is used.</p>
+     <title>用法</title>
+     <p>SAMPLE は指定したサイズのランダムなデータのサンプルを選択するために使います。 SAMPLE は確率的な演算子です。同じサンプルサイズを複数回指定して SAMPLE 演算子を使ったとしても、正確に同じ数のタプルが戻る保証はありません。</p>
    </section>
    
    <section>
-   <title>Example</title>
-   <p>In this example relation X will contain 1% of the data in relation A.</p>
+   <title>例</title>
+   <p>次の例で、関係 X は関係 A のデータの 1% を含んでいます。</p>
 <source>
 A = LOAD 'data' AS (f1:int,f2:int,f3:int);
 
 X = SAMPLE A 0.01;
 </source>
-<p>In this example, a scalar expression is used (it will sample approximately 1000 records from the input).</p>
+<p>次の例では、スカラ式が使われています (ほぼ 1000 個のレコードを選択します) 。</p>
 <source>
 a = load 'a.txt';
 b = group a all;
