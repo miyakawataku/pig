@@ -6539,10 +6539,10 @@ DUMP X;
    
    <section id="load">
    <title>LOAD </title>
-   <p>Loads data from the file system.</p>
+   <p>ファイルシステムからデータをロードします。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -6552,21 +6552,20 @@ DUMP X;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>'data'</p>
             </td>
             <td>
-               <p>The name of the file or directory, in single quotes.</p>
-               <p>If you specify a directory name, all the files in the directory are loaded. </p>
-               <p>You can use Hadoop globing to specify files at the file system or directory levels (see Hadoop
-                  <a href="http://hadoop.apache.org/common/docs/current/api/org/apache/hadoop/fs/FileSystem.html#globStatus(org.apache.hadoop.fs.Path)">globStatus</a> for details on globing syntax).</p>
-                  <p id="load-glob"><strong>Note:</strong> Pig uses Hadoop globbing so the functionality is IDENTICAL. However, when you run from the command line using the Hadoop fs command (rather than the Pig LOAD operator), the Unix shell may do some of the substitutions; this could alter the outcome giving the impression that globing works differently for Pig and Hadoop. For example:</p>
+               <p>ファイルかディレクトリの名前。単一引用符でくくります。</p>
+               <p>ディレクトリの名前を指定すると、ディレクトリ内のすべてのファイルがロードされます。</p>
+               <p>ファイルシステム、あるいはディレクトリ階層中のファイルを指定するために、 Hadoop のグロブを使うことができます (グロブの文法については Hadoop の <a href="http://hadoop.apache.org/common/docs/current/api/org/apache/hadoop/fs/FileSystem.html#globStatus(org.apache.hadoop.fs.Path)">globStatus</a> を参照してください) 。</p>
+                  <p id="load-glob"><strong>注記:</strong> Pig は Hadoop のグロブを使っています。したがって、グロブ機能は Hadoop と同一です。しかしながら、 Hadoop の fs コマンドをコマンドラインから使うと、 Pig の LOAD 演算子を使うのとは異なり、 Unix シェルの置換機能が働きます。結果として、 Pig と Hadoop の動きが違うように見えることがあります。たとえば:</p>
                 <ul>
-					<li>This works <br></br>hadoop fs -ls /mydata/20110423{00,01,02,03,04,05,06,07,08,09,{10..23}}00//<strong>part </strong></li>
-					<li>This does not work <br></br>LOAD '/mydata/20110423{00,01,02,03,04,05,06,07,08,09,{10..23}}00//<strong>part </strong>'</li>
+					<li>これはうまく行きます<br></br>hadoop fs -ls /mydata/20110423{00,01,02,03,04,05,06,07,08,09,{10..23}}00//<strong>part </strong></li>
+					<li>これはうまく行きません<br></br>LOAD '/mydata/20110423{00,01,02,03,04,05,06,07,08,09,{10..23}}00//<strong>part </strong>'</li>
 				</ul>
             </td>
          </tr>
@@ -6575,8 +6574,8 @@ DUMP X;
                <p>USING</p>
             </td>
             <td>
-               <p>Keyword. </p>
-               <p>If the USING clause is omitted, the default load function PigStorage is used. </p>
+               <p>キーワード。</p>
+               <p>USING 節が省略された場合には、デフォルトのロード関数である PigStorage が使われます。</p>
             </td>
          </tr>
          <tr>
@@ -6584,16 +6583,15 @@ DUMP X;
                <p>function</p>
             </td>
             <td>
-               <p>The load function. </p>
+               <p>ロード関数。</p>
                <ul>
                   <li>
                   
                   
-                     <p>You can use a built in function (see <a href="func.html#Load-Store-Functions">Load/Store Functions</a>). PigStorage is the default load function and does not need to be specified (simply omit the USING clause).</p>
+		     <p><a href="func.html#Load-Store-Functions">組み込み関数のロード関数</a>を使うことができます。その内、 PigStorage はデフォルトのロード関数なので、 USING 節を省略した場合に使われます。</p>
                   </li>
                   <li>
-                     <p>You can write your own load function  
-                     if your data is in a format that cannot be processed by the built in functions (see <a href="udf.html">User Defined Functions</a>).</p>
+		     <p>データの書式が組み込み関数で処理できない場合には、自作のロード関数を作ることもできます (<a href="udf.html">ユーザ定義関数</a> を参照してください) 。</p>
                   </li>
                </ul>
             </td>
@@ -6603,7 +6601,7 @@ DUMP X;
                <p>AS</p>
             </td>
             <td>
-               <p>Keyword. </p>
+               <p>キーワード。</p>
             </td>
          </tr>
          <tr>
@@ -6611,27 +6609,27 @@ DUMP X;
                <p>schema</p>
             </td>
             <td>
-               <p>A schema using the AS keyword, enclosed in parentheses (see <a href="#schemas">Schemas</a>).</p>
-               <p>The loader produces the data of the type specified by the schema. If the data does not conform to the schema, depending on the loader, either a null value or an error is generated.</p>
-               <p>Note: For performance reasons the loader may not immediately convert the data to the specified format; however, you can still operate on the data assuming the specified type.</p>
+               <p>スキーマは AS キーワードに後置し、括弧にくくって指定します (<a href="#schemas">スキーマ</a> を参照してください) 。</p>
+               <p>ロード関数はスキーマで指定された型のデータを生成します。データがスキーマに合致しない場合は、ロード関数は null 値を生成するか、エラーを発生します。どちらになるかはロード関数次第です。</p>
+               <p>注記: 性能上の理由から、ロード関数がデータをすぐには指定された書式に変換しないことがあります。その場合でも、プログラマはデータを指定した型であるものとして扱うことができます。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the LOAD operator to load data from the file system. </p></section>
+   <title>用法</title>
+   <p>LOAD 演算子はファイルシステムからデータを読み出すために使います。</p></section>
    
    <section>
-   <title>Examples</title>
-   <p>Suppose we have a data file called myfile.txt. The fields are tab-delimited. The records are newline-separated.</p>
+   <title>例</title>
+   <p>myfile.txt というデータファイルがあるものとします。フィールドはタブ区切り、レコードは改行区切りとします。</p>
 <source>
 1 2 3
 4 2 1
 8 3 4
 </source>
    
-   <p>In this example the default load function, PigStorage, loads data from myfile.txt to form relation A. The two LOAD statements are equivalent. Note that, because no schema is specified, the fields are not named and all fields default to type bytearray. </p>
+   <p>次の例では、デフォルトのロード関数である PigStorage を使って myfile.txt から関係 A を読み出しています。 2 つの LOAD 文は同じ意味になります。スキーマを指定していないので、すべてのフィールドは名無しで、型は bytearray になります。</p>
 <source>
 A = LOAD 'myfile.txt';
 
@@ -6643,7 +6641,7 @@ DUMP A;
 (8,3,4)
 </source>
    
-   <p>In this example a schema is specified using the AS keyword. The two LOAD statements are equivalent. You can use the DESCRIBE and ILLUSTRATE operators to view the schema. </p>
+   <p>次の例では、 AS キーワードを使ってスキーマを指定しています。 2 つの LOAD 文は同じ意味になります。スキーマを表示するためには DESCRIBE 演算子と ILLUSTRATE 演算子が使えます。</p>
 <source>
 A = LOAD 'myfile.txt' AS (f1:int, f2:int, f3:int);
 
@@ -6666,7 +6664,7 @@ ILLUSTRATE A;
 ---------------------------------------
 </source>
    <p>
-      For examples of how to specify more complex schemas for use with the LOAD operator, see Schemas for Complex Data Types and Schemas for Multiple Types.
+      LOAD 演算子で複雑なスキーマを指定する例については、<a href="#schema-complex">複合データ型のスキーマ</a>と<a href="#schema-multi">複数の型のスキーマ</a>を参照してください。
       </p></section></section>
       
 
