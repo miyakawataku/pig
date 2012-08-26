@@ -7875,10 +7875,10 @@ B = FOREACH A GENERATE myFunc($0);
    <!-- =========================================================================== -->
    <section id="register">
    <title>REGISTER</title>
-   <p>Registers a JAR file so that the UDFs in the file can be used.</p>
+   <p>UDF が使えるようにするため、 JAR ファイルを登録します。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -7888,14 +7888,14 @@ B = FOREACH A GENERATE myFunc($0);
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>path</p>
             </td>
             <td>
-               <p>The path to the JAR file (the full location URI is required). Do not place the name in quotes.</p>
+               <p>JAR ファイルのパス (完全 URI が必要) 。引用符でくくりません。</p>
                
             </td>
          </tr> 
@@ -7903,21 +7903,20 @@ B = FOREACH A GENERATE myFunc($0);
    </section>
    
    <section>
-   <title>Usage</title>
-   <p><strong>Pig Scripts</strong></p>
+   <title>用法</title>
+   <p><strong>Pig スクリプト</strong></p>
    
-   <p>Use the REGISTER statement inside a Pig script to specify a JAR file or a Python/JavaScript module. Pig supports JAR files and modules stored in local file systems as well as remote, distributed file systems such as HDFS and Amazon S3 (see <a href="start.html#Pig-Scripts">Pig Scripts</a>).</p>
+   <p>Pig スクリプトの中で REGISTER 文を使うことによって、 JAR ファイルや Python, JavaScript のモジュールが登録できます。 JAR ファイルとモジュールはローカルファイルシステムに置くこともできますし、 HDFS や Amazon S3 のようなリモートの分散ファイルシステムに置くこともできます (<a href="start.html#pig-scripts">Pig スクリプト</a> を参照してください) 。</p>
    
-   <p id="register-glob">Additionally, JAR files stored in local file systems can be specified as a glob pattern using “*”. Pig will search for matching jars in the local file system, either the relative path (relative to your working directory) or the absolute path. Pig will pick up all JARs that match the glob.</p>
+   <p id="register-glob">また、 JAR ファイルがローカルファイルシステムにある場合は、 "*" を使ったグロブパターンで指定することもできます。相対パス (作業ディレクトリ基準) 、絶対パスいずれであっても、あてはまる JAR が登録されます。</p>
    
-   <p><strong>Command Line</strong></p>
-   <p>You can register additional files (to use with your Pig script) via the command line using the -Dpig.additional.jars option. 
-For more information see <a href="udf.html">User Defined Functions</a>.</p>
+   <p><strong>コマンドライン</strong></p>
+   <p>スクリプト内で使うファイルは、コマンドラインの -Dpig.additional.jars オプションで登録することもできます。</p>
    </section>
    
    <section>
-   <title>Examples</title>
-<p>In this example REGISTER states that the JavaScript module, myfunc.js, is located in the /src directory.</p>
+   <title>例</title>
+<p>次の例では、 REGISTER 文を使って JavaScript のモジュール /src/myfunc.js を登録しています。</p>
 <source>
 /src $ java -jar pig.jar –
 
@@ -7926,17 +7925,17 @@ A = LOAD 'students';
 B = FOREACH A GENERATE myfunc.MyEvalFunc($0);
 </source>
    
-<p>In this example additional JAR files are registered via the command line.</p>
+<p>次の例では、コマンドラインから JAR ファイルを登録しています。</p>
 <source>
 pig -Dpig.additional.jars=my.jar:your.jar script.pig
 </source>
 
-<p>In this example a JAR file stored in HDFS is registered.</p>
+<p>次の例では、 HDFS 上の JAR ファイルを登録しています (訳注: <em>この例は完全に間違っています！</em>) 。</p>
 <source>
 java -cp pig.jar org.apache.pig.Main  hdfs://nn.mydomain.com:9020/myscripts/script.pig
 </source>
 
-<p>This example shows how to specify a glob pattern using either a relative path or an absolute path.</p>
+<p>次の例では、グロブパターンで相対パス・絶対パス上の JAR ファイルを登録しています。</p>
 <source>
 register /homes/user/pig/myfunc*.jar
 register count*.jar
