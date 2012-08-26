@@ -6953,10 +6953,10 @@ e = sample d 1000/num_rows;
    
    <section>
    <title>SPLIT</title>
-   <p>Partitions a relation into two or more relations.</p>
+   <p>関係を複数に分割します。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -6966,14 +6966,14 @@ e = sample d 1000/num_rows;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias</p>
             </td>
             <td>
-               <p>The name of a relation.</p>
+               <p>関係の名前。</p>
             </td>
          </tr>
          <tr>
@@ -6981,7 +6981,7 @@ e = sample d 1000/num_rows;
                <p>INTO</p>
             </td>
             <td>
-               <p>Required keyword.</p>
+               <p>必須キーワード。</p>
             </td>
          </tr>
          <tr>
@@ -6989,7 +6989,7 @@ e = sample d 1000/num_rows;
                <p>IF</p>
             </td>
             <td>
-               <p>Required keyword.</p>
+               <p>必須キーワード。</p>
             </td>
          </tr>
          <tr>
@@ -6997,7 +6997,7 @@ e = sample d 1000/num_rows;
                <p>expression</p>
             </td>
             <td>
-               <p>An expression.</p>
+               <p>式。</p>
             </td>
          </tr> 
            <tr>
@@ -7005,28 +7005,26 @@ e = sample d 1000/num_rows;
                <p>OTHERWISE</p>
             </td>
             <td>
-               <p>Optional keyword. Designates a default relation.</p>
+               <p>必須でないキーワード。どの IF 節も成り立たない場合の代入先の関係を指定します。</p>
             </td>
          </tr>
    </table></section>
    
    <section>
    <title>Usage</title>
-   <p>Use the SPLIT operator to partition the contents of a relation into two or more relations based on some expression. Depending on the conditions stated in the expression:</p>
+   <p>SPLIT 演算子は関係の中身を式の評価結果に基づいて 2 つ以上の関係に分割するために使います。式の評価結果次第で:</p>
    <ul>
       <li>
-         <p>A tuple may be assigned to more than one relation.</p>
+         <p>タプルは複数の関係に代入される場合があります。</p>
       </li>
       <li>
-         <p>A tuple may not be assigned to any relation.</p>
-         <p></p>
-         <p></p>
+         <p>タプルはどの関係にも代入されない場合があります。</p>
       </li>
    </ul></section>
    
    <section>
-   <title>Example</title>
-   <p>In this example relation A is split into three relations, X, Y, and Z.</p>
+   <title>例</title>
+   <p>次の例では、関係 A を 3 つの関係 X, Y, Z に分割しています。</p>
 <source>
 A = LOAD 'data' AS (f1:int,f2:int,f3:int);
 
@@ -7052,16 +7050,14 @@ DUMP Z;
 
 
       <section>
-   <title>Example</title>
-   <p>In this example, the SPLIT and FILTER statements are essentially equivalent. 
-   However, because SPLIT is implemented as "split the data stream and then apply filters" the 
-  SPLIT statement is more expensive than the FILTER statement because Pig needs to filter and store two data streams.</p>
+   <title>例</title>
+   <p>次の例で、 SPLIT と FILTER は同じ事を行なっています。ただし、 SPLIT は「データストリームを分割してフィルタを適用する」という風に実装されており、 2 つのデータストリームに対してフィルタを適用する必要があるため、 FILTER よりも非効率的です。</p>
    <source>
 SPLIT input_var INTO output_var IF (field1 is not null), ignored_var IF (field1 is null);  
--- where ignored_var is not used elsewhere
+-- ignored_var は他に使われていないものとする
    
 output_var = FILTER input_var BY (field1 is not null);
-   </source>
+</source>
       </section>
    </section>
 
