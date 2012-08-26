@@ -7930,9 +7930,9 @@ B = FOREACH A GENERATE myfunc.MyEvalFunc($0);
 pig -Dpig.additional.jars=my.jar:your.jar script.pig
 </source>
 
-<p>次の例では、 HDFS 上の JAR ファイルを登録しています (訳注: <em>この例は完全に間違っています！</em>) 。</p>
+<p>次の例では、 HDFS 上の JAR ファイルを登録しています。</p>
 <source>
-java -cp pig.jar org.apache.pig.Main  hdfs://nn.mydomain.com:9020/myscripts/script.pig
+pig -Dpig.additional.jars=hdfs://nn.mydomain.com:9020/myjars/my.jar script.pig
 </source>
 
 <p>次の例では、グロブパターンで相対パス・絶対パス上の JAR ファイルを登録しています。</p>
