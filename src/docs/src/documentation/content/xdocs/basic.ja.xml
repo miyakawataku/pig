@@ -1383,7 +1383,7 @@ D = FOREACH B GENERATE T.name, [25#5.6], {(1, 5, 18)};
          <p>任意の Pig データ型 (単純データ型および複合データ型) の値</p>
       </li>
       <li>
-         <p>任意の PIg 演算子 (算術演算子、比較演算子、 null, 条件演算子、符号演算子、キャスト演算子)</p>
+         <p>任意の Pig 演算子 (算術演算子、比較演算子、 null, 条件演算子、符号演算子、キャスト演算子)</p>
       </li>
       <li>
          <p>任意の Pig 組み込み関数</p>
@@ -7511,15 +7511,15 @@ DUMP U;
    
     <!-- UDF STATEMENTS --> 
    <section id="udf-statements">
-   <title>UDF Statements</title>
+   <title>UDF 関係の文</title>
    
 <!-- ======================================================== -->
    <section id="define-udfs">
-   <title>DEFINE (UDFs, streaming)</title>
-   <p>Assigns an alias to a UDF or streaming command.</p>
+   <title>DEFINE (UDF, ストリーミング)</title>
+   <p>UDF とストリーミングコマンドに別名を割り当てます。</p>
    
    <section>
-   <title>Syntax: UDF and streaming</title>
+   <title>文法: UDF とストリーミング</title>
    <table>
       <tr> 
             <td>
@@ -7530,14 +7530,14 @@ DUMP U;
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias</p>
             </td>
             <td>
-               <p>The name for a UDF function or the name for a streaming command (the cmd_alias for the <a href="#STREAM">STREAM</a> operator). </p>
+               <p>UDF あるいはストリーミングコマンドにつける名前 (<a href="#stream">STREAM</a> 演算子における cmd_alias) 。</p>
             </td>
          </tr>
          <tr>
@@ -7545,8 +7545,8 @@ DUMP U;
                <p>function</p>
             </td>
             <td>
-            <p>For use with functions.</p>
-               <p>The name of a UDF function. </p>
+            <p>UDF 用。</p>
+               <p>UDF の名前。</p>
             </td>
          </tr>
          <tr>
@@ -7554,13 +7554,13 @@ DUMP U;
                <p>`command`</p>
             </td>
             <td>
-            <p>For use with streaming.</p>
-               <p>A command, including the arguments, enclosed in back tics (where a command is anything that can be executed).</p>
-               <p>The clauses (input, output, ship, cache, stderr) are described below. Note the following:</p>
+            <p>ストリーミングコマンド用。</p>
+               <p>引数込みのコマンド。バッククオートでくくります。</p>
+               <p>input, output, ship, cache, stderr の各節については、下で詳説していますが、次のことに注意してください:</p>
                <ul>
-                  <li>All clauses are optional.</li>
-				  <li>The clauses can be specified in any order (for example, stderr can appear before input)</li>
-				  <li>Each clause can be specified at most once (for example, multiple inputs are not allowed)</li>
+                  <li>すべての節は省略可能です。</li>
+				  <li>これらの節はどんな順番でも指定できます (たとえば、 stderr が input の前に来ても構いません) 。</li>
+				  <li>それぞれの節が指定できるのは一度までです (たとえば、複数の input 節を指定することはできません) 。</li>
 				</ul>
             </td>
          </tr>
@@ -7569,21 +7569,20 @@ DUMP U;
                <p>input</p>
             </td>
             <td>
-                <p>For use with streaming.</p>
+                <p>ストリーミングコマンド用。</p>
                <p>INPUT ( {stdin | 'path'} [USING serializer] [, {stdin | 'path'} [USING serializer] …] )</p>
-               <p>Where:</p>
                <ul>
                   <li>
-                     <p>INPUT – Keyword.</p>
+                     <p>INPUT - キーワード。</p>
                   </li>
                   <li>
-                     <p>'path' – A file path, enclosed in single quotes.</p>
+                     <p>'path' - 単一引用符にくくったファイルパス。</p>
                   </li>
                   <li>
-                     <p>USING – Keyword.</p>
+                     <p>USING - キーワード。</p>
                   </li>
                   <li>
-                     <p>serializer – PigStreaming is the default serializer. </p>
+                     <p>serializer - デフォルトの直列化関数は PigStreaming です。</p>
                   </li>
                </ul>
             </td>
@@ -7593,21 +7592,20 @@ DUMP U;
                <p>output</p>
             </td>
             <td>
-            <p>For use with streaming.</p>
+            <p>ストリーミングコマンド用。</p>
                <p>OUTPUT ( {stdout | stderr | 'path'} [USING deserializer] [, {stdout | stderr | 'path'} [USING deserializer] …] )</p>
-               <p>Where:</p>
                <ul>
                   <li>
-                     <p>OUTPUT – Keyword.</p>
+                     <p>OUTPUT - キーワード。</p>
                   </li>
                   <li>
-                     <p>'path' – A file path, enclosed in single quotes.</p>
+                     <p>'path' - 単一引用符にくくったファイルパス。</p>
                   </li>
                   <li>
-                     <p>USING – Keyword.</p>
+                     <p>USING - キーワード。</p>
                   </li>
                   <li>
-                     <p>deserializer – PigStreaming is the default deserializer. </p>
+                     <p>deserializer - デフォルトの非直列化関数は PigStreaming です。</p>
                   </li>
                </ul>
             </td>
@@ -7617,15 +7615,14 @@ DUMP U;
                <p id="ship">ship</p>
             </td>
             <td>
-            <p>For use with streaming.</p>
+            <p>ストリーミングコマンド用。</p>
                <p>SHIP('path' [, 'path' …])</p>
-               <p>Where:</p>
                <ul>
                   <li>
-                     <p>SHIP – Keyword.</p>
+                     <p>SHIP - キーワード。</p>
                   </li>
                   <li>
-                     <p>'path' – A file path, enclosed in single quotes.</p>
+                     <p>'path' - 単一引用符にくくったファイルパス。</p>
                   </li>
                </ul>
             </td>
@@ -7635,15 +7632,14 @@ DUMP U;
                <p id="cache">cache</p>
             </td>
             <td>
-            <p>For use with streaming.</p>
+            <p>ストリーミングコマンド用。</p>
                <p>CACHE('dfs_path#dfs_file' [, 'dfs_path#dfs_file' …])</p>
-               <p>Where:</p>
                <ul>
                   <li>
-                     <p>CACHE – Keyword.</p>
+                     <p>CACHE - キーワード。</p>
                   </li>
                   <li>
-                     <p>'dfs_path#dfs_file' – A file path/file name on the distributed file system, enclosed in single quotes. Example: '/mydir/mydata.txt#mydata.txt'</p>
+                     <p>'dfs_path#dfs_file' - 単一引用符にくくったファイルパスとファイル名。例: '/mydir/mydata.txt#mydata.txt'</p>
                   </li>
                </ul>
             </td>
@@ -7653,43 +7649,42 @@ DUMP U;
                <p>stderr</p>
             </td>
            <td>
-            <p>For use with streaming.</p>
+            <p>ストリーミングコマンド用。</p>
             <p>STDERR( '/dir') or STDERR( '/dir' LIMIT n)</p>
-             <p>Where:</p>
-             <ul><li>'/dir' is the log directory, enclosed in single quotes.</li></ul>
-             <ul><li>(optional) LIMIT n is the error threshold where n is an integer value. If not specified, the default error threshold is unlimited.</li></ul>
+             <ul><li>'/dir' は単一引用符にくくったログディレクトリです。</li>
+             <li>(省略可能) LIMIT n (n は整数) はエラーの閾値を指定します。指定しない場合、デフォルトの閾値は無制限です。</li></ul>
             </td>
          </tr>
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the DEFINE statement to assign a name (alias) to a UDF function or to a streaming command.</p>
-   <p>Use DEFINE to specify a UDF function when:</p>
+   <title>用法</title>
+   <p>DEFINE 文は UDF やストリーミングコマンドに名前 (別名) をつけるために使います。</p>
+   <p>次のような場合に、 UDF に対して DEFINE 文を使います:</p>
    <ul>
       <li>
-         <p>The function has a long package name that you don't want to include in a script, especially if you call the function several times in that script.</p>
+         <p>UDF のパッケージ名が長く、スクリプト中に書き下したくない場合。特に、何回もその関数を呼び出す場合。</p>
       </li>
       <li>
-         <p>The constructor for the function takes string parameters. If you need to use different constructor parameters for different calls to the function you will need to create multiple defines – one for each parameter set.</p>
+         <p>UDF のコンストラクタが文字列の引数を取る場合。 UDF の呼び出しごとにコンストラクタの引数を変えたい場合は、引数セットごとに DEFINE を行う必要があります。</p>
       </li>
    </ul>
-   <p>Use DEFINE to specify a streaming command when: </p>
+   <p>次のような場合に、ストリーミングコマンドに対して DEFINE 文を使います:</p>
    <ul>
    <li>
-   <p>The streaming command specification is complex.</p>
+   <p>ストリーミングコマンドが複雑な場合。</p>
    </li>
       <li>
-   <p>The streaming command specification requires additional parameters (input, output, and so on).</p>
+   <p>ストリーミングコマンドが追加の引数を取る場合 (input, output 等) 。</p>
    </li>
    </ul>
    
    
    <section>
-   <title>About Input and Output</title>
-   <p>Serialization is needed to convert data from tuples to a format that can be processed by the streaming application. Deserialization is needed to convert the output from the streaming application back into tuples. PigStreaming is the default serialization/deserialization function.</p>
+   <title>入力と出力について</title>
+   <p>直列化は、ストリーミングプログラムが扱えるようにデータを整形するために必要です。非直列化は、ストリーミングプログラムの出力をタプルに戻すために必要です。デフォルトの直列化・非直列化関数は PigStreaming です。</p>
    
-<p>Streaming uses the same default format as PigStorage to serialize/deserialize the data. If you want to explicitly specify a format, you can do it as show below (see more examples in the Examples: Input/Output section).  </p> 
+<p>ストリーミングはデータを直列化・非直列化するのに、デフォルトで PigStorage を使います。デフォルトを使うのでなく、明示的に書式を指定したい場合は、次のようにしてください (これ以外の例については「入力と出力の例」節を参照してください) 。</p> 
 
 <source>
 DEFINE CMD `perl PigStreaming.pl - nameMap` input(stdin using PigStreaming(',')) output(stdout using PigStreaming(','));
@@ -7697,98 +7692,99 @@ A = LOAD 'file';
 B = STREAM B THROUGH CMD;
 </source>  
 
-<p>If you need an alternative format, you will need to create a custom serializer/deserializer by implementing the following interfaces.</p>
+<p>デフォルトでない書式が必要な場合は、次のインタフェースを実装して自前の直列化・非直列化関数を作る必要があります。</p>
 
 <source>
 interface PigToStream {
 
-        /**
-         * Given a tuple, produce an array of bytes to be passed to the streaming
-         * executable.
-         */
-        public byte[] serialize(Tuple t) throws IOException;
-    }
+    /**
+     * タプルを受け取って、ストリーミングプログラムに渡すためのバイト列を戻します。
+     */
+    public byte[] serialize(Tuple t) throws IOException;
+}
 
-    interface StreamToPig {
+interface StreamToPig {
 
-        /**
-         *  Given a byte array from a streaming executable, produce a tuple.
-         */
-        public Tuple deserialize(byte[]) throws IOException;
+    /**
+     *  ストリーミングプログラムからバイト列を受け取って、タプルを戻します。
+     */
+    public Tuple deserialize(byte[]) throws IOException;
 
-        /**
-         * This will be called on the front end during planning and not on the back
-         * end during execution.
-         *
-         * @return the {@link LoadCaster} associated with this object.
-         * @throws IOException if there is an exception during LoadCaster
-         */
-        public LoadCaster getLoadCaster() throws IOException;
-    }
+    /**
+     * 実行時ではなく、実行計画作成時に呼び出されます。
+     *
+     * @return the {@link LoadCaster} associated with this object.
+     * @return オブジェクトに関連付けられた {@link LoadCaster} 。
+     * @throws IOException LoadCaster を取得する際に例外が起きた場合。
+     */
+    public LoadCaster getLoadCaster() throws IOException;
+}
 </source>  
    
    </section>
    
    <section id="ship-about">
-   <title>About Ship </title>
-   <p>Use the ship option to send streaming binary and supporting files, if any, from the client node to the compute nodes. Pig does not automatically ship dependencies; it is your responsibility to explicitly specify all the dependencies and to make sure that the software the processing relies on (for instance, perl or python) is installed on the cluster. Supporting files are shipped to the task's current working directory and only relative paths should be specified. Any pre-installed binaries should be specified in the PATH. </p>
-   <p>Only files, not directories, can be specified with the ship option. One way to work around this limitation is to tar all the dependencies into a tar file that accurately reflects the structure needed on the compute nodes, then have a wrapper for your script that un-tars the dependencies prior to execution.</p>
-   <p>Note that the ship option has two components: the source specification, provided in the ship( ) clause, is the view of your machine; the command specification is the view of the actual cluster. The only guarantee is that the shipped files are available in the current working directory of the launched job and that your current working directory is also on the PATH environment variable. </p>
-   <p>Shipping files to relative paths or absolute paths is not supported since you might not have permission to read/write/execute from arbitrary paths on the clusters.</p>
+   <title>ship オプションについて</title>
+   <p>ship オプションはストリーミングプログラムと補助ファイルを、クライアントノードから計算ノードに送り込むために使います。 Pig が依存先のファイルを自動的に移送することはありません。ユーザは必要な依存先ファイルを明示的に指定し、必要なソフトウェア (Perl や Python 等) をクラスタにインストールする必要があります。 ship 節で指定した補助ファイルはタスクの作業ディレクトリに移送されます。また、 ship 節では相対パスを指定するべきです。あらかじめインストールされている実行ファイル (Perl や Python 等) は PATH 環境変数で指定されている必要があります。</p>
+   <p>ship オプションで指定できるのはディレクトリではなくファイルだけです。この制限を回避するには、すべての依存先ファイルをディレクトリツリーごと tar に固めて、スクリプト中にあらかじめ tar を展開するラッパを仕込むことです。</p>
+   <p>ship オプションが実質的に 2 つの部品をからなることに注意してください。 ship( ) 節ではクライアントノード上でのファイルパスを指定します。 command 節ではクラスタ上でのファイルパスを指定します。移送されたファイルはタスクの作業ディレクトリに展開され、また作業ディレクトリは PATH 環境変数に含まれます。</p>
+   <p>ファイルの移送先を相対パス・絶対パスで指定することはできません (訳注: 常に作業ディレクトリ上に移送されます) 。クラスタ上でユーザが任意のパスについて適切な権限 (read, write, execute) を持っているとは限らないからです。</p>
    
-    <p>Note the following:</p>
+    <p>次のことに注意してください:</p>
 	<ul>
 		<li>
-			<p>It is safe only to ship files to be executed from the current working directory on the task on the cluster.</p>
+			<p>タスクの作業ディレクトリからプログラムが実行できるようにファイルを移送することが安全なやり方です。</p>
 			<source>
 OP = stream IP through 'script';
-or
+
+あるいは
+
 DEFINE CMD 'script' ship('/a/b/script');
-OP = stream IP through 'CMD';
+OP = stream IP through CMD;
 </source>
 		</li>
 	    <li>
-			<p>Shipping files to relative paths or absolute paths is undefined and mostly will fail since you may not have permissions to read/write/execute from arbitraty paths on the actual clusters. </p>
+			<p>ファイルを相対パス・絶対パスで指定した場所に移送することはサポートされておらず、大抵の場合失敗します。クラスタ上で適切な権限 (read, write, execute) を持っていることは期待できないからです。</p>
 	    </li>
 	</ul>   
    </section>
    
    
    <section id="cache-about">
-   <title>About Cache</title>
-   <p>The ship option works with binaries, jars, and small datasets. However, loading larger datasets at run time for every execution can severely impact performance. Instead, use the cache option to access large files already moved to and available on the compute nodes. Only files, not directories, can be specified with the cache option.</p>
+   <title>cache オプションについて</title>
+   <p>ship オプションは実行プログラム、 JAR ファイル、小さなデータセットの場合にはよく機能します。しかし、大きなデータセットを実行のたびにロードすることは、性能に深刻な影響を与えます。このような場合は、 ship オプションの代わりに cache オプションを使うことで、あらかじめ計算ノード上に移送されたファイルにアクセスするようにすることができます。 cache オプションで指定できるのは、ディレクトリではなくファイルだけです。</p>
    </section>
    
    <section id="autoship">
-   <title>About Auto-Ship</title>
-   <p>If the ship and cache options are not specified, Pig will attempt to auto-ship the binary in the following way:</p>
+   <title>自動移送について</title>
+   <p>ship オプションも cache オプションの指定しないときには、 Pig は次の順序で自動移送を試みます。</p>
    <ul>
 		<li>
-            <p>If the first word on the streaming command is perl or python, Pig assumes that the binary is the first non-quoted string it encounters that does not start with dash.</p>
+            <p>コマンドの最初の単語が perl あるいは python である場合、引用符にくくられておらず、ダッシュで始まっていない最初の引数を実行ファイル名とみなします。</p>
 		</li>
 		<li>
-			<p>Otherwise, Pig will attempt to ship the first string from the command line as long as it does not come from <code>/bin, /usr/bin, /usr/local/bin</code>. Pig will determine this by scanning the path if an absolute path is provided or by executing  <code>which</code>. The paths can be made configurable using the <a href="cmds.html#set">set stream.skippath</a> option (you can use multiple set commands to specify more than one path to skip). </p>
+			<p>それ以外の場合、コマンドの最初の単語が <code>/bin, /usr/bin, /usr/local/bin</code> 上のファイルでない限り、このファイルを移送しようと試みます。最初の単語が絶対パスで与えられた場合にはそのパスによって、それ以外の場合は <code>which</code> コマンドの結果にもとづいてこれを判断します。移送対象外のパスは <a href="cmds.html#set">set stream.skippath</a> オプションで設定できます。複数のパスを移送対象外にするためには、複数回 set コマンドを実行します。</p>
 		</li>
 	</ul>
-	<p>If you don't supply a DEFINE for a given streaming command, then auto-shipping is turned off.</p>
-	<p>Note the following:</p>
+	<p>DEFINE を用いず直接ストリーミングコマンドを指定する場合は、自動移送は行われません。</p>
+	<p>次のことに注意してください:</p>
 	<ul>
 		<li>
-			<p>If Pig determines that it needs to auto-ship an absolute path it will not ship it at all since there is no way to ship files to the necessary location (lack of permissions and so on). </p>
+			<p>絶対パスで与えられたファイルが自動移送の対象だと判断された場合、結局移送は行われません。権限不足等のため、必要な場所にファイルを移送する方法がないためです。</p>
 			<source>
 OP = stream IP through `/a/b/c/script`;
-or 
+あるいは
 OP = stream IP through `perl /a/b/c/script.pl`;
 </source>
 		</li>
 	    <li>
-			<p>Pig will not auto-ship files in the following system directories (this is determined by executing 'which &lt;file&gt;' command). </p>
+			<p>Pig は次のシステムディレクトリ上のファイルを自動移送の対象にしません。これは 'which &lt;file&gt;' コマンドにもとづいて決定されます。</p>
 			<source>
 /bin /usr/bin /usr/local/bin /sbin /usr/sbin /usr/local/sbin
 </source>
 		</li>
 	    <li>
-			<p>To auto-ship, the file in question should be present in the PATH. So if the file is in the current working directory then the current working directory should be in the PATH. </p>
+			<p>自動移送の対象のファイルは PATH 上に存在する必要があります。したがって、ファイルが作業ディレクト上にある場合は、作業ディレクトリが PATH に入っている必要があります。</p>
 		</li>
 	</ul>
    
@@ -7796,20 +7792,20 @@ OP = stream IP through `perl /a/b/c/script.pl`;
       </section>
    
  <section>
- <title>Examples: Input/Output</title>
- <p>In this example PigStreaming is the default serialization/deserialization function. The tuples from relation A are converted to tab-delimited lines that are passed to the script.</p>
+ <title>入力と出力の例</title>
+ <p>次の例では、デフォルトの直列化・非直列化関数として PigStreaming を使っています。関係 A のタプルはタブ区切りの行としてスクリプトに渡されます。</p>
 <source>
 X = STREAM A THROUGH `stream.pl`;
 </source>
    
-   <p>In this example PigStreaming is used as the serialization/deserialization function, but a comma is used as the delimiter.</p>
+   <p>次の例でも PigStreaming を直列化・非直列化関数として使っていますが、フィールド区切りとしてカンマを使っています。</p>
 <source>
 DEFINE Y 'stream.pl' INPUT(stdin USING PigStreaming(',')) OUTPUT (stdout USING PigStreaming(','));
 
 X = STREAM A THROUGH Y;
 </source>
    
-   <p>In this example user defined serialization/deserialization functions are used with the script.</p>
+   <p>次の例では、ユーザ定義の直列化・非直列化関数を使ってスクリプトとデータの受け渡しを行なっています。</p>
 <source>
 DEFINE Y 'stream.pl' INPUT(stdin USING MySerializer) OUTPUT (stdout USING MyDeserializer);
 
@@ -7818,15 +7814,15 @@ X = STREAM A THROUGH Y;
    </section>
    
    <section>
-   <title>Examples: Ship/Cache</title>
-   <p>In this example ship is used to send the script to the cluster compute nodes.</p>
+   <title>ship オプションと cache オプションの例</title>
+   <p>次の例では、クラスタの計算ノードにスクリプトを送り込むために ship オプションを使っています。</p>
 <source>
 DEFINE Y 'stream.pl' SHIP('/work/stream.pl');
 
 X = STREAM A THROUGH Y;
 </source>
    
-   <p>In this example cache is used to specify a file located on the cluster compute nodes.</p>
+   <p>次の例では、クラスタの計算ノード上のファイルを指定するために cache オプションを使っています。</p>
 <source>
 DEFINE Y 'stream.pl data.gz' SHIP('/work/stream.pl') CACHE('/input/data.gz#data.gz');
 
@@ -7836,8 +7832,8 @@ X = STREAM A THROUGH Y;
    
  
      <section>
-   <title>Example: DEFINE with STREAM</title>
-<p>In this example a command is defined for use with the <a href="#STREAM">STREAM</a> operator.</p>
+   <title>DEFINE と STREAM の例</title>
+<p>次の例では、 <a href="#stream">STREAM</a> 演算子で使うためにコマンドを定義しています。</p>
 <source>
 A = LOAD 'data';
 
@@ -7848,16 +7844,19 @@ B = STREAM A through mycmd;
 </section>   
    
    <section>
-   <title>Examples: Logging</title>
-   <p>In this example the streaming stderr is stored in the _logs/&lt;dir&gt; directory of the job's output directory. Because the job can have multiple streaming applications associated with it, you need to ensure that different directory names are used to avoid conflicts. Pig stores up to 100 tasks per streaming job.</p>
+   <title>ログの例</title>
+   <p>次の例では、ストリーミングプログラムの stderr はジョブの出力ディレクトリ中の _logs/&lt;dir&gt; ディレクトリに保管されます。ジョブが複数のストリーミングプログラムを起動する場合は、ディレクトリ名の衝突を避ける必要があります。この例では、 Pig は最大 100 個のタスクの stderr を保存します。</p>
 <source>
 DEFINE Y 'stream.pl' stderr('&lt;dir&gt;' limit 100);
 
 X = STREAM A THROUGH Y;
 </source>
+</section>
 
+<section>
+<title>DEFINE と UDF の例</title>
    
-<p>In this example a function is defined for use with the FOREACH …GENERATE operator.</p>
+<p>次の例では、 FOREACH...GENERATE 演算子で用いるために関数を定義しています。</p>
 <source>
 REGISTER /src/myfunc.jar
 
