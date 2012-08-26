@@ -7357,10 +7357,10 @@ X = STREAM A THROUGH `stream.pl` as (f1:int, f2:int, f3:int);
    
    <section id="union">
    <title>UNION</title>
-   <p>Computes the union of two or more relations.</p>
+   <p>2 つ以上の関係の和演算を行います。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -7370,7 +7370,7 @@ X = STREAM A THROUGH `stream.pl` as (f1:int, f2:int, f3:int);
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        
       <tr>
@@ -7378,7 +7378,7 @@ X = STREAM A THROUGH `stream.pl` as (f1:int, f2:int, f3:int);
                <p>alias</p>
             </td>
             <td>
-               <p>The name of a relation.</p>
+               <p>関係の名前。</p>
             </td>
       </tr>
       
@@ -7387,47 +7387,45 @@ X = STREAM A THROUGH `stream.pl` as (f1:int, f2:int, f3:int);
                <p id="onschema">ONSCHEMA </p>  
             </td>
             <td>
-               <p>Use the ONSCHEMA clause to base the union on named fields (rather than positional notation). 
-               All inputs to the union must have a non-unknown (non-null) <a href="#schemas">schema</a>.</p>
+	       <p>フィールドの位置ではなく名前に基づいて UNION を行う場合に ONSCHEMA を指定します。この場合、入力となるすべての関係は既知 (非 null) の<a href="#Schemas">スキーマ</a>を持っている必要があります。</p>
             </td>
          </tr>
    </table>
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the UNION operator to merge the contents of two or more relations. The UNION operator:</p>
+   <title>用法</title>
+   <p>UNION 演算子は 2 つ以上の関係をマージするために使います。</p>
    <ul>
       <li>
-         <p>Does not preserve the order of tuples. Both the input and output relations are interpreted as unordered bags of tuples.</p>
+         <p>入力におけるタプルの順序を保持しません。入力の関係、出力の関係いずれも、整列されていないバッグとして解釈されます。</p>
       </li>
       <li>
-         <p>Does not ensure (as databases do) that all tuples adhere to the same schema or that they have the same number of fields. In a typical scenario, however, this should be the case; therefore, it is the user's responsibility to either (1) ensure that the tuples in the input relations have the same schema or (2) be able to process varying tuples in the output relation.</p>
+         <p>データベースとは異なり、すべてのタプルが同じスキーマを持ち、同じ数のフィールドを持っていることを確認しません。しかし、典型的なシナリオでは、すべてのタプルが同じスキーマ、同じ数のフィールドを持っていて欲しいはずです。したがって、 Pig のユーザは (1) 入力となる関係中のタプルが同じスキーマであること、あるいは (2) 後続の処理が異なるスキーマのタプルを扱えること、に気を払う責任があります。</p>
       </li>
       <li>
-         <p>Does not eliminate duplicate tuples.</p>
+         <p>重複するタプルを排除しません。</p>
       </li>
    </ul>
    <p></p> 
-   <p><strong>Schema Behavior</strong></p>
-   <p>The behavior of schemas for UNION (positional notation / data types) and UNION ONSCHEMA (named fields / data types) is the same, except where noted.</p>
+   <p><strong>スキーマの振る舞い</strong></p>
+   <p>UNION (位置 / データ型) と UNION ONSCHEMA (フィールド名 / データ型) におけるスキーマの振る舞いは、特記する場合を除いて同一です。</p>
 
-<p>Union on relations with two different sizes result in a null schema (union only): </p>
+<p>異なった数のフィールドを持つ関係同士の UNION (位置による UNION のみ) の結果は、スキーマが null になります。</p>
 <source>
 A: (a1:long, a2:long) 
 B: (b1:long, b2:long, b3:long) 
 A union B: null 
 </source>
   
-<p>Union columns with incompatible types result in a bytearray type: </p>
+<p>入力の関係同士で、対応する列が異なる型を持つ場合、結果の型は bytearray 型になります。</p>
 <source>
 A: (a1:long, a2:long) 
 B: (b1:(b11:long, b12:long), b2:long) 
 A union B: (a1:bytearray, a2:long) 
 </source>
 
-<p>Union columns of compatible type will produce an "escalate" type. 
-The priority is:</p>
+<p>入力の関係同士で対応する列が互換性のある型の場合、型の昇格が起こります。型の優先順位は次のとおりです。</p>
 <ul>
 <li>double &gt; float &gt; long &gt; int &gt; bytearray</li>
 <li>tuple|bag|map|chararray &gt; bytearray</li>
@@ -7438,20 +7436,20 @@ B: (b1:float, b2:chararray, b3:bytearray)
 A union B: (a1:float, a2:chararray, a3:int) 
 </source>
 
-<p>Union of different inner types results in an empty complex type: </p>
+<p>複合型の内部型が異なる場合、結果は空の複合型になります。</p>
 <source>
 A: (a1:(a11:long, a12:int), a2:{(a21:charray, a22:int)}) 
 B: (b1:(b11:int, b12:int), b2:{(b21:int, b22:int)}) 
 A union B: (a1:(), a2:{()}) 
 </source>  
 
-<p>The alias of the first relation is always taken as the alias of the unioned relation field. </p>  
+<p>1 番目の関係におけるフィールド名が、結果の関係におけるフィールド名になります。</p>  
    
 </section>
 
    <section>
-   <title>Example</title>
-   <p>In this example the union of relation A and B is computed.</p>
+   <title>例</title>
+   <p>次の例では、関係 A と関係 B の和を計算しています。</p>
 <source>
 A = LOAD 'data' AS (a1:int,a2:int,a3:int);
 
@@ -7478,8 +7476,8 @@ DUMP X;
    </section>
    
    <section>
-   <title>Example</title>
-   <p>This example shows the use of ONSCHEMA.</p>
+   <title>例</title>
+   <p>次の例は ONSCHEMA を使っています。</p>
 <source>
 L1 = LOAD 'f1' USING (a : int, b : float);
 DUMP L1;
