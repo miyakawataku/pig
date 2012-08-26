@@ -248,20 +248,20 @@
  <!-- CASE SENSITIVITY -->
    <section id="case-sensitivity">
    <title>大文字・小文字の区別</title>
-   <p>関係やフィールドの名前 (別名) では大文字・小文字を区別します。 Pig Latin の関数では大文字・小文字を区別します。パラメータの名前 (<a href="cont.html#parameter-sub">パラメータ置換</a>を参照) と Pig Latin のキーワード (<a href="#reserved-keywords">予約語</a> を参照) では大文字・小文字を区別しません。</p>
+   <p>関係やフィールドの名前 (別名) は大文字・小文字を区別します。 Pig Latin の関数は大文字・小文字を区別します。パラメータの名前 (<a href="cont.html#parameter-sub">パラメータ置換</a>を参照) と Pig Latin のキーワード (<a href="#reserved-keywords">予約語</a> を参照) は大文字・小文字を区別しません。</p>
    <p>下の例では、次のようになります:</p>
    <ul>
       <li>
-         <p>関係の名前 (別名) A, B, C では大文字・小文字を区別します。</p>
+         <p>関係の名前 (別名) A, B, C は大文字・小文字を区別します。</p>
       </li>
       <li>
-         <p>フィールドの名前 (別名) f1, f2, f3 では大文字・小文字を区別します。</p>
+         <p>フィールドの名前 (別名) f1, f2, f3 は大文字・小文字を区別します。</p>
       </li>
       <li>
-         <p>関数の名前 PigStorage, COUNT では大文字・小文字を区別します。</p>
+         <p>関数の名前 PigStorage, COUNT は大文字・小文字を区別します。</p>
       </li>
       <li>
-         <p>キーワード LOAD, USING, AS, GROUP, BY, FOREACH, GENERATE, DUMP では大文字・小文字を区別しません。つまり、それぞれ load, using, as, group, by と書くことができます。</p>
+         <p>キーワード LOAD, USING, AS, GROUP, BY, FOREACH, GENERATE, DUMP は大文字・小文字を区別しません。つまり、それぞれ load, using, as, group, by と書くことができます。</p>
       </li>
       <li>
          <p>次の例の FOREACH 文では、関係 B のフィールドを位置表記 ($0) で参照しています。</p>
