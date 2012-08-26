@@ -7207,10 +7207,10 @@ a:8,b:4,c:3
    
    <section id="stream">
    <title>STREAM</title>
-   <p>Sends data to an external script or program.</p>
+   <p>データを外部スクリプトや外部プログラムに送り込みます。</p>
       
       <section>
-      <title>Syntax</title>
+      <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -7220,14 +7220,14 @@ a:8,b:4,c:3
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>alias</p>
             </td>
             <td>
-               <p>The name of a relation.</p>
+               <p>関係の名前。</p>
             </td>
          </tr>
          <tr>
@@ -7235,7 +7235,7 @@ a:8,b:4,c:3
                <p>THROUGH</p>
             </td>
             <td>
-               <p>Keyword. </p>
+               <p>キーワード。</p>
             </td>
          </tr>
          <tr>
@@ -7243,7 +7243,7 @@ a:8,b:4,c:3
                <p>`command`</p>
             </td>
             <td>
-               <p>A command, including the arguments, enclosed in back tics (where a command is anything that can be executed).</p>
+               <p>コマンド。バッククオートにくくります。</p>
             </td>
          </tr>
          <tr>
@@ -7251,7 +7251,7 @@ a:8,b:4,c:3
                <p>cmd_alias</p>
             </td>
             <td>
-               <p>The name of a command created using the DEFINE operator (see <a href="#define-udfs">DEFINE (UDFs, streaming)</a>  for additional  streaming examples).</p>
+               <p>DEFINE 演算子で定義したコマンドの名前 (<a href="basic.html#define-udfs">DEFINE (UDF, ストリーミング)</a> を参照してください) 。</p>
             </td>
          </tr>
          <tr>
@@ -7259,7 +7259,7 @@ a:8,b:4,c:3
                <p>AS</p>
             </td>
             <td>
-               <p>Keyword.</p>
+               <p>キーワード。</p>
             </td>
          </tr>
          <tr>
@@ -7267,21 +7267,21 @@ a:8,b:4,c:3
                <p>schema</p>
             </td>
             <td>
-               <p>A schema using the AS keyword, enclosed in parentheses (see <a href="#schemas">Schemas</a>).</p>
+               <p>スキーマは AS キーワードの後に、括弧でくくって指定します (<a href="#Schemas">スキーマ</a> を参照してください) 。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the STREAM operator to send data through an external script or program. Multiple stream operators can appear in the same Pig script. The stream operators can be adjacent to each other or have other operations in between.</p>
-   <p>When used with a command, a stream statement could look like this:</p>
+   <title>用法</title>
+   <p>STREAM 演算子はデータを外部スクリプトや外部プログラムに送り込むために使います。 Pig スクリプトの中で複数の STREAM 演算子を使うこともできます。 STREAM 演算子同士を連続して使うこともできますし、他の演算子を挟んで使うこともできます。</p>
+   <p>コマンドを STREAM 文に直接記述する場合は、次のようになります:</p>
 <source>
 A = LOAD 'data';
 
 B = STREAM A THROUGH `stream.pl -n 5`;
 </source>
-   <p>When used with a cmd_alias, a stream statement could look like this, where mycmd is the defined alias.</p>
+   <p>DEFINE 演算子でコマンドを定義してから STREAM 演算子を使う場合は、次のようになります。</p>
 <source>
 A = LOAD 'data';
 
@@ -7292,32 +7292,32 @@ B = STREAM A THROUGH mycmd;
    </section>
    
    <section>
-   <title>About Data Guarantees</title>
-   <p>Data guarantees are determined based on the position of the streaming operator in the Pig script. </p>
+   <title>データに関する保証</title>
+   <p>外部プログラムに渡されるデータについては、 STREAM 演算子の位置次第で保証されることが変わります。</p>
    <ul>
       <li>
-         <p>Unordered data – No guarantee for the order in which the data is delivered to the streaming application. </p>
+         <p>整列されていないデータ: データの順番については何も保証されません。</p>
       </li>
       <li>
-         <p>Grouped data – The data for the same grouped key is guaranteed to be provided to the streaming application contiguously</p>
+         <p>グループ化されたデータ: 同じグループ化キーを持つデータは連続して渡されます。</p>
       </li>
       <li>
-         <p>Grouped and ordered data – The data for the same grouped key is guaranteed to be provided to the streaming application contiguously. Additionally, the data within the group is guaranteed to be sorted by the provided secondary key.</p>
+         <p>グループ化・整列されたデータ: 同じグループ化キーを持つデータは連続して渡されます。また、グループの内部で、データはセカンダリキーでソートされます。</p>
       </li>
    </ul>
-   <p>In addition to position, data grouping and ordering can be determined by the data itself. However, you need to know the property of the data to be able to take advantage of its structure.</p>
+   <p>グループ化と整列については、 STREAM 演算子の位置に加えてデータそれ自体によっても決定されます。 However, you need to know the property of the data to be able to take advantage of its structure.</p>
    </section>
    
    <section>
-   <title>Example: Data Guarantees</title>
-   <p>In this example the data is unordered.</p>
+   <title>データに関する保証の例</title>
+   <p>次の例では、データは整列化されていません。</p>
 <source>
 A = LOAD 'data';
 
 B = STREAM A THROUGH `stream.pl`;
 </source>
    
-   <p>In this example the data is grouped.</p>
+   <p>次の例では、データはグループ化されています。</p>
 <source>
 A = LOAD 'data';
 
@@ -7328,7 +7328,7 @@ C = FOREACH B FLATTEN(A);
 D = STREAM C THROUGH `stream.pl`;
 </source>
    
-   <p>In this example the data is grouped and ordered.</p>
+   <p>次の例では、データはグループ化・整列されています。</p>
 <source>
 A = LOAD 'data';
 
@@ -7344,8 +7344,8 @@ E = STREAM C THROUGH `stream.pl`;
    </section>
    
    <section>
-   <title>Example: Schemas</title>
-   <p>In this example a schema is specified as part of the STREAM statement.</p>
+   <title>スキーマの例</title>
+   <p>次の例では、 STREAM 文の中でスキーマを指定しています。</p>
 <source>
 X = STREAM A THROUGH `stream.pl` as (f1:int, f2:int, f3:int);
 </source>
