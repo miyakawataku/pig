@@ -34,7 +34,7 @@
  <p><strong>必須</strong></p>
       <p>Unix ユーザ、 Windows ユーザとも次のソフトウェアが必要です:</p>
 		<ul>
-		  <li> <strong>Hadoop 0.20.2, 020.203, 020.204,  0.20.205, 1.0.0, 1.0.1, or 0.23.0, 0.23.1</strong> - <a href="http://hadoop.apache.org/common/releases.html">http://hadoop.apache.org/common/releases.html</a> (Pig が使う Hadoop のバージョンを変えるには、 HADOOP_HOME 環境変数に Hadop をインストールしたディレクトリを設定してください。 HADOOP_HOME 環境変数を設定しない場合は、 Pig に組み込まれたバージョンが使われます。現在 Pig には Hadoop 1.0.0 が組み込まれています)</li>
+		  <li> <strong>Hadoop 0.20.2, 020.203, 020.204,  0.20.205, 1.0.0, 1.0.1, or 0.23.0, 0.23.1</strong> - <a href="http://hadoop.apache.org/common/releases.html">http://hadoop.apache.org/common/releases.html</a> (Pig が使う Hadoop のバージョンを変えるには、 HADOOP_HOME 環境変数に Hadop をインストールしたディレクトリを設定してください。 HADOOP_HOME 環境変数を設定しない場合は、 Pig に組み込まれたバージョンの Hadoop を使います。現在 Pig には Hadoop 1.0.0 が組み込まれています)</li>
 		  <li> <strong>Java 1.6</strong> - <a href="http://java.sun.com/javase/downloads/index.jsp">http://java.sun.com/javase/downloads/index.jsp</a> (JAVA_HOME 環境変数に Java インストールディレクトリを指定してください)</li>	
 		</ul>
 		<p></p>
@@ -61,18 +61,18 @@
 	<li>Apache ダウンロードミラーから新しめの安定バージョンをダウンロード
 	(<a href="http://hadoop.apache.org/pig/releases.html">Pig Releases</a> を見てください) 。</li>
 	
-    <li>ダウンロードした Pig のアーカイブを解凍して、次のことを確認:
+    <li>ダウンロードした Pig のアーカイブを解凍して、次のことを確認してください:
 	    <ul>
 	    <li>Pig を実行するためのシェルスクリプト pig が bin ディレクトリに配置されていること (/pig-n.n.n/bin/pig) 。
         Pig 実行のための環境変数についてシェルスクリプト内に説明があります。</li>
-	    <li>Pig のプロパティファイル pig.properties が conf ディレクトリ (/pig-n.n.n/conf/pig.properties) に配置されていること。他の場所に設定ファイルを置く時は、 PIG_CONF_DIR 環境変数にディレクトリを指定する必要があります。</li>
+	    <li>Pig のプロパティファイル pig.properties が conf ディレクトリ (/pig-n.n.n/conf/pig.properties) に配置されていること。他の場所に設定ファイルを置く時は、 PIG_CONF_DIR 環境変数にそのディレクトリを指定する必要があります。</li>
 	</ul>	
 	</li>
-	<li>/pig-n.n.n/bin をパスに追加。 bash, sh, ksh では export コマンドを、 tcsh, csh では setenv コマンドを使ってください。例: <br></br>
+	<li>/pig-n.n.n/bin を PATH に追加してください。 bash, sh, ksh では export コマンドを、 tcsh, csh では setenv コマンドを使ってください。例: <br></br>
 	<code>$ export PATH=/&lt;my-path-to-pig&gt;/pig-n.n.n/bin:$PATH</code>
 </li>
 <li>
-次のコマンドで、 Pig がインストールできていることを確認: <code>$ pig -help</code>
+次のコマンドで、 Pig がインストールできていることを確認してください: <code>$ pig -help</code>
 </li>
 </ol>
 
@@ -120,21 +120,21 @@
 	<title>実行モード</title> 
 <p>Pig には二種類の実行モードがあります: </p>
 <ul>
-<li><strong>ローカルモード</strong> - Pig をローカルモードで実行するのに必要なのはマシンが一台だけです。全ファイルがローカルマシンに配置され、ローカルマシン上で実行されます。ローカルモードで実行するには -x フラグをつけてください (pig -x local) 。
+<li><strong>ローカルモード</strong> - マシンが一台あれば Pig がローカルモードで実行できます。この場合、すべてのファイルがローカルマシンに配置され、ローカルマシン上で実行されます。ローカルモードで実行するには -x フラグをつけてください (pig -x local) 。
 </li>
   <li><strong>MapReduce モード</strong> - Pig を MapReduceモードで実行するには Hadoop クラスタが必要です。MapReduce モードはデフォルトのモードです。 -x フラグで MapReduce モードでの実行を指定できますが、<em>必須ではありません</em> (pig あるいは pig -x mapreduce).
 </li>
 </ul>
 <p></p>
 
-<p>どちらのモードも "pig" コマンドで実行できます (実体は Perl スクリプト bin/pig) 。または、 "java" コマンドで実行することも可能です (java -cp pig.jar ...) 。
+<p>どちらのモードも "pig" コマンドで実行できます (コマンドの実体は Perl スクリプト bin/pig です) 。また、 "java" コマンドで実行することもできます (java -cp pig.jar ...) 。
 </p>
 
 
 <section>
 <title>例</title>
 
-<p>pig コマンドでローカルモードと MapReduce モードの双方で実行する例。</p>
+<p>次の例では、ローカルモードと MapReduce モードの双方で pig コマンドを実行しています。</p>
 <source>
 /* ローカルモード */
 $ pig -x local ...
@@ -146,7 +146,7 @@ $ pig ...
 $ pig -x mapreduce ...
 </source>
 
-<p>java コマンドでローカルモードと MapReduce モードの双方で実行する例。</p>
+<p>次の例では、java コマンドを使ってローカルモードと MapReduce モードの双方で Pig を実行しています。</p>
 <source>
 /* ローカルモード */
 $ java -cp pig.jar org.apache.pig.Main -x local ...
@@ -164,12 +164,12 @@ $ java -cp pig.jar org.apache.pig.Main -x mapreduce ...
 <!-- ++++++++++++++++++++++++++++++++++ -->
 <section id="interactive-mode">
 <title>対話モード</title>
-<p>Grunt シェルは Pig の対話モードです。Grunt シェルを起動するには下記のように "pig" コマンドを実行します。 Grunt シェルでは Pig Latin 文と Pig コマンドを対話的に実行できます。
+<p>Grunt シェルは Pig の対話モードです。Grunt シェルを起動するには下記のように "pig" コマンドを実行します。 Grunt シェルでは Pig Latin 文と Pig コマンドが対話的に実行できます。
 </p>
 
 <section>
 <title>例</title>
-<p>下記の Pig Latin は /etc/passwd ファイルからすべてのユーザ ID を列挙します。はじめに /etc/passwd ファイルを作業ディレクトリにコピーしてください。次に、 "pig" コマンドで Grunt シェルを起動してください (ローカルモードあるいは MapReduce モードで) 。次に、Grunt シェルのプロンプトで Pig Latin 文を対話的に入力してください (その際、文ごとにセミコロンを忘れないように) 。 DUMP 演算子を打つと結果が端末に表示されます</p>
+<p>下記の Pig Latin は /etc/passwd ファイルからすべてのユーザ ID を列挙します。はじめに /etc/passwd ファイルを作業ディレクトリにコピーしてください。次に、 "pig" コマンドで Grunt シェルを起動してください (ローカルモードあるいは MapReduce モードで) 。次に、Grunt シェルのプロンプトで Pig Latin 文を対話的に入力してください (文ごとにセミコロンを付けてください) 。最後に DUMP 演算子を打つと結果が端末に表示されます</p>
 <source>
 grunt&gt; A = load 'passwd' using PigStorage(':'); 
 grunt&gt; B = foreach A generate $0 as id; 
@@ -202,12 +202,12 @@ grunt>
 <section id="batch-mode">
 <title>バッチモード</title>
 
-<p><a href="#pig-scripts">Pig スクリプト</a> と "pig" コマンド (ローカルモードあるいは MapReduce モード) を使って Pig をバッチモードで実行できます。</p>
+<p><a href="#pig-scripts">Pig スクリプト</a> と "pig" コマンド (ローカルモードあるいは MapReduce モード) を使うと、バッチモードでの実行ができます。</p>
 
 <section>
 <title>例</title>
 
-<p>下記の Pig スクリプト (id.pig) は /etc/passwd ファイルから全ユーザ ID を列挙します。はじめに /etc/passwd ファイルを作業ディレクトリにコピーしてください。次に、コマンドラインから Pig スクリプトを実行してください (ローカルモードあるいは MapReduce モードで) 。最後の STORE 演算子で結果がファイル (id.out) に出力されます。</p>
+<p>下記の Pig スクリプト (id.pig) は /etc/passwd ファイルから全ユーザ ID を列挙します。はじめに /etc/passwd ファイルを作業ディレクトリにコピーしてください。次に、コマンドラインから Pig スクリプトを実行してください (ローカルモードあるいは MapReduce モードで) 。最後の STORE 演算子で結果をファイル (id.out) に出力します。</p>
 <source>
 /* id.pig */
 
@@ -234,7 +234,7 @@ $ pig -x mapreduce id.pig
    <section id="pig-scripts">
 	<title>Pig スクリプト</title>
 	
-<p>Pig Latin 文と Pig コマンドは Pig スクリプトとして 1 ファイルにまとめられます。特に必要でない限り、 Pig スクリプトの拡張子は *.pig とするのがよい習慣です。</p>	
+<p>Pig Latin 文と Pig コマンドは Pig スクリプトとして 1 ファイルにまとめられます。特に理由がない限り、 Pig スクリプトの拡張子は *.pig とするのがよいでしょう。</p>	
 	
 <p>Pig スクリプトはコマンドラインからも Grunt シェルからも実行できます
 (詳しくは <a href="cmds.html#run">run</a> コマンドと <a href="cmds.html#exec">exec</a> コマンドを見てください) 。</p>
@@ -283,7 +283,7 @@ $ pig hdfs://nn.mydomain.com:9020/myscripts/script.pig
 	<title>Pig Latin 文</title>	
    <p>Pig Latin 文は Pig によるデータ処理の基本構成物です。 Pig Latin 文は<a href="basic.html#relations">関係</a>を入力に取り、別の関係を出力する演算子です (この定義は、ファイルシステムからデータを読み込む LOAD と、ファイルシステムにデータを書き出す STORE を除く、すべての Pig Latin 演算子にあてはまります) 。 Pig Latin の文は<a href="basic.html#expressions">式</a>と<a href="basic.html#Schemas">スキーマ</a>を含むことがあります。 Pig Latin の文は複数行に渡ることがあります。また、 Pig Latin の文はセミコロン (「;」) で終わる必要があります。デフォルトでは、 Pig Latin の文は<a href="perf.html#multi-query-execution">複数クエリ実行</a> で処理されます。</p>
    
-   <p>Pig Latin は通常次のように構成されます:</p>
+   <p>Pig Latin のスクリプトは通常次のように構成します:</p>
    <ul>
       <li>
          <p>LOAD 文でファイルシステムからデータを読み込む</p>
@@ -306,7 +306,7 @@ B = FOREACH A GENERATE name;
 </source> 
 </li>
 <li>
-<p>次の例は、 LOAD 文、 FOREACH 文、 DUMP 文の妥当性検証を行ったのちに、実行します。</p>
+<p>次の例は、 LOAD 文、 FOREACH 文、 DUMP 文の妥当性検証を行って、実行します。</p>
 <source>
 A = LOAD 'student' USING PigStorage() AS (name:chararray, age:int, gpa:float);
 B = FOREACH A GENERATE name;
@@ -328,16 +328,16 @@ DUMP B;
    <!-- ++++++++++++++++++++++++++++++++++ -->   
    <section id="data-work-with">
    <title>データ処理</title>
-   <p>Pig では様々な方法でデータを変換できます。まずは、次に挙げる演算子に慣れるのがよいでしょう:</p>
+   <p>Pig では様々な方法でデータ変換ができます。まずは、次の演算子に慣れるのがよいでしょう:</p>
    <ul>
       <li>
          <p>データのタプル (すなわち行) を処理するには <a href="basic.html#filter">FILTER</a> 演算子を使います。列を処理するには <a href="basic.html#foreach">FOREACH</a> 演算子を使います。</p>
       </li>
       <li>
-         <p>一つの関係の中でデータをグループ化するためには <a href="basic.html#GROUP">GROUP</a> 演算子を使います。複数の関係のデータを結合・グループ化するためには、 <a href="basic.html#COGROUP">COGROUP</a> 演算子、 <a href="basic.html#join-inner">内部 JOIN</a> 演算子、 <a href="basic.html#join-outer">外部 JOIN</a> 演算子を使います。</p>
+         <p>一つの関係の中でデータをグループ化するためには <a href="basic.html#GROUP">GROUP</a> 演算子を使います。複数の関係のデータを結合・グループ化するためには、 <a href="basic.html#COGROUP">COGROUP</a> 演算子、 <a href="basic.html#join-inner">JOIN (内部結合)</a> 演算子、 <a href="basic.html#join-outer">JOIN (外部結合)</a> 演算子を使います。</p>
       </li>
       <li>
-         <p>複数の関係をマージするためには <a href="basic.html#UNION">UNION</a> 演算子を使います。一つの関係を複数の関係に分割するためには <a href="basic.html#SPLIT">SPLIT</a> 演算子を使います。</p>
+         <p>複数の関係をマージするためには <a href="basic.html#UNION">UNION</a> 演算子を使います。一つの関係を複数に分割するためには <a href="basic.html#SPLIT">SPLIT</a> 演算子を使います。</p>
       </li>
    </ul>
    </section>
@@ -413,42 +413,42 @@ DUMP B;
   <section id="tutorial">
 <title>Pig チュートリアル </title>
 
-<p>ローカルモードや MapReduce モードでどのように Pig スクリプトを走らせるか、 Pig チュートリアルによって学ぶことができます (<a href="#execution-modes">実行モード</a> を参照)。</p>
+<p>ローカルモードや MapReduce モードでどのように Pig スクリプトを走らせるか、 Pig チュートリアルで学べます (<a href="#execution-modes">実行モード</a> を参照)。</p>
 
 <p>チュートリアルをはじめるためには、次の準備作業が必要です:</p>
 
 <ol>
-<li>JAVA_HOME 環境変数が Java のインストール場所を指していることを確認</li>
-<li>PATH 環境変数が pig コマンドのあるディレクトリを含んでいることを確認 (これによって pig コマンドでチュートリアルが実行できるようになります)
+<li>JAVA_HOME 環境変数が Java のインストール場所を指していることを確認してください</li>
+<li>PATH 環境変数が pig コマンドのあるディレクトリを含んでいることを確認してください (これによって pig コマンドでチュートリアルが実行できるようになります)
 <source>
 $ export PATH=/&lt;my-path-to-pig&gt;/pig-0.9.0/bin:$PATH 
 </source>
 </li>
-<li>PIG_HOME 環境変数を設定:
+<li>PIG_HOME 環境変数を設定してください:
 <source>
 $ export PIG_HOME=/&lt;my-path-to-pig&gt;/pig-0.9.0 
 </source></li>
-<li>pigtutorial.tar.gz ファイルを作成:
+<li>pigtutorial.tar.gz ファイルを作成してください:
 <ul>
-    <li>Pig チュートリアルのディレクトリに移動 (.../pig-0.9.0/tutorial) 。</li>
-	<li>チュートリアルディレクトリ内の build.xml ファイルを編集。
+    <li>Pig チュートリアルのディレクトリに移動してください (.../pig-0.9.0/tutorial) 。</li>
+	<li>チュートリアルディレクトリ内の build.xml ファイルを編集してください。
 <source>
 変更前:   &lt;property name="pigjar" value="../pig.jar" /&gt;
 変更後:   &lt;property name="pigjar" value="../pig-0.9.0-core.jar" /&gt;
 </source>
 	</li>
-	<li>チュートリアルディレクトリ内で "ant" コマンドを実行。これで pigtutorial.tar.gz ファイルが作成される。
+	<li>チュートリアルディレクトリ内で "ant" コマンドを実行してください。これで pigtutorial.tar.gz ファイルが作成されます。
 	</li>
 </ul>
 
 </li>
-<li>作成された pigtutorial.tar.gz ファイルを作業用のディレクトリに移動。</li>
-<li>pigtutorial.tar.gz ファイルを展開。
+<li>作成された pigtutorial.tar.gz ファイルを作業用のディレクトリに移動してください。</li>
+<li>pigtutorial.tar.gz ファイルを展開してください。
 <source>
 $ tar -xzf pigtutorial.tar.gz
 </source>
 </li>
-<li>pigtmp という名前の新しいディレクトリが作成されます。このディレクトリは <a href="#Pig+Tutorial+Files">Pig チュートリアルファイル</a> を含んでいます。これらのファイルは Hadoop 0.20.2 で動作します。また、 <a href="#pig-script-1">Pig スクリプト 1</a> と <a href="#pig-script-2">Pig スクリプト 2</a> を実行するのに必要なものすべてが含まれています。</li>
+<li>pigtmp という名前の新しいディレクトリが作成されます。このディレクトリの中には <a href="#Pig+Tutorial+Files">Pig チュートリアルファイル</a> があります。これらのファイルは Hadoop 0.20.2 で動作します。また、 <a href="#pig-script-1">Pig スクリプト 1</a> と <a href="#pig-script-2">Pig スクリプト 2</a> を実行するのに必要なファイルがすべて入っています。</li>
 </ol>
 
 
@@ -461,13 +461,13 @@ $ tar -xzf pigtutorial.tar.gz
 
 <p>ローカルモードで Pig スクリプトを実行するためには次のようにします:</p>
 <ol>
-<li>pigtmp ディレクトリに移動</li>
-<li>次のコマンドを実行 (script1-local.pig か script2-local.pig のどちらかを利用)
+<li>pigtmp ディレクトリに移動してください</li>
+<li>次のコマンドを実行してください (script1-local.pig か script2-local.pig のどちらか)
 <source>
 $ pig -x local script1-local.pig
 </source>
 </li>
-<li>part-r-00000 ディレクトリに格納された結果ファイルの内容を確認。
+<li>part-r-00000 ディレクトリに格納された結果ファイルの内容を確認してください。
 <p>次のような Hadoop の警告メッセージが出力されていますが、無視して構いません:</p>
 <source>
 2010-04-08 12:55:33,642 [main] INFO  org.apache.hadoop.metrics.jvm.JvmMetrics 
@@ -483,29 +483,29 @@ $ pig -x local script1-local.pig
 
 <p>Pig スクリプトを MapReduce モードで実行するためには、次のようにします:</p>
 <ol>
-<li>pigtmp ディレクトリに移動。</li>
-<li>excite.log.bz2 ファイルを HDFS 上のディレクトリにコピー。
+<li>pigtmp ディレクトリに移動してください。</li>
+<li>excite.log.bz2 ファイルを HDFS 上のディレクトリにコピーしてください。
 <source>
 $ hadoop fs –copyFromLocal excite.log.bz2 .
 </source>
 </li>
 
-<li>PIG_CLASSPATH 環境変数にクラスタ設定ファイルが格納されたディレクトリを指定 (core-site.xml, hdfs-site.xml, mapred-site.xml を含むディレクトリ):
+<li>PIG_CLASSPATH 環境変数にクラスタ設定ファイルが格納されたディレクトリを指定してください (core-site.xml, hdfs-site.xml, mapred-site.xml を含むディレクトリ):
 <source>
 export PIG_CLASSPATH=/mycluster/conf
 </source></li>
-<li>Set the HADOOP_CONF_DIR environment variable to the location of the cluster configuration directory:
+<li>HADOOP_CONF_DIR 環境変数にクラスタ設定ファイルが格納されたディレクトリを指定してください:
 <source>
 export HADOOP_CONF_DIR=/mycluster/conf
 </source></li>
 
-<li>次のコマンドを実行 (script1-hadoop.pig か script2-hadoop.pig のどちらかを利用):
+<li>次のコマンドを実行してください (script1-hadoop.pig か script2-hadoop.pig のどちらか):
 <source>
 $ pig script1-hadoop.pig
 </source>
 </li>
 
-<li>HDFS 上の script1-hadoop-results あるいは script2-hadoop-results ディレクトリに格納された結果ファイルの内容を確認:
+<li>HDFS 上の script1-hadoop-results あるいは script2-hadoop-results ディレクトリに格納された結果ファイルの内容を確認してください:
 <source>
 $ hadoop fs -ls script1-hadoop-results
 $ hadoop fs -cat 'script1-hadoop-results/*' | less
