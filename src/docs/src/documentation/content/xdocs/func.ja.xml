@@ -242,9 +242,9 @@ DUMP X;
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->  
    <section id="count">
    <title>COUNT</title>
-   <p>Computes the number of elements in a bag. </p>
+   <p>バッグ中の要素の数を数えます。</p>
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -254,39 +254,31 @@ DUMP X;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression with data type bag.</p>
+               <p>バッグ型の任意の式。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the COUNT function to compute the number of elements in a bag.
-   COUNT requires a preceding GROUP ALL statement for global counts and a GROUP BY statement for group counts.</p>
+   <title>用法</title>
+   <p>COUNT 関数はバッグ中の要素の数を数えるために使います。データセット全体の数を数えるためには事前に GROUP ALL 文が必要です。グループごとの数を数えるためには事前に GROUP BY 文が必要です。</p>
 
-   <p>
-    The COUNT function follows syntax semantics and ignores nulls. 
-    What this means is that a tuple in the bag will not be counted if the FIRST FIELD in this tuple is NULL. 
-    If you want to include NULL values in the count computation, use 
-    <a href="#COUNT-STAR">COUNT_STAR</a>.
-   </p>   
+   <p>COUNT 関数は follows syntax semantics, null を無視します。つまり、タプルの最初のフィールドが null である場合、そのタプルは数えられません。 null を含めて数えたい場合は、 <a href="#count-star">COUNT_STAR</a> を使います。</p>
    
-   <p>
-    Note: You cannot use the tuple designator (*) with COUNT; that is, COUNT(*) will not work.   
-   </p>
+   <p>注記: COUNT 関数の引数としてタプル指定子 (*) を使うことはできません。つまり、 COUNT(*) は使えません。</p>
    </section>
    
    
    <section>
-   <title>Example</title>
-   <p>In this example the tuples in the bag are counted (see the <a href="basic.html#GROUP">GROUP</a> operator for information about the field names in relation B).</p>
+   <title>例</title>
+   <p>次の例では、バッグ中のタプルの数を数えています。関係 B のフィールド名については <a href="basic.html#GROUP">GROUP</a> を参照してください。</p>
 <source>
 A = LOAD 'data' AS (f1:int,f2:int,f3:int);
 
@@ -317,7 +309,7 @@ DUMP X;
    </section>
    
    <section>
-   <title>Types Tables</title>
+   <title>型テーブル</title>
    <table>
          <tr>
             <td>
