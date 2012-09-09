@@ -268,7 +268,7 @@ DUMP X;
    
    <section>
    <title>用法</title>
-   <p>COUNT 関数はバッグ中の要素の数を数えるために使います。データセット全体の数を数えるためには事前に GROUP ALL 文が必要です。グループごとの数を数えるためには事前に GROUP BY 文が必要です。</p>
+   <p>COUNT 関数はバッグ中の要素の数を数えるために使います。データセット全体で要素の数を数えるには事前に GROUP ALL 文が必要です。グループごとに要素の数を数えるには事前に GROUP BY 文が必要です。</p>
 
    <p>COUNT 関数は follows syntax semantics, null を無視します。つまり、タプルの最初のフィールドが null である場合、そのタプルは数えられません。 null を含めて数えたい場合は、 <a href="#count-star">COUNT_STAR</a> を使います。</p>
    
@@ -363,9 +363,9 @@ DUMP X;
      <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
  <section id="count-star">
    <title>COUNT_STAR</title>
-   <p>Computes the number of elements in a bag. </p>
+   <p>バッグ中の要素の数を数えます。</p>
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -376,31 +376,28 @@ DUMP X;
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression with data type bag.</p>
+               <p>バッグ型の任意の式。</p>
             </td>
          </tr> 
    </table>
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the COUNT_STAR function to compute the number of elements in a bag.
-   COUNT_STAR requires a preceding GROUP ALL statement for global counts and a GROUP BY statement for group counts.</p>
-   <p>COUNT_STAR includes NULL values in the count computation 
-   (unlike <a href="#COUNT">COUNT</a>, which ignores NULL values).
-   </p>
+   <title>用法</title>
+   <p>COUNT_STAR 関数はバッグ中の要素の数を数えます。データセット全体で要素を数えるには事前に GROUP ALL 文が必要です。グループごとに要素の数を数えるには事前に GROUP BY 文が必要です。</p>
+   <p>COUNT_STAR は null 値を含んで要素の数を数えます (<a href="#count">COUNT</a> が null を無視するのと対照的です) 。</p>
    </section>
    
    <section>
-   <title>Example</title>
-   <p>In this example COUNT_STAR is used the count the tuples in a bag.</p>
+   <title>例</title>
+   <p>次の例では COUNT_STAR 関数でバッグ中のタプルの数を数えています。</p>
 <source>
 X = FOREACH B GENERATE COUNT_STAR(A);
 </source>
