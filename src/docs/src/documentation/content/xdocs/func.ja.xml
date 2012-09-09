@@ -184,10 +184,10 @@ DUMP C;
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++ --> 
    <section id="concat">
    <title>CONCAT</title>
-   <p>Concatenates two expressions of identical type.</p>
+   <p>同じ型の 2 つの式を連結します。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -198,28 +198,28 @@ DUMP C;
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>Any expression.</p>
+               <p>任意の式。</p>
             </td>
          </tr> 
    </table>
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the CONCAT function to concatenate two expressions. The result values of the two expressions must have identical types.</p>
+   <title>用法</title>
+   <p>CONCAT 関数は 2 つの式を連結するために使います。 2 つの式の結果は同じ型である必要があります。</p>
    </section>
 
    
    <section>
-   <title>Example</title>
-   <p>In this example fields f2 and f3 are concatenated.</p>
+   <title>例</title>
+   <p>次の例ではフィールド f2, f3 を連結しています。</p>
 <source>
 A = LOAD 'data' as (f1:chararray, f2:chararray, f3:chararray);
 
