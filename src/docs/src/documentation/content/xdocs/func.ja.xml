@@ -61,15 +61,15 @@ decoded_strings = FOREACH encoded_strings GENERATE UrlDecode(encoded, 'UTF-8');
 <!-- ======================================================== -->  
 <!-- EVAL FUNCTIONS -->    
 <section id="eval-functions">
-<title>Eval Functions</title>
+<title>評価関数</title>
 
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->  
 <section id="avg">
 <title>AVG</title>
-   <p>Computes the average of the numeric values in a single-column bag. </p>
+   <p>一列のバッグ中の数値の平均値を計算します。</p>
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table> 
       <tr>
             <td>
@@ -80,29 +80,28 @@ decoded_strings = FOREACH encoded_strings GENERATE UrlDecode(encoded, 'UTF-8');
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>Any expression whose result is a bag. The elements of the bag should be data type int, long, float, or double.</p>
+               <p>結果がバッグになる任意の式。バッグの要素は int, long, float, double のいずれかである必要があります。</p>
             </td>
          </tr> 
    </table>
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the AVG function to compute the average of the numeric values in a single-column bag. 
-   AVG requires a preceding GROUP ALL statement for global averages and a GROUP BY statement for group averages.</p>
-   <p>The AVG function now ignores NULL values. </p>      
+   <title>用法</title>
+   <p>AVG 関数は、一列のバッグ中の数値の平均を計算するために使います。 データセット全体の平均値を計算するためには、事前に GROUP ALL 文が必要です。グループごとの平均を計算するためには、事前に GROUP BY 文が必要です。</p>
+   <p>現在、 AVG 関数は null 値を無視します。</p>      
    </section>
    
    <section>
-   <title>Example</title>
-   <p>In this example the average GPA for each student is computed (see the <a href="basic.html#GROUP">GROUP</a> operator for information about the field names in relation B).</p>
+   <title>例</title>
+   <p>次の例では、学生ごとに GPA (成績評価値) を計算しています。関係 B のフィールド名については、 <a href="basic.html#GROUP">GROUP</a> を参照してください。</p>
 <source>
 A = LOAD 'student.txt' AS (name:chararray, term:chararray, gpa:float);
 
@@ -131,7 +130,7 @@ DUMP C;
    </section>
    
    <section>
-   <title>Types Tables</title>
+   <title>型テーブル</title>
    <table>
          <tr>
             <td>
@@ -173,10 +172,10 @@ DUMP C;
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as double </p>
+               <p>double 型にキャストされる</p>
             </td>
          </tr> 
    </table>
