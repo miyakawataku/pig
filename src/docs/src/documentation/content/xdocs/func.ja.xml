@@ -407,10 +407,10 @@ X = FOREACH B GENERATE COUNT_STAR(A);
     <!-- ++++++++++++++++++++++++++++++++++++++++++++++ --> 
    <section id="diff">
    <title>DIFF</title>
-   <p>Compares two fields in a tuple.</p>
+   <p>2 つのバッグをタプル単位で比較し、片方にだけ存在するタプルをバッグに詰めて戻します。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -427,27 +427,20 @@ X = FOREACH B GENERATE COUNT_STAR(A);
                <p>expression</p>
             </td>
             <td>
-               <p>An expression with any data type.</p>
+               <p>任意の型の式。</p>
             </td>
          </tr> 
    </table>
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>The DIFF function takes two bags as arguments and compares them. 
-   Any tuples that are in one bag but not the other are returned in a bag. 
-   If the bags match, an empty bag is returned. If the fields are not bags 
-   then they will be wrapped in tuples and returned in a bag if they do not match, 
-   or an empty bag will be returned if the two records match. The implementation 
-   assumes that both bags being passed to the DIFF function will fit entirely 
-   into memory simultaneously. If this is not the case the UDF will still function 
-   but it will be VERY slow.</p>
+   <title>用法</title>
+   <p>DIFF 関数はバッグの引数を 2 つ取り、それぞれを比較します。片方のバッグにだけ存在し、もう片方には存在しないタプルを、バッグに詰めて戻します。もし 2 つのバッグが一致したら、空のバッグを戻します。引数がバッグでない場合は、両引数それぞれをタプルに詰めた上で比較し、一致しなければ両タプルを詰めたバッグを、一致すれば空のバッグを戻します。現在の実装は、 2 つのバッグが同時にメモリに載せられることを前提としています。メモリに載らない場合でも DIFF 関数は機能しますが、非常に遅くなります。</p>
    </section>
    
    <section>
-   <title>Example</title>
-   <p>In this example DIFF compares the tuples in two bags.</p>
+   <title>例</title>
+   <p>次の例では、 DIFF 関数で 2 つのバッグ中のタプルを比較しています</p>
 <source>
 A = LOAD 'bag_data' AS (B1:bag{T1:tuple(t1:int,t2:int)},B2:bag{T2:tuple(f1:int,f2:int)});
 
