@@ -514,10 +514,10 @@ Y = filter X by IsEmpty(SSN_NAME);
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->   
    <section id="max">
    <title>MAX</title>
-   <p>Computes the maximum of the numeric values or chararrays in a single-column bag. MAX requires a preceding GROUP ALL statement for global maximums and a GROUP BY statement for group maximums.</p>
+   <p>一要素のバッグから、数値あるいは文字列の最大値を求めます。データセット全体の最大値を得るためには事前に GROUP ALL 文が必要です。グループごとの最大値を得るためには事前に GROUP BY 文が必要です。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -527,25 +527,26 @@ Y = filter X by IsEmpty(SSN_NAME);
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression with data types int, long, float, double, or chararray.</p>
+               <p>int, long, float, double, chararray のいずれかを要素とするバッグ型の式。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the MAX function to compute the maximum of the numeric values or chararrays in a single-column bag.</p></section>
+   <title>用法</title>
+   <p>MAX 関数は一要素のバッグから数値か文字列の最大値を得ます。</p></section>
    
    <section>
-   <title>Example</title>
+   <title>例</title>
    <p>In this example the maximum GPA for all terms is computed for each student (see the GROUP operator for information about the field names in relation B).</p>
+   <p>次の例では、それぞれの学生について、全学期中最大の GPA を計算しています (関係 B のフィールド名については、 <a href="basic.html#GROUP">GROUP</a> を参照してください) 。</p>
 <source>
 A = LOAD 'student' AS (name:chararray, session:chararray, gpa:float);
 
@@ -574,7 +575,7 @@ DUMP X;
    </section>
    
    <section>
-   <title>Types Tables</title>
+   <title>型テーブル</title>
    <table>
          <tr>
             <td>
@@ -619,7 +620,7 @@ DUMP X;
                <p>chararray </p>
             </td>
             <td>
-               <p>cast as double</p>
+               <p>double にキャストされる</p>
             </td>
          </tr> 
    </table>
