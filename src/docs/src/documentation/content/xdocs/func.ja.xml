@@ -465,10 +465,10 @@ grunt> dump x;
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->   
 <section id="isempty">
    <title>IsEmpty</title>
-   <p>Checks if a bag or map is empty.</p>
+   <p>バッグもしくはマップが空かどうかチェックします。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -478,34 +478,34 @@ grunt> dump x;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression with any data type.</p>
+               <p>任意の型の式。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>The IsEmpty function checks if a bag or map is empty (has no data). The function can be used to filter data.</p></section>
+   <title>用法</title>
+   <p>IsEmpty 関数はバッグもしくはマップが空か、つまりデータを持っていないかどうかをチェックします。不要なレコードを除去するために使えます。</p></section>
    
    <section>
-   <title>Example</title>
-   <p>In this example all students with an SSN but no name are located.</p>
+   <title>例</title>
+   <p>次の例では、社会保障番号 (SSN) があるが名前がない学生を計算しています。</p>
 <source>
 SSN = load 'ssn.txt' using PigStorage() as (ssn:long);
 
 SSN_NAME = load 'students.txt' using PigStorage() as (ssn:long, name:chararray);
 
-/* do a left outer join of SSN with SSN_Name */
+/* SSN と SSN_NAME を左外部結合します。 */
 X = JOIN SSN by ssn LEFT OUTER, SSN_NAME by ssn;
 
-/* only keep those ssn's for which there is no name */
+/* 名前がない学生の社会保障番号だけを残します。 */
 Y = filter X by IsEmpty(SSN_NAME);
 </source>
    </section></section>    
