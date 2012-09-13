@@ -545,7 +545,6 @@ Y = filter X by IsEmpty(SSN_NAME);
    
    <section>
    <title>例</title>
-   <p>In this example the maximum GPA for all terms is computed for each student (see the GROUP operator for information about the field names in relation B).</p>
    <p>次の例では、それぞれの学生について、全学期中最大の GPA を計算しています (関係 B のフィールド名については、 <a href="basic.html#GROUP">GROUP</a> を参照してください) 。</p>
 <source>
 A = LOAD 'student' AS (name:chararray, session:chararray, gpa:float);
