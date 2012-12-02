@@ -985,10 +985,10 @@ DUMP X;
      <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
    <section id="tokenize">
    <title>TOKENIZE</title>
-   <p>Splits a string and outputs a bag of words. </p>
+   <p>文字列を単語のバッグに分割します。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -998,14 +998,14 @@ DUMP X;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression with data type chararray.</p>
+               <p>chararray 型の式。</p>
             </td>
          </tr> 
           <tr>
@@ -1013,20 +1013,20 @@ DUMP X;
                <p>'field_delimiter'</p>
             </td>
             <td>
-               <p>An optional field delimiter (in single quotes).</p>
-               <p>If field_delimiter is null or not passed, the following will be used as delimiters: space [  ], double quote [ " ], coma [ , ] parenthesis [ () ], star [ * ].</p>
+               <p>単一引用符で括った区切り文字 (省略可能) 。</p>
+               <p>区切り文字を省略するか、 null を渡した場合は、次の文字が区切り文字とみなされます: 空白文字「 」、二重引用符「"」、コンマ「,」、丸括弧「()」、アスタリスク「*」。</p>
             </td>
          </tr>
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the TOKENIZE function to split a string of words (all words in a single tuple) into a bag of words (each word in a single tuple). </p>
+   <title>用法</title>
+   <p>TOKENIZE 関数は複数の単語からなる文字列 (すべての単語が一列に属する) を、単語のバッグ (各単語がそれぞれひとつのタプルに属する) に分割するために使います。</p>
    </section>
    
    <section>
-   <title>Example</title>
-   <p>In this example the strings in each row are split.</p>
+   <title>例</title>
+   <p>次の例では、それぞれの行の文字列を分割しています。</p>
 <source>
 A  = LOAD 'data' AS (f1:chararray);
 
@@ -1042,7 +1042,7 @@ DUMP X;
 ({(Here),(is),(the),(second),(string.)})
 ({(Here),(is),(the),(third),(string.)})
 </source>
-   <p>In this example a field delimiter is specified.</p>
+   <p>次の例では、区切り文字を指定しています。</p>
 <source>
 {code}
 A = LOAD 'data' AS (f1:chararray);
