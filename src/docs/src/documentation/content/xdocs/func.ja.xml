@@ -746,10 +746,10 @@ DUMP X;
      <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
    <section id="size">
    <title>SIZE</title>
-   <p>Computes the number of elements based on any Pig data type. </p>
+   <p>データ型に応じて要素数を数えます。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -759,22 +759,22 @@ DUMP X;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression with any data type.</p>
+               <p>任意の型の式。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the SIZE function to compute the number of elements based on the data type (see the Types Tables below). 
-   SIZE includes NULL values in the size computation. SIZE is not algebraic.</p>
+   <title>用法</title>
+   <p>Use the SIZE function to compute the number of elements based on the data type (see the Types Tables below).  SIZE includes NULL values in the size computation. SIZE is not algebraic.</p>
+   <p>SIZE 関数はデータ型に応じて要素数を数えます。</p>
    </section>
    
    <section>
