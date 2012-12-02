@@ -773,13 +773,12 @@ DUMP X;
    
    <section>
    <title>用法</title>
-   <p>Use the SIZE function to compute the number of elements based on the data type (see the Types Tables below).  SIZE includes NULL values in the size computation. SIZE is not algebraic.</p>
-   <p>SIZE 関数はデータ型に応じて要素数を数えます。</p>
+   <p>SIZE 関数はデータ型に応じて要素数を数えます (詳しくは下記の型テーブルを見てください) 。 SIZE 関数は null を数に含めます。 SIZE は代数的関数ではありません。</p>
    </section>
    
    <section>
-   <title>Example</title>
-   <p>In this example the number of characters in the first field is computed.</p>
+   <title>例</title>
+   <p>次の例では、最初の列の文字数を数えています。</p>
 <source>
 A = LOAD 'data' as (f1:chararray, f2:chararray, f3:chararray);
 (apache,open,source)
@@ -796,14 +795,14 @@ DUMP X;
    </section>
    
    <section>
-   <title>Types Tables</title>
+   <title>型テーブル</title>
    <table>
        <tr>
             <td>
                <p>int </p>
             </td>
             <td>
-               <p>returns 1 </p>
+               <p>1 を戻します</p>
             </td>
          </tr>
          <tr>
@@ -811,7 +810,7 @@ DUMP X;
                <p>long </p>
             </td>
             <td>
-               <p>returns 1 </p>
+               <p>1 を戻します</p>
             </td>
          </tr>
          <tr>
@@ -819,7 +818,7 @@ DUMP X;
                <p>float </p>
             </td>
             <td>
-               <p>returns 1 </p>
+               <p>1 を戻します</p>
             </td>
          </tr>
          <tr>
@@ -827,7 +826,7 @@ DUMP X;
                <p>double </p>
             </td>
             <td>
-               <p>returns 1 </p>
+               <p>1 を戻します</p>
             </td>
          </tr>
          <tr>
@@ -835,7 +834,7 @@ DUMP X;
                <p>chararray </p>
             </td>
             <td>
-               <p>returns number of characters in the array </p>
+               <p>配列中の文字の数を戻します</p>
             </td>
          </tr>
          <tr>
@@ -843,7 +842,7 @@ DUMP X;
                <p>bytearray </p>
             </td>
             <td>
-               <p>returns number of bytes in the array </p>
+               <p>配列中のバイト数を戻します</p>
             </td>
          </tr>
          <tr>
@@ -851,7 +850,7 @@ DUMP X;
                <p>tuple </p>
             </td>
             <td>
-               <p>returns number of fields in the tuple</p>
+               <p>タプル中のフィールド数を戻します</p>
             </td>
          </tr>
          <tr>
@@ -859,7 +858,7 @@ DUMP X;
                <p>bag </p>
             </td>
             <td>
-               <p>returns number of tuples in bag </p>
+               <p>バッグ中のタプル数を戻します</p>
             </td>
          </tr>
          <tr>
@@ -867,7 +866,7 @@ DUMP X;
                <p>map </p>
             </td>
             <td>
-               <p>returns number of key/value pairs in map </p>
+               <p>マップ中のキー・値のペア数を戻します</p>
             </td>
          </tr> 
    </table></section></section>
