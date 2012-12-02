@@ -1097,10 +1097,10 @@ store A into ‘myoutput.bz’;
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
    <section id="binstorage">
    <title>BinStorage</title>
-   <p>Loads and stores data in machine-readable format.</p>
+   <p>データを機械可読の形式で読み書きします。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1110,30 +1110,28 @@ store A into ‘myoutput.bz’;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
-               <p>none</p>
+               <p>なし</p>
             </td>
             <td>
-               <p>no parameters</p>
+               <p>パラメータは無し</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
+   <title>用法</title>
 
-   <p>Pig uses BinStorage to load and store the temporary data that is generated between multiple MapReduce jobs.</p>
+   <p>Pig は複数の MapReduce ジョブ間で一時データを受け渡すために BinStorage を使っています。</p>
    <ul>
-   <li>BinStorage works with data that is represented on disk in machine-readable format. 
-   BinStorage does NOT support <a href="#Handling-Compression">compression</a>.</li>
-   <li>BinStorage supports multiple locations (files, directories, globs) as input.</li>
+   <li>BinStorage 関数は機械可読の形式で格納されたデータを扱います。 BinStorage は<a href="#handling-compression">圧縮</a>をサポートしません。</li>
+   <li>BinStorage は入力元の複数指定 (ファイル、ディレクトリ、グロブ) をサポートします。</li>
    </ul>
-    <p></p>
-   <p>Occasionally, users use BinStorage to store their own data. However, because BinStorage is a proprietary binary format, the original data is never in BinStorage - it is always a derivation of some other data.</p>
-<p>We have seen several examples of users doing something like this:</p>
+   <p>まれに、ユーザが自分のデータを BinStorage を使って保存することはありますが、 BinStorage は専用のバイナリ書式なので、元々のデータが BinStorage であることはありません。 BinStorage のデータは常に、他のデータの処理結果であるはずです。</p>
+<p>あるユーザが次のようにしている例がありました:</p>
 
 <source>
 a = load 'b.txt' as (id, f);
@@ -1141,7 +1139,7 @@ b = group a by id;
 store b into 'g' using BinStorage();
 </source>
 
-<p>And then later:</p>
+<p>その後、次のような処理を実行していました:</p>
 
 <source>
 a = load 'g/part*' using BinStorage() as (id, d:bag{t:(v, s)});
@@ -1149,11 +1147,11 @@ b = foreach a generate (double)id, flatten(d);
 dump b;
 </source>
 
-<p>There is a problem with this sequence of events. The first script does not define data types and, as the result, the data is stored as a bytearray and a bag with a tuple that contains two bytearrays. The second script attempts to cast the bytearray to double; however, since the data originated from a different loader, it has no way to know the format of the bytearray or how to cast it to a different type. To solve this problem, Pig:</p>
+<p>この処理の流れには問題があります。最初のスクリプトはデータ型を定義していないので、データは 1 つの bytearray と、 2 つの bytearray からなるタプルを含むバッグとして保存されます。二番目のスクリプトは bytearray を double にキャストしています。しかし、別のローダがデータを読み出しているため、 bytearray の形式が分からず、別の型へのキャスト方法も分かりません。この問題を解決するために、 Pig では:</p>
 
 <ul>
-<li>Sends an error message when the second script is executed: "ERROR 1118: Cannot cast bytes loaded from BinStorage. Please provide a custom converter."</li>
-<li id="custom-converter">Allows you to use a custom converter to perform the casting. <br></br>
+<li>二番目のスクリプトの実行時に "ERROR 1118: Cannot cast bytes loaded from BinStorage. Please provide a custom converter." というエラーメッセージを表示します。</li>
+<li id="custom-converter">あるいは、自作の変換器でキャストを実行することもできます。<br></br>
 <source>
 a = load 'g/part*' using BinStorage('Utf8StorageConverter') as (id, d:bag{t:(v, s)});
 b = foreach a generate (double)id, flatten(d);
@@ -1164,25 +1162,25 @@ dump b;
 </section>
    
    <section>
-   <title>Examples</title>
-   <p>In this example BinStorage is used with the LOAD and STORE functions.</p>
+   <title>例</title>
+   <p>次の例では、 BinStorage をロード・ストア関数として使っています。</p>
 <source>
 A = LOAD 'data' USING BinStorage();
 
 STORE X into 'output' USING BinStorage(); 
 </source>
 
-   <p>In this example BinStorage is used to load multiple locations.</p>
+   <p>次の例では、複数の入力元を指定して BinStorage を使っています。</p>
 <source>
 A = LOAD 'input1.bin, input2.bin' USING BinStorage();
 </source>
 
-<p>BinStorage does not track data lineage. When Pig uses BinStorage to move data between MapReduce jobs, Pig can figure out the correct cast function to use and apply it. However, as shown in the example below, when you store data using BinStorage and then use a separate Pig Latin script to read data (thus loosing the type information), it is your responsibility to correctly cast the data before storing it using BinStorage.
+<p>BinStorage はデータの来歴を追跡しません。それでも  Pig が MapReduce ジョブ間で BinStorage を使う場合には、 Pig はどのキャスト関数を適用するべきかを把握していられます。しかし、次の例のように、ユーザが BinStorage を使ってデータを保存し、別の Pig Latin スクリプトでデータを読み出す時には、型情報が失われます。この場合、 BinStorage でデータを保存する前に、ユーザの責任で正しくデータをキャストする必要があります。
  </p>
 
 <source>
 raw = load 'sampledata' using BinStorage() as (col1,col2, col3);
---filter out null columns
+-- null の列を持つ行を消す
 A = filter raw by col1#'bcookie' is not null;
 
 B = foreach A generate col1#'bcookie'  as reqcolumn;
