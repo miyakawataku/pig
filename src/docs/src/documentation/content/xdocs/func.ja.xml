@@ -875,10 +875,10 @@ DUMP X;
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->   
    <section id="sum">
    <title>SUM</title>
-   <p>Computes the sum of the numeric values in a single-column bag. SUM requires a preceding GROUP ALL statement for global sums and a GROUP BY statement for group sums.</p>
+   <p>一列のバッグ中の数値の合計を計算します。データセット全体で合計を計算するには事前に GROUP ALL 文が必要です。グループごとに合計を計算するには事前に GROUP BY 文が必要です。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -888,25 +888,25 @@ DUMP X;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression with data types int, long, float, double, or bytearray cast as double.</p>
+               <p>int, long, float, double, bytearray (double 型にキャストされる) いずれかの型の式。</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the SUM function to compute the sum of a set of numeric values in a single-column bag.</p></section>
+   <title>用法</title>
+   <p>SUM 関数は一列のバッグ中の数値の合計を計算します。</p></section>
    
    <section>
-   <title>Example</title>
-   <p>In this example the number of pets is computed. (see the GROUP operator for information about the field names in relation B).</p>
+   <title>例</title>
+   <p>次の例では、ペットの数を数えています (関係 B のフィールド名については <a href="basic.html#GROUP">GROUP 演算子</a> を参照してください) 。</p>
 <source>
 A = LOAD 'data' AS (owner:chararray, pet_type:chararray, pet_num:int);
 
@@ -931,7 +931,7 @@ DUMP X;
    </section>
    
    <section>
-   <title>Types Tables</title>
+   <title>型テーブル</title>
    <table>
          <tr>
             <td>
@@ -973,10 +973,10 @@ DUMP X;
                <p>double </p>
             </td>
             <td>
-               <p>error </p>
+               <p>エラー</p>
             </td>
             <td>
-               <p>cast as double </p>
+               <p>double 型にキャストされる</p>
             </td>
          </tr> 
    </table>
