@@ -1054,32 +1054,30 @@ DUMP B;
    
    <!-- ======================================================================== -->
    <section id="load-store-functions">
-   <title>Load/Store Functions</title>
-   <p>Load/store functions determine how data goes into Pig and comes out of Pig. 
-   Pig provides a set of built-in load/store functions, described in the sections below. 
-   You can also write your own load/store functions  (see <a href="udf.html">User Defined Functions</a>).</p>
+   <title>ロード・ストア関数</title>
+   <p>ロード・ストア関数は Pig にデータを入力する方法と、 Pig からデータを出力する方法を決定します。後述するように、 Pig は組み込みのロード・ストア関数をいくつか提供しています。また、独自のロード・ストア関数を作ることもできます (詳細は <a href="udf.html">ユーザ定義関数</a> を見てください) 。</p>
    
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
    <section id="handling-compression">
-   <title>Handling Compression</title>
+   <title>圧縮</title>
 
-<p>Support for compression is determined by the load/store function. PigStorage and TextLoader support gzip and bzip compression for both read (load) and write (store). BinStorage does not support compression.</p>
+<p>圧縮がサポートされるか否かはロード・ストア関数ごとに異なります。 PigStorage と TextLoader は読み (ロード) 書き (ストア) ともに gzip 圧縮と bzip 圧縮をサポートします。 BinStorage は圧縮をサポートしません。</p>
 
-<p>To work with gzip compressed files, input/output files need to have a .gz extension. Gzipped files cannot be split across multiple maps; this means that the number of maps created is equal to the number of part files in the input location.</p>
+<p>gzip 圧縮のファイルを扱うには、入力、出力ともにファイルの拡張子が .gz である必要があります。 gzip 圧縮されたファイルは複数の Map 処理に分割できません。これは、入力ファイル数と同じだけの Map 処理が起動されることを意味します。</p>
 
 <source>
 A = load ‘myinput.gz’;
 store A into ‘myoutput.gz’; 
 </source>
 
-<p>To work with bzip compressed files, the input/output files need to have a .bz or .bz2 extension. Because the compression is block-oriented, bzipped files can be split across multiple maps.</p>
+<p>bzip 圧縮のファイルを扱うには、入力、出力ともにファイルの拡張子が .bz か .bz2 である必要があります。 bzip 圧縮はブロック志向なので、 bzip 圧縮されたファイルは複数の Map 処理に分割できます。</p>
 
 <source>
 A = load ‘myinput.bz’;
 store A into ‘myoutput.bz’; 
 </source>
 
-<p>Note: PigStorage and TextLoader correctly read compressed files as long as they are NOT CONCATENATED FILES generated in this manner: </p>
+<p>注意: PigStorage と TextLoader が圧縮ファイルを正しく読めるのは、<em>ファイルが次のように連結されたのでない限りにおいて</em>です:</p>
   <ul>
       <li>
          <p>cat *.gz > text/concat.gz</p>
@@ -1092,8 +1090,7 @@ store A into ‘myoutput.bz’;
       </li>
    </ul>
 <p></p>
-<p>If you use concatenated gzip or bzip files with your Pig jobs, you will NOT see a failure but the results will be INCORRECT.</p>
-<p></p>
+<p>gzip ファイルや bzip ファイルをこのように連結して Pig ジョブの入力とした場合、処理が失敗するのではなく、<em>誤った結果</em>が得られます。</p>
 
 </section>
 
