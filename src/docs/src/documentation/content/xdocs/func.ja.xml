@@ -1212,10 +1212,10 @@ dump X;
      <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
    <section id="jsonloadstore">
    <title>JsonLoader, JsonStorage</title>
-   <p>Load or store JSON data.</p>
+   <p>JSON のデータを読み込みまたは書き込みます。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1230,35 +1230,35 @@ dump X;
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>schema</p>
             </td>
             <td>
-               <p>An optional Pig schema, in single quotes.</p>
+               <p>単一引用符で括った Pig のスキーマ (省略可能)</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use JsonLoader to load JSON data. </p>
+   <title>用法</title>
+   <p>JsonLoader は JSON データを読み込むために使います。</p>
    
-    <p>Use JsonStorage to store JSON data.</p>
+    <p>JsonStorage は JSON データを書き込むために使います。</p>
    
-   <p>Note that there is no concept of delimit in JsonLoader or JsonStorer. The data is encoded in standard JSON format. JsonLoader optionally takes a schema as the construct argument.</p>
+   <p>JsonLoader と JsonStorage に区切り文字はありません。データは標準的な JSON 形式でエンコードされます。 JsonLoader は引数としてスキーマを取ることもできます。</p>
    </section>
    
    <section>
-   <title>Examples</title>
-   <p>In this example data is loaded with a schema. </p>
+   <title>例</title>
+   <p>次の例では、スキーマを指定してデータを読み込んでいます。</p>
 <source>
 a = load 'a.json' using JsonLoader('a0:int,a1:{(a10:int,a11:chararray)},a2:(a20:double,a21:bytearray),a3:[chararray]');  
 </source>
 
-   <p>In this example data is loaded without a schema; it assumes there is a .pig_schema (produced by JsonStorage) in the input directory. </p>
+   <p>次の例では、スキーマを指定せずにデータを読み込んでいます。 JsonStorage が生成した .pig_schema というファイルが入力ディレクトリに存在する場合、このようにすることが可能です。</p>
 <source>
 a = load 'a.json' using JsonLoader(); 
 </source>
