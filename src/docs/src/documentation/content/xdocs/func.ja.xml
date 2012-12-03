@@ -1313,10 +1313,10 @@ STORE X INTO 'output' USING PigDump();
       <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->  
    <section id="pigstorage">
    <title>PigStorage</title>
-   <p>Loads and stores data as structured text files.</p>
+   <p>データを構造化されたテキストファイルとして読み込みまたは書き込みます。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1326,15 +1326,15 @@ STORE X INTO 'output' USING PigDump();
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p id="field-delimiter">field_delimiter</p>
             </td>
             <td>
-               <p>The default field delimiter is tab ('\t'). </p>
-               <p>You can specify other characters as field delimiters; however, be sure to encase the characters in single quotes.</p>
+               <p>デフォルトの区切りはタブ文字 ('\t') です。</p>
+               <p>その他の区切り文字を使う際は単一引用符に括って指定します。</p>
             </td>
          </tr> 
                 <tr>
@@ -1342,30 +1342,30 @@ STORE X INTO 'output' USING PigDump();
                <p id="pigstorage-options">'options'</p>
             </td>
             <td>
-               <p>A string that contains space-separated options (‘optionA  optionB  optionC’)</p>
-               <p>Currently supported options are:</p>
+               <p>オプションをスペース区切りで指定します (‘optionA  optionB  optionC’)</p>
+               <p>現在サポートされているオプションは次の通り:</p>
                <ul>
-					<li>(‘schema’) - Stores the schema of the relation using a hidden JSON file.</li>
-					<li>(‘noschema’) - Ignores a stored schema during the load.</li>
-                                        <li>('tagsource') - Add a first column indicates the input file of the record.</li>
+					<li>(‘schema’) - 関係のスキーマを JSON の隠しファイルとして保存します。</li>
+					<li>(‘noschema’) - ロード時にスキーマファイルを無視します。</li>
+                                        <li>('tagsource') - 入力ファイル名をレコードの最初の列として追加します。</li>
 				</ul>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>PigStorage is the default function used by Pig to load/store the data. PigStorage supports structured text files (in human-readable UTF-8 format) in compressed or uncompressed form (see <a href="#Handling-Compression">Handling Compression</a>). All Pig <a href="basic.html#data-types">data types</a> (both simple and complex) can be read/written using this function. The input data to the load can be a file, a directory or a glob.</p>
+   <title>用法</title>
+   <p>PigStorage は Pig のデフォルトのロード・ストア関数です。 PigStorage は人間が読める UTF-8 形式の構造化されたテキストファイルをサポートします。圧縮、非圧縮いずれも可能です (詳細は <a href="#handling-compression">圧縮</a> を見てください) 。 Pig の<a href="basic.html#data-types">データ型</a> は、単純型、複合型ともすべて読み書きできます。ロード時の入力データはファイル、ディレクトリ、グロブのいずれかで指定します。</p>
 
- <p><strong>Load/Store Statements</strong></p> 
-  <p>Load statements – PigStorage expects data to be formatted using field delimiters, either the tab character  ('\t') or other specified character.</p>
+ <p><strong>LOAD 文、 STORE 文</strong></p> 
+  <p>LOAD 文 - PigStorage はタブ ('\t') かその他指定されたフィールド区切り文字で書式化されたデータを読み込みます。</p>
 
-   <p>Store statements – PigStorage outputs data using field deliminters, either the tab character  ('\t') or other specified character, and the line feed record delimiter ('\n').  </p>
+   <p>STORE 文 - PigStorage はPigStorage はタブ ('\t') かその他指定されたフィールド区切り文字と、行区切り文字 ('\n') で書式化されたデータを出力します。</p>
 
- <p><strong>Field/Record Delimiters</strong></p> 
-   <p>Field Delimiters – For load and store statements the default field delimiter is the tab character ('\t'). You can use other characters as field delimiters, but separators such as ^A or Ctrl-A should be represented in Unicode (\u0001) using UTF-16 encoding (see Wikipedia <a href="http://en.wikipedia.org/wiki/ASCII">ASCII</a>, <a href="http://en.wikipedia.org/wiki/Unicode">Unicode</a>, and <a href="http://en.wikipedia.org/wiki/UTF-16">UTF-16</a>).</p>
+ <p><strong>フィールド区切り・レコード区切り</strong></p> 
+   <p>フィールド区切り - LOAD 文、 STORE 文とも、デフォルトのフィールド区切りはタブ文字 ('\t') です。他の文字をフィールド区切りとして使う場合は、たとえば ^A または Ctrl-A であれば、 UTF-16 エンコーディングの Unicode (\u0001) で指定します (詳しくはWikipediaの <a href="http://ja.wikipedia.org/wiki/ASCII">ASCII</a>, <a href="http://ja.wikipedia.org/wiki/Unicode">Unicode</a>, and <a href="http://ja.wikipedia.org/wiki/UTF-16">UTF-16</a> を参照してください) 。</p>
    
-   <p>Record Deliminters – For load statements Pig interprets the line feed ( '\n' ), carriage return ( '\r' or CTRL-M) and combined CR + LF ( '\r\n' ) characters as record delimiters (do not use these characters as field delimiters). For store statements Pig uses the line feed ('\n') character as the record delimiter.</p>
+   <p>レコード区切り - LOAD 文では Pig は LF ('\n'), CR ('\r' または Ctrl-M), または CR + LF ('\r\n') をレコード区切りとして扱います (これらの文字をフィールド区切りとして用いてはいけません) 。 STORE 文では LF ('\n') をレコード区切りとして使います。</p>
    
 <p><strong>Schemas</strong></p>    
    
