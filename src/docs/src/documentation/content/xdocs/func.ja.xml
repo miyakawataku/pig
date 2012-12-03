@@ -1272,10 +1272,10 @@ a = load 'a.json' using JsonLoader();
      <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
    <section id="pigdump">
    <title>PigDump</title>
-   <p>Stores data in UTF-8 format.</p>
+   <p>データを UTF-8 形式で保存します。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1285,25 +1285,25 @@ a = load 'a.json' using JsonLoader();
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
-               <p>none</p>
+               <p>なし</p>
             </td>
             <td>
-               <p>no parameters</p>
+               <p>パラメータは無し</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>PigDump stores data as tuples in human-readable UTF-8 format. </p></section>
+   <title>用法</title>
+   <p>PigDump はデータを人間が読める UTF-8 形式で保存します。</p></section>
    
    <section>
-   <title>Example</title>
-   <p>In this example PigDump is used with the STORE function.</p>
+   <title>例</title>
+   <p>次の例では、 PigDump をストア関数として使っています。</p>
 <source>
 STORE X INTO 'output' USING PigDump();
 </source>
