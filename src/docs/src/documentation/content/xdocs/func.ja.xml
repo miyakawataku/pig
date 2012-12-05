@@ -1484,26 +1484,25 @@ A = LOAD 'data' USING TextLoader();
 <!-- ======================================================== -->  
 <!-- Math Functions -->
 <section id="math-functions">
-<title>Math Functions</title>
+<title>数学関数</title>
 
-<p>For general information about these functions, see the <a href="http://download.oracle.com/javase/6/docs/api/">Java API Specification</a>, 
-<a href="http://download.oracle.com/javase/6/docs/api/java/lang/Math.html">Class Math</a>. Note the following:</p>
+<p>数学関数について一般的な情報は 、<a href="http://docs.oracle.com/javase/jp/6/api/">Java API 仕様</a>、および <a href="http://docs.oracle.com/javase/jp/6/api/java/lang/Math.html">Math クラス</a> を見てください。ただし、下記の点に注意してください:</p>
 
 <ul>
 		<li>
-<p>Pig function names are case sensitive and UPPER CASE.</p>
+<p>Pig の関数名はすべて大文字です。大文字・小文字は区別されます。</p>
 	</li>
 	<li>
-<p>Pig may process results differently than as stated in the Java API Specification:</p>
+<p>いくつかの場合に Pig は Java API 仕様の記述とは異なった形で結果を戻します:</p>
 <ul>
 	<li>
-<p>If the result value is null or empty, Pig returns null.</p>
+<p>結果が null か空だった場合、 Pig は null を戻します。</p>
 	</li>
 		<li>
-<p>If the result value is not a number (NaN), Pig returns null.</p>
+<p>結果が NaN だった場合、 Pig は null を戻します。</p>
 	</li>
 		<li>
-<p>If Pig is unable to process the expression, Pig returns an exception.</p>
+<p>Pig は引数を処理出来なかった場合に例外を発生します。</p>
 	</li>
 </ul> 
 	</li>
