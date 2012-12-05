@@ -1367,69 +1367,69 @@ STORE X INTO 'output' USING PigDump();
    
    <p>レコード区切り - LOAD 文では Pig は LF ('\n'), CR ('\r' または Ctrl-M), または CR + LF ('\r\n') をレコード区切りとして扱います (これらの文字をフィールド区切りとして用いてはいけません) 。 STORE 文では LF ('\n') をレコード区切りとして使います。</p>
    
-<p><strong>Schemas</strong></p>    
+<p><strong>スキーマ</strong></p>    
    
-<p>If the schema option is specified, a hidden ".pig_schema" file is created in the output directory when storing data. It is used by PigStorage (with or without -schema) during loading to determine the field names and types of the data without the need for a user to explicitly provide the schema in an as clause, unless <code>noschema</code> is specified. No attempt to merge conflicting schemas is made during loading. The first schema encountered during a file system scan is used. </p>   
+<p>schema オプションを指定すると、データの保存時に ".pig_schema" という隠しファイルが出力ディレクトリに作成されます。このファイルは PigStorage によるロード時に (schema オプションが指定されるか否かにかかわらず) 使用されます。これによって、ユーザが AS 節で明示的にスキーマを指定することなしに、フィールド名と型が決定できます。ただし、 <code>noschema</code> オプションが指定された場合には、 ".pig_schema" ファイルは無視されます。複数の矛盾するスキーマファイルが存在する場合には、それらをマージすることはなく、単純に最初に見つかったスキーマファイルが使われます。</p>
 
-<p>Additionally, if the schema option is specified, a ".pig_headers" file is created in the output directory. This file simply lists the delimited aliases. This is intended to make export to tools that can read files with header lines easier (just cat the header to your data). </p>
+<p>加えて、 schema オプションが指定された場合には、出力ディレクトリに ".pig_headers" ファイルも作成されます。このファイルは単純に列の別名を羅列したものです。これによって、ヘッダ行を扱うツール向けにデータをエクスポートするのが簡単になります (単純にヘッダ行をデータに追加すればよいのです) 。</p>
 
-<p>If the schema option is NOT specified, a schema will not be written when storing data.</p>
+<p>schema オプションが指定されなかった場合には、データ保存時にスキーマは書き出されません。</p>
 
-<p>If the noschema option is NOT specified, and a schema is found, it gets loaded when loading data.</p>
+<p>noschema オプションが指定されなかった時にスキーマファイルが見つかった場合、スキーマファイルはロードに利用されます。</p>
 
-<p>Note that regardless of whether or not you store the schema, you always need to specify the correct delimiter to read your data. If you store reading delimiter "#" and then load using the default delimiter, your data will not be parsed correctly.</p>   
+<p>スキーマファイルを使うか否かにかかわらず、常に正しい区切り文字を指定する必要があることに注意してください。区切り文字を "#" としてデータを保存した後に、デフォルトの区切り文字でデータを読み込んだら、データは正しく解釈されません。</p>   
 
-<p><strong>Record Provenance</strong></p>
-<p>If tagsource option is specified, PigStorage will add a psudo-column INPUT_FILE_NAME to the beginning of the record. As the name suggests, it is the input file name containing this particular record.</p>
+<p><strong>レコードの起源</strong></p>
+<p>tagsource オプションが指定された場合には、 PigStorage はレコードの最初に INPUT_FILE_NAME 擬似列を追加します。名前が示すとおり、この列にはレコードの読み込み元のファイル名が格納されます。</p>
    
-  <p><strong>Complex Data Types</strong></p>   
-  <p>The formats for complex data types are shown here:</p>
+  <p><strong>複合データ型</strong></p>   
+  <p>複合型の書式は次の通りです:</p>
  <ul>
-		<li><a href="basic.html#tuple">Tuple</a>: enclosed by (), items separated by ","
+		<li><a href="basic.html#tuple">タプル</a>: () で括られ、要素間は "," で区切られます
 		<ul>
-			<li>Non-empty tuple: (item1,item2,item3)</li>
-		    <li>Empty tuple is valid: ()</li>
+			<li>空でないタプル: (item1,item2,item3)</li>
+		    <li>空のタプル: ()</li>
 		</ul>
 		</li>
-		<li><a href="basic.html#bag">Bag</a>: enclosed by {}, tuples separated by ","
+		<li><a href="basic.html#bag">バッグ</a>: {} で括られ、タプルは "," で区切られます
 		<ul>
-			<li>Non-empty bag: {code}{(tuple1),(tuple2),(tuple3)}{code}</li>
-		    <li>Empty bag is valid: {}</li>
+			<li>空でないバッグ: {code}{(tuple1),(tuple2),(tuple3)}{code}</li>
+		    <li>空のバッグ: {}</li>
 		</ul>		
 		</li>
-		<li><a href="basic.html#map">Map</a>: enclosed by [], items separated by ",", key and value separated by "#"
+		<li><a href="basic.html#map">マップ</a>: [] で括られ、要素間は "," で区切られ、キーと値は "#" で区切られます
 		<ul>
-			<li>Non-empty map: [key1#value1,key2#value2]</li>
-		    <li>Empty map is valid: []</li>
+			<li>空でないマップ: [key1#value1,key2#value2]</li>
+		    <li>空のマップ: []</li>
 		</ul>		
 		</li>
 </ul>
-   <p>If load statement specify a schema, Pig will convert the complex type according to schema. If conversion fails, the affected item will be null (see <a href="basic.html#nulls">Nulls and Pig Latin</a>). </p>
+   <p>LOAD 文でスキーマを指定していた場合、 Pig はスキーマに従って複合データ型を変換します。変換が失敗した場合には、その項目は null になります (詳細は <a href="basic.html#nulls">Pig Latin における null</a> を見てください) 。</p>
    
 
    </section>
    
    <section>
-   <title>Examples</title>
-   <p>In this example PigStorage expects input.txt to contain tab-separated fields and newline-separated records. The statements are equivalent.</p>
+   <title>例</title>
+   <p>次の例では、 PigStorage を使って、 input.txt を、フィールドがタブ区切り、レコードが改行区切りのデータとして読み込んでいます。 2 つの行は同じ意味になります。</p>
 <source>
 A = LOAD 'student' USING PigStorage('\t') AS (name: chararray, age:int, gpa: float); 
 
 A = LOAD 'student' AS (name: chararray, age:int, gpa: float);
 </source>
    
-   <p>In this example PigStorage stores the contents of X into files with fields that are delimited with an asterisk ( * ). The STORE function specifies that the files will be located in a directory named output and that the files will be named part-nnnnn (for example, part-00000).</p>
+   <p>次の例では、 PigStorage を使って、 X の内容をアスタリスク ( * ) 区切りのファイル群として保存しています。この STORE 文では、 output という名前のディレクトリの下に、 part-nnnnn (たとえば part-00000) という名前でファイルが保存されます。</p>
 <source>
 STORE X INTO  'output' USING PigStorage('*');
 </source>
 
-<p>In this example, PigStorage loads data with complex data type, a bag of map and double.</p>
+<p>次の例では、 PigStorage を使って、複合型のデータ (マップと double からなるバッグ) を読み込んでいます。</p>
 <source>
 a = load '1.txt' as (a0:{t:(m:map[int],d:double)});
 
-{([foo#1,bar#2],34.0),([white#3,yellow#4],45.0)} : valid
-{([foo#badint],baddouble)} : conversion fail for badint/baddouble, get {([foo#],)}
-{} : valid, empty bag
+{([foo#1,bar#2],34.0),([white#3,yellow#4],45.0)} : 正しいデータ
+{([foo#badint],baddouble)} : badint と baddouble で変換が失敗し、結局 {([foo#],)} として読み込まれます
+{} : 正しい空のバッグ
 </source>
 </section>
 </section>
