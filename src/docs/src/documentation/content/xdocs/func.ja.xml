@@ -1438,10 +1438,10 @@ a = load '1.txt' as (a0:{t:(m:map[int],d:double)});
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
    <section id="textloader">
    <title>TextLoader</title>
-   <p>Loads unstructured data in UTF-8 format.</p>
+   <p>UTF-8 形式の構造化されていないデータを読み込みます。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1452,28 +1452,28 @@ a = load '1.txt' as (a0:{t:(m:map[int],d:double)});
    </section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
-               <p>none</p>
+               <p>なし</p>
             </td>
             <td>
-               <p>no parameters</p>
+               <p>パラメータは無し</p>
             </td>
          </tr> 
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>TextLoader works with unstructured data in UTF8 format. Each resulting tuple contains a single field with one line of input text. TextLoader also supports <a href="#Handling-Compression">compression</a>.</p>
-   <p>Currently, TextLoader support for compression is limited.</p>  
-   <p>TextLoader cannot be used to store data.</p>
+   <title>用法</title>
+   <p>TextLoader は UTF-8 形式の構造化されていないファイルに使います。読み込まれたそれぞれのタプルは、読み込んだ文字列の 1 行を 1 つのフィールドとして持ちます。 TextLoader は<a href="#handling-compression">圧縮</a>をサポートします。</p>
+   <p>現在のところ、 TextLoader における圧縮には制限があります。</p>  
+   <p>TextLoader をデータの保存に使うことはできません。</p>
    </section>
    
    <section>
-   <title>Example</title>
-   <p>In this example TextLoader is used with the LOAD function.</p>
+   <title>例</title>
+   <p>次の例では、 LOAD 時に TextLoader を使っています。</p>
 <source>
 A = LOAD 'data' USING TextLoader();
 </source>
