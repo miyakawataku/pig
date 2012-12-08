@@ -1550,10 +1550,10 @@ A = LOAD 'data' USING TextLoader();
     
 <section id="acos">
    <title>ACOS</title>
-   <p>Returns the arc cosine of an expression.</p>
+   <p>引数のアークコサイン (逆余弦) の値を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1563,14 +1563,14 @@ A = LOAD 'data' USING TextLoader();
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result is type double.</p>
+               <p>double 型の式。</p>
             </td>
          </tr>
         
@@ -1578,10 +1578,8 @@ A = LOAD 'data' USING TextLoader();
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the ACOS function to return the arc cosine of an expression.
-  </p>
+     <title>用法</title>
+     <p>ACOS 関数は逆余弦の値を求めるために使います。</p>
    </section>
    
 </section>    
