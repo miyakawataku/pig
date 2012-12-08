@@ -1900,11 +1900,10 @@ A = LOAD 'data' USING TextLoader();
   
  <section id="exp">
    <title>EXP</title>
-   <p>Returns Euler's number e raised to the power of x.
-</p>
+   <p>オイラー数の x 乗の値を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1914,14 +1913,14 @@ A = LOAD 'data' USING TextLoader();
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result is type double.</p>
+               <p>double 型の値。</p>
             </td>
          </tr>
         
@@ -1929,10 +1928,8 @@ A = LOAD 'data' USING TextLoader();
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the EXP function to return the value of Euler's number e raised to the power of x (where x is the result value of the expression).
-     </p>
+     <title>用法</title>
+     <p>EXP 関数は、引数 x に対して、オイラー数 e を x 乗した値を求めるために使います。</p>
    </section>
 </section>    
   
