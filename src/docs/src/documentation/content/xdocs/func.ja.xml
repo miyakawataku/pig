@@ -1626,7 +1626,7 @@ A = LOAD 'data' USING TextLoader();
   
  <section id="atan">
    <title>ATAN</title>
-   <p>式の逆正接の値を戻します。</p>
+   <p>引数の逆正接の値を戻します。</p>
 
 <section>
    <title>文法</title>
@@ -1664,10 +1664,10 @@ A = LOAD 'data' USING TextLoader();
   
  <section id="cbrt">
    <title>CBRT</title>
-   <p>Returns the cube root of an expression.</p>
+   <p>引数の立方根の値を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1677,14 +1677,14 @@ A = LOAD 'data' USING TextLoader();
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result is type double.</p>
+               <p>double 型の式。</p>
             </td>
          </tr>
         
@@ -1692,10 +1692,8 @@ A = LOAD 'data' USING TextLoader();
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the CBRT function to return the cube root of an expression. 
-</p>
+     <title>用法</title>
+     <p>CBRT 関数は立方根の値を求めるために使います。</p>
    </section>
 
 </section>  
