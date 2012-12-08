@@ -2288,10 +2288,10 @@ A = LOAD 'data' USING TextLoader();
 <!-- ======================================================== -->  
  <section id="sin">
    <title>SIN</title>
-   <p>Returns the sine of an expression.</p>
+   <p>引数のサイン (正弦) の値を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2301,14 +2301,14 @@ A = LOAD 'data' USING TextLoader();
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result is double.</p>
+               <p>double 型の式。</p>
             </td>
          </tr>
         
@@ -2316,20 +2316,18 @@ A = LOAD 'data' USING TextLoader();
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the SIN function to return the sine of an expession. 
-     </p>
+     <title>用法</title>
+     <p>SIN 関数は引数のサイン (正弦) の値を求めるために使います。</p>
    </section>
 </section>       
   
 <!-- ======================================================== -->  
  <section id="sinh">
    <title>SINH</title>
-   <p>Returns the hyperbolic sine of an expression.</p>
+   <p>引数のハイパボリックサインの値を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2339,14 +2337,14 @@ Use the SIN function to return the sine of an expession.
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result is double.</p>
+               <p>double 型の式。</p>
             </td>
          </tr>
         
@@ -2354,10 +2352,8 @@ Use the SIN function to return the sine of an expession.
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the SINH function to return the hyperbolic sine of an expression. 
-     </p>
+     <title>用法</title>
+     <p>SINH 関数はハイパボリックサインの値を求めるために使います。</p>
    </section>
 </section>
 
