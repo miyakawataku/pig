@@ -1486,7 +1486,7 @@ A = LOAD 'data' USING TextLoader();
 <section id="math-functions">
 <title>数学関数</title>
 
-<p>数学関数について一般的な情報は 、<a href="http://docs.oracle.com/javase/jp/6/api/">Java API 仕様</a>、および <a href="http://docs.oracle.com/javase/jp/6/api/java/lang/Math.html">Math クラス</a> を見てください。ただし、下記の点に注意してください:</p>
+<p>数学関数に関する一般的な情報については、<a href="http://docs.oracle.com/javase/jp/6/api/">Java API 仕様</a>、および <a href="http://docs.oracle.com/javase/jp/6/api/java/lang/Math.html">Math クラス</a>を見てください。ただし、下記の点に注意してください:</p>
 
 <ul>
 		<li>
@@ -2475,20 +2475,19 @@ A = LOAD 'data' USING TextLoader();
 
 <!-- String Functions -->
 <section id="string-functions">
-<title>String Functions</title>
+<title>文字列関数</title>
 
-<p>For general information about these functions, see the <a href="http://download.oracle.com/javase/6/docs/api/">Java API Specification</a>, 
-<a href="http://download.oracle.com/javase/6/docs/api/java/lang/String.html">Class String</a>. Note the following:</p>
+<p>文字列関数に関する一般的な情報については、 <a href="http://docs.oracle.com/javase/jp/6/api/">Java API 仕様</a>、および <a href="http://docs.oracle.com/javase/jp/6/api/java/lang/String.html">String クラス</a>を見てください。ただし、下記の点に注意してください:</p>
 
 <ul>
 	<li>
-<p>Pig function names are case sensitive and UPPER CASE.</p>
+<p>Pig の関数名はすべて大文字です。大文字・小文字は区別されます。</p>
 	</li>
 		<li>
-<p>Pig string functions have an extra, first parameter: the string to which all the operations are applied.</p>
+<p>Pig の文字列関数は、関数の適用対象となる文字列を、最初の引数として取ります。</p>
 	</li>
 		<li>
-<p>Pig may process results differently than as stated in the Java API Specification. If any of the input parameters are null or if an insufficient number of parameters are supplied, NULL is returned.</p>
+<p>Pig は Java API 仕様の記述とは異なった形で結果を戻す場合があります。引数のいずれかが null であったり、引数の数が足りなかった場合、 Pig は null を戻します。</p>
 	</li>
 
 </ul>
