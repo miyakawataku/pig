@@ -1823,11 +1823,10 @@ A = LOAD 'data' USING TextLoader();
   
  <section id="cos">
    <title>COS</title>
-   <p>Returns the trigonometric cosine of an expression.
-</p>
+   <p>引数のコサイン (余弦) の値を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1837,14 +1836,14 @@ A = LOAD 'data' USING TextLoader();
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression (angle) whose result is type double.</p>
+               <p>角度を表す double 型の値。</p>
             </td>
          </tr>
         
@@ -1852,10 +1851,8 @@ A = LOAD 'data' USING TextLoader();
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the COS function to return the trigonometric cosine of an expression.
-     </p>
+     <title>用法</title>
+     <p>COS 関数はコサインの値を求めるために使います。</p>
    </section>
    
 </section>    
@@ -1864,11 +1861,10 @@ Use the COS function to return the trigonometric cosine of an expression.
   
  <section id="cosh">
    <title>COSH</title>
-   <p>Returns the hyperbolic cosine of an expression.
-</p>
+   <p>引数のハイパボリックコサインの値を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1878,14 +1874,14 @@ Use the COS function to return the trigonometric cosine of an expression.
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result is type double.</p>
+               <p>double 型の値。</p>
             </td>
          </tr>
         
@@ -1893,10 +1889,8 @@ Use the COS function to return the trigonometric cosine of an expression.
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the COSH function to return the hyperbolic cosine of an expression. 
-     </p>
+     <title>用法</title>
+     <p>COSH 関数はハイパボリックコサインの値を求めるために使います。</p>
    </section>
 </section>    
   
