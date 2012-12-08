@@ -2397,10 +2397,10 @@ A = LOAD 'data' USING TextLoader();
 <!-- ======================================================== -->  
  <section id="tan">
    <title>TAN</title>
-   <p>Returns the trignometric tangent of an angle.</p>
+   <p>引数のタンジェント (正接) の値を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2410,14 +2410,14 @@ A = LOAD 'data' USING TextLoader();
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression (angle) whose result is double.</p>
+               <p>角度を表す double 型の式。</p>
             </td>
          </tr>
         
@@ -2425,10 +2425,8 @@ A = LOAD 'data' USING TextLoader();
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the TAN function to return the trignometric tangent of an angle.
-     </p>
+     <title>用法</title>
+     <p>TAN 関数はタンジェント (正接) の値を求めるために使います。</p>
    </section>
 
 </section>
@@ -2436,10 +2434,10 @@ Use the TAN function to return the trignometric tangent of an angle.
 <!-- ======================================================== -->  
  <section id="tanh">
    <title>TANH</title>
-   <p>Returns the hyperbolic tangent of an expression. </p>
+   <p>引数のハイパボリックタンジェントの値を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2449,14 +2447,14 @@ Use the TAN function to return the trignometric tangent of an angle.
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result is double.</p>
+               <p>double 型の式。</p>
             </td>
          </tr>
         
@@ -2464,10 +2462,8 @@ Use the TAN function to return the trignometric tangent of an angle.
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the TANH function to return the hyperbolic tangent of an expression. 
-     </p>
+     <title>用法</title>
+     <p>TANH 関数はハイパボリックタンジェントの値を求めるために使います。</p>
    </section>
 </section>
 </section>
