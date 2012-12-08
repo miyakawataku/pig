@@ -2132,10 +2132,10 @@ A = LOAD 'data' USING TextLoader();
   
  <section id="random">
    <title>RANDOM</title>
-   <p>Returns a pseudo random number.</p>
+   <p>擬似乱数を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2145,14 +2145,14 @@ A = LOAD 'data' USING TextLoader();
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>N/A</p>
             </td>
             <td>
-               <p>No terms.</p>
+               <p>引数はありません。</p>
             </td>
          </tr>
         
@@ -2160,10 +2160,8 @@ A = LOAD 'data' USING TextLoader();
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the RANDOM function to return a pseudo random number (type double) greater than or equal to 0.0 and less than 1.0.
-     </p>  
+     <title>用法</title>
+     <p>RANDOM 関数は 0.0 以上 1.0 未満の double 型の擬似乱数を求めるために使います。</p>  
    </section>
 </section>     
   
