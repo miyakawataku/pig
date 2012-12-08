@@ -2058,10 +2058,10 @@ A = LOAD 'data' USING TextLoader();
   
  <section id="log">
    <title>LOG</title>
-   <p>Returns the natural logarithm (base e) of an expression.</p>
+   <p>引数の自然対数 (e を底とする) を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2071,14 +2071,14 @@ A = LOAD 'data' USING TextLoader();
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result is type double.</p>
+               <p>double 型の式。</p>
             </td>
          </tr>
         
@@ -2086,10 +2086,8 @@ A = LOAD 'data' USING TextLoader();
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the LOG function to return the natural logarithm (base e) of an expression.
-     </p>
+     <title>用法</title>
+     <p>LOG 関数は引数の自然対数 (e 底とする) を求めるために使います。</p>
    </section>
 </section>     
   
@@ -2097,10 +2095,10 @@ Use the LOG function to return the natural logarithm (base e) of an expression.
   
  <section id="log10">
    <title>LOG10</title>
-   <p>Returns the base 10 logarithm of an expression.</p>
+   <p>引数の 10 を底とする対数を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2110,14 +2108,14 @@ Use the LOG function to return the natural logarithm (base e) of an expression.
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result is type double.</p>
+               <p>double 型の式。</p>
             </td>
          </tr>
         
@@ -2125,10 +2123,8 @@ Use the LOG function to return the natural logarithm (base e) of an expression.
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the LOG10 function to return the base 10 logarithm of an expression.
-     </p>
+     <title>用法</title>
+     <p>LOG10 関数は 10 を底とする対数を求めるために使います。</p>
    </section>
 </section>     
 
