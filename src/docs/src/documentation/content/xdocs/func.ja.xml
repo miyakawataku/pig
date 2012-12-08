@@ -1579,7 +1579,7 @@ A = LOAD 'data' USING TextLoader();
    
 <section>
      <title>用法</title>
-     <p>ACOS 関数は逆余弦の値を求めるために使います。</p>
+     <p>ACOS 関数はアークコサイン (逆余弦) の値を求めるために使います。</p>
    </section>
    
 </section>    
@@ -1587,7 +1587,7 @@ A = LOAD 'data' USING TextLoader();
   <!-- ======================================================== -->     
     <section id="asin">
    <title>ASIN</title>
-   <p>引数の逆正弦の値を戻します。</p>
+   <p>引数のアークサイン (逆正弦) の値を戻します。</p>
 
 <section>
    <title>文法</title>
@@ -1618,7 +1618,7 @@ A = LOAD 'data' USING TextLoader();
    
 <section>
      <title>用法</title>
-     <p>ASIN 関数は引数の逆正弦の値を求めるために使います。</p>
+     <p>ASIN 関数は引数のアークサイン (逆正弦) の値を求めるために使います。</p>
    </section>
 </section>
    
@@ -1626,7 +1626,7 @@ A = LOAD 'data' USING TextLoader();
   
  <section id="atan">
    <title>ATAN</title>
-   <p>引数の逆正接の値を戻します。</p>
+   <p>引数のアークタンジェント (逆正接) の値を戻します。</p>
 
 <section>
    <title>文法</title>
@@ -1655,7 +1655,7 @@ A = LOAD 'data' USING TextLoader();
    
 <section>
      <title>用法</title>
-     <p>ATAN 関数は逆正接の値を求めるために使います。</p>
+     <p>ATAN 関数はアークタンジェント (逆正接) の値を求めるために使います。</p>
    </section>
    
 </section>  
