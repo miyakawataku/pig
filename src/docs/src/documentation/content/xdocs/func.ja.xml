@@ -1512,10 +1512,10 @@ A = LOAD 'data' USING TextLoader();
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="abs">
    <title>ABS</title>
-   <p>Returns the absolute value of an expression.</p>
+   <p>引数の絶対値を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -1525,25 +1525,22 @@ A = LOAD 'data' USING TextLoader();
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>Any expression whose result is type int, long, float, or double.</p>
+               <p>int, long, float, double のいずれかの型の式。</p>
             </td>
          </tr>
           
    </table></section>
    
 <section>
-     <title>Usage</title>
-     <p>
-	Use the ABS function to return the absolute value of an expression. 
-    If the result is not negative (x &#8805; 0), the result is returned. If the result is negative (x &lt; 0), the negation of the result is returned.
-    </p>
+     <title>用法</title>
+     <p>ABS 関数は絶対値を求めるために使います。引数が非負の値 (x &#8805; 0) である時は、引数の値をそのまま戻します。引数が負の値 (x &lt; 0) である時は、反数を戻します。</p>
 
 </section>
    
