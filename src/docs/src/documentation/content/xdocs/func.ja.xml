@@ -3134,10 +3134,10 @@ DUMP b;
 <!-- ======================================================== -->
  <section id="tobag">
    <title>TOBAG</title>
-   <p>Converts one or more expressions to type bag. </p>
+   <p>1 つから複数の要素をバッグにまとめます。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -3149,30 +3149,28 @@ DUMP b;
  </section>
 
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression with any data type.</p>
+               <p>任意の型の式。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>Use the TOBAG function to convert one or more expressions to individual tuples which are then placed in a bag.</p>
-     <p>See also: <a href="basic.html#bag">Bag</a> data type and <a href="basic.html#type-construction">Type Construction Operators</a></p>
+     <title>用法</title>
+     <p>TOBAG 関数は 1 つから複数の式をそれぞれタプルに括った上でバッグにまとめます。</p>
+     <p><a href="basic.html#bag">バッグ</a>と<a href="basic.html#type-construction">型構築演算子</a>も参照してください。</p>
  </section>
  
  <section>
-     <title>Example</title>
-     <p>
-In this example, fields f1 and f3 are converted to tuples that are then placed in a bag.
-     </p>
+     <title>例</title>
+     <p>次の例では、フィールド f1 と f3 をそれぞれタプルに括って、バッグにまとめています。</p>
  <source>
 a = LOAD 'student' AS (f1:chararray, f2:int, f3:float);
 DUMP a;
