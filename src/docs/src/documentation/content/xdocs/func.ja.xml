@@ -3276,10 +3276,10 @@ Output (results)
  <!-- ======================================================== -->  
  <section id="topx">
    <title>TOP</title>
-   <p>Returns the top-n tuples from a bag of tuples.</p>
+   <p>バッグの各タプルを特定の列が大きい方から N 個のタプルを戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -3291,14 +3291,14 @@ Output (results)
  </section>
 
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>topN</p>
             </td>
             <td>
-               <p>The number of top tuples to return (type integer).</p>
+               <p>結果として切り出すタプルの個数を表す int 型の式。</p>
             </td>
          </tr> 
                 <tr>
@@ -3306,7 +3306,7 @@ Output (results)
                <p>column</p>
             </td>
             <td>
-               <p>The tuple column whose values are being compared.</p>
+               <p>タプル中の比較する列のインデックス。</p>
             </td>
          </tr> 
                 <tr>
@@ -3314,31 +3314,27 @@ Output (results)
                <p>relation</p>
             </td>
             <td>
-               <p>The relation (bag of tuples) containing the tuple column.</p>
+               <p>比較する列を含むバッグ。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>
-TOP function returns a bag containing top N tuples from the input bag where N is controlled by the first parameter to the function. The tuple comparison is performed based on a single column from the tuple. The column position is determined by the second parameter to the function. The function assumes that all tuples in the bag contain an element of the same type in the compared column
-     </p>
+     <title>用法</title>
+     <p>TOP 関数はバッグの各要素について、特定の列の値が大きい方から、最初の引数で指定した個数分のタプルを含むバッグを戻します。タプル同士の比較は、タプル中の単一の列で行われます。列の一は二番目の引数で指定します。この関数は、バッグ中のすべてのタプルについて、比較に使う列が同じ型の値を保持していることを前提としています。</p>
 </section>
  
  <section>
-     <title>Example</title>
-     <p>
-In this example the top 10 occurrences are returned.
-     </p>
+     <title>例</title>
+     <p>次の例では、出現度数の上位 10 件を戻しています。</p>
  <source>
 A = LOAD 'data' as (first: chararray, second: chararray);
 B = GROUP A BY (first, second);
-C = FOREACH B generate FLATTEN(group), COUNT(*) as count;
-D = GROUP C BY first; // again group by first
+C = FOREACH B generate FLATTEN(group), COUNT(A) as count;
+D = GROUP C BY first; // first 列のみでグループ化
 topResults = FOREACH D {
-    result = TOP(10, 2, C); // and retain top 10 occurrences of 'second' in first
+    result = TOP(10, 2, C); // second 列の値が大きい方から 10 件を取得します
     GENERATE FLATTEN(result);
 }
 </source>
