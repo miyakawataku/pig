@@ -2991,10 +2991,10 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
 <!-- ======================================================== -->  
  <section id="ucfirst">
    <title>UCFIRST</title>
-   <p>Returns a string with the first character converted to upper case. </p>
+   <p>文字列中の最初の文字を大文字にします。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -3005,34 +3005,32 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result type is chararray.</p>
+               <p>chararray 型の式。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>
-Use the UCFIRST function to convert only the first character in a string to upper case. 
-     </p>
+     <title>用法</title>
+     <p>UCFIRST 関数は文字列中の最初の文字を大文字にするために使います。</p>
 </section>
 </section>
 
 <!-- ======================================================== -->  
  <section id="upper">
    <title>UPPER</title>
-   <p>Returns a string converted to upper case. </p>
+   <p>文字列中のすべての文字を大文字にします。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -3043,24 +3041,22 @@ Use the UCFIRST function to convert only the first character in a string to uppe
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result type is chararray. </p>
+               <p>chararray 型の式。</p>
             </td>
          </tr> 
    </table>
 </section>
    
 <section>
-     <title>Usage</title>
-     <p>
-Use the UPPER function to convert all characters in a string to upper case.
-     </p>
+     <title>用法</title>
+     <p>UPPER 関数は文字列中のすべての文字を大文字にするために使います。</p>
    </section>
 </section>
  
