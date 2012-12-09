@@ -3197,10 +3197,10 @@ DUMP b;
 <!-- ======================================================== -->
  <section id="tomap">
    <title>TOMAP</title>
-   <p>Converts key/value expression pairs into a map. </p>
+   <p>キー・値のペアの並びをマップにまとめます。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -3212,14 +3212,14 @@ DUMP b;
  </section>
 
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>key-expression</p>
             </td>
             <td>
-               <p>An expression of type chararray.</p>
+               <p>chararray 型の式。</p>
             </td>
          </tr> 
                 <tr>
@@ -3227,33 +3227,30 @@ DUMP b;
                <p>value-expression</p>
             </td>
             <td>
-               <p>An expression of any type supported by a map.</p>
+               <p>マップの値としてサポートされている任意の型の式。</p>
             </td>
          </tr>
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>Use the TOMAP function to convert pairs of expressions into a map. Note the following:</p>
+     <title>用法</title>
+     <p>TOMAP 関数はキー・値のペアの並びをマップにまとめます。下記の点に注意してください:</p>
      <ul>
-<li>You must supply an even number of expressions as parameters</li>
-<li>The elements must comply with map type rules:
+<li>引数の数は偶数である必要があります。</li>
+<li>各要素はマップ型のルールを満たす必要があります:
 <ul>
-<li>Every odd element (key-expression) must be a chararray since only chararrays can be keys into the map</li>
-<li>Every even element (value-expression) can be of any type supported by a map. </li>
+<li>奇数番目の引数はマップのキーになるため、 chararray 型である必要があります。マップのキーとして許されるのは chararray 型だけだからです。</li>
+<li>偶数番目の引数はマップの値になるため、マップの値として許される型である必要があります。</li>
 </ul>
 </li>
      </ul>
- <p></p>    
- <p>See also: <a href="basic.html#map">Map</a> data type and  <a href="basic.html#type-construction">Type Construction Operators</a></p>  
+ <p><a href="basic.html#map">マップ</a>と<a href="basic.html#type-construction">型構築演算子</a>も参照してください。</p>  
  </section>
  
  <section>
-     <title>Example</title>
-     <p>
-In this example, student names (type chararray) and student GPAs (type float) are used to create three maps.
-     </p>
+     <title>例</title>
+     <p>次の例では、学生の名前 (chararray 型) をキーとし、 GPA (float 型) を値とするマップを作っています。</p>
  <source>
 A = load 'students' as (name:chararray, age:int, gpa:float);
 B = foreach A generate TOMAP(name, gpa);
