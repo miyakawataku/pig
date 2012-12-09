@@ -2955,10 +2955,10 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
 <!-- ======================================================== -->  
  <section id="trim">
    <title>TRIM</title>
-   <p>Returns a copy of a string with leading and trailing white space removed.</p>
+   <p>先頭および最後尾の空白文字を取り除いた文字列を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2969,24 +2969,22 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression whose result is chararray. </p>
+               <p>chararray 型の式。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>
-Use the TRIM function to remove leading and trailing white space from a string.
-     </p>
+     <title>文法</title>
+     <p>TRIM 関数は、先頭および最後尾の空白文字を取り除くために使います。</p>
 </section>
 </section> 
 
