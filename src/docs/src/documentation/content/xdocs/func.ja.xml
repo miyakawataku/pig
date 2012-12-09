@@ -3068,16 +3068,16 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
 <!-- ======================================================== -->
 <!-- Other Functions -->
 <section id="bag-tuple-functions">
-<title>Tuple, Bag, Map Functions</title>
+<title>タプル、バッグ、マップ関数</title>
 
 <!-- ======================================================== -->  
  <section id="totuple">
    <title>TOTUPLE</title>
-   <p>Converts one or more expressions to type tuple. </p>
+   <p>1 つから複数の要素をタプルにまとめます。</p>
 
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -3089,30 +3089,28 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
  </section>
 
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>expression</p>
             </td>
             <td>
-               <p>An expression of any datatype.</p>
+               <p>任意の型の式。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>Use the TOTUPLE function to convert one or more expressions to a tuple.</p>
-        <p>See also: <a href="basic.html#tuple">Tuple</a> data type and <a href="basic.html#type-construction">Type Construction Operators</a></p>
+     <title>用法</title>
+     <p>TOTUPLE 関数は 1 つから複数の要素をタプルにまとめるために使います。</p>
+        <p><a href="basic.html#tuple">タプル</a>と<a href="basic.html#type-construction">型構築演算子</a>も参照してください。</p>
  </section>
  
  <section>
-     <title>Example</title>
-     <p>
-In this example, fields f1, f2 and f3 are converted to a tuple.
-     </p>
+     <title>例</title>
+     <p>次の例では、フィールド f1, f2, f3 をタプルにまとめています。</p>
  <source>
 a = LOAD 'student' AS (f1:chararray, f2:int, f3:float);
 DUMP a;
