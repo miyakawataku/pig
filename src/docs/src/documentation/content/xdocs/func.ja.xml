@@ -2795,7 +2795,7 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
 <!-- ======================================================== -->  
  <section id="replace">
    <title>REPLACE</title>
-   <p>Replaces existing characters in a string with new characters.</p>
+   <p>既存の部分文字列を新しい文字列に置き換えます。</p>
 
 <section>
    <title>Syntax</title>
@@ -2816,7 +2816,7 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
                <p>string</p>
             </td>
             <td>
-               <p>The string to be updated.</p>
+               <p>置き換え対象の文字列。</p>
             </td>
          </tr> 
                 <tr>
@@ -2824,7 +2824,7 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
                <p>'oldChar'</p>
             </td>
             <td>
-               <p>The existing characters being replaced, in quotes. </p>
+               <p>単一引用符に括った、置き換える元の部分文字列。</p>
             </td>
          </tr> 
                 <tr>
@@ -2832,31 +2832,26 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
                <p>'newChar'</p>
             </td>
             <td>
-               <p>The new characters replacing the existing characters, in quotes.</p>
+               <p>単一引用符に括った、置き換え先の文字列。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>
-Use the REPLACE function to replace existing characters in a string with new characters.
-     </p>
-     <p>
-For example, to change "open source software" to "open source wiki" use this statement: 
-REPLACE(string,'software','wiki');
-     </p>
+     <title>用法</title>
+     <p>REPLACE 関数は既存の部分文字列を新しい文字列で置き換えるために使います。</p>
+     <p>例えば、 "open source software" を "open wiki software" に置き換えるためには次のようにします: REPLACE(string,'software','wiki')</p>
 </section>
 </section> 
 
 <!-- ======================================================== -->  
  <section id="strsplit">
    <title>STRSPLIT</title>
-   <p>Splits a string around matches of a given regular expression. </p>
+   <p>文字列を正規表現で分割します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2867,14 +2862,14 @@ REPLACE(string,'software','wiki');
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>string</p>
             </td>
             <td>
-               <p>The string to be split.</p>
+               <p>分割対象の文字列。</p>
             </td>
          </tr> 
                 <tr>
@@ -2882,7 +2877,7 @@ REPLACE(string,'software','wiki');
                <p>regex</p>
             </td>
             <td>
-               <p>The regular expression.</p>
+               <p>正規表現。</p>
             </td>
          </tr> 
                 <tr>
@@ -2890,20 +2885,16 @@ REPLACE(string,'software','wiki');
                <p>Limit</p>
             </td>
             <td>
-               <p>The number of times the pattern (the compiled representation of the regular expression) is applied.</p>
+               <p>分割の最大数。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>
-Use the STRSPLIT function to split a string around matches of a given regular expression.
-     </p>
-     <p>
-For example, given the string (open:source:software), STRSPLIT (string, ':',2) will return ((open,source:software)) and STRSPLIT (string, ':',3) will return ((open,source,software)).
-     </p>
+     <title>用法</title>
+     <p>STRSPLIT 関数は文字列を正規表現で分割するために使います。</p>
+     <p>たとえば、 '(open:source:software)' という文字列に対して STRSPLIT(string, ':',2) は、 ((open,source:software)) を戻します。 STRSPLIT(string, ':',3) は ((open,source,software)) を戻します。</p>
 </section>
 </section> 
 
