@@ -2495,10 +2495,10 @@ A = LOAD 'data' USING TextLoader();
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
  <section id="indexof">
    <title>INDEXOF</title>
-   <p>Returns the index of the first occurrence of a character in a string, searching forward from a start index. </p>
+   <p>文字列中で、開始位置から文字を前方に探索した時に、最初に出現する位置のインデックスを戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2509,14 +2509,14 @@ A = LOAD 'data' USING TextLoader();
  </section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>string</p>
             </td>
             <td>
-               <p>The string to be searched.</p>
+               <p>探索対象の文字列。</p>
             </td>
          </tr> 
                 <tr>
@@ -2524,7 +2524,7 @@ A = LOAD 'data' USING TextLoader();
                <p>'character'</p>
             </td>
             <td>
-               <p>The character being searched for, in quotes. </p>
+               <p>単一引用符に括った、探索する文字。</p>
             </td>
          </tr> 
                 <tr>
@@ -2532,18 +2532,15 @@ A = LOAD 'data' USING TextLoader();
                <p>startIndex</p>
             </td>
             <td>
-               <p>The index from which to begin the forward search. </p>
-               <p>The string index begins with zero (0).</p>
+               <p>探索開始位置の、 0 始まりのインデックス。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>
-Use the INDEXOF function to determine the index of the first occurrence of a character in a string. The forward search for the character begins at the designated start index.
-     </p>
+     <title>用法</title>
+     <p>INDEXOF 関数は文字の最初の出現位置を求めるために使います。指定した開始位置から前方探索します。</p>
 
 </section>
 </section> 
@@ -2551,28 +2548,28 @@ Use the INDEXOF function to determine the index of the first occurrence of a cha
 <!-- ======================================================== -->  
  <section id="last-index-of">
    <title>LAST_INDEX_OF</title>
-   <p>Returns the index of the last occurrence of a character in a string, searching backward from a start index. </p>
+   <p>文字列中で、開始位置から文字を後方に探索した時に、最後方で出現する位置のインデックスを戻します。</p>
 
 <section>
    <title>Syntax</title>
    <table>
        <tr>
             <td>
-               <p>LAST_INDEX_OF(expression)</p>
+               <p>LAST_INDEX_OF(string, 'character', startIndex)</p>
             </td>
          </tr>
    </table>
    </section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>string</p>
             </td>
             <td>
-               <p>The string to be searched.</p>
+               <p>探索対象の文字列。</p>
             </td>
          </tr> 
                 <tr>
@@ -2580,7 +2577,7 @@ Use the INDEXOF function to determine the index of the first occurrence of a cha
                <p>'character'</p>
             </td>
             <td>
-               <p>The character being searched for, in quotes.</p>
+               <p>単一引用符に括った、探索する文字。</p>
             </td>
          </tr> 
                 <tr>
@@ -2588,18 +2585,15 @@ Use the INDEXOF function to determine the index of the first occurrence of a cha
                <p>startIndex</p>
             </td>
             <td>
-               <p>The index from which to begin the backward search.</p>
-               <p>The string index begins with zero (0).</p>
+               <p>探索開始位置の、 0 始まりのインデックス。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>
-Use the LAST_INDEX_OF function to determine the index of the last occurrence of a character in a string. The backward search for the character begins at the designated start index.
-     </p>
+     <title>用法</title>
+     <p>LAST_INDEX_OF 関数は文字の最後方の出現位置を求めるために使います。指定した開始位置から後方探索します。</p>
 </section>
 </section> 
 
