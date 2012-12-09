@@ -2674,10 +2674,10 @@ A = LOAD 'data' USING TextLoader();
 <!-- ======================================================== -->
  <section id="regex-extract">
    <title>REGEX_EXTRACT </title>
-   <p>Performs regular expression matching and extracts the matched group defined by an index parameter. </p>
+   <p>正規表現マッチを行い、マッチしたグループをインデックス指定で抜き出します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2688,14 +2688,14 @@ A = LOAD 'data' USING TextLoader();
  </section>
 
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>string</p>
             </td>
             <td>
-               <p>The string in which to perform the match.</p>
+               <p>マッチ対象の文字列。</p>
             </td>
          </tr> 
         <tr>
@@ -2703,7 +2703,7 @@ A = LOAD 'data' USING TextLoader();
                <p>regex</p>
             </td>
             <td>
-               <p>The regular expression.</p>
+               <p>正規表現。</p>
             </td>
          </tr> 
          
@@ -2712,27 +2712,21 @@ A = LOAD 'data' USING TextLoader();
                <p>index</p>
             </td>
             <td>
-               <p>The index of the matched group to return.</p>
+               <p>抜き出すグループのインデックス。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>
-Use the REGEX_EXTRACT function to perform regular expression matching and to extract the matched group defined by the index parameter (where the index is a 1-based parameter.) The function uses Java regular expression form.
-     </p>
-     <p>
-The function returns a string that corresponds to the matched group in the position specified by the index. If there is no matched expression at that position, NULL is returned.
-     </p>
+     <title>用法</title>
+     <p>REGEX_EXTRACT 関数は正規表現マッチを行い、マッチしたグループを 1 始まりのインデックス指定で抜き出します。 Java 標準の正規表現を使います。</p>
+     <p>指定したインデックスに対応するグループを文字列として戻します。グループがマッチしなければ、 null を戻します。</p>
  </section>
  
  <section>
-     <title>Example</title>
-     <p>
-This example will return the string '192.168.1.5'.
-     </p>
+     <title>例</title>
+     <p>次の例では、文字列 '192.168.1.5' が戻ります。</p>
  <source>
 REGEX_EXTRACT('192.168.1.5:8020', '(.*)\:(.*)', 1);
 </source>
@@ -2744,28 +2738,28 @@ REGEX_EXTRACT('192.168.1.5:8020', '(.*)\:(.*)', 1);
 <!-- ======================================================== -->
  <section id="regex-extract-all">
    <title>REGEX_EXTRACT_ALL </title>
-   <p>Performs regular expression matching and extracts all matched groups.</p>
+   <p>正規表現マッチを行い、マッチしたグループをすべて戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
-               <p>REGEX_EXTRACT (string, regex)</p>
+               <p>REGEX_EXTRACT_ALL (string, regex)</p>
             </td>
          </tr>
    </table>
  </section>
 
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
        <tr>
             <td>
                <p>string</p>
             </td>
             <td>
-               <p>The string in which to perform the match.</p>
+               <p>マッチ対象の文字列。</p>
             </td>
          </tr> 
          
@@ -2774,27 +2768,21 @@ REGEX_EXTRACT('192.168.1.5:8020', '(.*)\:(.*)', 1);
                <p>regex</p>
             </td>
             <td>
-               <p>The regular expression.</p>
+               <p>正規表現。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>
-Use the REGEX_EXTRACT_ALL function to perform regular expression matching and to extract all matched groups. The function uses Java regular expression form.
-     </p>
-     <p>
-The function returns a tuple where each field represents a matched expression. If there is no match, an empty tuple is returned.
-     </p>
+     <title>文法</title>
+     <p>REGEX_EXTRACT_ALL 関数は正規表現マッチを行い、マッチしたグループをすべて得るために使います。 Java 標準の正規表現を使います。</p>
+     <p>各要素がマッチしたグループからなるタプルを戻します。マッチしなければ、空のタプルが戻ります。</p>
  </section>
  
  <section>
-     <title>Example</title>
-     <p>
-This example will return the tuple (192.168.1.5,8020).
-     </p>
+     <title>例</title>
+     <p>次の例では、タプル (192.168.1.5,8020) が戻ります。</p>
  <source>
 REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
 </source>
