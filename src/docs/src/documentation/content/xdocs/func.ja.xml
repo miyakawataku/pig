@@ -2894,17 +2894,17 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
 <section>
      <title>用法</title>
      <p>STRSPLIT 関数は文字列を正規表現で分割するために使います。</p>
-     <p>たとえば、 '(open:source:software)' という文字列に対して STRSPLIT(string, ':',2) は、 ((open,source:software)) を戻します。 STRSPLIT(string, ':',3) は ((open,source,software)) を戻します。</p>
+     <p>たとえば、 "open:source:software" という文字列に対して STRSPLIT(string, ':',2) は、 (open,source:software) を戻します。 STRSPLIT(string, ':',3) は (open,source,software) を戻します。</p>
 </section>
 </section> 
 
 <!-- ======================================================== -->  
  <section id="substring">
    <title>SUBSTRING</title>
-   <p>Returns a substring from a given string. </p>
+   <p>部分文字列を戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -2915,14 +2915,14 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
    </table></section>
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
           <tr>
             <td>
                <p>string</p>
             </td>
             <td>
-               <p>The string from which a substring will be extracted.</p>
+               <p>部分文字列を切り出す対象の文字列。</p>
             </td>
          </tr> 
        <tr>
@@ -2930,8 +2930,8 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
                <p>startIndex</p>
             </td>
             <td>
-               <p>The index (type integer) of the first character of the substring.</p>
-               <p>The index of a string begins with zero (0).</p>
+               <p>部分文字列の最初の文字のインデックスを表す int 型の式。</p>
+               <p>0 始まりのインデックスです。</p>
             </td>
          </tr> 
                 <tr>
@@ -2939,20 +2939,16 @@ REGEX_EXTRACT_ALL('192.168.1.5:8020', '(.*)\:(.*)');
                <p>stopIndex</p>
             </td>
             <td>
-               <p>The index (type integer) of the character <em>following</em> the last character of the substring.</p>
+               <p>最後の文字の<em>次の文字</em>のインデックスを表す int 型の式。</p>
             </td>
          </tr> 
    </table>
 </section>
 
 <section>
-     <title>Usage</title>
-     <p>
-Use the SUBSTRING function to return a substring from a given string. 
-     </p>
-          <p>  
-Given a field named alpha whose value is ABCDEF, to return substring BCD use this statement: SUBSTRING(alpha,1,4). Note that 1 is the index of B (the first character of the substring) and  4 is the index of E  (the character <em>following</em> the last character of the substring).
-     </p>
+     <title>用法</title>
+     <p>SUBSTRING 関数は部分文字列を求めるために使います。</p>
+          <p>フィールド alpha の内容が文字列 "ABCDEF" の時、 "BCD" を戻すためには次のようにします: SUBSTRING(alpha, 1, 4) 。 1 は部分文字列の最初の文字である "B" のインデックスです。 4 は部分文字列の最後の文字の<em>次の文字</em>である "E" のインデックスです。</p>
 </section>
 </section> 
 
