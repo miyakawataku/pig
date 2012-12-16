@@ -2548,14 +2548,14 @@ A = LOAD 'data' USING TextLoader();
 <!-- ======================================================== -->  
  <section id="last-index-of">
    <title>LAST_INDEX_OF</title>
-   <p>文字列中で、開始位置から文字を後方に探索した時に、最後方で出現する位置のインデックスを戻します。</p>
+   <p>文字列の末尾から文字を後方に探索し、最後方で出現する位置のインデックスを戻します。</p>
 
 <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
-               <p>LAST_INDEX_OF(string, 'character', startIndex)</p>
+               <p>LAST_INDEX_OF(string, 'character')</p>
             </td>
          </tr>
    </table>
@@ -2580,20 +2580,12 @@ A = LOAD 'data' USING TextLoader();
                <p>単一引用符に括った、探索する文字。</p>
             </td>
          </tr> 
-                <tr>
-            <td>
-               <p>startIndex</p>
-            </td>
-            <td>
-               <p>探索開始位置の、 0 始まりのインデックス。</p>
-            </td>
-         </tr> 
    </table>
 </section>
 
 <section>
      <title>用法</title>
-     <p>LAST_INDEX_OF 関数は文字の最後方の出現位置を求めるために使います。指定した開始位置から後方探索します。</p>
+     <p>LAST_INDEX_OF 関数は、文字列の末尾から後方探索し、文字の最後方の出現位置を求めるために使います。</p>
 </section>
 </section> 
 
