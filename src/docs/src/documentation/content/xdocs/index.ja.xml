@@ -19,25 +19,25 @@
 
 <document>
   <header>
-    <title>Overview (概要)</title>
+    <title>概要</title>
   </header>
   <body>
       <p>Pig ドキュメンテーションは、 Pig を使うために有用な情報を提供しています。</p>
       
       <p>
-        「<a href="start.html">Getting Started (はじめよう！)</a>」では、 Pig のセットアップ方法と、簡単な Pig Latin 文の書き方を紹介しています。 Pig スクリプトを書く準備ができたら、「<a href="basic.html">Pig Latin Basics (Pig Latin の基本)</a>」で Pig Latin の演算子とデータ型について学んでください。
+        「<a href="start.html">はじめよう！</a>」では、 Pig のセットアップ方法と、簡単な Pig Latin 文の書き方を紹介しています。 Pig スクリプトを書く準備ができたら、「<a href="basic.html">Pig Latin の基本</a>」で Pig Latin の演算子とデータ型について学んでください。
       </p>
         
       <p>
-        関数は Pig スクリプトの部品の一つです。「<a href="func.html">Built In Functions (組み込み関数)</a>」は、組み込み関数について説明しています。「<a href="udf.html">User Defined Functions (ユーザ定義関数)</a>」は、自前の関数を作る方法を説明しています。また、 Piggy Bank リポジトリに登録されている関数を使ったり、自前の関数を登録したりする方法も説明しています。
+        関数は Pig スクリプトの部品の一つです。「<a href="func.html">組み込み関数</a>」は、組み込み関数について説明しています。「<a href="udf.html">ユーザ定義関数</a>」は、自前の関数を作る方法を説明しています。また、 Piggy Bank リポジトリに登録されている関数を使ったり、自前の関数を登録したりする方法も説明しています。
       </p>
        
       <p>
-        「<a href="cont.html">Control Structures (制御構造)</a>」は、 Pig スクリプトの実行制御について説明しています。「<a href="perf.html">Performance and Efficiency (性能と効率)</a>」には、コード最適化について例を挙げて解説しています。
+        「<a href="cont.html">制御構造</a>」は、 Pig スクリプトの実行制御について説明しています。「<a href="perf.html">性能と効率</a>」には、コード最適化について例を挙げて解説しています。
       </p>
        
       <p>
-        プログラムを実行するためには、「<a href="cmds.html">Shell and Utililty Commands (シェルとユーティリティコマンド)</a>」で説明するコマンドを使ってください。また、プログラムをテスト・デバッグするためには、「<a href="test.html">Testing and Diagnostics (テストと診断)</a>」で説明するツールを使ってください。
+        プログラムを実行するためには、「<a href="cmds.html">シェルとユーティリティコマンド</a>」で説明するコマンドを使ってください。また、プログラムをテスト・デバッグするためには、「<a href="test.html">テストと診断</a>」で説明するツールを使ってください。
       </p>
       
       <p>
