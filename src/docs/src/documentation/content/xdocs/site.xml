@@ -39,10 +39,10 @@ See http://forrest.apache.org/docs/linking.html for more info
 <site label="Pig" href="" xmlns="http://apache.org/forrest/linkmap/1.0" tab="">
 
   <docs label="Pig"> 
-    <index label="Overview" 				href="index.html" />
-    <start label="Getting Started"	        href="start.html" />
-    <basics label="Pig Latin Basics"	href="basic.html" />
-    <funct label="Built In Functions"	href="func.html" />
+    <index label="概要" 				href="index.html" />
+    <start label="はじめよう！"	        href="start.html" />
+    <basics label="Pig Latin の基本"	href="basic.html" />
+    <funct label="組み込み関数"	href="func.html" />
     <udf label="User Defined Functions"  href="udf.html" />
     <control label="Control Structures"	href="cont.html" />
     <cmds label="Shell and Utililty Commands" href="cmds.html" />
