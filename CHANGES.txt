@@ -24,6 +24,8 @@ INCOMPATIBLE CHANGES
 
 IMPROVEMENTS
 
+PIG-2907: Publish pig jars for Hadoop2/23 to maven (rohini)
+
 PIG-3019: Need a target in build.xml for source releases (gates)
 
 PIG-2794: Pig test: add utils to simplify testing on Windows (jgordon via gates)
@@ -37,6 +39,8 @@ PIG-2712: Pig does not call OutputCommitter.abortJob() on the underlying OutputF
 PIG-2727: PigStorage Source tagging does not need pig.splitCombination to be turned off (prkommireddi via dvryaboy)
 
 BUG FIXES
+
+PIG-3099: Pig unit test fixes for TestGrunt(1), TestStore(2), TestEmptyInputDir(3) (vikram.dixit via daijy)
 
 PIG-3035: With latest version of hadoop23 pig does not return the correct exception stack trace from backend (rohini)
 
