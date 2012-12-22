@@ -42,16 +42,16 @@
 <!-- WRITING UDFS -->
 
 <section id="udf-java">
-<title>Writing Java UDFs</title>
+<title>Java UDF を書く</title>
 
 <!-- =============================================================== -->
 <section id="eval-functions">
-<title>Eval Functions</title>
+<title>評価関数</title>
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="eval-functions-use">
-<title>How to Use a Simple Eval Function</title>
-<p>Eval is the most common type of function. It can be used in <code>FOREACH</code> statements as shown in this script: </p>
+<title>単純な評価関数を使う</title>
+<p>評価関数はもっとも一般的な関数の種類です。次のように、 FOREACH 文の中で使えます。</p>
 
 <source>
 -- myscript.pig
@@ -61,31 +61,21 @@ B = FOREACH A GENERATE myudfs.UPPER(name);
 DUMP B;
 </source>
 
-<p>The command below can be used to run the script. Note that all examples in this document run in local mode for simplicity 
-but the examples can also run in Hadoop mode. For more information on how to run Pig, please see the PigTutorial. </p>
+<p>このスクリプトは次のコマンドで実行できます。簡便のために、このドキュメント中のプログラム例はすべてローカルモードで動かしていますが、 Hadoop モードで動かすことも可能です。 Pig の実行方法についての詳細は、 <a href="start.html#tutorial">Pig チュートリアル</a>を見てください。</p>
 
 <source>
 java -cp pig.jar org.apache.pig.Main -x local myscript.pig
 </source>
 
-<p>The first line of the script provides the location of the <code>jar&nbsp;file</code> that contains the UDF. 
-(Note that there are no quotes around the jar file. Having quotes would result in a syntax error.) 
-To locate the jar file, Pig first checks the <code>classpath</code>. If the jar file can't be found in the classpath, 
-Pig assumes that the location is either an absolute path or a path relative to the location from which Pig was invoked. 
-If the jar file can't be found, an error will be printed: <code>java.io.IOException:&nbsp;Can't&nbsp;read&nbsp;jar&nbsp;file:&nbsp;myudfs.jar</code>. </p>
+<p>スクリプトの最初の行は、 UDF を含む JAR ファイルの場所を指定しています (JAR ファイル名は引用符でくくりません。引用符をつけると文法エラーになります) 。 JAR ファイルは最初にクラスパス上で探索されます。クラスパス上になかった場合、絶対パスか、 Pig を起動した場所からの相対パスとして JAR ファイルを探索します。 JAR ファイルが見つからなかった場合、エラーメッセージが表示されます: <code>java.io.IOException:&nbsp;Can't&nbsp;read&nbsp;jar&nbsp;file:&nbsp;myudfs.jar</code></p>
 
-<p>Multiple <code>register</code> commands can be used in the same script. If the same fully-qualified function is present in multiple jars, 
-the first occurrence will be used consistently with Java semantics. </p>
+<p><code>REGISTER</code> コマンドは 1 つのスクリプトで複数回使えます。関数の完全修飾名が複数の JAR ファイル中で見つかる場合、 Java の意味論に整合して、最初に見つかったファイルが使われます。</p>
 
-<p>The name of the UDF has to be fully qualified with the package name or an error will be reported: 
-<code>java.io.IOException:&nbsp;Cannot&nbsp;instantiate:UPPER</code>. Also, the function name is case sensitive (UPPER and upper are not the same). 
-A UDF can take one or more parameters. The exact signature of the function should clear from its documentation. </p>
+<p>UDF の名前はパッケージ名で完全修飾する必要があります。正しく完全修飾名を指定しない場合、エラーになります: <code>java.io.IOException:&nbsp;Cannot&nbsp;instantiate:UPPER</code> 。また、関数名は大文字・小文字を区別します (UPPER と upper は別の名前として扱われます) 。 UDF は 1 つ以上の引数を取ることができます。関数のドキュメンテーションは正確なシグネチャを記載するべきです。</p>
 
-<p>The function provided in this example takes an ASCII string and produces its uppercase version. If you are familiar with column transformation functions 
-in SQL, you will recognize that UPPER fits this concept. However, as we will see later in the document, eval functions in Pig go beyond column 
-transformation functions and include aggregate and filter functions. </p>
+<p>この例に示した関数は 1 つの ASCII 文字列を引数に取り、大文字にして戻します。 SQL の関数による列変換に親しんだ方なら、 UPPER 関数が同種のものだと分かることでしょう。ただし、後に見るように、 Pig の評価関数は単なる列変換関数にとどまらず、集計関数やフィルタ関数を包含しています。</p>
 
-<p>If you are just a user of UDFs, this is most of what you need to know about UDFs to use them in your code.  </p>
+<p>UDF を使うだけであれば、以上が UDF について知るべきことのほとんどすべてです。</p>
 
 </section>
 
