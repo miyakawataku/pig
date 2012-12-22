@@ -1376,7 +1376,7 @@ D = FOREACH B GENERATE T.name, [25#5.6], {(1, 5, 18)};
     <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section id="expressions">
    <title>式</title>
-   <p>Pig Latin において、式は FILTER, FOREACH, GROUP, SPLIT 演算子、そして集合関数の中で使える言語構造です。</p>
+   <p>Pig Latin において、式は FILTER, FOREACH, GROUP, SPLIT 演算子、そして評価関数の中で使える言語構造です。</p>
    <p>式は数学において伝統的な中置記法で書けます。文脈に応じて、式は次のものを含む可能性があります。</p>
    <ul>
       <li>
