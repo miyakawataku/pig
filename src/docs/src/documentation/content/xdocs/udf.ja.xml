@@ -132,8 +132,8 @@ jar -cf myudfs.jar myudfs
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="aggregate-functions">
-<title>Aggregate Functions</title>
-<p>Aggregate functions are another common type of eval function. Aggregate functions are usually applied to grouped data, as shown in this script: </p>
+<title>集約関数</title>
+<p>集約関数も一般的な評価関数の種別です。次のスクリプトのように、集約関数は通常グループ化されたデータに対して用います。</p>
 
 <source>
 -- myscript2.pig
@@ -143,7 +143,7 @@ C = FOREACH B GENERATE group, COUNT(A);
 DUMP C;
 </source>
 
-<p>The script above uses the <code>COUNT</code> function to count the number of students with the same name. There are a couple of things to note about this script. First, even though we are using a function, there is no <code>register</code> command. Second, the function is not qualified with the package name. The reason for both is that <code>COUNT</code> is a <code>builtin</code> function meaning that it comes with the Pig distribution. These are the only two differences between builtins and UDFs. Builtins are discussed in more detail later in this document.  </p>
+<p>上野スクリプトは <code>COUNT</code> 関数を使って同じ名前の学生の数を数えています。このスクリプトについては注意すべき点が二つあります。まずは <code>REGISTER</code> なしで関数を使っていること、二つ目は関数が完全修飾されていないことです。これは <code>COUNT</code> が組み込み関数であって Pig に同梱されているためです。組み込み関数と UDF との違いはこの二点だけです。組み込み関数については、このドキュメント内で詳述します。</p>
 </section>
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
