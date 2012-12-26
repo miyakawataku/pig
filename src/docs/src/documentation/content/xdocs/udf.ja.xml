@@ -143,16 +143,16 @@ C = FOREACH B GENERATE group, COUNT(A);
 DUMP C;
 </source>
 
-<p>上野スクリプトは <code>COUNT</code> 関数を使って同じ名前の学生の数を数えています。このスクリプトについては注意すべき点が二つあります。まずは <code>REGISTER</code> なしで関数を使っていること、二つ目は関数が完全修飾されていないことです。これは <code>COUNT</code> が組み込み関数であって Pig に同梱されているためです。組み込み関数と UDF との違いはこの二点だけです。組み込み関数については、このドキュメント内で詳述します。</p>
+<p>上のスクリプトは <code>COUNT</code> 関数を使って同じ名前の学生の数を数えています。このスクリプトについては注意すべき点が二つあります。まずは <code>REGISTER</code> なしで関数を使っていること、二つ目は関数が完全修飾されていないことです。これは <code>COUNT</code> が組み込み関数であって Pig に同梱されているためです。組み込み関数と UDF との違いはこの二点だけです。組み込み関数については、このドキュメント内で詳述します。</p>
 </section>
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="algebraic-interface">
-<title>Algebraic Interface</title>
+<title>Algebraic インタフェース</title>
 
-<p>An aggregate function is an eval function that takes a bag and returns a scalar value. One interesting and useful property of many aggregate functions is that they can be computed incrementally in a distributed fashion. We call these functions <code>algebraic</code>. <code>COUNT</code> is an example of an algebraic function because we can count the number of elements in a subset of the data and then sum the counts to produce a final output. In the Hadoop world, this means that the partial computations can be done by the map and combiner, and the final result can be computed by the reducer. </p>
+<p>集約関数はバッグを引数に取りスカラ値を戻す評価関数です。多くの集約関数は、分散環境で差分更新的に計算できるという、興味深く有用な特質を持っています。 Pig ではこのような関数を「代数的 (algebraic)」と呼びます。 <code>COUNT</code> は代数的関数の一例です。なぜなら、データの部分ごとに要素数を数え、それを合計することで、全体の要素数が得られるからです。 Hadoop の世界ではこのような処理は、 Mapper と Combiner で部分ごとの計算を行い、 Reducer で最後にまとめあげます。</p>
 
-<p>It is very important for performance to make sure that aggregate functions that are algebraic are implemented as such. Let's look at the implementation of the COUNT function to see what this means. (Error handling and some other code is omitted to save space. The full code can be accessed <a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/builtin/COUNT.java?view=markup"> here</a>.)</p>
+<p>代数的な集約関数をこのように実装することは、性能上とても重要です。 COUNT 関数の実装を例にとってどういうことか見てみましょう (エラー処理その他いくらかのコードは読み易さのために省略しています。完全なコードは <a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/builtin/COUNT.java?view=markup">SVN リポジトリ</a> で見てください) 。</p>
 
 <source>
 public class COUNT extends EvalFunc&lt;Long&gt; implements Algebraic{
@@ -186,7 +186,7 @@ public class COUNT extends EvalFunc&lt;Long&gt; implements Algebraic{
 }
 </source>
 
-<p><code>COUNT</code> implements <code>Algebraic</code> interface which looks like this: </p>
+<p><code>COUNT</code> 関数は <code>Algebraic</code> インタフェースを実装しています。 <code>Algebraic</code> インタフェースの内容は次のとおりです: </p>
 
 <source>
 public interface Algebraic{
@@ -196,10 +196,10 @@ public interface Algebraic{
 }
 </source>
 
-<p>For a function to be algebraic, it needs to implement <code>Algebraic</code> interface that consist of definition of three classes derived from <code>EvalFunc</code>. The contract is that the  <code>exec</code> function of the <code>Initial</code> class is called once and is passed the original input tuple. Its output is a tuple that contains partial results. The <code>exec</code> function of the <code>Intermed</code> class can be called zero or more times and takes as its input a tuple that contains partial results produced by the <code>Initial</code> class or by prior invocations of the <code>Intermed</code> class and produces a tuple with another partial result. Finally, the <code>exec</code> function of the <code>Final</code> class is called and produces the final result as a scalar type. </p>
+<p>代数的関数を書くするためには、 <code>Algebraic</code> を実装して、またネストしたクラスとして <code>EvalFunc</code> を継承したクラスを 3 つ定義する必要があります。 <code>Initial</code> クラスの <code>exec</code> メソッドは関数の入力を引数として最初に呼ばれ、中間的な結果を戻します。 <code>Intermed</code> クラスの <code>exec</code> メソッドは、 <code>Initial</code> クラスか <code>Intermed</code> クラスの戻り値を引数として、 0 回以上呼ばれ、中間的な結果を戻します。最後に、 <code>Final</code> クラスの <code>exec</code> メソッドが関数の戻り値となるスカラ値を生成します。</p>
 
-<p>Here's the way to think about this in the Hadoop world. The <code>exec</code> function of the <code>Initial</code> class is invoked once for each input tuple by the <code>map</code> process and produces partial results. The <code>exec</code> function of the <code>Intermed</code> class is invoked once by each <code>combiner</code> invocation (which can happen zero or more times) and also produces partial results. The <code>exec</code> function of the <code>Final</code> class is invoked once by the reducer and produces the final result. </p>
-<p>Take a look at the <code>COUNT</code> implementation to see how this is done. Note that the <code>exec</code> function of the <code>Initial</code> and <code>Intermed</code> classes is parameterized with <code>Tuple</code> and the <code>exec</code> of the <code>Final</code> class is parameterized with the real type of the function, which in the case of the <code>COUNT</code> is <code>Long</code>. Also, note that the fully-qualified name of the class needs to be returned from <code>getInitial</code>, <code>getIntermed</code>, and <code>getFinal</code> methods. </p>
+<p>Hadoop の世界では次のようになります。 <code>Initial</code> クラスの <code>exec</code> メソッドは Mapper ごとに呼ばれ、中間的な結果を戻します。 <code>Intermed</code> クラスの <code>exec</code> メソッドは、 Combiner (実行されることもされないこともあります) ごとに呼ばれ、中間的な結果を戻します。 <code>Final</code> クラスの <code>exec</code> メソッドは Reducer ごとに呼ばれ、最終的な結果を生成します。</p>
+<p><code>COUNT</code> 関数が、どのように実装されているか見てみましょう。 <code>Initial</code> クラスと <code>Intermed</code> クラスの <code>exec</code> メソッドは <code>Tuple</code> 型でパラメータ化されており、 <code>Final</code> クラスの <code>exec</code> メソッドは <code>COUNT</code> 関数の戻り値の型である <code>Long</code> 型でパラメータ化されています。また、それぞれのクラスの完全修飾名は <code>getInitial</code>, <code>getIntermed</code>, <code>getFinal</code> の各メソッドで戻す必要があります。</p>
 </section>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
