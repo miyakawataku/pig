@@ -81,8 +81,8 @@ java -cp pig.jar org.apache.pig.Main -x local myscript.pig
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="eval-functions-write">
-<title> How to Write a Simple Eval Function</title>
-<p>Let's now look at the implementation of the <code>UPPER</code> UDF. </p>
+<title>評価関数の書き方</title>
+<p><code>UPPER</code> 関数の実装を見てみましょう。</p>
 
 <source>
 1  package myudfs;
@@ -105,11 +105,11 @@ java -cp pig.jar org.apache.pig.Main -x local myscript.pig
 18  }
 </source>
 
-<p>Line 1 indicates that the function is part of the <code>myudfs</code> package. The UDF class extends the <code>EvalFunc</code> class which is the base class for all eval functions. It is parameterized with the return type of the UDF which is a Java <code>String</code> in this case. We will look into the <code>EvalFunc</code> class in more detail later, but for now all we need to do is to implement the <code>exec</code> function. This function is invoked on every input tuple. The input into the function is a tuple with input parameters in the order they are passed to the function in the Pig script. In our example, it will contain a single string field corresponding to the student name. </p>
-<p>The first thing to decide is what to do with invalid data. This depends on the format of the data. If the data is of type <code>bytearray</code> it means that it has not yet been converted to its proper type. In this case, if the format of the data does not match the expected type, a NULL value should be returned. If, on the other hand, the input data is of another type, this means that the conversion has already happened and the data should be in the correct format. This is the case with our example and that's why it throws an error (line 15.) </p>
-<p>Also, note that lines 9-10 check if the input data is null or empty and if so returns null. </p>
-<p>The actual function implementation is on lines 12-13 and is self-explanatory. </p>
-<p>Now that we have the function implemented, it needs to be compiled and included in a jar. You will need to build <code>pig.jar</code> to compile your UDF. You can use the following set of commands to checkout the code from SVN repository and create pig.jar: </p>
+<p>1 行目は関数が <code>myudfs</code> パッケージに属することを意味しています。この UDF クラスはすべての評価関数の基底クラスである <code>EvalFunc</code> クラスを継承し、 UDF の戻り値の型である Java の <code>String</code> を型パラメータとしています。 <code>EvalFunc</code> については後に詳しく見ますが、今必要なことは <code>exec</code> メソッドを実装することです。このメソッドは入力となるタプルごとに呼び出されます。メソッドの引数は Pig スクリプト中で呼び出した関数の引数を順番通りに収めたタプルです。この例では、学生の名前に対応する文字列フィールドが 1 つ収められています。</p>
+<p>最初にするべきことは、不正なデータの扱いを決めることです。これはデータの型式に依存します。たとえばデータが <code>bytearray</code> 型だった場合、まだ適切な型に変換されていないことが分かります。この例では、データの型式が期待したものと異なった場合、 NULL を戻す必要があります。一方で、もしも入力データが別の型だった場合には、型変換はすでに行われて、データは適切な型になっているものと判断できます。 15 行目でエラーを投げているのがその場合です。</p>
+<p>9 から 10 行目では入力データが null か空でないかをチェックして、そうだった場合には null を戻しています。</p>
+<p>12 から 13 行目では見ての通り関数本来の仕事をしています。</p>
+<p>関数が実装できたので、コンパルして JAR ファイルに固める必要があります。 UDF をコンパイルするためにはあらかじめ <code>pig.jar</code> をビルドする必要があります。 SVN リポジトリから Pig のコードをチェックアウトして pig.jar を作るには、次のコマンドを実行してください:</p>
 
 <source>
 svn co http://svn.apache.org/repos/asf/pig/trunk
@@ -117,7 +117,7 @@ cd trunk
 ant
 </source>
 
-<p>You should see <code>pig.jar</code> in your current working directory. The set of commands below first compiles the function and then creates a jar file that contains it. </p>
+<p>上記コマンドの結果として、作業ディレクトリに pig.jar ができているはずです。次のコマンドで関数をコンパイルして、 JAR に固めます。</p>
 
 <source>
 cd myudfs
@@ -126,7 +126,7 @@ cd ..
 jar -cf myudfs.jar myudfs
 </source>
 
-<p>You should now see <code>myudfs.jar</code> in your current working directory. You can use this jar with the script described in the previous section. </p>
+<p>上記コマンドの結果として、作業ディレクトリ内に <code>myudfs.jar</code> ができているはずです。この JAR ファイルは前章の説明の通り Pig スクリプトから使用できます。</p>
 
 </section>
 
