@@ -359,17 +359,17 @@ public class IsEmpty extends FilterFunc {
 </section>
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="pig-types">
-<title> Pig Types and Native Java Types</title>
-<p>The main thing to know about Pig's type system is that Pig uses native Java types for almost all of its types, as shown in this table. </p>
+<title>Pig の型と Java の型</title>
+<p>Pig の型システムについて重要なことは、次の表に示すとおり、 Pig が Java のネイティブの型をほぼそのまま使うという事です。</p>
 
 
 <table>
 <tr>
 <th>
-Pig Type
+Pig の型
 </th>
 <th>
-Java Class
+Java のクラス
 </th>
 </tr>
 <tr>
@@ -446,9 +446,9 @@ Java Class
 </tr>
 </table>
 
-<p>All Pig-specific classes are available <a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/data/"> here</a>. </p>
-<p><code>Tuple</code> and <code>DataBag</code> are different in that they are not concrete classes but rather interfaces. This enables users to extend Pig with their own versions of tuples and bags. As a result, UDFs cannot directly instantiate bags or tuples; they need to go through factory classes: <code>TupleFactory</code> and <code>BagFactory</code>. </p>
-<p>The builtin <code>TOKENIZE</code> function shows how bags and tuples are created. A function takes a text string as input and returns a bag of words from the text. (Note that currently Pig bags always contain tuples.) </p>
+<p>Pig 独自の型は <a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/data/">SVN リポジトリ</a> で見られます。</p>
+<p><code>Tuple</code> と <code>DataBag</code> は実クラスでなくインタフェースである点で特殊です。これにより、ユーザは独自のタプル型やバッグ型を作ることで Pig が拡張できます。このため、 UDF はバッグやタプルを直接インスタンス化できません。インスタンスを作るためには、 <code>TupleFactory</code> や <code>BagFactory</code> といったファクトリクラスを使う必要があります。</p>
+<p><code>TOKENIZE</code> 組み込み関数を見るとバッグとタプルがどのように作られるか分かります。この関数は文字列を引数に取って、文字列中の単語のバッグを戻します (今のところ Pig のバッグが保持できるのはタプルだけであることに注意してください) 。</p>
 
 <source>
 package org.apache.pig.builtin;
@@ -476,7 +476,7 @@ public class TOKENIZE extends EvalFunc&lt;DataBag&gt; {
             while (tok.hasMoreTokens()) output.add(mTupleFactory.newTuple(tok.nextToken()));
             return output;
         } catch (ExecException ee) {
-            // error handling goes here
+            // エラー処理
         }
     }
 }
