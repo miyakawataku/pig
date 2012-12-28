@@ -286,13 +286,13 @@ public class IntMax extends EvalFunc&lt;Integer&gt; implements Algebraic, Accumu
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="filter-functions">
-<title> Filter Functions</title>
-<p>Filter functions are eval functions that return a <code>boolean</code> value. Filter functions can be used anywhere a Boolean expression is appropriate, including the <code>FILTER</code> operator or <code>bincond</code> expression. </p>
+<title>フィルタ関数</title>
+<p>フィルタ関数はブーリアン値を戻す評価関数です。フィルタ関数はブーリアン式が置ける場所ならどこでも使えます。たとえば、 <code>FILTER</code> 演算子や条件演算子式で使えます。</p>
 
-<p>The example below uses the <code>IsEmpy</code> builtin filter function to implement joins. </p>
+<p>次の例では <code>IsEmpy</code> 組み込み関数を結合に使っています。</p>
 
 <source>
--- inner join
+-- 内部結合
 A = LOAD 'student_data' AS (name: chararray, age: int, gpa: float);
 B = LOAD 'voter_data' AS (name: chararray, age: int, registration: chararay, contributions: float);
 C = COGROUP A BY name, B BY name;
@@ -302,10 +302,10 @@ F = FOREACH E GENERATE flatten(A), flatten(B);
 DUMP F;
 </source>
 
-<p>Note that, even if filtering is omitted, the same results will be produced because the <code>foreach</code> results is a cross product and cross products get rid of empty bags. However, doing up-front filtering is more efficient since it reduces the input of the cross product. </p>
+<p>実は、フィルタを行わなくても同じ結果が得られます。 <code>FOREACH</code> と <code>FLATTEN</code> の組み合わせによってクロス積が生成され、クロス積は空のバッグを消し去るからです。しかしながら、あらかじめ空のバッグを排除することによって、クロス積の入力が減らせるため、より効率的になります。</p>
 
 <source>
--- full outer join
+-- 全外部結合
 A = LOAD 'student_data' AS (name: chararray, age: int, gpa: float);
 B = LOAD 'voter_data' AS (name: chararray, age: int, registration: chararay, contributions: float);
 C = COGROUP A BY name, B BY name;
@@ -313,7 +313,7 @@ D = FOREACH C GENERATE group, flatten((IsEmpty(A) ? null : A)), flatten((IsEmpty
 dump D;
 </source>
 
-<p>The implementation of the <code>IsEmpty</code> function looks like this: </p>
+<p><code>IsEmpty</code> 関数の実装は次のようになります:</p>
 
 <source>
 import java.io.IOException;
@@ -327,7 +327,7 @@ import org.apache.pig.data.Tuple;
 import org.apache.pig.data.DataType;
 
 /**
- * Determine whether a bag or map is empty.
+ * バッグかマップが空かどうかを確かめます。
  */
 public class IsEmpty extends FilterFunc {
 
