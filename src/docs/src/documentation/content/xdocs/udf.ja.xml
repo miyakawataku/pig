@@ -841,19 +841,17 @@ dump b;
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="import-lists">
-<title>Import Lists</title>
-<p>An import list allows you to specify the package to which a UDF or a group of UDFs belong,
- eliminating the need to qualify the UDF on every call. An import list can be specified via the udf.import.list Java 
- property on the Pig command line: </p>
+<title>インポートリスト</title>
+<p>インポートリストに UDF が属するパッケージを指定することで、 UDF 呼び出しごとに完全修飾名を書く必要がなくなります。インポートリストは、 Pig 起動時にコマンドラインから Java プロパティ udf.import.list で指定します:</p>
 <source>
 pig -Dudf.import.list=com.yahoo.yst.sds.ULT
 </source>
-<p>You can supply multiple locations as well: </p>
+<p>複数の場所を指定することもできます:</p>
 <source>
 pig -Dudf.import.list=com.yahoo.yst.sds.ULT:org.apache.pig.piggybank.evaluation
 </source>
 </section>
-<p>To make use of import scripts, do the following:</p>
+<p>スクリプト中でインポートされた UDF を使うには、次のようにします:</p>
 <source>
 myscript.pig:
 A = load '/data/SDS/data/searcg_US/20090820' using ULTLoader as (s, m, l);
