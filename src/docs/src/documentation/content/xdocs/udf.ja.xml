@@ -108,7 +108,7 @@ java -cp pig.jar org.apache.pig.Main -x local myscript.pig
 <p>1 行目は関数が <code>myudfs</code> パッケージに属することを意味しています。この UDF クラスはすべての評価関数の基底クラスである <code>EvalFunc</code> クラスを継承し、 UDF の戻り値の型である Java の <code>String</code> を型パラメータとしています。 <code>EvalFunc</code> については後に詳しく見ますが、今必要なことは <code>exec</code> メソッドを実装することです。このメソッドは入力となるタプルごとに呼び出されます。メソッドの引数は Pig スクリプト中で呼び出した関数の引数を順番通りに収めたタプルです。この例では、学生の名前に対応する文字列フィールドが 1 つ収められています。</p>
 <p>最初にするべきことは、不正なデータの扱いを決めることです。これはデータの型式に依存します。たとえばデータが <code>bytearray</code> 型だった場合、まだ適切な型に変換されていないことが分かります。この例では、データの型式が期待したものと異なった場合、 NULL を戻す必要があります。一方で、もしも入力データが別の型だった場合には、型変換はすでに行われて、データは適切な型になっているものと判断できます。 15 行目でエラーを投げているのがその場合です。</p>
 <p>9 から 10 行目では入力データが null か空でないかをチェックして、そうだった場合には null を戻しています。</p>
-<p>12 から 13 行目では見ての通り関数本来の仕事をしています。</p>
+<p>12 から 13 行目では見てのとおり関数本来の仕事をしています。</p>
 <p>関数が実装できたので、コンパルして JAR ファイルに固める必要があります。 UDF をコンパイルするためにはあらかじめ <code>pig.jar</code> をビルドする必要があります。 SVN リポジトリから Pig のコードをチェックアウトして pig.jar を作るには、次のコマンドを実行してください:</p>
 
 <source>
@@ -126,7 +126,7 @@ cd ..
 jar -cf myudfs.jar myudfs
 </source>
 
-<p>上記コマンドの結果として、作業ディレクトリ内に <code>myudfs.jar</code> ができているはずです。この JAR ファイルは前章の説明の通り Pig スクリプトから使用できます。</p>
+<p>上記コマンドの結果として、作業ディレクトリ内に <code>myudfs.jar</code> ができているはずです。この JAR ファイルは前章の説明のとおり Pig スクリプトから使用できます。</p>
 
 </section>
 
@@ -633,8 +633,8 @@ public class TOKENIZE extends EvalFunc&lt;DataBag&gt; {
 
 <p>UDF で起きるエラーにはいくつかの種類があります:</p>
 <ol>
-<li><p>特定の行に影響を与えるが、他の行には影響がないエラー。このようなエラーの例は、不正な入力値やゼロ除算です。このような状況での適切な処理方法は、警告メッセージを出力して、 null を戻すことです。次章で見る <code>ABS</code> 関数は、この手法を採用しています。今のところ、警告メッセージは標準エラーに出力することになっていますが、いずれ UDF にロガーを渡すようにするつもりです。 null を戻すことは、不正な値が bytearray 型である場合にしか意味がないということに注意してください。それ以外の型の場合は、特定の型が既に割り当てられており、引数は適切な値になっているはずです。そうでない場合は内部エラーであり、全体の処理を失敗させる必要があります。両方の場合について、次章の <code>ABS</code> 関数の実装の中で見ていきます。</p></li>
-<li><p>処理全体に影響するが、再試行で解決する可能性があるエラー。このようなエラーの例は、参照ファイルが存在せず、開けない場合です。これは環境に依存する一時的な問題である可能性があるため、再試行すればうまく行くかも知れません。この場合、次章の <code>ABS</code> 関数のように、 <code>IOException</code> を投げて Pig にエラーを通知します。</p></li>
+<li><p>特定の行に影響を与えるが、他の行には影響がないエラー。このようなエラーの例は、不正な入力値やゼロ除算です。このような状況での適切な処理方法は、警告メッセージを出力して、 null を戻すことです。次節で見る <code>ABS</code> 関数は、この手法を採用しています。今のところ、警告メッセージは標準エラーに出力することになっていますが、いずれ UDF にロガーを渡すようにするつもりです。 null を戻すことは、不正な値が bytearray 型である場合にしか意味がないということに注意してください。それ以外の型の場合は、特定の型が既に割り当てられており、引数は適切な値になっているはずです。そうでない場合は内部エラーであり、全体の処理を失敗させる必要があります。両方の場合について、次節の <code>ABS</code> 関数の実装の中で見ていきます。</p></li>
+<li><p>処理全体に影響するが、再試行で解決する可能性があるエラー。このようなエラーの例は、参照ファイルが存在せず、開けない場合です。これは環境に依存する一時的な問題である可能性があるため、再試行すればうまく行くかも知れません。この場合、次節の <code>ABS</code> 関数のように、 <code>IOException</code> を投げて Pig にエラーを通知します。</p></li>
 <li><p>処理全体に影響し、再試行でも解決できないエラー。このようなエラーの例は、パーミッションが適切でないため、参照ファイルが開けない場合です。今のところ Pig には、このようなエラーに適切に対処する方法がありません。 Hadoop についても同様です。したがってこのようなエラーは上記の 2 と同じやり方で処理します。</p></li>
 </ol>
 
@@ -642,11 +642,11 @@ public class TOKENIZE extends EvalFunc&lt;DataBag&gt; {
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="function-overloading">
-<title>Function Overloading</title>
+<title>関数オーバーロード</title>
 
-<p>Before the type system was available in Pig, all values for the purpose of arithmetic calculations were assumed to be doubles as the safest choice. However, this is not very efficient if the data is actually of type integer or long. (We saw about a 2x slowdown of a query when using double where integer could be used.) Now that Pig supports types we can take advantage of the type information and choose the function that is most efficient for the provided operands. </p>
-<p>UDF writers are encouraged to provide type-specific versions of a function if this can result in better performance. On the other hand, we don't want the users of the functions to worry about different functions - the right thing should just happen. Pig allows for this via a function table mechanism as shown in the next example. </p>
-<p>This example shows the implementation of the <code>ABS</code> function that returns the absolute value of a numeric value passed to it as input. </p>
+<p>Pig に型システムが導入される以前、数値計算に使われる値はすべて double 型とみなされていました。しかしながら、実際の型が int や long である場合、これは効率的なやり方ではありません (int が使えるところで double を使うと、約 2 倍の処理時間が掛かった例があります) 。今や Pig は型システムを備えているので、型情報を用い、引数に対して最も効率的な関数を選ぶことができます。</p>
+<p>UDF の作者は、性能の向上が見込まれる場合、型を指定したバージョンの実装を提供することが推奨されます。一方で、関数を使う側は、型ごとの実装を気にしなくても正しく動作するようになっています。次の例で見るように、これは関数テーブルの仕組みによって実現しています。</p>
+<p>次の例で見る <code>ABS</code> 関数は、引数の数値の絶対値を戻します。</p>
 
 <source>
 import java.io.IOException;
@@ -670,12 +670,12 @@ public class ABS extends EvalFunc&lt;Double&gt; {
             System.err.println("Failed to process input; error - " + nfe.getMessage());
             return null;
         } catch (Exception e){
-            throw IOException("Caught exception processing input row ", e);
+            throw new IOException("Caught exception processing input row ", e);
         }
         return Math.abs(d);
     }
-    public List (FuncSpec) getArgToFuncMapping() throws FrontendException {
-        List (FuncSpec) funcList = new ArrayList (FuncSpec) ();
+    public List&lt;FuncSpec&gt; getArgToFuncMapping() throws FrontendException {
+        List&lt;FuncSpec&gt; funcList = new ArrayList&lt;FuncSpec&gt;();
         funcList.add(new FuncSpec(this.getClass().getName(), new Schema(new Schema.FieldSchema(null, DataType.BYTEARRAY))));
         funcList.add(new FuncSpec(DoubleAbs.class.getName(),  new Schema(new Schema.FieldSchema(null, DataType.DOUBLE))));
         funcList.add(new FuncSpec(FloatAbs.class.getName(),   new Schema(new Schema.FieldSchema(null, DataType.FLOAT))));
@@ -686,7 +686,7 @@ public class ABS extends EvalFunc&lt;Double&gt; {
 }
 </source>
 
-<p>The main thing to notice in this example is the <code>getArgToFuncMapping()</code> method. This method returns a list that contains a mapping from the input schema to the class that should be used to handle it. In this example the main class handles the <code>bytearray</code> input and outsources the rest of the work to other classes implemented in separate files in the same package. The example of one such class is below. This class handles integer input values. </p>
+<p>この例で重要なのは <code>getArgToFuncMapping()</code> メソッドです。このメソッドは、入力スキーマから関数実装クラスへのマッピングのリストを戻します。この例では、メインの <code>ABS</code> クラスは <code>bytearray</code> 型の入力値のみを処理し、その他の型の処理は同パッケージ内の別ファイル内で実装された他のクラスに委譲しています。他のクラスの一例として、 <code>int</code> 型の入力値を処理するクラスを見てみましょう。</p>
 
 <source>
 import java.io.IOException;
@@ -701,7 +701,7 @@ public class IntAbs extends EvalFunc&lt;Integer&gt; {
         try{
             d = (Integer)input.get(0);
         } catch (Exception e){
-            throw newIOException("Caught exception processing input row ", e);
+            throw new IOException("Caught exception processing input row ", e);
         }
         return Math.abs(d);
     }
@@ -709,13 +709,13 @@ public class IntAbs extends EvalFunc&lt;Integer&gt; {
 </source>
 
 
-<p>A note on error handling. The <code>ABS</code> class covers the case of the <code>bytearray</code> which means the data has not been converted yet to its actual type. This is why a null value is returned when <code>NumberFormatException</code> is encountered. However, the <code>IntAbs</code> function is only called if the data is already of type <code>Integer</code> which means it has already been converted to the real type and bad format has been dealt with. This is why an exception is thrown if the input can't be cast to <code>Integer</code>. </p>
-<p>The example above covers a reasonably simple case where the UDF only takes one parameter and there is a separate function for each parameter type. However, this will not always be the case. If Pig can't find an <code>exact&nbsp;match</code> it tries to do a <code>best&nbsp;match</code>. The rule for the best match is to find the most efficient function that can be used safely. This means that Pig must find the function that, for each input parameter, provides the smallest type that is equal to or greater than the input type. The type progression rules are: <code>int&gt;long&gt;float&gt;double</code>. </p>
-<p>For instance, let's consider function <code>MAX</code> which is part of the <code>piggybank</code> described later in this document. Given two values, the function returns the larger value. The function table for <code>MAX</code> looks like this: </p>
+<p>エラー処理について: <code>ABS</code> クラスは、まだ実際の型に変換されていない <code>bytearray</code> 値を処理します。 <code>NumberFormatException</code> が起きた時に null を戻しているのはこのためです。しかしながら <code>IntAbs</code> は実際の型である <code>Integer</code> に変換された上で呼ばれるので、不正なデータは既に弾かれているはずです。入力データを <code>Integer</code> にキャストできない時に例外を投げているのはこのためです。</p>
+<p>以上の例は、 UDF がただ一つの引数を取り、引数の型ごとに別々の実装があるという、そこそこ単純な例ですが、もっと複雑な場合もあります。 Pig は「正確合致」の実装を見つけられない場合は、「最良合致」の実装を見つけようとします。「最良合致」の規則は、安全に使える中で最も効率的な実装を見つける、というものです。つまり Pig は、それぞれの引数について、入力の型と同じかより大きい型の中で、最も小さい型の実装を見つけます。型の優先順位は次のとおりです: <code>int&gt;long&gt;float&gt;double</code> 。</p>
+<p>例として、後述する <code>piggybank</code> 中の <code>MAX</code> 関数について見てみましょう。この関数は 2 つの値を引数に取って、大きい方の値を戻します。 <code>MAX</code> の関数テーブルは次のとおりです:</p>
 
 <source>
-public List (FuncSpec) getArgToFuncMapping() throws FrontendException {
-    List (FuncSpec) funcList = new ArrayList (FuncSpec) ();
+public List&lt;FuncSpec&gt; getArgToFuncMapping() throws FrontendException {
+    List&lt;FuncSpec&gt; funcList = new ArrayList&lt;FuncSpec&gt;();
     Util.addToFunctionList(funcList, IntMax.class.getName(), DataType.INTEGER);
     Util.addToFunctionList(funcList, DoubleMax.class.getName(), DataType.DOUBLE);
     Util.addToFunctionList(funcList, FloatMax.class.getName(), DataType.FLOAT);
@@ -725,9 +725,9 @@ public List (FuncSpec) getArgToFuncMapping() throws FrontendException {
 }
 </source>
 
-<p>The <code>Util.addToFunctionList</code> function is a helper function that adds an entry to the list as the first argument, with the key of the class name passed as the second argument, and the schema containing two fields of the same type as the third argument.  </p>
+<p><code>Util.addToFunctionList</code> はヘルパメソッドです。これは、 2 番目の引数に指定したクラス名と、 3 番目の引数に指定した型のフィールドを 2 つ含むスキーマからなるマッピングを、最初の引数である関数テーブルに追加します。</p>
 
-<p>Let's now see how this function can be used in a Pig script: </p>
+<p>この関数が Pig スクリプトの中でどのように使われるか見てみましょう:</p>
 
 <source>
 REGISTER piggybank.jar
@@ -736,7 +736,7 @@ B = FOREACH A GENERATE name, org.apache.pig.piggybank.evaluation.math.MAX(gpa1, 
 DUMP B;
 </source>
 
-<p>In this example, the function gets one parameter of type <code>float</code> and another of type <code>double</code>. The best fit will be the function that takes two double values. Pig makes this choice on the user's behalf by inserting implicit casts for the parameters. Running the script above is equivalent to running the script below: </p>
+<p>この例では、関数は <code>float</code> 型の値と <code>double</code> 型の値を引数に取っています。この場合、 double 値を 2 つ取る実装が最良です。 Pig は暗黙キャストを挿入することで、ユーザに代わってこの選択を行います。上記のスクリプトは下記のスクリプトと同じように実行されます:</p>
 
 <source>
 A = LOAD 'student_data' AS (name: chararray, gpa1: float, gpa2: double);
@@ -744,9 +744,9 @@ B = FOREACH A GENERATE name, org.apache.pig.piggybank.evaluation.math.MAX((doubl
 DUMP B;
 </source>
 
-<p>A special case of the <code>best&nbsp;fit</code> approach is handling data without a schema specified. The type for this data is interpreted as <code>bytearray</code>. Since the type of the data is not known, there is no way to choose a best fit version. The only time a cast is performed is when the function table contains only a single entry. This works well to maintain backward compatibility.  </p>
+<p>「最良合致」の特殊な場合は、スキーマが指定されていないデータを処理する時です。この時、データの型は <code>bytearray</code> と解釈されます。データの型が分からないので、最良合致を見つける方法がありません。唯一、関数テーブルが 1 つの要素だけからなっている場合のみ、キャストが実行されます。この動作は、後方互換性を維持するために役に立ちます。</p>
 
-<p>Let's revisit the <code>UPPER</code> function from our first example. As it is written now, it would only work if the data passed to it is of type <code>chararray</code>. To make it work with data whose type is not explicitly set, a function table with a single entry needs to be added: </p>
+<p>この章の最初で示した <code>UPPER</code> 関数の例をもう一度見てみましょう。この節で書いたとおり、 <code>UPPER</code> 関数がうまく働くのは <code>chararray</code> 型の値が渡された場合のみです。型が明示的に設定されていないデータが処理できるようにするためには、 1 要素からなる関数テーブルを追加します:</p>
 
 <source>
 package myudfs;
@@ -767,18 +767,18 @@ public class UPPER extends EvalFunc&lt;String&gt;
             return null;
         }
     }
-    public List (FuncSpec) getArgToFuncMapping() throws FrontendException {
-        List (FuncSpec) funcList = new ArrayList (FuncSpec) ();
+    public List&lt;FuncSpec&gt; getArgToFuncMapping() throws FrontendException {
+        List&lt;FuncSpec&gt; funcList = new ArrayList&lt;FuncSpec&gt; ();
         funcList.add(new FuncSpec(this.getClass().getName(), new Schema(new Schema.FieldSchema(null, DataType.CHARARRAY))));
         return funcList;
     }
 }
 </source>
 
-<p>Now the following script will ran: </p>
+<p>こうすれば、次のスクリプトが動くようになります:</p>
 
 <source>
--- this is myscript.pig
+-- myscript.pig
 REGISTER myudfs.jar;
 A = LOAD 'student_data' AS (name, age, gpa);
 B = FOREACH A GENERATE myudfs.UPPER(name);
