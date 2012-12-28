@@ -629,16 +629,13 @@ public class TOKENIZE extends EvalFunc&lt;DataBag&gt; {
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="error-handling">
-<title> Error Handling</title>
+<title>エラー処理</title>
 
-<p>There are several types of errors that can occur in a UDF: </p>
+<p>UDF で起きるエラーにはいくつかの種類があります:</p>
 <ol>
-<li><p>An error that affects a particular row but is not likely to impact other rows. An example of such an error would be a malformed input value or divide by zero problem. A reasonable handling of this situation would be to emit a warning and return a null value. <code>ABS</code> function in the next section demonstrates this approach. The current approach is to write the warning to <code>stderr</code>. Eventually we would like to pass a logger to the UDFs. Note that returning a NULL value only makes sense if the malformed value is of type <code>bytearray</code>. Otherwise the proper type has been already created and should have an appropriate value. If this is not the case, it is an internal error and should cause the system to fail. Both cases can be seen in the implementation of the <code>ABS</code> function in the next section. </p>
-</li>
-<li><p>An error that affects the entire processing but can succeed on retry. An example of such a failure is the inability to open a lookup file because the file could not be found. This could be a temporary environmental issue that can go away on retry. A UDF can signal this to Pig by throwing an <code>IOException</code> as with the case of the <code>ABS</code> function below. </p>
-</li>
-<li><p>An error that affects the entire processing and is not likely to succeed on retry. An example of such a failure is the inability to open a lookup file because of file permission problems. Pig currently does not have a way to handle this case. Hadoop does not have a way to handle this case either. It will be handled the same way as 2 above. </p>
-</li>
+<li><p>特定の行に影響を与えるが、他の行には影響がないエラー。このようなエラーの例は、不正な入力値やゼロ除算です。このような状況での適切な処理方法は、警告メッセージを出力して、 null を戻すことです。次章で見る <code>ABS</code> 関数は、この手法を採用しています。今のところ、警告メッセージは標準エラーに出力することになっていますが、いずれ UDF にロガーを渡すようにするつもりです。 null を戻すことは、不正な値が bytearray 型である場合にしか意味がないということに注意してください。それ以外の型の場合は、特定の型が既に割り当てられており、引数は適切な値になっているはずです。そうでない場合は内部エラーであり、全体の処理を失敗させる必要があります。両方の場合について、次章の <code>ABS</code> 関数の実装の中で見ていきます。</p></li>
+<li><p>処理全体に影響するが、再試行で解決する可能性があるエラー。このようなエラーの例は、参照ファイルが存在せず、開けない場合です。これは環境に依存する一時的な問題である可能性があるため、再試行すればうまく行くかも知れません。この場合、次章の <code>ABS</code> 関数のように、 <code>IOException</code> を投げて Pig にエラーを通知します。</p></li>
+<li><p>処理全体に影響し、再試行でも解決できないエラー。このようなエラーの例は、パーミッションが適切でないため、参照ファイルが開けない場合です。今のところ Pig には、このようなエラーに適切に対処する方法がありません。 Hadoop についても同様です。したがってこのようなエラーは上記の 2 と同じやり方で処理します。</p></li>
 </ol>
 
 </section>
