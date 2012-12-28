@@ -789,11 +789,11 @@ DUMP B;
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="reporting-progress">
-<title>Reporting Progress</title>
+<title>進行状況の報告</title>
 
-<p>A challenge of running a large shared system is to make sure system resources are used efficiently. One aspect of this challenge is detecting runaway processes that are no longer making progress. Pig uses a heartbeat mechanism for this purpose. If any of the tasks stops sending a heartbeat, the system assumes that it is dead and kills it.   </p>
-<p>Most of the time, single-tuple processing within a UDF is very short and does not require a UDF to heartbeat. The same is true for aggregate functions that operate on large bags because bag iteration code takes care of it. However, if you have a function that performs a complex computation that can take an order of minutes to execute, you should add a progress indicator to your code. This is very easy to accomplish. The <code>EvalFunc</code> function provides a <code>progress</code> function that you need to call in your <code>exec</code> method. </p>
-<p>For instance, the <code>UPPER</code> function would now look as follows: </p>
+<p>大きな共有システムの勘所は、システムのリソースが効率的に使われるようにすることです。その一つの側面として、暴走して処理が進んでいないプロセスを検出することがあります。 Pig はこの目的のために、ハートビートの仕組みを採用しています。いずれかのタスクがハートビートを送出しなくなったら、システムはタスクが死んだものと判断してこれを殺します。</p>
+<p>ほとんどの場合、 UDF による単一のタプルの処理の実行時間はとても短いため、 UDF がハートビートを送出する必要はありません。大きなバッグに対する集約関数でも同様です。なぜなら、バッグのイテレーション処理がハートビートを送出してくれるからです。しかしながら、分単位の時間が掛かる複雑な計算を実行する関数については、コードの中で進行状況を報告する必要があります。これを実施するのはとても簡単です。 <code>EvalFunc</code> クラスが提供している <code>progress</code> メソッドを、 <code>exec</code> メソッドから呼び出すだけです。</p>
+<p>例えば、 <code>UPPER</code> 関数では次のようになります:</p>
 
 <source>
 public class UPPER extends EvalFunc&lt;String&gt;
@@ -802,11 +802,11 @@ public class UPPER extends EvalFunc&lt;String&gt;
                 if (input == null || input.size() == 0)
                 return null;
                 try{
-                        reporter.progress();
+                        progress();
                         String str = (String)input.get(0);
                         return str.toUpperCase();
                 }catch(Exception e){
-                    throw new OException("Caught exception processing input row ", e);
+                    throw new IOException("Caught exception processing input row ", e);
                 }
         }
 }
