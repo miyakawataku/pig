@@ -355,7 +355,7 @@ public class IsEmpty extends FilterFunc {
 
 <section id="udf_simulation">
 <title>シミュレーションによる UDF 実装</title>
-<p>複雑な種類の EvalFunc を実装すると、単純な種類の実装は自動的に提供されます。つまり、 <a href="#Algebraic-Interface">Algebraic</a> インタフェースを実装すれば、 Accumulator インタフェースの実装と単純な EvalFunc の exec メソッドはただで得られます。同じように、 <a href="#Accumulator-Interface">Accumulator</a> インタフェースを実装すると、単純な EvalFunc の exec メソッドはただで得られますが、 Algebraic の実装は得られません。これら自動的に生成される実装はシミュレーションに基づくので、最も効率的という訳ではありません。もし Accumulator インタフェースや EvalFunc の exec メソッドを効率的にしたいのであれば、自分でそれらのメソッドを実装してください。実装したメソッドは、自動的に提供される実装に優先して使用されます。</p>
+<p>複雑な種類の EvalFunc を実装すると、単純な種類の実装は自動的に提供されます。つまり、 <a href="#algebraic-interface">Algebraic</a> インタフェースを実装すれば、 Accumulator インタフェースの実装と単純な EvalFunc の exec メソッドはただで得られます。同じように、 <a href="#accumulator-interface">Accumulator</a> インタフェースを実装すると、単純な EvalFunc の exec メソッドはただで得られますが、 Algebraic の実装は得られません。これら自動的に生成される実装はシミュレーションに基づくので、最も効率的という訳ではありません。もし Accumulator インタフェースや EvalFunc の exec メソッドを効率的にしたいのであれば、自分でそれらのメソッドを実装してください。実装したメソッドは、自動的に提供される実装に優先して使用されます。</p>
 </section>
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="pig-types">
