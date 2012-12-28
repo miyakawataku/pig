@@ -485,11 +485,11 @@ public class TOKENIZE extends EvalFunc&lt;DataBag&gt; {
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="schemas">
-<title>Schemas and Java UDFs</title>
+<title>スキーマと Java UDF</title>
 
-<p>Pig uses type information for validation and performance. It is important for UDFs to participate in type propagation. Our UDFs generally make no effort to communicate their output schema to Pig. This is because Pig can usually figure out this information by using Java's <a href="http://java.sun.com/developer/technicalArticles/ALT/Reflection/"> Reflection</a>. If your UDF returns a scalar or a map, no work is required. However, if your UDF returns a tuple or a bag (of tuples), it needs to help Pig figure out the structure of the tuple. </p>
-<p>If a UDF returns a tuple or a bag and schema information is not provided, Pig assumes that the tuple contains a single field of type bytearray. If this is not the case, then not specifying the schema can cause failures. We look at this next. </p>
-<p>Let's assume that we have UDF <code>Swap</code> that, given a tuple with two fields, swaps their order. Let's assume that the UDF does not specify a schema and look at the scripts below: </p>
+<p>Pig はバリデーションと効率化のために型情報を使います。そのため、 UDF を型伝播に参加させることは重要です。普通 UDF を実装する際に出力スキーマを Pig に伝えるために何かをすることはありません。これは、 Pig が Javaの<a href="http://www.oracle.com/technetwork/articles/java/javareflection-1536171.html">リフレクション</a>を使って型情報を見つけ出すためです。 UDF の戻り値がスカラ値かマップの時には、特に何をする必要もありません。しかしながら、 UDF がタプルか、タプルのバッグを戻す時には、 Pig がタプルの構造を把握できるように助けてあげる必要があります。</p>
+<p>UDF がタプルかバッグを戻し、スキーマ情報が与えられていない場合、 Pig はタプルが bytearray 型のフィールドを 1 つ持っているものと仮定します。そうでない場合、スキーマを指定しないことが失敗の原因になります。これについては次で見てみましょう。</p>
+<p>ここで、 <code>Swap</code> UDF が 2 つの引数を取って順番をひっくり返すものとします。 UDF がスキーマを指定しない場合に、次のスクリプトがどうなるか見てみましょう。</p>
 
 <source>
 register myudfs.jar;
@@ -500,14 +500,14 @@ D = limit B 20;
 dump D;
 </source>
 
-<p>This script will result in the following error cause by line 4 ( <code>C = foreach B generate $2;</code>). </p>
+<p>このスクリプトは 4 行目の <code>C = foreach B generate $2;</code> で次のエラーを発生します。</p>
 
 <source>
 java.io.IOException: Out of bound access. Trying to access non-existent column: 2. Schema {bytearray,gpa: float} has 2 column(s).
 </source>
 
-<p>This is because Pig is only aware of two columns in B while line 4 is requesting the third column of the tuple. (Column indexing in Pig starts with 0.) </p>
-<p>The function, including the schema, looks like this: </p>
+<p>これは、 Pig が B には 2 つの列しかないと認識しているのに、 4 行目で 3 つ目の列を指定しているからです (Pig では列のインデックスは 0 から始まります) 。</p>
+<p>スキーマを含んだ関数は次のように書きます。</p>
 
 <source>
 package myudfs;
@@ -545,21 +545,20 @@ public class Swap extends EvalFunc&lt;Tuple&gt; {
 }
 </source>
 
-<p>The function creates a schema with a single field (of type <code>FieldSchema) of type tuple</code>. The name of the field is constructed using the <code>getSchemaName</code> function of the <code>EvalFunc</code> class. The name consists of the name of the UDF function, the first parameter passed to it, and a sequence number to guarantee uniqueness. In the previous script, if you replace <code>dump&nbsp;D;</code>  with <code>describe&nbsp;B;</code> , you will see the following output: 
-</p>
+<p>この関数はタプル型のフィールドのスキーマ (<code>FieldSchema</code> 型) を生成しています。フィールド名は <code>EvalFunc</code> の <code>getSchemaName</code> メソッドを使って構築しています。結果のフィールド名は、最初の引数に渡した UDF 名を含んでおり、一連の番号によって一意性が保証されます。さきほどのスクリプトで <code>dump D;</code> の代わりに <code>describe B;</code> を実行すると、次の出力が得られます:</p>
 
 <source>
 B: {myudfs.swap_age_3::age: int,myudfs.swap_age_3::name: chararray,gpa: float}
 </source>
 
-<p>The second parameter to the <code>FieldSchema</code> constructor is the schema representing this field, which in this case is a tuple with two fields. The third parameter represents the type of the schema, which in this case is a <code>TUPLE</code>. All supported schema types are defined in the <code>org.apache.pig.data.DataType</code> class. </p>
+<p><code>FieldSchema</code> のコンストラクタの 2 番目の引数はフィールドのスキーマで、今回の場合は 2 つのフィールドを含むタプルになります。 3 番目の引数はスキーマの型を表し、今回の場合は <code>TUPLE</code> になります。サポートされているスキーマの型は <code>org.apache.pig.data.DataType</code> クラスで定義されています。</p>
 
 <source>
 public class DataType {
     public static final byte UNKNOWN   =   0;
     public static final byte NULL      =   1;
-    public static final byte BOOLEAN   =   5; // internal use only
-    public static final byte BYTE      =   6; // internal use only
+    public static final byte BOOLEAN   =   5; // Pig の内部使用のみ
+    public static final byte BYTE      =   6; // Pig の内部使用のみ
     public static final byte INTEGER   =  10;
     public static final byte LONG      =  15;
     public static final byte FLOAT     =  20;
@@ -574,10 +573,10 @@ public class DataType {
 }
 </source>
 
-<p>You need to import the <code>org.apache.pig.data.DataType</code> class into your code to define schemas. You also need to import the schema class <code>org.apache.pig.impl.logicalLayer.schema.Schema</code>. </p>
-<p>The example above shows how to create an output schema for a tuple. Doing this for a bag is very similar. Let's extend the <code>TOKENIZE</code> function to do that.</p>
+<p>スキーマを定義するためには <code>org.apache.pig.data.DataType</code> クラスをインポートする必要があります。また、スキーマのクラスである <code>org.apache.pig.impl.logicalLayer.schema.Schema</code> クラスもインポートする必要があります。</p>
+<p>上の例では、タプル型の出力スキーマをどのように作るかを見ました。バッグでもほとんど同じです。 <code>TOKENIZE</code> 関数の例を見てみましょう。</p>
 
-<p>As you can see in the example below, this is very similar to the output schema definition in the <code>Swap</code> function. One difference is that instead of reusing input schema, we create a brand new field schema to represent the tokens stored in the bag. The other difference is that the type of the schema created is BAG (not TUPLE). </p>
+<p>見てお分かりのように、 <code>Swap</code> 関数のスキーマ定義と極めて似通っています。相違点の一つは、バッグ中の単語のスキーマを表すために、入力スキーマの情報を再利用するのではなく、フィールドのスキーマを新しく作っていることです。もうひとつの違いは、スキーマの型が TUPLE でなく BAG であることです。</p>
 
 <source>
 package org.apache.pig.builtin;
@@ -606,7 +605,7 @@ public class TOKENIZE extends EvalFunc&lt;DataBag&gt; {
             while (tok.hasMoreTokens()) output.add(mTupleFactory.newTuple(tok.nextToken()));
             return output;
         } catch (ExecException ee) {
-            // error handling goes here
+            // エラー処理
         }
     }
     public Schema outputSchema(Schema input) {
@@ -622,8 +621,8 @@ public class TOKENIZE extends EvalFunc&lt;DataBag&gt; {
     }
 }
 </source>
-<p></p>
-<p>One more note about schemas and UDFs. Users have requested the ability to examine the input schema of the data before processing the data via a UDF. For example, they would like to know how to convert an input tuple to a map such that the keys in the map are the names of the input columns. Currently there is no way to do this. This is a feature we would like to support in the future.</p>
+
+<p>スキーマと UDF についてもうひとつ特筆すべきこととして、 UDF で実際にデータを処理する前に、入力データのスキーマが分かるようにしてほしいという要望が上がっています。たとえば、入力タプルを、フィールド名がキーとなるマップに変換したいとしても、現在のところ方法がありません。これはいずれサポートしたい機能です。</p>
 
 </section>
 
