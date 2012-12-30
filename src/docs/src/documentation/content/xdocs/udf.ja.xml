@@ -889,9 +889,9 @@ pig -cp sds.jar -Dudf.import.list=com.yahoo.yst.sds.ULT myscript.pig
 <li id="loadcaster"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/LoadCaster.java?view=markup">LoadCaster</a> には、 bytearray を特定の型に変換するメソッドがあります。 DataByteArray のフィールドから他の型へのキャスト (暗黙・明示的いずれも) をサポートしたい場合に、ロード関数はこのインタフェースを実装します。</li>
 </ul>
 
- <p>LoadFunc 抽象クラスはロード関数を実装するためのメインのクラスです。オーバーライドする必要があるメソッドは次の通りです:</p>
+ <p>LoadFunc 抽象クラスはロード関数を実装するためのメインのクラスです。オーバーライドする必要があるメソッドは次のとおりです:</p>
  <ul>
- <li id="getInputFormat">getInputFormat(): Pig はロード関数が使う InputFormat を知るためにこのメソッドを呼び出します。 Pig において InputFormat と RecordReader のメソッドが呼び出される方法と文脈は、 Hadoop MapReduce と同じです。 Hadoop に同梱されている InputFormat の実装を使う場合には、 org.apache.hadoop.mapreduce パッケージ下の新 API 版を使います。自作の InputFormat を使う場合には、 InputFormat は org.apache.hadoop.mapreduce 下の新 API を使って実装する必要があります。<br></br> <br></br> 
+ <li id="getInputFormat">getInputFormat(): Pig はこのメソッドを呼び出してロード関数が使う InputFormat を知ります。 InputFormat と RecordReader のメソッドは Hadoop MapReduce と同じ方法と文脈で呼び出されます。 Hadoop に同梱されている InputFormat の実装を使う場合には、 org.apache.hadoop.mapreduce パッケージ下の新 API 版を使います。自作の InputFormat を使う場合には、 InputFormat は org.apache.hadoop.mapreduce 下の新 API を使って実装する必要があります。<br></br> <br></br> 
  
  テキストベースの InputFormat やファイルベースの InputFormat を使う自作のロード関数で、サブディレクトリ中のファイルを再帰的に読み込みたい場合には、 org.apache.pig.backend.hadoop.executionengine.mapReduceLayer パッケージ中の PigTextInputFormat か PigFileInputFormat クラスを使う必要があります。 Pig の InputFormat 実装を使うことで、指定されたディレクトリの一段下しか読まないという Hadoop 標準の TextInputFormat と FileInputFormat の制限が回避できます。たとえば、 LOAD 文で入力元として 'dir1' を指定し、このディレクトリのサブディレクトリとして 'dir2' と 'dir2/dir3' がある場合、 Hadoop 標準の TextInputFormat と FileInputFormat は 'dir1' 直下のファイルだけを読み込みます。 PigTextInputFormat か PigFileInputFormat を使うか、それらを拡張したクラスを使えば、全ディレクトリ中のファイルが読み込まれます。</li>
  
@@ -1026,35 +1026,30 @@ public class SimpleTextLoader extends LoadFunc {
 
 <!-- =============================================================== -->
 <section id="store-functions">
-<title> Store Functions</title>
+<title>ストア関数</title>
 
-<p id="storefunc"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/StoreFunc.java?view=markup">StoreFunc</a> 
-abstract class has the main methods for storing data and for most use cases it should suffice to extend it. There is an optional interface which can be implemented to achieve extended functionality: </p>
+<p id="storefunc"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/StoreFunc.java?view=markup">StoreFunc</a> 抽象クラスにはデータを保存するためのメソッドがあります。多くの場合、このクラスを拡張すれば充分間に合います。より多くの機能が必要な場合のために、オプショナルなインタフェースが 1 つあります:</p>
 <ul>
-<li id="storemetadata"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/StoreMetadata.java?view=markup">StoreMetadata:</a> 
-This interface has methods to interact with metadata systems to store schema and store statistics. This interface is optional and should only be implemented if metadata needs to stored. </li>
+<li id="storemetadata"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/StoreMetadata.java?view=markup">StoreMetadata:</a> スキーマや統計情報を保存するメタデータの仕組みのためのメソッドがあります。このインタフェースはオプショナルです。メタデータを保存する必要がある場合だけ実装します。</li>
 </ul>
 
-<p id="storefunc-override">The methods which need to be overridden in StoreFunc are explained below: </p>
+<p id="storefunc-override">StoreFunc 中でオーバーライドする必要があるメソッドは次のとおりです:</p>
 <ul>
-<li id="getOutputFormat">getOutputFormat(): This method will be called by Pig to get the OutputFormat used by the storer. The methods in the OutputFormat (and underlying RecordWriter and OutputCommitter) will be called by pig in the same manner (and in the same context) as by Hadoop in a map-reduce java program. If the OutputFormat is a hadoop packaged one, the implementation should use the new API based one under org.apache.hadoop.mapreduce. If it is a custom OutputFormat, it should be implemented using the new API under org.apache.hadoop.mapreduce. The checkOutputSpecs() method of the OutputFormat will be called by pig to check the output location up-front. This method will also be called as part of the Hadoop call sequence when the job is launched. So implementations should ensure that this method can be called multiple times without inconsistent side effects. </li>
-<li id="setStoreLocation">setStoreLocation(): This method is called by Pig to communicate the store location to the storer. The storer should use this method to communicate the same information to the underlying OutputFormat. This method is called multiple times by pig - implementations should bear in mind that this method is called multiple times and should ensure there are no inconsistent side effects due to the multiple calls. </li>
-<li id="prepareToWrite">prepareToWrite(): In the new API, writing of the data is through the OutputFormat provided by the StoreFunc. In prepareToWrite() the RecordWriter associated with the OutputFormat provided by the StoreFunc is passed to the StoreFunc. The RecordWriter can then be used by the implementation in putNext() to write a tuple representing a record of data in a manner expected by the RecordWriter. </li>
-<li id="putNext">putNext(): The meaning of putNext() has not changed and is called by Pig runtime to write the next tuple of data - in the new API, this is the method wherein the implementation will use the underlying RecordWriter to write the Tuple out.</li>
+<li id="getOutputFormat">getOutputFormat(): Pig はこのメソッドを呼び出してストア関数が使う OutputFormat を知ります。 OutputFormat, RecordWriter, OutputCommitter のメソッドは Hadoop MapReduce と同じ文脈で呼び出されます。 Hadoop に同梱された OutputFormat の実装を使う場合には、 org.apache.hadoop.mapreduce パッケージ下の新 API 版を使います。自作の OutputFormat を使う場合には、 org.apache.hadoop.mapreduce 下の新 API を使って実装する必要があります。 Pig は出力先の場所を知るために、前もって OutputFormat クラスの checkOutputSpecs() メソッドを呼びます。このメソッドはジョブが起動する際に Hadoop からも呼び出されます。このため、不整合を起こす副作用がないように注意する必要があります。</li>
+<li id="setStoreLocation">setStoreLocation(): Pig は出力先の場所をストア関数に伝えるためにこのメソッドを呼びます。ストア関数はこのメソッドの中で、同じ情報を OutputFormat に伝える必要があります。このメソッドは複数回呼ばれる可能性があるため、不整合を起こす副作用がないように注意する必要があります。</li>
+<li id="prepareToWrite">prepareToWrite(): データの書き込みは StoreFunc で指定された OutputFormat を通じて行われます。 prepareToWrite() メソッドは、 OutputFormat に紐づいた RecordWriter をストア関数に渡します。ストア関数実装は putNext() メソッドの中で、この RecordWriter を使ってデータのレコードを表すタプルを書き込みます。</li>
+<li id="putNext">putNext(): Pig はタプルを書き込むためのこのメソッドを呼び出します。このメソッドは、 RecordWriter を使ってタプルを書き込みます。</li>
 </ul>
 
-<p id="storefunc-default">The following methods have default implementations in StoreFunc and should be overridden only if necessary: </p>
+<p id="storefunc-default">次のメソッドは StoreFunc クラス内にデフォルトの実装がありますが、必要に応じてオーバーライドします。</p>
 <ul>
-<li id="setStoreFuncUDFContextSignature">setStoreFuncUDFContextSignature(): This method will be called by Pig both in the front end and back end to pass a unique signature to the Storer. The signature can be used to store into the UDFContext any information which the Storer needs to store between various method invocations in the front end and back end. The default implementation in StoreFunc has an empty body. This method will be called before other methods. 
-</li>
-<li id="relToAbsPathForStoreLocation">relToAbsPathForStoreLocation(): Pig runtime will call this method to allow the Storer to convert a relative store location to an absolute location. An implementation is provided in StoreFunc which handles this for FileSystem based locations. </li>
-<li id="checkschema">checkSchema(): A Store function should implement this function to check that a given schema describing the data to be written is acceptable to it. The default implementation in StoreFunc has an empty body. This method will be called before any calls to setStoreLocation(). </li>
+<li id="setStoreFuncUDFContextSignature">setStoreFuncUDFContextSignature(): Pig はストア関数に対して固有のシグネチャを通知するために、フロントエンドとバックエンドの双方でこのメソッドを呼び出します。ストア関数はこのシグネチャを使って、フロントエンドとバックエンドでの多くのメソッド呼び出し間で共有する必要がある情報を UDFContext に格納します。デフォルトの実装は何もしていません。このメソッドは他のメソッドが呼び出される前に呼び出されます。</li>
+<li id="relToAbsPathForStoreLocation">relToAbsPathForStoreLocation(): Pig は保存先の相対位置を絶対位置に変換するためにこのメソッドを呼び出します。 StoreFunc クラス内のデフォルトの実装は FileSystem 内の表現として相対位置を解決します。</li>
+<li id="checkschema">checkSchema(): データのスキーマが、そのストア関数で書き込めるものかどうかをチェックするために、このメソッドを実装します。 StoreFunc クラス内のデフォルトの実装は何もしていません。このメソッドは setStoreLocation() の前に呼び出されます。</li>
 </ul>
 
-<p><strong>Example Implementation</strong></p>
-<p>
-The storer implementation in the example is a storer for text data with line delimiter as '\n' and '\t' as default field delimiter (which can be overridden by passing a different field delimiter in the constructor) - this is similar to current PigStorage storer in Pig. The implementation uses an existing Hadoop supported OutputFormat - TextOutputFormat as the underlying OutputFormat. 
-</p>
+<p><strong>実装例</strong></p>
+<p>次のストア関数の実装例は、 '\n' を行区切りとし、 '\t' をデフォルトのフィールド区切りとしてテキストデータを書き込みます。フィールド区切りはコンストラクタで指定することもできます。つまり、 PigStorage のストア関数と同じです。この実装は 既存の Hadoop の TextOutputFormat を OutputFormat として使います。</p>
 
 <source>
 public class SimpleTextStorer extends StoreFunc {
@@ -1123,7 +1118,7 @@ public class SimpleTextStorer extends StoreFunc {
 
     @SuppressWarnings("unchecked")
     private void putField(Object field) throws IOException {
-        //string constants for each delimiter
+        //区切り文字の文字列定数
         String tupleBeginDelim = "(";
         String tupleEndDelim = ")";
         String bagBeginDelim = "{";
