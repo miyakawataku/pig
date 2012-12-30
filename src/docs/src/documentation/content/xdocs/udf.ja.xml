@@ -866,15 +866,11 @@ pig -cp sds.jar -Dudf.import.list=com.yahoo.yst.sds.ULT myscript.pig
 <!-- =============================================================== -->
 <!-- BEGIN LOAD/STORE FUNCTIONS -->
 <section id="load-store-functions">
-<title> Load/Store Functions</title>
+<title>ロード・ストア関数</title>
 
-<p>The load/store UDFs control how data goes into Pig and comes out of Pig. Often, the same function handles both input and output but that does not have to be the case. </p>
-<p>
-The Pig load/store API is aligned with Hadoop's InputFormat and OutputFormat classes.
-This enables you to create new LoadFunc and StoreFunc implementations based on existing Hadoop InputFormat and OutputFormat classes with minimal code. The complexity of reading the data and creating a record lies in the InputFormat while the complexity of writing the data lies in the OutputFormat. This enables Pig to easily read/write data in new storage formats as and when an Hadoop InputFormat and OutputFormat is available for them. </p>
-<p>
-<strong>Note:</strong> Both the LoadFunc and StoreFunc implementations should use the Hadoop 20 API based classes (InputFormat/OutputFormat and related classes) under the <strong>new</strong> org.apache.hadoop.mapreduce package instead of the old org.apache.hadoop.mapred package. 
-</p>
+<p>ロード・ストア関数は Pig にデータを入力する方法と、 Pig からデータを出力する方法を制御します。一つの関数で入力と出力の双方を行う場合もありますが、そうしなくても構いません。</p>
+<p>Pig のロード・ストア関数の API は Hadoop の InputFormat と OutputFormat と適合するようにできています。このため、既存の Hadoop の InputFormat や OutputFormat を元にして、少ないコードで LoadFunc や StoreFunc が作れます。データをレコードに読み込む際に最も面倒なところは InputFormat の中で、データを書き込む際に最も面倒なところは OutputFormat の中で行います。このため、 Hadoop の InputFormat と OutputFormat さえ用意されていれば、 Pig が新しい形式のデータを読み書きできるようにすることは容易です。</p>
+<p><strong>注意:</strong> LoadFunc と StoreFunc はいずれも Hadoop 0.20 の API を使うようにできています (InputFormat, OutputFormat その他のクラスについて) 。これらのクラスは org.apache.hadoop.mapred パッケージの中ではなく、<strong>新しい</strong> org.apache.hadoop.mapreduce パッケージの中にあります。</p>
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="load-functions">
