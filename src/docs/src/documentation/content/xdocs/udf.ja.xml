@@ -874,50 +874,43 @@ pig -cp sds.jar -Dudf.import.list=com.yahoo.yst.sds.ULT myscript.pig
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="load-functions">
-<title> Load Functions</title>
-<p id="loadfunc"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/LoadFunc.java?view=markup">LoadFunc</a> 
-abstract class has three main methods for loading data and for most use cases it would suffice to extend it. There are three other optional interfaces which can be implemented to achieve extended functionality: </p>
+<title>ロード関数</title>
+<p id="loadfunc"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/LoadFunc.java?view=markup">LoadFunc</a> 抽象クラスには主に 3 つのメソッドがあります。多くの場合このクラスを拡張すれば充分間に合います。より多くの機能が必要な場合のために 3 つのオプショナルなインタフェースがあります:</p>
 
 <ul>
-<li id="LoadMetadata"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/LoadMetadata.java?view=markup">LoadMetadata</a> 
-has methods to deal with metadata - most implementation of loaders don't need to implement this unless they interact with some metadata system. The getSchema() method in this interface provides a way for loader implementations to communicate the schema of the data back to pig. If a loader implementation returns data comprised of fields of real types (rather than DataByteArray fields), it should provide the schema describing the data returned through the getSchema() method. The other methods are concerned with other types of metadata like partition keys and statistics. Implementations can return null return values for these methods if they are not applicable for that implementation.</li>
+<li id="LoadMetadata"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/LoadMetadata.java?view=markup">LoadMetadata</a> には、メタデータを扱うためのメソッドがあります。多くの場合、何らかのメタデータの仕組みを扱わない限り、ロード関数の実装がこのインタフェースを実装する必要はありません。インタフェース中の getSchema() メソッドによって、データのスキーマを Pig に戻すことができます。ロード関数が DataByteArray 型のフィールドでなく実際の型のフィールドからなるデータを戻す場合、 getSchema() メソッドによってデータのスキーマを戻す必要があります。その他のメソッドは、パーティションキーや統計情報などのメタデータに関連するものです。該当する情報がない場合、これらのメソッドは null を戻すようにします。</li>
 
-<li id="LoadPushDown"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/LoadPushDown.java?view=markup">LoadPushDown</a> 
-has methods to push operations from Pig runtime into loader implementations. Currently only the pushProjection() method is called by Pig to communicate to the loader the exact fields that are required in the Pig script. The loader implementation can choose to honor the request (return only those fields required by Pig script) or not honor the request (return all fields in the data). If the loader implementation can efficiently honor the request, it should implement LoadPushDown to improve query performance. (Irrespective of whether the implementation can or cannot honor the request, if the implementation also implements getSchema(), the schema returned in getSchema() should describe the entire tuple of data.)
+<li id="LoadPushDown"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/LoadPushDown.java?view=markup">LoadPushDown</a> には、 Pig の処理をロード関数側にプッシュダウン最適化するためのメソッドがあります。現在のところ、 Pig が呼び出すのは pushProjection() メソッドだけです。このメソッドは Pig スクリプト中で実際に使われているフィールドをロード関数に伝えるために呼び出されます。ロード関数の実装は、要求を受け付けて必要なフィールドだけを戻すこともできますし、要求を受け付けずすべてのフィールドを戻すこともできます。ロード関数がフィールドを効率的に絞り込める場合、クエリの性能を上げるために LoadPushDown インタフェースを実装します。ロード関数がフィールドを絞り込むか絞り込まないかにかかわらず、 getSchema() メソッドを実装している場合には、データのタプル全体を表すスキーマを戻す必要があります。
 <ul>
-	<li id="pushprojection">pushProjection(): This method tells LoadFunc which fields are required in the Pig script, thus enabling LoadFunc to optimize performance by loading only those fields that are needed. pushProjection() takes a requiredFieldList. requiredFieldList is read only and cannot be changed by LoadFunc. requiredFieldList includes a list of requiredField: each requiredField indicates a field required by the Pig script; each requiredField includes index, alias, type (which is reserved for future use), and subFields. Pig will use the column index requiredField.index to communicate with the LoadFunc about the fields required by the Pig script. If the required field is a map, Pig will optionally pass requiredField.subFields which contains a list of keys that the Pig script needs for the map. For example, if the Pig script needs two keys for the map, "key1" and "key2", the subFields for that map will contain two requiredField; the alias field for the first RequiredField will be "key1" and the alias for the second requiredField will be "key2". LoadFunc will use requiredFieldResponse.requiredFieldRequestHonored to indicate whether the pushProjection() request is honored.
-</li>
+	<li id="pushprojection">pushProjection(): ロード関数の実装に対して、 Pig スクリプト中でどのフィールドが必要かを伝えます。これを受けてロード関数の実装は、必要なフィールドだけを読み込むことで性能を上げることができます。 pushProjection() メソッドは引数として requiredFieldList を取ります。 requiredFieldList は読み取り専用の引数で、 requiredField のリストからなります。それぞれの requiredField は Pig スクリプトで要求されたフィールドを表しており、 index, alias, type (将来の拡張用) , subFields からなります。必要な列のインデックスは requiredField.index に格納されます。必要なフィールドがマップだった場合、必要なキーのリストが requiredField.subFields に格納されます。たとえば、 Pig スクリプトがマップのキーとして "key1" と "key2" を使っていた場合、このマップに対する subFields は 2 つの requiredField を格納します。最初の requiredField の alias は "key1" で、二番目の requiredField の alias は "key2" です。 pushProjection() メソッドへのリクエストが受け付けられたかどうかを通知するには、戻り値中の requiredFieldResponse.requiredFieldRequestHonored を使います。</li>
 </ul>
 </li>
 
-<li id="loadcaster"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/LoadCaster.java?view=markup">LoadCaster</a> 
-has methods to convert byte arrays to specific types. A loader implementation should implement this if casts (implicit or explicit) from DataByteArray fields to other types need to be supported. </li>
+<li id="loadcaster"><a href="http://svn.apache.org/viewvc/pig/trunk/src/org/apache/pig/LoadCaster.java?view=markup">LoadCaster</a> には、 bytearray を特定の型に変換するメソッドがあります。 DataByteArray のフィールドから他の型へのキャスト (暗黙・明示的いずれも) をサポートしたい場合に、ロード関数はこのインタフェースを実装します。</li>
 </ul>
 
- <p>The LoadFunc abstract class is the main class to extend for implementing a loader. The methods which need to be overridden are explained below:</p>
+ <p>LoadFunc 抽象クラスはロード関数を実装するためのメインのクラスです。オーバーライドする必要があるメソッドは次の通りです:</p>
  <ul>
- <li id="getInputFormat">getInputFormat(): This method is called by Pig to get the InputFormat used by the loader. The methods in the InputFormat (and underlying RecordReader) are called by Pig in the same manner (and in the same context) as by Hadoop in a MapReduce java program. If the InputFormat is a Hadoop packaged one, the implementation should use the new API based one under org.apache.hadoop.mapreduce. If it is a custom InputFormat, it should be implemented using the new API in org.apache.hadoop.mapreduce.<br></br> <br></br> 
+ <li id="getInputFormat">getInputFormat(): Pig はロード関数が使う InputFormat を知るためにこのメソッドを呼び出します。 Pig において InputFormat と RecordReader のメソッドが呼び出される方法と文脈は、 Hadoop MapReduce と同じです。 Hadoop に同梱されている InputFormat の実装を使う場合には、 org.apache.hadoop.mapreduce パッケージ下の新 API 版を使います。自作の InputFormat を使う場合には、 InputFormat は org.apache.hadoop.mapreduce 下の新 API を使って実装する必要があります。<br></br> <br></br> 
  
- If a custom loader using a text-based InputFormat or a file-based InputFormat would like to read files in all subdirectories under a given input directory recursively, then it should use the PigTextInputFormat and PigFileInputFormat classes provided in org.apache.pig.backend.hadoop.executionengine.mapReduceLayer. The Pig InputFormat classes work around a current limitation in the Hadoop TextInputFormat and FileInputFormat classes which only read one level down from the provided input directory. For example, if the input in the load statement is 'dir1' and there are subdirs 'dir2' and 'dir2/dir3' beneath dir1, the Hadoop TextInputFormat and FileInputFormat classes read the files under 'dir1' only. Using PigTextInputFormat or PigFileInputFormat (or by extending them), the files in all the directories can be read. </li>
+ テキストベースの InputFormat やファイルベースの InputFormat を使う自作のロード関数で、サブディレクトリ中のファイルを再帰的に読み込みたい場合には、 org.apache.pig.backend.hadoop.executionengine.mapReduceLayer パッケージ中の PigTextInputFormat か PigFileInputFormat クラスを使う必要があります。 Pig の InputFormat 実装を使うことで、指定されたディレクトリの一段下しか読まないという Hadoop 標準の TextInputFormat と FileInputFormat の制限が回避できます。たとえば、 LOAD 文で入力元として 'dir1' を指定し、このディレクトリのサブディレクトリとして 'dir2' と 'dir2/dir3' がある場合、 Hadoop 標準の TextInputFormat と FileInputFormat は 'dir1' 直下のファイルだけを読み込みます。 PigTextInputFormat か PigFileInputFormat を使うか、それらを拡張したクラスを使えば、全ディレクトリ中のファイルが読み込まれます。</li>
  
- <li id="setLocation">setLocation(): This method is called by Pig to communicate the load location to the loader. The loader should use this method to communicate the same information to the underlying InputFormat. This method is called multiple times by pig - implementations should bear this in mind and should ensure there are no inconsistent side effects due to the multiple calls. </li>
+ <li id="setLocation">setLocation(): Pig はロード元の場所をロード関数に伝えるためにこのメソッドを呼び出します。ロード関数はこのメソッドの中で、同じ情報を InputFormat に伝える必要があります。このメソッドは複数回呼ばれる可能性があるため、不整合を起こす副作用がないように注意する必要があります。</li>
  
- <li id="prepareToRead">prepareToRead(): Through this method the RecordReader associated with the InputFormat provided by the LoadFunc is passed to the LoadFunc. The RecordReader can then be used by the implementation in getNext() to return a tuple representing a record of data back to pig. </li>
+ <li id="prepareToRead">prepareToRead(): ロード関数が使う InputFormat に紐づいた RecordReader をロード関数に渡します。ロード関数実装は getNext() メソッドの中でこの RecordReader を使ってレコードを読み込みタプルを戻します。</li>
  
- <li id="getnext">getNext(): The meaning of getNext() has not changed and is called by Pig runtime to get the next tuple in the data - in this method the implementation should use the underlying RecordReader and construct the tuple to return. </li>
+ <li id="getnext">getNext(): Pig はデータから新しいタプルを読み込むためにこのメソッドを呼び出します。このメソッドは RecordReader を使ってデータを読み込み、タプルを作って戻します。</li>
  </ul>
 
- <p id="loadfunc-default">The following methods have default implementations in LoadFunc and should be overridden only if needed: </p>
+ <p id="loadfunc-default">次のメソッドは LoadFunc クラス内にデフォルトの実装がありますが、必要に応じてオーバーライドします:</p>
  <ul>
- <li id="setUdfContextSignature">setUdfContextSignature(): This method will be called by Pig both in the front end and back end to pass a unique signature to the Loader. The signature can be used to store into the UDFContext any information which the Loader needs to store between various method invocations in the front end and back end. A use case is to store RequiredFieldList passed to it in LoadPushDown.pushProjection(RequiredFieldList) for use in the back end before returning tuples in getNext(). The default implementation in LoadFunc has an empty body. This method will be called before other methods. </li>
+ <li id="setUdfContextSignature">setUdfContextSignature(): Pig はロード関数に対して固有のシグネチャを通知するために、フロントエンドとバックエンドの双方でこのメソッドを呼び出します。ロード関数はこのシグネチャを使って、フロントエンドとバックエンドでの多くのメソッド呼び出し間で共有する必要がある情報を UDFContext に格納します。一つの使い道として、 LoadPushDown.pushProjection(RequiredFieldList) が渡された RequiredFieldList を UDFContext に格納し、バックエンドの getNext() メソッドがタプルを構築する前にこれを参照する、ということが挙げられます。 LoadFunc クラス内のデフォルト実装は何もしていません。このメソッドは他のメソッドが呼び出される前に呼び出されます。</li>
  
- <li id="relativeToAbsolutePath">relativeToAbsolutePath(): Pig runtime will call this method to allow the Loader to convert a relative load location to an absolute location. The default implementation provided in LoadFunc handles this for FileSystem locations. If the load source is something else, loader implementation may choose to override this.</li>
+ <li id="relativeToAbsolutePath">relativeToAbsolutePath(): Pig はロード元の相対位置を絶対位置に変換するためにこのメソッドを呼び出します。 LoadFunc クラス内のデフォルト実装は、 FileSystem 内の表現として相対位置を解決します。データのロード元がどこか他の場所の場合、ロード関数はこのメソッドをオーバーライドします。</li>
  </ul>
 
-<p><strong>Example Implementation</strong></p>
-<p>
-The loader implementation in the example is a loader for text data with line delimiter as '\n' and '\t' as default field delimiter (which can be overridden by passing a different field delimiter in the constructor) - this is similar to current PigStorage loader in Pig. The implementation uses an existing Hadoop supported Inputformat - TextInputFormat - as the underlying InputFormat.
-</p>
+<p><strong>実装例</strong></p>
+<p>次のロード関数は、 '\n' を行区切りとし、 '\t' をデフォルトのフィールド区切りとして、テキストデータを読み込みます。フィールド区切りはコンストラクタで指定することもできます。つまり、 PigStorage のロード関数と同じです。この実装は既存の Hadoop の TextInputFormat を InputFormat として使います。</p>
 <source>
 public class SimpleTextLoader extends LoadFunc {
     protected RecordReader in = null;
@@ -930,11 +923,11 @@ public class SimpleTextLoader extends LoadFunc {
     }
 
     /**
-     * Constructs a Pig loader that uses specified character as a field delimiter.
+     * 指定された文字をフィールド区切り文字としてロード関数を構築します.
      *
      * @param delimiter
-     *            the single byte character that is used to separate fields.
-     *            ("\t" is the default.)
+     *            フィールドを区切る 1 バイト文字.
+     *            (デフォルトは "\t".)
      */
     public SimpleTextLoader(String delimiter) {
         this();
@@ -982,7 +975,7 @@ public class SimpleTextLoader extends LoadFunc {
                     start = i + 1;
                 }
             }
-            // pick up the last field
+            // 最後のフィールドを読み込む
             readField(buf, start, len);
 
             Tuple t =  mTupleFactory.newTupleNoCopy(mProtoTuple);
