@@ -1258,15 +1258,13 @@ public class SimpleTextStorer extends StoreFunc {
 
 <!-- =============================================================== -->
 <section>
-<title>Advanced Topics</title>
+<title>高度な話題</title>
 
 <section id="udf-interfaces">
-<title>UDF Interfaces</title>
-<p>Java UDFs can be invoked multiple ways. The simplest UDF can just extend EvalFunc, which requires only the exec function to be implemented (see <a href="#eval-functions-write"> How to Write a Simple Eval Function</a>). Every eval UDF must implement this. Additionally, if a function is algebraic, it can implement <code>Algebraic</code> interface to significantly improve query performance in the cases when combiner can be used (see <a href="#Algebraic-Interface">Algebraic Interface</a>). Finally, a function that can process tuples in an incremental fashion can also implement the Accumulator interface to improve query memory consumption (see <a href="#Accumulator-Interface">Accumulator Interface</a>).
-</p>
+<title>各種 UDF インタフェース</title>
+<p>Java の UDF はいくつかの方法で呼び出されます。最も単純な UDF は単に EvalFunc クラスを拡張し、 exec メソッドを実装するものです (see <a href="#eval-functions-write">評価関数の書き方</a>を参照してください) 。すべての評価関数はこのメソッドを実装します。加えて、関数が代数的である場合は、 <code>Algebraic</code> インタフェースを実装することで、 Combiner が使える場合には目に見えてクエリ性能が改善できます (<a href="#algebraic-interface">Algebraic インタフェース</a>を参照してください) 。最後に、関数が少しずつデータを処理できる場合には、 Accumulator インタフェースを実装することでメモリ使用量が改善できます (<a href="#accumulator-interface">Accumulator インタフェース</a>を参照してください) 。</p>
 
-<p>The optimizer selects the exact method by which a UDF is invoked based on the UDF type and the query. Note that only a single interface is used at any given time. The optimizer tries to find the most efficient way to execute the function. If a combiner is used and the function implements the Algebraic interface then this interface will be used to invoke the function. If the combiner is not invoked but the accumulator can be used and the function implements Accumulator interface then that interface is used. If neither of the conditions is satisfied then the exec function is used to invoke the UDF. 
-</p>
+<p>オプティマイザは UDF の型とクエリの種類に応じて、 UDF を呼び出すのに適切なメソッドを選びます。一度に使われるのはひとつのインタフェースだけで、オプティマイザは関数を実行するのに最も効率的な方法を選びます。 Combiner が使われいて、関数が Algebraic インタフェースを実装している場合は、関数を呼び出すのに Algebraic インタフェースが使われます。 Combiner が使われていない場合、クエリ実行で Accumulator が使用可能で、関数が Accumulator を実装していれば、このインタフェースが使われます。どちらの条件も満たされなければ、 UDF を実行するのに exec メソッドが使われます。</p>
  </section>
  
  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
