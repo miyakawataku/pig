@@ -1277,12 +1277,12 @@ public class SimpleTextStorer extends StoreFunc {
  
   <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="udf-configurations">
-<title>Passing Configurations to UDFs</title>
-<p>The singleton UDFContext class provides two features to UDF writers. First, on the backend, it allows UDFs to get access to the JobConf object, by calling getJobConf. This is only available on the backend (at run time) as the JobConf has not yet been constructed on the front end (during planning time).</p>
+<title>UDF に設定を渡す</title>
+<p>シングルトンクラスである UDFContext には UDF の作者向けの 2 つの機能があります。一つ目の機能として、バックエンドでは、 UDF 実装は getJobConf メソッドを呼ぶことで JobConf オブジェクトが得られます。このメソッドが呼べるのはバックエンド (実行時) だけです。フロントエンド (実行計画時) には、まだ JobConf が構築されていないからです。</p>
 
-<p>Second, it allows UDFs to pass configuration information between instantiations of the UDF on the front and backends. UDFs can store information in a configuration object when they are constructed on the front end, or during other front end calls such as describeSchema. They can then read that information on the backend when exec (for EvalFunc) or getNext (for LoadFunc) is called. Note that information will not be passed between instantiations of the function on the backend. The communication channel only works from front end to back end.</p>
+<p>二つ目の機能として、 UDFContext を使うことでフロントエンドからバックエンドに対して設定情報を渡すことができます。 UDF はフロントエンドのコンストラクタや describeSchema メソッド等で情報を設定オブジェクトに詰め込みます。これらの情報は、 EvalFunc の exec メソッドや LoadFunc の getNext メソッド等から読み出せます。 UDFContext を使っても、バックエンドの関数インスタンス間で情報をやり取りすることはできないということに注意してください。やり取りはフロントエンドからバックエンドに向けてのみ可能です。</p>
 
-<p>To store information, the UDF calls getUDFProperties. This returns a Properties object which the UDF can record the information in or read the information from. To avoid name space conflicts UDFs are required to provide a signature when obtaining a Properties object. This can be done in two ways. The UDF can provide its Class object (via this.getClass()). In this case, every instantiation of the UDF will be given the same Properties object. The UDF can also provide its Class plus an array of Strings. The UDF can pass its constructor arguments, or some other identifying strings. This allows each instantiation of the UDF to have a different properties object thus avoiding name space collisions between instantiations of the UDF.</p>
+<p>情報を格納するには、 getUDFProperties をを呼び出します。このメソッドは情報を読み書きするための Properties オブジェクトを戻します。名前の衝突を避けるために、 Properties オブジェクトを取得するにはシグネチャを使う必要があります。これには二つの方法があります。一つは、 UDF のクラスオブジェクト (this.getClass()) をシグネチャとして使う方法です。この場合、 UDF は呼び出し間で Properties オブジェクトを共有することになります。二つ目は、クラスと文字列の配列の組み合わせをシグネチャとして使う方法です。コンストラクタ引数やその他識別のための文字列がシグネチャとして使えます。この場合、 UDF 呼び出しごとに違う Properties オブジェクトを使うことになるので、 UDF 呼び出しごとの名前空間の衝突が避けられます。</p>
 </section>
 
  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
