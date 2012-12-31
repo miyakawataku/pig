@@ -1701,44 +1701,38 @@ function main() {
 <!-- PIGGYBANK -->
 <section id="piggybank">
 <title>Piggy Bank</title>
-<p>Piggy Bank is a place for Pig users to share the Java UDFs they have written for use with Pig. 
-The functions are contributed "as-is." 
-If you find a bug in a function, take the time to fix it and contribute the fix to Piggy Bank. 
-If you don't find the UDF you need, take the time to write and contribute the function to Piggy Bank.
-</p>
+<p>Piggy Bank は Pig ユーザが自作の Java UDF を共有するための場所です。関数は「ありのまま」で提供されます。関数のバグを見つけたら、バグを潰して修正を Piggy Bank に寄贈してください。欲しい UDF がなかったら、作って Piggy Bank に寄贈してください。</p>
 
-<p><strong>Note:</strong> Piggy Bank currently supports Java UDFs. Support for Python and JavaScript UDFs will be added at a later date.</p>
+<p><strong>注記:</strong> Piggy Bank は今のところ Java UDF だけを対象にしています。 Python と JavaScript の UDF は、将来対象になります。</p>
 
  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="piggbank-access">
-<title>Accessing Functions</title>
+<title>関数を入手する</title>
 
-<p>The Piggy Bank functions are currently distributed in source form. Users are required to checkout the code and build the package themselves. No binary distributions or nightly builds are available at this time. </p>
+<p>Piggy Bank の関数は今のところソースの形で配布されます。ユーザはコードを自分でチェックアウトしてビルドする必要があります。現時点では、バイナリ配布もナイトリービルドもありません。</p>
 
-<p>To build a jar file that contains all available UDFs, follow these steps: </p>
+<p>入手可能な全 UDF をビルドするには、次のようにします。</p>
 <ul>
-<li>Checkout UDF code: <code>svn co http://svn.apache.org/repos/asf/pig/trunk/contrib/piggybank</code> </li>
-<li>Add pig.jar to your ClassPath: <code>export CLASSPATH=$CLASSPATH:/path/to/pig.jar</code> </li>
-<li>Build the jar file: from directory<code>trunk/contrib/piggybank/java</code> run <code>ant</code>. 
-This will generate <code>piggybank.jar</code> in the same directory. </li>
+<li>UDF コードをチェックアウト: <code>svn co http://svn.apache.org/repos/asf/pig/trunk/contrib/piggybank</code> </li>
+<li>pig.jar をクラスパスに追加: <code>export CLASSPATH=$CLASSPATH:/path/to/pig.jar</code> </li>
+<li>JAR ファイルをビルド: <code>trunk/contrib/piggybank/java</code> ディレクトリ下で <code>ant</code> を実行します。<code>piggybank.jar</code> が同じディレクトリ内にできます。</li>
 </ul>
 <p></p>
 
-<p>To obtain <code>javadoc</code> description of the functions run <code>ant javadoc</code> from directory <code>trunk/contrib/piggybank/java</code>. The documentation is generate in directory <code>trunk/contrib/piggybank/java/build/javadoc</code>.</p>
+<p>関数の <code>Javadoc</code> が必要なら、 <code>trunk/contrib/piggybank/java</code> ディレクトリで <code>ant javadoc</code> を実行します。ドキュメンテーションは <code>trunk/contrib/piggybank/java/build/javadoc</code> ディレクトリに生成されます。</p>
 
-<p>To use a function, you need to determine which package it belongs to. The top level packages correspond to the function type and currently are: </p>
+<p>関数を使うには、関数が属するパッケージを見つける必要があります。トップレベルのパッケージが関数の分類に対応しています。現在存在するのは次のパッケージです:</p>
 <ul>
-<li>org.apache.pig.piggybank.comparison - for custom comparator used by ORDER operator </li>
-<li>org.apache.pig.piggybank.evaluation - for eval functions like aggregates and column transformations </li>
-<li>org.apache.pig.piggybank.filtering - for functions used in FILTER operator </li>
-<li>org.apache.pig.piggybank.grouping - for grouping functions</li>
-<li>org.apache.pig.piggybank.storage - for load/store functions </li>
+<li>org.apache.pig.piggybank.comparison - ORDER 演算子で使う比較関数</li>
+<li>org.apache.pig.piggybank.evaluation - 集約関数や列変換関数のような評価関数</li>
+<li>org.apache.pig.piggybank.filtering - FILTER 演算子で使う関数</li>
+<li>org.apache.pig.piggybank.grouping - グループ化関数</li>
+<li>org.apache.pig.piggybank.storage - ロード・ストア関数</li>
 </ul>
-<p></p>
 
-<p>(The exact package of the function can be seen in the javadocs or by navigating the source tree.) </p>
+<p>(関数が属するパッケージの正確な位置については Javadoc か、ソースツリーを見てください)</p>
 
-<p>For example, to use the UPPER command: </p>
+<p>たとえば、 UPPER 関数を使うには次のようにします:</p>
 
 <source>
 REGISTER /public/share/pig/contrib/piggybank/java/piggybank.jar ;
@@ -1750,18 +1744,17 @@ STORE TweetsInaug INTO 'meta/inaug/tweets_inaug' ;
 
  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="piggybank-contribute">
-<title>Contributing Functions</title>
+<title>関数を寄贈する</title>
 
-<p>To contribute a Java function that you have written, do the following:</p>
+<p>自作の Java 関数を寄贈するには、次のようにします:</p>
 <ol>
-<li>Check the existing javadoc to make sure that the function does not already exist as described in <a href="#piggbank-access">Accessing Functions</a>. </li>
-<li>Checkout the UDF code as described in <a href="#piggbank-access">Accessing Functions</a>. </li>
-<li>Place your java code in the directory that makes sense for your function. The directory structure currently has two levels: (1) function type, as described in <a href="#piggbank-access">Accessing Functions</a>, and (2) function subtype, for some of the types (like math or string for eval functions). If you think your function requires a new subtype, feel free to add one. </li>
-<li>Make sure that your function is well documented and uses the 
-<a href="http://download.oracle.com/javase/1.4.2/docs/tooldocs/solaris/javadoc.html">javadoc</a> style of documentation. </li>
-<li>Make sure that your code follows Pig coding conventions described in <a href="http://wiki.apache.org/pig/HowToContribute">How to Contribute to Pig</a>.</li>
-<li>Make sure that for each function, you add a corresponding test class in the test part of the tree. </li>
-<li>Submit your patch following the process described in <a href="http://wiki.apache.org/pig/HowToContribute">How to Contribute to Pig</a>. </li>
+<li><a href="#piggbank-access">関数を入手する</a>で示した手順で既存の Javadoc を見て、同様の関数が既に存在していないことを確認します。</li>
+<li><a href="#piggbank-access">関数を入手する</a>で示した手順で UDF のコードをチェックアウトします。</li>
+<li>関数の分類に応じた場所に Java コードを配置します。ディレクトリ構造は 2 つのレベルにわかれています: (1) <a href="#piggbank-access">関数を入手する</a>で示した関数の分類 (2) 関数の小分類 (評価関数の中の数学関数 (math) 、文字列関数 (string) のように) 。自作の関数に新しい小分類が必要だと思ったら、追加して構いません。</li>
+<li>関数を <a href="http://docs.oracle.com/javase/6/docs/technotes/tools/windows/javadoc.html">Javadoc</a> 形式で充分にドキュメント化します。</li>
+<li>コードが <a href="https://cwiki.apache.org/confluence/display/PIG/HowToContribute">How to Contribute to Pig</a> に示した Pig のコーディング規約を遵守しているようにします。</li>
+<li>ソースツリー中の test ディレクトリ下に、関数に対応するテストクラスを追加します。</li>
+<li><a href="https://cwiki.apache.org/confluence/display/PIG/HowToContribute">How to Contribute to Pig</a> に示した手順でパッチを投稿します。</li>
 </ol>
 </section>
 </section> 
