@@ -1342,7 +1342,7 @@ public class SimpleTextStorer extends StoreFunc {
 Register 'test.py' using jython as myfuncs;
 </source>
 
-<p>次の構文も可能です。 test.py 中の全関数が名前空間 myfuncs の中に作られます。</p>
+<p>次の書き方も可能です。 test.py 中の全関数が名前空間 myfuncs の中に作られます。</p>
 <source>
 register 'test.py' using org.apache.pig.scripting.jython.JythonScriptEngine as myfuncs;
 </source>
@@ -1382,7 +1382,7 @@ b = foreach a generate myfuncs.helloworld(), myfuncs.square(3);
 </section>
 <section id="decorators">
 <title>デコレータとスキーマ</title>
-<p>Python スクリプト中の UDF の戻り値を Pig が判別できるように、 Python のデコレータを使って出力スキーマを定義します。</p>
+<p>Python スクリプト中の UDF の戻り値の型を Pig が判別できるように、 Python のデコレータを使って出力スキーマを定義します。</p>
 <ul>
 <li id="outputschema">outputSchema - Pig が解釈可能な書式でスクリプト UDF の出力スキーマを定義します。</li>
 <li id="outputfunctionschema">outputFunctionSchema - 入力型に応じて出力スキーマを戻す関数を、委譲先として定義します。このデコレータは、入力型として複数の型を受け入れ、入力型に応じた処理を行う関数のために用意されています。複数の型を受け入れる関数の単純な例は square 関数です。この場合、出力スキーマを生成する関数は、単純に入力スキーマをそのまま戻します。</li>
@@ -1493,24 +1493,24 @@ result = P.bind().runSingle();
 
  <!-- =============================================================== -->
  <section id="js-udfs">
- <title>Writing JavaScript UDFs</title>
+ <title>JavaScript UDF を書く</title>
  
- <p><strong>Note:</strong> <em>JavaScript UDFs are an experimental feature.</em></p>
+ <p><strong>注記:</strong> <em>JavaScript UDF は実験的機能です。</em></p>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++ -->
  <section id="register-js">
- <title>Registering the UDF</title>
- <p>You can register JavaScript as shown here. This example uses org.apache.pig.scripting.js.JsScriptEngine to interpret JavaScript. You can develop and use custom script engines to support multiple programming languages and ways to interpret them. Currently, Pig identifies js as a keyword and ships the required scriptengine (js) to interpret it. </p>
+ <title>UDF を登録する</title>
+ <p>JavaScript の UDF は次のようにして登録できます。この例では JavaScript を実行するのに org.apache.pig.scripting.js.JsScriptEngine を使っています。複数言語をサポートし、実行するために、自作のスクリプトエンジンが開発できます。現在のところ、 Pig は「js」キーワードを識別し、実行に必要なスクリプトエンジン (Rhino) を配布します。</p>
  <source>
  register 'test.js' using javascript as myfuncs;
  </source>
  
- <p>The following syntax is also supported, where myfuncs is the namespace created for all the functions inside test.js.</p>
+ <p>次の書き方も可能です。 test.js 中の全関数が名前空間 myfuncs の中に作られます。</p>
  <source>
  register 'test.js' using org.apache.pig.scripting.js.JsScriptEngine as myfuncs;
  </source>
 
- <p>The register statement above registers the js functions defined in test.js in Pig’s runtime within the defined namespace (myfuncs here). They can then be referred later on in the pig script as myfuncs.helloworld(), myfuncs.complex(), and myfuncs.square(). An example usage is:</p>
+ <p>上記の REGISTER 文は test.js 中の JavaScript 関数を、 Pig の指定した名前空間 (ここでは myfuncs) の中に登録します。これにより、以降 Pig スクリプトの中で myfuncs.helloworld(), myfuncs.complex(), and myfuncs.square() のように関数が使えるようになります。使用例は次のとおりです:</p>
  
  <source>
  b = foreach a generate myfuncs.helloworld(), myfuncs.complex($0);
@@ -1519,18 +1519,18 @@ result = P.bind().runSingle();
  
  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++ -->
  <section id="schema-return-types">
- <title>Return Types and Schemas</title>
- <p>Since JavaScript functions are first class objects, you can annotate them by adding attributes. Add an outputSchema attribute to your function so that Pig can identify return types for the script UDF. </p>
+ <title>戻り値の型とスキーマ</title>
+ <p>JavaScript の関数は第一級のオブジェクトであるため、属性を追加することで注釈が付けられます。 UDF の戻り値の型を Pig が判別できるようにするため、関数に outputSchema 属性を追加します。</p>
  <ul>
- <li>outputSchema - Defines schema for a script udf in a format that Pig understands and is able to parse. </li>
- <li>Sample Schema String - y:{t:(word:chararray,num:long)} <br></br>Variable names inside a schema string are used for type conversion between Pig and JavaScript. Tuples are converted to Objects using the names and vice versa</li>
+ <li>outputSchema - Pig が解釈可能な書式で UDF の出力のスキーマを定義します。</li>
+ <li>スキーマ文字列の例 - y:{t:(word:chararray,num:long)} <br></br>スキーマ文字列中の変数名は Pig と JavaScript の間で型変換を行う際に用いられます。つまり、 Pig タプルと JavaScript オブジェクト間の変換は変数名を使って行われます。</li>
  </ul>
  </section>
  
  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++ -->
  <section id="js-example">
- <title>Example Scripts</title> 
-  <p>A simple JavaScript UDF (udf.js) is shown here.</p>
+ <title>スクリプト例</title> 
+  <p>単純な JavaScript UDF (udf.js) の例は次のとおりです。</p>
  <source>
  helloworld.outputSchema = "word:chararray";
 function helloworld() {
@@ -1543,7 +1543,7 @@ function complex(word){
 }
 </source>
  
-<p>This Pig script registers the JavaScript UDF (udf.js).</p>
+<p>Pig スクリプトは次のようにして JavaScript UDF (udf.js) を登録します。</p>
 <source>
  register ‘udf.js’ using javascript as myfuncs; 
 A = load ‘data’ as (a0:chararray, a1:int);
@@ -1554,13 +1554,12 @@ B = foreach A generate myfuncs.helloworld(), myfuncs.complex(a0);
   
    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++ -->
  <section id="js-advanced">
- <title>Advanced Topics</title> 
+ <title>高度な話題</title> 
 
- <p>UDFs and Pig scripts are generally stored in separate files. For testing purposes you can combine the code in a single file - a "combined" script. 
- Note, however, if you then decide to embed this "combined" script in a host language, the language of the UDF and the host language must match.</p>
+ <p>UDF と Pig のスクリプトは一般的に別々のファイルに保存されます。しかし、テストの用途のため、コードを単一の「複合」スクリプトとして保存することもできます。ただし、「複合」スクリプトをある言語に埋め込んだら、 UDF はその言語で書く必要があります。</p>
  
- <p>This example combines JavaScript and Pig. This "combined" script can only be embedded in JavaScript.</p>
-<p>With JavaScript, the control flow MUST be defined in the main function. Otherwise the script will result in an error.</p>
+ <p>下の例では JavaScript と Pig を複合しています。この場合、「複合」スクリプトは JavaScript だけに埋め込めます。</p>
+<p>JavaScript の複合スクリプトでは、 Pig スクリプトの制御の流れは main 関数の中に書く必要があります。そうしないと、スクリプトはエラーを発生します。</p>
  <source>
 importPackage(Packages.org.apache.pig.scripting.js)
 pig = org.apache.pig.scripting.js.JSPig;
