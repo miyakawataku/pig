@@ -1583,14 +1583,14 @@ function main() {
 
  <!-- =============================================================== -->
  <section id="jruby-udfs">
- <title>Writing Ruby UDFs</title>
+ <title>Ruby UDF を書く</title>
 
- <p><strong>Note:</strong> <em>Ruby UDFs are an experimental feature.</em></p>
+ <p><strong>注記:</strong> <em>Ruby UDF は実験的機能です。</em></p>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++ -->
  <section id="write-jruby">
- <title>Writing a Ruby UDF</title>
- <p>You must extend PigUdf and define your Ruby UDFs in the class. </p>
+ <title>Ruby UDF を書く</title>
+ <p>PigUdf クラスを継承して Ruby UDF のクラスを定義します。</p>
  <source>
  require 'pigudf'
  class Myudfs &lt; PigUdf
@@ -1602,42 +1602,42 @@ function main() {
  </source>
  </section>
  <section id="jruby-schema-return-types">
- <title>Return Types and Schemas</title>
- <p>You have two ways to define the return schema:</p>
- <p>outputSchema - Defines the schema for a UDF in a format that Pig understands. </p>
+ <title>戻り値の型とスキーマ</title>
+ <p>戻り値のスキーマを定義するには二つの方法があります:</p>
+ <p>outputSchema - Pig が解釈可能な書式で UDF の出力のスキーマを定義します。</p>
  <source>
  outputSchema "word:chararray"
  </source>
  <source>
  outputSchema "t:(m:[], t:(name:chararray, age:int, gpa:double), b:{t:(name:chararray, age:int, gpa:double)})"
  </source>
- <p>Schema function</p>
+ <p>スキーマ関数</p>
  <source>
  outputSchemaFunction :squareSchema
  def squareSchema input
      input
  end
  </source>
- <p>You need to put outputSchema/outputSchemaFunction statement right before your UDF. The schema function itself can be defined anywhere inside the class.</p>
+ <p>outputSchema 文と outputSchemaFunction 文は UDF 実装の直前に置きます。スキーマ関数自体はクラスの中のどこに置いても構いません。</p>
  </section>
  <section id="register-jruby">
- <title>Registering the UDF</title>
- <p>You can register a Ruby UDF as shown here. </p>
+ <title>UDF を登録する</title>
+ <p>Ruby UDF は次のようにして登録します。</p>
  <source>
  register 'test.rb' using jruby as myfuncs;
  </source>
- <p> This is a shortcut to the complete syntax:</p>
+ <p>次の例はショートカット版の構文です:</p>
  <source>
  register 'test.rb' using org.apache.pig.scripting.jruby.JrubyScriptEngine as myfuncs;
  </source>
- <p>The <code>register</code> statement above registers the Ruby functions defined in test.rb in Pig’s runtime within the defined namespace (myfuncs in this example). They can then be referred later on in the Pig Latin script as <code>myfuncs.square()</code>. An example usage is:</p>
+ <p>上記の <code>REGISTER</code> 文は test.rb 内の Ruby 関数を、 Pig の指定した名前空間 (ここでは myfuncs) の中に登録します。これにより、以降 Pig Latin スクリプトの中で <code>myfuncs.square()</code> のように関数が使えるようになります。使用例は次のとおりです:</p>
  <source>
  b = foreach a generate myfuncs.concat($0, $1);
  </source>
  </section>
  <section id="jruby-example">
- <title>Example Scripts</title>
- <p>Here are two complete Ruby UDF samples.</p>
+ <title>スクリプト例</title>
+ <p>Ruby UDF の完全なサンプルを 2 つお見せします。</p>
  <source>
  require 'pigudf'
  class Myudfs &lt; PigUdf
@@ -1663,8 +1663,8 @@ function main() {
  </section>
 
  <section id="jruby-advanced">
- <title>Advanced Topics</title>
- <p> You can also write Algebraic and Accumulator UDFs using Ruby. You need to extend your class from <code>AlgebraicPigUdf</code> and <code>AccumulatorPigUdf</code> respectively. For an Algebraic UDF, define <code>initial</code>, <code>intermed</code>, and <code>final</code> methods in the class. For an Accumulator UDF, define <code>exec</code> and <code>get</code> methods in the class. Below are example for each type of UDF: </p>
+ <title>高度な話題</title>
+ <p>Ruby では Algebraic インタフェースや Accumulator インタフェースの UDF も書けます。それぞれ、 <code>AlgebraicPigUdf</code> か <code>AccumulatorPigUdf</code> を継承したクラスを作ります。 Algebraic な UDF では <code>initial</code>, <code>intermed</code>, <code>final</code> メソッドを定義します。 Accumulator な UDF では <code>exec</code> メソッドと <code>get</code> メソッドを定義します。それぞれの種類の UDF の例を下記に挙げます:</p>
  <source>
  class Count &lt; AlgebraicPigUdf
      output_schema Schema.long
