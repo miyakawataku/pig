@@ -1466,10 +1466,10 @@ b = foreach a generate myfuncs.helloworld(), myfuncs.square(3);
 <!-- ++++++++++++++++++++ -->
 <section id="combined-scripts">
 <title>複合スクリプト</title>
-  <p>UDF と Pig のスクリプトは一般的に別々のファイルに保存されます。しかし、テストの用途のため、コードを単一の「複合」スクリプトとして保存することもできます。 Note, however, if you then decide to embed this "combined" script in a host language, the language of the UDF must match the host language.</p>
+  <p>UDF と Pig のスクリプトは一般的に別々のファイルに保存されます。しかし、テストの用途のため、コードを単一の「複合」スクリプトとして保存することもできます。ただし、「複合」スクリプトをある言語に埋め込んだら、 UDF はその言語で書く必要があります。</p>
  
- <p>This example combines Python and Pig. This "combined" script can only be embedded in Python.</p>
- <p>Python では、制御の流れを UDF 定義から分離するため、 <code>if __name__ == '__main__': </code> を使う必要があります。そうしないと、スクリプトはエラーになります。</p>
+ <p>下の例では Python と Pig を複合しています。この場合、「複合」スクリプトは Python だけに埋め込めます。</p>
+ <p>Pig スクリプトの制御の流れを UDF 定義から分離するため、 Pig スクリプトは <code>if __name__ == '__main__': </code> の下で実行する必要があります。そうしないと、スクリプトはエラーを発生します。</p>
  <source>
  #!/usr/bin/jython
 from org.apache.pig.scripting import *
