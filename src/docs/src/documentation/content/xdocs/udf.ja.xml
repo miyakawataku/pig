@@ -1269,9 +1269,9 @@ public class SimpleTextStorer extends StoreFunc {
  
  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="function-instantiation">
-<title>Function Instantiation</title>
-<p>One problem that users run into is when they make assumption about how many times a constructor for their UDF is called. For instance, they might be creating side files in the store function and doing it in the constructor seems like a good idea. The problem with this approach is that in most cases Pig instantiates functions on the client side to, for instance, examine the schema of the data.  </p>
-<p>Users should not make assumptions about how many times a function is instantiated; instead, they should make their code resilient to multiple instantiations. For instance, they could check if the files exist before creating them. </p>
+<title>関数のインスタンス化</title>
+<p>多くのユーザが、 UDF のコンストラクタが呼ばれる回数をあらかじめ仮定するという間違いを犯しています。たとえば、ストア関数のコンストラクタで補助ファイルを作るのはいい考えだと思えるかも知れません。このやり方の問題は、多くの場合 Pig が、データのスキーマを検証するなどの目的のために、クライアント側でストア関数をインスタンス化するという事です。</p>
+<p>ユーザは関数がインスタンス化される回数について仮定を置くべきではありません。その代わり、複数回呼び出されても大丈夫なようにコードを書くべきです。たとえば、ファイル作成前に存在チェックをする、などです。</p>
 </section>
 
  
