@@ -1287,43 +1287,43 @@ public class SimpleTextStorer extends StoreFunc {
 
  <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="udf-monitoring">
-<title>Monitoring Long-Running UDFs</title>
-<p>Sometimes one may discover that a UDF that executes very quickly in the vast majority of cases turns out to run exceedingly slowly on occasion. This can happen, for example, if a UDF uses complex regular expressions to parse free-form strings, or if a UDF uses some external service to communicate with. As of version 0.8, Pig provides a facility for monitoring the length of time a UDF is executing for every invocation, and terminating its execution if it runs too long. This facility can be turned on using a simple Java annotation:</p>
+<title>実行時間の長い UDF を監視する</title>
+<p>UDF の実行時間がほとんどの場合に短いのに、一部だけあまりにも実行時間が長い、という例に時折行き当たるかも知れません。これはたとえば、自由形式の文字列に対して複雑な正規表現による解析を行ったり、 UDF が外部のサービスと通信したりする場合に起こり得ます。 Pig 0.8 以降、 UDF の実行時間を呼び出しごとに監視し、実行時間が長すぎる場合に実行を中断する機能が追加されました。この機能は簡単な Java アノテーションを付けることで有効にできます:</p>
 	
 <source>
 	import org.apache.pig.builtin.MonitoredUDF;
 	
 	@MonitoredUDF
 	public class MyUDF extends EvalFunc&lt;Integer&gt; {
-	  /* implementation goes here */
+	  /* 処理の実装 */
 	}
 </source>
 
-<p>Simply annotating your UDF in this way will cause Pig to terminate the UDF's exec() method if it runs for more than 10 seconds, and return the default value of null. The duration of the timeout and the default value can be specified in the annotation, if desired:</p>
+<p>UDF に上記のようなアノテーションを付けることで、 exec() メソッドの実行時間が 10 秒を超える場合に、 exec() メソッドの実行が中断され、 null が戻るようになります。タイムアウト時間と、タイムアウト時のデフォルト値もアノテーションによって指定することができます:</p>
 
 <source>
 	import org.apache.pig.builtin.MonitoredUDF;
 	
 	@MonitoredUDF(timeUnit = TimeUnit.MILLISECONDS, duration = 100, intDefault = 10)
 	public class MyUDF extends EvalFunc&lt;Integer&gt; {
-	  /* implementation goes here */
+	  /* 処理の実装 */
 	}
 </source>
 
-<p>intDefault, longDefault, doubleDefault, floatDefault, and stringDefault can be specified in the annotation; the correct default will be chosen based on the return type of the UDF. Custom defaults for tuples and bags are not supported at this time.</p>
+<p>デフォルト値として指定できるのは intDefault, longDefault, doubleDefault, floatDefault, stringDefault です。 UDF の戻り値型に応じて、適切なデフォルト値が使われます。タプルやバッグのデフォルト値を設定することは、今のところできません。</p>
 
-<p>If desired, custom logic can also be implemented for error handling by creating a subclass of MonitoredUDFExecutor.ErrorCallback, and overriding its handleError and/or handleTimeout methods. Both of those methods are static, and are passed in the instance of the EvalFunc that produced an exception, as well as an exception, so you may use any state you have in the UDF to process the errors as desired. The default behavior is to increment Hadoop counters every time an error is encountered. Once you have an implementation of the ErrorCallback that performs your custom logic, you can provide it in the annotation:</p>
+<p>必要であれば、 MonitoredUDFExecutor.ErrorCallback のサブクラス中の静的メソッド、 handleError メソッドか handleTimeout メソッドで、自作のエラー処理を実装することもできます。いずれのメソッドも、引数として例外を発生した EvalFunc オブジェクトと、例外オブジェクトを取ります。これにより、エラー処理のために必要な情報が得られるかも知れません。デフォルトの挙動は、エラーが発生するたびに Hadoop のカウンタを 1 ずつ増やすことです。独自処理のために ErrorCallback の実装を作ったら、アノテーションで次のように指定できます。</p>
 
 <source>
 	import org.apache.pig.builtin.MonitoredUDF;
 
 	@MonitoredUDF(errorCallback=MySpecialErrorCallback.class)
 	public class MyUDF extends EvalFunc&lt;Integer&gt; {
-	  /* implementation goes here */
+	  /* 処理の実装 */
 	}
 </source>
 
-<p>Currently the MonitoredUDF annotation works with regular and Algebraic UDFs, but has no effect on UDFs that run in the Accumulator mode.</p>
+<p>現在のところ、 MonitoredUDF アノテーションは単純な UDF と Algebraic な UDF のみで動作し、 Accumulator モードでは動作しません。</p>
 
 </section>
 </section>
