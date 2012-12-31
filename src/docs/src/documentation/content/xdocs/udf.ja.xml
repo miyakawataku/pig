@@ -839,28 +839,6 @@ dump b;
 </source>
 </section>
 
-<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
-<section id="import-lists">
-<title>インポートリスト</title>
-<p>インポートリストに UDF が属するパッケージを指定することで、 UDF 呼び出しごとに完全修飾名を書く必要がなくなります。インポートリストは、 Pig 起動時にコマンドラインから Java プロパティ udf.import.list で指定します:</p>
-<source>
-pig -Dudf.import.list=com.yahoo.yst.sds.ULT
-</source>
-<p>複数の場所を指定することもできます:</p>
-<source>
-pig -Dudf.import.list=com.yahoo.yst.sds.ULT:org.apache.pig.piggybank.evaluation
-</source>
-</section>
-<p>スクリプト中でインポートされた UDF を使うには、次のようにします:</p>
-<source>
-myscript.pig:
-A = load '/data/SDS/data/searcg_US/20090820' using ULTLoader as (s, m, l);
-....
-
-command:
-pig -cp sds.jar -Dudf.import.list=com.yahoo.yst.sds.ULT myscript.pig 
-</source>
-
 </section>
 
 <!-- =============================================================== -->
@@ -1253,7 +1231,52 @@ public class SimpleTextStorer extends StoreFunc {
 </section>
 <!-- END LOAD/STORE FUNCTIONS -->
 
+<!-- =============================================================== -->
+<section id="use-short-names">
+<title>短い名前を使う</title>
 
+<p>短い名前を使って Java UDF を呼び出す方法は 2 つあります。インポートリストにパッケージを指定する方法と、 DEFINE 文で別名を定義する方法です。</p>
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<section id="import-lists">
+<title>インポートリスト</title>
+<p>インポートリストに UDF が属するパッケージを指定することで、 UDF 呼び出しごとに完全修飾名を書く必要がなくなります。インポートリストは、 Pig 起動時にコマンドラインから Java プロパティ udf.import.list で指定します:</p>
+<source>
+pig -Dudf.import.list=com.yahoo.yst.sds.ULT
+</source>
+<p>複数の場所を指定することもできます:</p>
+<source>
+pig -Dudf.import.list=com.yahoo.yst.sds.ULT:org.apache.pig.piggybank.evaluation
+</source>
+<p>スクリプト中でインポートされた UDF を使うには、次のようにします:</p>
+<source>
+myscript.pig:
+A = load '/data/SDS/data/searcg_US/20090820' using ULTLoader as (s, m, l);
+....
+
+command:
+pig -cp sds.jar -Dudf.import.list=com.yahoo.yst.sds.ULT myscript.pig 
+</source>
+</section>
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<section id="define-alias">
+<title>別名を定義する</title>
+<p><a href="basic.html#define-udfs">DEFINE 文</a>を使って、 関数の別名が定義できます:</p>
+
+<source>
+REGISTER piggybank.jar
+DEFINE MAXNUM org.apache.pig.piggybank.evaluation.math.MAX;
+A = LOAD 'student_data' AS (name: chararray, gpa1: float, gpa2: double);
+B = FOREACH A GENERATE name, MAXNUM(gpa1, gpa2);
+DUMP B;
+</source>
+
+<p>DEFINE 文の最初の引数は関数の別名、二番目の引数は関数の完全修飾名です。 DEFINE 文の実行以降は、別名を使って関数が呼び出せます。</p>
+
+</section>
+
+</section>
 
 
 <!-- =============================================================== -->
