@@ -1303,7 +1303,7 @@ DUMP B;
 <title>UDF に設定を渡す</title>
 <p>シングルトンクラスである UDFContext には UDF の作者向けの 2 つの機能があります。一つ目の機能として、バックエンドでは、 UDF 実装は getJobConf メソッドを呼ぶことで JobConf オブジェクトが得られます。このメソッドが呼べるのはバックエンド (実行時) だけです。フロントエンド (実行計画時) には、まだ JobConf が構築されていないからです。</p>
 
-<p>二つ目の機能として、 UDFContext を使うことでフロントエンドからバックエンドに対して設定情報を渡すことができます。 UDF はフロントエンドのコンストラクタや describeSchema メソッド等で情報を設定オブジェクトに詰め込みます。これらの情報は、 EvalFunc の exec メソッドや LoadFunc の getNext メソッド等から読み出せます。 UDFContext を使っても、バックエンドの関数インスタンス間で情報をやり取りすることはできないということに注意してください。やり取りはフロントエンドからバックエンドに向けてのみ可能です。</p>
+<p>二つ目の機能として、 UDFContext を使うことでフロントエンドからバックエンドに対して設定情報を渡すことができます。 UDF はフロントエンドのコンストラクタや checkSchema メソッド等で情報を設定オブジェクトに詰め込みます。これらの情報は、 EvalFunc の exec メソッドや LoadFunc の getNext メソッド等から読み出せます。 UDFContext を使っても、バックエンドの関数インスタンス間で情報をやり取りすることはできないということに注意してください。やり取りはフロントエンドからバックエンドに向けてのみ可能です。</p>
 
 <p>情報を格納するには、 getUDFProperties をを呼び出します。このメソッドは情報を読み書きするための Properties オブジェクトを戻します。名前の衝突を避けるために、 Properties オブジェクトを取得するにはシグネチャを使う必要があります。これには二つの方法があります。一つは、 UDF のクラスオブジェクト (this.getClass()) をシグネチャとして使う方法です。この場合、 UDF は呼び出し間で Properties オブジェクトを共有することになります。二つ目は、クラスと文字列の配列の組み合わせをシグネチャとして使う方法です。コンストラクタ引数やその他識別のための文字列がシグネチャとして使えます。この場合、 UDF 呼び出しごとに違う Properties オブジェクトを使うことになるので、 UDF 呼び出しごとの名前空間の衝突が避けられます。</p>
 </section>
@@ -1773,7 +1773,7 @@ STORE TweetsInaug INTO 'meta/inaug/tweets_inaug' ;
 <li><a href="#piggbank-access">関数を入手する</a>で示した手順で既存の Javadoc を見て、同様の関数が既に存在していないことを確認します。</li>
 <li><a href="#piggbank-access">関数を入手する</a>で示した手順で UDF のコードをチェックアウトします。</li>
 <li>関数の分類に応じた場所に Java コードを配置します。ディレクトリ構造は 2 つのレベルにわかれています: (1) <a href="#piggbank-access">関数を入手する</a>で示した関数の分類 (2) 関数の小分類 (評価関数の中の数学関数 (math) 、文字列関数 (string) のように) 。自作の関数に新しい小分類が必要だと思ったら、追加して構いません。</li>
-<li>関数を <a href="http://docs.oracle.com/javase/6/docs/technotes/tools/windows/javadoc.html">Javadoc</a> 形式で充分にドキュメント化します。</li>
+<li>関数を <a href="http://docs.oracle.com/javase/6/docs/technotes/tools/solaris/javadoc.html">Javadoc</a> 形式で充分にドキュメント化します。</li>
 <li>コードが <a href="https://cwiki.apache.org/confluence/display/PIG/HowToContribute">How to Contribute to Pig</a> に示した Pig のコーディング規約を遵守しているようにします。</li>
 <li>ソースツリー中の test ディレクトリ下に、関数に対応するテストクラスを追加します。</li>
 <li><a href="https://cwiki.apache.org/confluence/display/PIG/HowToContribute">How to Contribute to Pig</a> に示した手順でパッチを投稿します。</li>
