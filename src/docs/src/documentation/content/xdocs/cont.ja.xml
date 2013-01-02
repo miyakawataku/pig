@@ -33,8 +33,8 @@
 
 <!-- ============================================== -->
 <section id="invocation-basics">
-<title>Invocation Basics</title>
-<p>Embedded Pig is supported in batch mode only, not interactive mode. You can request that embedded Pig be used by adding the <code>--embedded</code> option to the Pig command line. If this option is passed as an argument, that argument will refer to the language Pig  is embedded in, either Python or JavaScript. If no argument is specified, it is taken to refer to the reference implementation for Python.</p>
+<title>呼び出しの基礎</title>
+<p>埋め込み Pig が使えるのはバッチモードだけです。対話モードでは使えません。 Pig コマンドラインで <code>--embedded</code> オプションを指定することで埋め込み Pig が使えます。このオプションには、引数として埋め込み先の言語 (Python か JavaScript) が指定できます。引数を指定しない場合には、リファレンス実装である Python が指定されたものとみなされます。</p>
 
  <p><strong>Python</strong></p>
  <source>
@@ -43,21 +43,21 @@ OR
 $ java -cp &lt;jython jars&gt;:&lt;pig jars&gt;; [--embedded python] /tmp/myembedded.py
  </source>
  <p></p>
- <p>Pig will look for the <code>#!/usr/bin/python</code> line in the script.</p>
+ <p>Pig はスクリプトの <code>#!/usr/bin/python</code> という行を認識します。</p>
  
   <source>
 #!/usr/bin/python 
 
-# explicitly import Pig class 
+# Pig クラスをインポート
 from org.apache.pig.scripting import Pig 
 
-# COMPILE: compile method returns a Pig object that represents the pipeline
+# コンパイル: compile メソッドはパイプラインを表す Pig オブジェクトを戻します
 P = Pig.compile("a = load '$in'; store a into '$out';")
 
 input = 'original'
 output = 'output'
 
-# BIND and RUN 
+# バインドして実行
 result = P.bind({'in':input, 'out':output}).runSingle()
 
 if result.isSuccessful() :
@@ -72,8 +72,7 @@ $ pig myembedded.js
 OR
 $ java -cp &lt;rhino jars&gt;:&lt;pig jars&gt;; [--embedded javascript] /tmp/myembedded.js
 </source>
-<p></p>
-<p>Pig will look for the *.js extension in the script.</p>
+<p>Pig は *.js の拡張子を認識します。</p>
 <source>
 importPackage(Packages.org.apache.pig.scripting.js) 
 
@@ -95,82 +94,82 @@ function main() {
 }
 </source>
 
-<p><strong>Invocation Process</strong></p>
+<p><strong>呼び出しプロセス</strong></p>
 
 <p>You invoke Pig in the host scripting language through an embedded <a href="#pig-Object">Pig object</a>. </p>  
+<p>ホスト言語から <a href="#pig-Object">Pig オブジェクト</a>を通じて Pig を呼び出します。</p>  
 
-<p><strong>Compile:</strong> Compile is a static function on the Pig object and in its simplest form takes a fragment of Pig Latin that defines the pipeline as its input:</p>  
+<p><strong>コンパイル:</strong> compile は Pig クラスの静的関数です。パイプラインを定義する Pig Latin を引数に取ります:</p>
 
 <source>
-# COMPILE: complie method returns a Pig object that represents the pipeline
+# コンパイル: compile メソッドはパイプラインを表す Pig オブジェクトを戻します
 P = Pig.compile("""A = load '$in’; store A into '$out’;""")
 </source>
 
-<p>Compile returns an instance of Pig object. This object can have certain values undefined. For example, you may want to define a pipeline without yet specifying the location of the input to the pipeline. The parameter will be indicated by a dollar sign followed by a sequence of alpha-numeric or underscore characters. Values for these parameters must be provided later at the time bind() is called on the Pig object. To call run() on a Pig object without all parameters being bound is an error. </p>
-<p></p>
+<p>コンパイルによって Pig オブジェクトを生成します。 Pig オブジェクトは未確定値を含むことができます。たとえば、入力ファイルの場所を確定しない状態のパラメータとしてパイプラインを作成することが考えられます。パラメータはドル記号で始まり、英数字・アンダースコアの連なりで構成します。パラメータの値は Pig オブジェクトの bind() メソッドを呼び出すことで束縛します。すべてのパラメータを束縛していない状態で Pig オブジェクトの run() メソッドを呼ぶとエラーになります。</p>
 
-<p><strong>Bind:</strong> Resolve the parameters during the bind call.</p>
+<p><strong>バインド:</strong> bind メソッドを呼び出してパラメータを変数の値に束縛します。</p>
 
 <source>
 input = "original”
 output = "output”
 
-# BIND: bind method binds the variables with the parameters in the pipeline and returns a BoundScript object
+# バインド: bind メソッドは変数に値を束縛し、 BoundScript オブジェクトを戻します。
 Q = P.bind({'in':input, 'out':output}) 
 </source>
 
-<p>Please note that all parameters must be resolved during bind. Having unbound parameters while running your script is an error. Also note that even if your script is fully defined during compile, bind without parameters still must be called.</p>
+<p>bind メソッドの呼び出しではすべてのパラメータを束縛する必要があります。束縛されていないパラメータがあると、スクリプトの実行はエラーになります。また、スクリプトのコンパイル時に未確定のパラメータがなかったとしても、 bind メソッドはパラメータ無しで呼ぶ必要があります。</p>
 
-<p><strong>Run:</strong> Bind call returns an instance of <a href="#BoundScript-Object">BoundScript object</a> that can be used to execute the pipeline. The simplest way to execute the pipeline is to call runSingle function. (However, as mentioned later, this works only if  a single set of variables is bound to the parameters. Otherwise, if multiple set of variables are bound, an exception will be thrown if runSingle is called.)</p>
+<p><strong>実行:</strong> bind メソッドは <a href="#BoundScript-Object">BoundScript オブジェクト</a>を戻します。 BoundScript オブジェクトはパイプラインを実行するのに使えます。パイプラインを実行するための最も単純な方法は、 runSingle メソッドを呼ぶことです。ただし後述するように、 runSingle メソッドが成功するのはパラメータに単一の変数セットを束縛している場合のみです。複数の変数セットを束縛している場合に runSingle メソッドを呼ぶと例外が投げられます。</p>
 
 <source>
-
 result = Q.runSingle()
 </source>
 
-<p>The function returns a <a href="#PigStats-Object">PigStats object</a> that tells you whether the run succeeded or failed. In case of success, additional run statistics are provided.</p>
+<p>runSingle メソッドは <a href="#PigStats-Object">PigStats オブジェクト</a>を戻します。 PigStats オブジェクトは実行が成功したか失敗したかを表します。成功した場合は、実行統計情報も得られます。</p>
 
 
-<p><strong>Embedded Python Example</strong></p>
-<p>A complete embedded example is shown below.</p>
+<p><strong>Python 埋め込みの例</strong></p>
+<p>埋め込み Pig の完全な例です。</p>
 <source>
+#!/usr/bin/python
 
-#! /usr/bin/python
+# Pig クラスをインポートします。
+from org.apache.pig.scripting import Pig
 
-# explicitly import Pig class from org.apache.pig.scripting import Pig
-
-# COMPILE: compile method returns a Pig object that represents the pipeline
+# コンパイル: compile メソッドはパイプラインを表す Pig オブジェクトを戻します
 P = Pig.compile("""A = load '$in’; store A into '$out’;""")
 
 input = "original”
 output = "output”
 
-# BIND: bind method binds the variables with the parameters in the pipeline and returns a BoundScript object
+# バインド: bind メソッドは変数に値を束縛し、 BoundScript オブジェクトを戻します。
 Q = P.bind({'in':input, 'out':output}) 
 
-# In this case, only one set of variables is bound to the pipeline, runSingle method returns a PigStats object. 
-# If multiple sets of variables are bound to the pipeline, run method instead must be called and it returns 
-# a list of PigStats objects.
+# ここでは 1 つの変数セットをパイプラインに束縛しているので、 runSingle メソッドは PigStats オブジェクトを戻します。
+# 複数の変数セットを束縛した場合には、代わりに run メソッドを呼びます。
+# run メソッドは PigStats のリストを戻します。
 result = Q.runSingle()
 
-# check the result
+# 結果チェック
 if result.isSuccessful():
     print "Pig job succeeded"
 else:
     raise "Pig job failed"    
+</source>
 
+<p>あるいは、単に次のようにします。</p>
 
-OR, SIMPLY DO THIS:
+<source>
+#!/usr/bin/python
 
-
-#! /usr/bin/python
-
-# explicitly import Pig class from org.apache.pig.scripting import Pig
+# Pig クラスをインポートします。
+from org.apache.pig.scripting import Pig
 
 in = "original”
 out = "output”
 
-# implicitly bind the parameters to the local variables 
+# パラメータをローカル変数の値に暗黙的に束縛します
 result= Pig.compile("""A = load '$in’; store A into '$out’;""").bind().runSingle() 
 
 if result.isSuccessful():
