@@ -24,11 +24,11 @@
 
 <!-- ============================================ -->       
 <section id="embed-python">
-<title>Embedded Pig - Python and JavaScript </title>
+<title>埋め込み Pig - Python と JavaScript </title>
    
-<p>To enable control flow, you can embed Pig Latin statements and Pig commands in the Python and JavaScript scripting languages using a JDBC-like compile, bind, run model. For Python, make sure the Jython jar is included in your class path. For JavaScript, make sure the Rhino jar is included in your classpath.</p>
+<p>制御構造を有効にするためには、 Pig Latin 文と Pig コマンドを Python か JavaScript などスクリプト言語に埋め込みます。埋め込み Pig は、 JDBC のようなコンパイル・バインド・実行のモデルを使います。 Python では、 Jython の JAR ファイルをクラスパスに含めます。 JavaScript では、 Rhino の JAR ファイルをクラスパスに含めます。</p>
 
-<p>Note that host languages and the languages of UDFs (included as part of the embedded Pig) are completely orthogonal. For example, a Pig Latin statement that registers a Python UDF may be embedded in Python, JavaScript, or Java. The exception to this rule is "combined" scripts – here the languages must match (see the <a href="udf.html#python-advanced">Advanced Topics for Python</a> and <a href="udf.html#js-advanced">Advanced Topics for JavaScript</a>). </p>
+<p>埋め込み先のホスト言語と、埋め込み Pig が使う UDF の言語は完全に直行です。たとえば、 Python UDF を登録する Pig Latin 文は Python, JavaScript, Java のいずれにも組み込めます。例外は「複合」スクリプトで、この場合はホスト言語と UDF の言語が一致する必要があります (<a href="udf.html#python-advanced">Python の高度な話題</a> と <a href="udf.html#js-advanced">JavaScript の高度な話題</a> を見てください) 。</p>
 
 
 <!-- ============================================== -->
