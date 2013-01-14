@@ -294,27 +294,26 @@ result = Q.runSingle()
 <section id="pigrunner-api">
 <title>PigRunner API</title>
 
-<p>Starting with Pig 0.8, some applications such as Oozie workflow invoke Pig using the PigRunner Java class rather than through the command line. For these applications, the PigRunner interface has been expanded to accommodate embedded Pig. PigRunner accepts Python and JavaScript scripts as input. These scripts can potentially contain multiple Pig pipelines; therefore, we need a way to return results for all of them.</p>
+<p>Pig 0.8 以降、 Oozie のようなアプリケーションはコマンドラインから Pig を実行する代わりに Java の PigRunner クラスを使って Pig を実行します。これらアプリケーションのため、 PigRunner インタフェースは埋め込み Pig と適合するように拡張されています。 PigRunner は Python と JavaScript のスクリプトを入力として受け入れます。埋め込みスクリプトは複数のパイプラインを含んでいる可能性があるため、すべてのパイプラインの結果を戻す方法が必要となりました。</p>
 
-<p>To do this and to preserve backward compatibility PigStats and related objects were expanded as shown below:</p>
+<p>後方互換性を維持しながらこれを可能にするため、 PigStats と関連するオブジェクトは次のように拡張されています:</p>
 <ul>
 
-<li id="PigStats">PigStats is now an abstract class. (PigStats as it is today will become SimplePigStats.)</li>
+<li id="PigStats">PigStats は抽象クラスになりました (これまでの PigStats は SimplePigStats になりました) 。</li>
 
 
-<li id="SimplePigStats">SimplePigStats is a new class that extends PigStats. SimplePigStats.getAllStats() will return null. </li>
+<li id="SimplePigStats">SimplePigStats は PigStats を継承したクラスです。 SimplePigStats.getAllStats() は null を戻します。</li>
 
-<li id="EmbeddedPigStats">EmbeddedPigStats is a new class that extends PigStats. EmbeddedPigStats will return null for methods not listed in the proposal below. </li>
+<li id="EmbeddedPigStats">EmbeddedPigStats は PigStats を継承したクラスです。次に挙げる以外のメソッドはすべて null を戻します。</li>
 
 
-<li id="isembedded">isEmbedded() is a new abstract method that accommodates embedded Pig.</li>
+<li id="isembedded">isEmbedded() は埋め込み Pig 用の抽象メソッドです。</li>
 
-<li id="stats-messages">getAllStats() and List&lt; &gt; getAllErrorMessages() methods were added to the PigStats class. The map returned from getAllStats is keyed on the name of the pipeline provided in the compile call. If the name was not compiled an internally generated id would be used. </li>
+<li id="stats-messages">PigStats クラスには getAllStats() と getAllErrorMessages() メソッドが追加されています。 getAllStats() メソッドの戻り値であるマップのキーは、 compile メソッドで指定したパイプラインの名前です。 compile メソッドで名前が指定されていない場合は、内部的に生成された ID が使われます。</li>
 
-<li id="PigProgressNotificationListener2">The PigProgressNotificationListener interface was modified to add script id to all its methods.  </li>
+<li id="PigProgressNotificationListener2">PigProgressNotificationListener インタフェースのすべてのメソッドはスクリプト ID を引数に取る様になりました。</li>
 </ul>
-<p></p>
-<p>For more details, see <a href="#Java-Objects">Java Objects</a>.</p>
+<p>詳細については <a href="#java-objects">Java オブジェクト</a> を見てください。</p>
 
 </section> 
 
