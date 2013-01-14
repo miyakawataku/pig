@@ -181,44 +181,38 @@ else:
 
 <!-- ============================================== -->
 <section id="invocation-details">
-<title>Invocation Details</title>
-<p>All three APIs (compile, bind, run) discussed in the previous section have several versions depending on what you are trying to do.</p>
+<title>呼び出しの詳細</title>
+<p>前節で述べた 3 つの API (compile, bind, run) はいずれも、やりたいことに応じていくつかの変種があります。</p>
 
 <section>
-<title>Compile</title>
-<p>In its basic form, compile just takes a Pig Latin fragment that defines the pipeline as described in the previous section. Additionally, the pipeline can be given a name. This name is only used when the embedded script is invoked via the PigRunner Java API (as discussed later in this document).</p>
+<title>コンパイル</title>
+<p>前節で述べたように、基本的なメソッドである compile メソッドは、単にパイプラインを表す Pig Latin 文を引数に取ります。加えて、 compile メソッドはパイプラインの名前も取ることができます。この名前は、 PigRunner Java API 経由で組み込みスクリプトが実行された時にのみ使われます (この章で後述します) 。</p>
 
 <source>
-
- P = Pig.compile("P1", """A = load '$in'; store A into '$out';""")
+P = Pig.compile("P1", """A = load '$in'; store A into '$out';""")
 </source>
 
-<p>In addition to providing Pig script via a string, you can store it in a file and pass the file to the compile call:</p>
+<p>文字列として Pig スクリプトを与える以外に、スクリプトをファイルに保存して、そのファイル名を指定してコンパイルすることもできます:</p>
 <source>
-
 P = Pig.compileFromFile("myscript.pig")
 </source>
 
-<p>You can also name a pipeline stored in the script:</p>
+<p>パイプラインに名前を付けることもできます:</p>
 <source>
-
 P = Pig.compileFromFile("P2", "myscript.pig")
 </source>
 </section>
 
 
 <section>
-<title>Bind</title>
-<p>In its simplest form, bind takes no parameters. In this case, an implicit bind is performed; Pig internally constructs a map of parameters from the local variables specified by the user in the script.</p>
+<title>バインド</title>
+<p>もっとも単純な形では、 bind メソッドは引数を取らずに呼び出せます。この場合、暗黙的なパラメータの束縛が行われます。 Pig は、スクリプト内で指定された名前の変数から、内部的にパラメータのマップを構築します。</p>
 
 <source>
-
-Q = P.bind () 
+Q = P.bind() 
 </source>
 
-<p>In the case where parameter substitution is needed, a map of parameters (parameter name &gt; parameter value) must be provided as was illustrated in the example above.</p>
-
-<p>Finally, you might want to run the same pipeline in parallel with a different set of parameters, for instance for multiple dates. In this case, bind function, needs to be passed a list of maps with each element of the list containing parameters for a single invocation. In the example below, the pipeline is run for the US, the UK, and Brazil.</p>
+<p>最後に、 1 つのパイプラインを複数のパラメータセット、たとえば複数の日付に対して並行して実行することができます。この場合、 bind メソッドは 1 回の呼び出しでパラメータのマップのリストを取ります。次の例では、パイプラインを US, UK, ブラジル について呼び出しています。</p>
 
 <source>
 P = Pig.compile("""A = load '$in';
@@ -241,13 +235,12 @@ for i in [0, 1, 2]:
 </section>
 
 <section>
-<title>Run</title>
+<title>実行</title>
 
-<p>We have already seen that the simplest way to run a script is to call runSingle without any parameters. Additionally, a Java Properties object and or file containing a list of properties can be passed to this call. The properties are passed to Pig and a treated as any other properties passed from command line.</p>
+<p>これまで見てきたように、スクリプトを実行するために最も単純なやり方は runSingle メソッドを引数なしで呼び出すことです。これに加えて、 Java の Properties オブジェクトか、プロパティのリストを格納したファイルを引数として渡すこともできます。引数として渡したプロパティは、コマンドラインから渡したプロパティと同様に扱われます。</p>
 
 <source>
-
-// In a jython script 
+# Jython スクリプト
 
 from java.util import Properties
 ... ...
@@ -259,16 +252,15 @@ props.put(key2, val2)
 
 Pig.compile(...).bind(...).runSingle(props)
 </source>
-<p>A more general version of run allows to run one or more pipelines concurrently. In this case, a list of PigStats results is returned – one for each pipeline run. The example above shows how to make use of this call.</p>
-<p>As the case with runSingle, a set of Java Properties or a property file can be passed to the call.</p>
+<p>より汎用的な run メソッドを使うと、複数のパイプラインを同時に動かすことができます。この場合、それぞれのパイプラインの結果を表す PigStats のリストが戻ります。メソッドの使い方については前節の例を見てください。</p>
+<p>runSingle と同様に、 Java プロパティかプロパティファイルを渡して呼び出すこともできます。</p>
 </section>
 
 <section>
-<title>Passing Parameters to a Script</title>
-<p>Inside your script, you can define parameters and then pass parameters from command line to your script.  There are two ways to pass parameters to your script:</p>
-<p>
-1. -param
-Similar to regular Pig parameter substitution, you can define parameters using -param/–param_file on Pig's command line.  This variable will be treated as one of the binding variables when binding the Pig Latin script. For example, you can invoke the below Python script using: pig –param loadfile=student.txt script.py. </p>
+<title>スクリプトにパラメータを渡す</title>
+<p>スクリプトの中でパラメータを定義し、コマンドラインからパラメータを渡すことができます。パラメータをスクリプトに渡すには 2 つの方法があります:</p>
+<p><strong>1. -param</strong></p>
+<p>通常の Pig のパラメータ置換と同じように、 Pig のコマンドラインから -param オプションか -param_file オプションを指定することで、パラメータを渡すことができます。 Pig Latin スクリプトに変数を束縛する時、渡したパラメータは束縛変数として扱われます。たとえば、下記の Python スクリプトは次のように呼び出せます: pig –param loadfile=student.txt script.py</p>
 <source>
 #!/usr/bin/python
 from org.apache.pig.scripting import Pig
@@ -281,12 +273,11 @@ Q = P.bind()
 result = Q.runSingle()
 </source>
 
-<p>
-2. Command line arguments
-Currently this feature is only available in Python. You can pass command line arguments (the arguments after the script file name) to Python. These will become sys.argv in Python.  For example: pig script.py student.txt. The corresponding script is:
-</p>
+<p><strong>2. コマンドライン引数</strong></p>
+<p>これは Python のみで利用できる機能ですが、スクリプトファイル名の後のコマンドライン引数を Python に与えることができます。 Python プログラムの中では sys.argv としてコマンドライン引数が得られます。たとえば次のように起動します: pig script.py student.txt 。対応するスクリプトは次のとおりです:</p>
 <source>
 #!/usr/bin/python
+import sys
 from org.apache.pig.scripting import Pig
 
 P = Pig.compile("A = load '" + sys.argv[1] + "' as (name, age, gpa);" +
