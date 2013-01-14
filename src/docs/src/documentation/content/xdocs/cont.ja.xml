@@ -319,14 +319,14 @@ result = Q.runSingle()
 
 
 <section>
-<title>Usage Examples</title>
+<title>使用例</title>
 
 <section id="pig-files">
-<title>Passing a Pig Script </title>
-<p>This example shows you how to pass an entire Pig script to the compile call.</p>
+<title>Pig スクリプトを渡す</title>
+<p>次の例では、 Pig スクリプト全体を compile メソッドに渡しています。</p>
 
 <source>
-#! /usr/bin/python
+#!/usr/bin/python
 
 from org.apache.pig.scripting import Pig
 
@@ -344,13 +344,13 @@ else:
 </section> 
 
 <section id="convergence">
-<title>Convergence</title>
-<p>There is a class of problems that involve iterating over a data pipeline an indeterminate number of times until a certain value is reached. Examples arise in machine learning, graph traversal, and a host of numerical analysis problems which involve finding interpolations, extrapolations or regressions. The Python example below shows one way to achieve convergence using Pig scripts.</p>
+<title>収束</title>
+<p>解くべき問題によっては、必要な値が得られるまでパイプラインを複数回実行する必要があり、その回数があらかじめ分からないことがあります。たとえば機械学習、グラフ走査、そして内挿・外挿・回帰など多くの数値解析などの問題です。次の Python の例では、 Pig スクリプトで反復計算を行っています。</p>
 
 <source>
 #!/usr/bin/python
 
-# explicitly import Pig class
+# Pig クラスをインポート
 from org.apache.pig.scripting import Pig
 
 P = Pig.compile("""A = load '$input' as (user, age, gpa);
@@ -358,13 +358,14 @@ P = Pig.compile("""A = load '$input' as (user, age, gpa);
                    C = foreach B generate AVG(A.gpa);
                    store C into '$output';
                 """)
-# initial output
+# 初期出力
 input = "studenttab5"
 output = "output-5"
 final = "final-output"
 
 for i in range(1, 4):
-    Q = P.bind({'input':input, 'output':output}) # attaches $input, $output in Pig Latin to input, output Python variable
+    # Pig Latin 中の $input と $output に Python の input 変数と output 変数を関連付けます
+    Q = P.bind({'input':input, 'output':output})
     results = Q.runSingle()
 
     if results.isSuccessful() == "FAILED":
@@ -385,8 +386,8 @@ for i in range(1, 4):
 </section>
 
 <section id="automated-pig-latin">
-<title>Automated Pig Latin Generation</title>
-<p>A number of user frameworks do automated generation of Pig Latin, such as setting the proper date for data loads.</p>
+<title>Pig Latin の自動生成</title>
+<p>多くのフレームワークは Pig Latin を自動生成します。たとえば、データロード時に適切な日付を設定するなどのためです。</p>
 
 <source>
 today = sys.argv[1]
@@ -401,8 +402,8 @@ P.bind({'date':today}).runSingle()
 
 
 <section>
-<title>Conditional Compilation</title>
-<p>A sub-use case of automated generation is conditional code generation. Different processing might be required based on whether this is weekday or a weekend.</p>
+<title>条件付きコンパイル</title>
+<p>コード自動生成のユースケースの一つに、条件付きコンパイルがあります。たとえば、平日と週末で実行すべき処理が違うなどの場合です。</p>
 
 <source>
 str = "A = load 'input';" 
@@ -416,11 +417,10 @@ results = Pig.compile(str).bind().runSingle()
 </section>
 
 <section>
-<title>Parallel Execution</title>
-<p>Another sub-use case of automated generation is parallel execution of identical pipelines. You may have a single pipeline that you would like to run multiple data sets through in parallel. In the example below, the pipeline is run for the US, the UK, and Brazil.</p>
+<title>並列実行</title>
+<p>コード自動生成のその他のユースケースには、同一のパイプラインを並列実行することがあります。たとえば、ひとつのパイプラインを複数のデータセットについて並行して実行したいということがあります。次の例では、パイプラインを US, UK, ブラジルについて実行しています。</p>
 
 <source>
-
 P = Pig.compile("""A = load '$in';
                    B = filter A by user is not null;
                    ...
@@ -431,7 +431,8 @@ Q = P.bind([{'in':'us_raw','out':'us_processed'},
         {'in':'uk_raw','out':'uk_processed'},
         {'in':'brazil_raw','out':'brazil_processed'}])
 
-results = Q.run() # it blocks until all pipelines are completed
+# すべてのパイプラインが完了するまでブロックします
+results = Q.run()
 
 for i in [0, 1, 2]:
     result = results[i]
