@@ -743,15 +743,15 @@ public class BoundScript {
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="PigStats-Object">
-<title>PigStats.java Object</title>
+<title>PigStats オブジェクト</title>
 <source>
 public abstract class PigStats {
     public abstract boolean isEmbedded();
     
     /**
-     * An embedded script contains one or more pipelines. 
-     * For a named pipeline in the script, the key in the returning map is the name of the pipeline. 
-     * Otherwise, the key in the returning map is the script id of the pipeline.
+     * 埋め込みスクリプトは 1 つ以上のパイプラインを含む場合があります。
+     * スクリプト中で名前が付けられたパイプラインについては、その名前が戻り値のマップのキーになります。
+     * パイプラインに名前が付けられていない場合は、パイプラインの ID が戻り値のマップのキーになります。
      */
     public abstract Map&lt;String, List&lt;PigStats&gt;&gt; getAllStats();
     
