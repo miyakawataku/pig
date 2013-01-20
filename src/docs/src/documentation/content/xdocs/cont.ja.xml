@@ -57,7 +57,7 @@ P = Pig.compile("a = load '$in'; store a into '$out';")
 input = 'original'
 output = 'output'
 
-# バインドして実行
+# 束縛して実行
 result = P.bind({'in':input, 'out':output}).runSingle()
 
 if result.isSuccessful() :
@@ -108,13 +108,13 @@ P = Pig.compile("""A = load '$in’; store A into '$out’;""")
 
 <p>コンパイルによって Pig オブジェクトを生成します。 Pig オブジェクトは未確定値を含むことができます。たとえば、入力ファイルの場所を確定しない状態のパラメータとしてパイプラインを作成することが考えられます。パラメータはドル記号で始まり、英数字・アンダースコアの連なりで構成します。パラメータの値は Pig オブジェクトの bind() メソッドを呼び出すことで束縛します。すべてのパラメータを束縛していない状態で Pig オブジェクトの run() メソッドを呼ぶとエラーになります。</p>
 
-<p><strong>バインド:</strong> bind メソッドを呼び出してパラメータを変数の値に束縛します。</p>
+<p><strong>束縛:</strong> bind メソッドを呼び出してパラメータを変数の値に束縛します。</p>
 
 <source>
 input = "original”
 output = "output”
 
-# バインド: bind メソッドは変数に値を束縛し、 BoundScript オブジェクトを戻します。
+# 束縛: bind メソッドは変数に値を束縛し、 BoundScript オブジェクトを戻します。
 Q = P.bind({'in':input, 'out':output}) 
 </source>
 
@@ -143,7 +143,7 @@ P = Pig.compile("""A = load '$in’; store A into '$out’;""")
 input = "original”
 output = "output”
 
-# バインド: bind メソッドは変数に値を束縛し、 BoundScript オブジェクトを戻します。
+# 束縛: bind メソッドは変数に値を束縛し、 BoundScript オブジェクトを戻します。
 Q = P.bind({'in':input, 'out':output}) 
 
 # ここでは 1 つの変数セットをパイプラインに束縛しているので、 runSingle メソッドは PigStats オブジェクトを戻します。
@@ -205,7 +205,7 @@ P = Pig.compileFromFile("P2", "myscript.pig")
 
 
 <section>
-<title>バインド</title>
+<title>束縛</title>
 <p>もっとも単純な形では、 bind メソッドは引数を取らずに呼び出せます。この場合、暗黙的なパラメータの束縛が行われます。 Pig は、スクリプト内で指定された名前の変数から、内部的にパラメータのマップを構築します。</p>
 
 <source>
@@ -445,146 +445,185 @@ for i in [0, 1, 2]:
    
 <!-- ====================================================================== -->
  <section id="java-objects">
-<title>Java Objects</title>
+<title>Java オブジェクト</title>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
  <section id="pig-object">
-<title>pig.java Object</title>
+<title>Pig オブジェクト</title>
 <source>
 public class Pig {    
     /**
-     * Run a filesystem command.  Any output from this command is written to
-     * stdout or stderr as appropriate.
-     * @param cmd Filesystem command to run along with its arguments as one
-     * string.
+     * ファイルシステムコマンドを実行します。
+     * コマンドの実行結果は標準出力か標準エラーへと適切に出力されます。
+     *
+     * @param cmd
+     *     ファイルシステムコマンドと引数をひとつの文字列にしたもの。
      * @throws IOException
      */
     public static void fs(String cmd) throws IOException {...}
     
     /**
-     * Register a jar for use in Pig.  Once this is done this jar will be
-     * registered for ALL SUBSEQUENT Pig pipelines in this script.  
-     * If you wish to register it for only a single Pig pipeline, use 
-     * register within that definition.
-     * @param jarfile Path of jar to include.
-     * @throws IOException if the indicated jarfile cannot be found.
+     * Pig で使う JAR ファイルを登録します。
+     * このメソッドを実行すると、後続するすべてのパイプラインに対して JAR ファイルが登録されます。
+     * JAR ファイルをひとつのパイプラインだけに対して登録したい場合は、
+     * パイプラインの定義中で REGISTER 文を実行してください。
+     *
+     * @param jarfile
+     *     登録する JAR ファイルのパス。
+     * @throws IOException
+     *     指定した JAR ファイルが見つからなかった時。
      */
     public static void registerJar(String jarfile) throws IOException {...}
     
     /**
-     * Register script UDFs for use in Pig. Once this is done all UDFs
-     * defined in the file will be available for ALL SUBSEQUENT 
-     * Pig pipelines in this script. If you wish to register UDFS for 
-     * only a single Pig pipeline, use register within that definition.
-     * @param udffile Path of the script UDF file
-     * @param namespace namespace of the UDFs
+     * Pig で使うスクリプト UDF を登録します。
+     * このメソッドを実行すると、スクリプト中のすべての UDF が、
+     * 後続するすべてのパイプラインから使用可能になります。
+     * UDF をひとつのパイプラインだけに対して登録したい場合は、
+     * パイプラインの定義中で REGISTER 文を実行してください。
+     *
+     * @param udffile
+     *     UDF スクリプトのパス。
+     * @param namespace
+     *     UDF の名前空間。
      * @throws IOException
      */
     public static void registerUDF(String udffile, String namespace) throws IOException {...}
     
     /**
-     * Define an alias for a UDF or a streaming command.  This definition
-     * will then be present for ALL SUBSEQUENT Pig pipelines defined in this 
-     * script.  If you wish to define it for only a single Pig pipeline, use
-     * define within that definition.
-     * @param alias name of the defined alias
-     * @param definition string this alias is defined as
+     * UDF あるいはストリーミングコマンドに別名を定義します。
+     * この定義は後続するすべてのパイプラインに対して有効になります。
+     * 別名をひとつのパイプラインだけに対して定義したい場合は、
+     * パイプラインの定義中で DEFINE 文を実行してください。
+     *
+     * @param alias
+     *     定義する別名。
+     * @param definition
+     *     別名が適宜される対象。
      */
     public static void define(String alias, String definition) throws IOException {...}
 
     /**
-     * Set a variable for use in Pig Latin.  This set
-     * will then be present for ALL SUBSEQUENT Pig pipelines defined in this 
-     * script.  If you wish to set it for only a single Pig pipeline, use
-     * set within that definition.
-     * @param var variable to set
-     * @param value to set it to
+     * Pig Latin 中で使う変数に値を格納します。
+     * 格納した値は後続するすべてのパイプラインについて有効になります。
+     * ひとつのパイプラインに対してだけ変数を格納したい場合は、
+     * パイプラインの定義中で格納してください。
+     *
+     * @param var
+     *     値を格納する変数。
+     * @param value
+     *     格納する値。
      */
     public static void set(String var, String value) throws IOException {...}
             
     /**
-     * Define a Pig pipeline.  
-     * @param pl Pig Latin definition of the pipeline.
-     * @return Pig object representing this pipeline.
-     * @throws IOException if the Pig Latin does not compile.
+     * Pig のパイプラインを定義します。
+     * 
+     * @param pl
+     *     Pig Latin によるパイプラインの定義。
+     * @return
+     *     パイプラインを表す Pig オブジェクト。
+     * @throws IOException
+     *     Pig Latin がコンパイルできない時。
      */
     public static Pig compile(String pl) throws IOException {...}
 
     /**
-     * Define a named portion of a Pig pipeline.  This allows it
-     * to be imported into another pipeline.
-     * @param name Name that will be used to define this pipeline.
-     * The namespace is global.
-     * @param pl Pig Latin definition of the pipeline.
-     * @return Pig object representing this pipeline.
-     * @throws IOException if the Pig Latin does not compile.
+     * 名前付きの Pig パイプラインを定義します。
+     * この名前を使って他のパイプラインにインポートできるようになります。
+     * 
+     * @param name
+     *     パイプラインの名前。パイプラインの名前空間はグローバルです。
+     * @param pl
+     *     Pig Latin によるパイプラインの定義。
+     * @return
+     *     パイプラインを表す Pig オブジェクト。
+     * @throws IOException
+     *     Pig Latin がコンパイルできない時。
      */
     public static Pig compile(String name, String pl) throws IOException {...}
 
     /**
-     * Define a Pig pipeline based on Pig Latin in a separate file.
-     * @param filename File to read Pig Latin from.  This must be a purely 
-     * Pig Latin file.  It cannot contain host language constructs in it.
-     * @return Pig object representing this pipeline.
-     * @throws IOException if the Pig Latin does not compile or the file
-     * cannot be found.
+     * Pig Latin ファイルから Pig パイプラインを定義します。
+     *
+     * @param filename
+     *     Pig Latin が格納されたファイル。
+     *     これは純粋な Pig Latin ファイルである必要があります。
+     *     ホスト言語を含むことはできません。
+     * @return
+     *     パイプラインを表す Pig オブジェクト。
+     * @throws IOException
+     *     Pig Latin がコンパイルできない時、あるいはファイルが見つからない時。
      */
     public static Pig compileFromFile(String filename) throws IOException {...}
 
     /**
-     * Define a named Pig pipeline based on Pig Latin in a separate file.
-     * This allows it to be imported into another pipeline.
-     * @param name Name that will be used to define this pipeline.
-     * The namespace is global.
-     * @param filename File to read Pig Latin from.  This must be a purely 
-     * Pig Latin file.  It cannot contain host language constructs in it.
-     * @return Pig object representing this pipeline.
-     * @throws IOException if the Pig Latin does not compile or the file
-     * cannot be found.
+     * Pig Latin ファイルから Pig パイプラインを定義します。
+     * 名前を使って他のパイプラインにインポートできるようになります。
+     *
+     * @param name
+     *     パイプラインの名前。パイプラインの名前空間はグローバルです。
+     * @param filename
+     *     Pig Latin が格納されたファイル。
+     *     これは純粋な Pig Latin ファイルである必要があります。
+     *     ホスト言語を含むことはできません。
+     * @return
+     *     パイプラインを表す Pig オブジェクト。
+     * @throws IOException
+     *     Pig Latin がコンパイルできない時、あるいはファイルが見つからない時。
      */
     public static Pig compileFromFile(String name, String filename) throws IOException {...}
     
     /**
-     * Bind this to a set of variables. Values must be provided
-     * for all Pig Latin parameters.
-     * @param vars map of variables to bind.  Keys should be parameters defined 
-     * in the Pig Latin.  Values should be strings that provide values for those
-     * parameters.  They can be either constants or variables from the host
-     * language.  Host language variables must contain strings.
-     * @return a {@link BoundScript} object 
-     * @throws IOException if there is not a key for each
-     * Pig Latin parameter or if they contain unsupported types.
+     * 変数の値を束縛します。
+     * すべての Pig Latin パラメータに対して値が与えられる必要があります。
+     *
+     * @param vars
+     *     束縛する変数セットのマップ。
+     *     キーは Pig Latin で定義されているパラメータの名前です。
+     *     値はパラメータの値を表す文字列です。
+     *     ホスト言語中ではこれらの値は定数でも変数でも構いません。
+     *     変数である場合は、文字列変数である必要があります。
+     * @return
+     *     {@link BoundScript} オブジェクト。
+     * @throws IOException
+     *     いずれかのパラメータに対応するキーがなかった場合、
+     *     あるいはサポートされない型の値が与えられた場合。
      */
     public BoundScript bind(Map&lt;String, String&gt; vars) throws IOException {...}
         
     /**
-     * Bind this to multiple sets of variables.  This will 
-     * cause the Pig Latin script to be executed in parallel over these sets of 
-     * variables.
-     * @param vars list of maps of variables to bind.  Keys should be parameters defined 
-     * in the Pig Latin.  Values should be strings that provide values for those
-     * variables.  They can be either constants or variables from the host
-     * language.  Host language variables must be strings.
-     * @return a {@link BoundScript} object 
-     * @throws IOException  if there is not a key for each
-     * Pig Latin parameter or if they contain unsupported types.
+     * 複数の変数セットを束縛します。
+     * Pig Latin スクリプトは変数セットごとに並列で実行されます。
+     *
+     * @param vars
+     *     束縛する変数セットのマップのリスト。
+     *     キーは Pig Latin で定義されているパラメータの名前です。
+     *     値はパラメータの値を表す文字列です。
+     *     ホスト言語中ではこれらの値は定数でも変数でも構いません。
+     *     変数である場合は、文字列変数である必要があります。
+     * @return
+     *     {@link BoundScript} オブジェクト。
+     * @throws IOException
+     *     いずれかのパラメータに対応するキーがなかった場合、
+     *     あるいはサポートされない型の値が与えられた場合。
      */
     public BoundScript bind(List&lt;Map&lt;String, String&gt;&gt; vars) throws IOException {...}
 
     /**
-     * Bind a Pig object to variables in the host language (optional
-     * operation).  This does an implicit mapping of variables in the host
-     * language to parameters in Pig Latin.  For example, if the user
-     * provides a Pig Latin statement
+     * ホスト言語中の変数を束縛します (オプショナルな操作) 。
+     * これはホスト言語中の変数から Pig Latin パラメータへの暗黙的なマッピングを行います。
+     * たとえば、ユーザが Pig Latin 文
      * p = Pig.compile("A = load '$input';");
-     * and then calls this function it will look for a variable called
-     * input in the host language.  Scoping rules of the host
-     * language will be followed in selecting which variable to bind.  The 
-     * variable bound must contain a string value.  This method is optional
-     * because not all host languages may support searching for in scope
-     * variables.
-     * @throws IOException if host language variables are not found to resolve all
-     * Pig Latin parameters or if they contain unsupported types.
+     * を定義して、 p に対してこのメソッドを呼ぶと、このメソッドはホスト言語中の「input」
+     * という変数を探します。
+     * 束縛する変数を選択するには、ホスト言語のスコーピング規則が使われます。
+     * すべてのホスト言語で、スコープ中の変数を得る機能があるとは限らないため、
+     * このメソッドはオプショナルです。
+     *
+     * @throws IOException
+     *     Pig Latin パラメータに対応するホスト言語の変数が存在しない場合、
+     *     あるいは変数にサポートされない型の値が入っていた場合。
      */
     public BoundScript bind() throws IOException {...}
 
