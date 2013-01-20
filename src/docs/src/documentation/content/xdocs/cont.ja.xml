@@ -762,62 +762,85 @@ public abstract class PigStats {
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="PigProgressNotificationListener">
-<title>PigProgressNotificationListener.java Object</title>
+<title>PigProgressNotificationListener オブジェクト</title>
 <source>
-
-/** 
-     * Invoked just before launching MR jobs spawned by the script.
-     * @param scriptId id of the script
-     * @param numJobsToLaunch the total number of MR jobs spawned by the script
+    /** 
+     * スクリプトから生成された MapReduce ジョブが実行される直前に呼び出されます。
+     *
+     * @param scriptId
+     *     スクリプトの ID。
+     * @param numJobsToLaunch
+     *     スクリプトから生成された MapReduce ジョブの数。
      */
     public void launchStartedNotification(String scriptId, int numJobsToLaunch);
     
     /**
-     * Invoked just before submitting a batch of MR jobs.
-     * @param scriptId id of the script
-     * @param numJobsSubmitted the number of MR jobs in the batch
+     * MapReduce ジョブのバッチを投入する直前に呼び出されます。
+     *
+     * @param scriptId
+     *     スクリプトの ID。
+     * @param numJobsSubmitted
+     *     スクリプトから生成された MapReduce ジョブの数。
      */
     public void jobsSubmittedNotification(String scriptId, int numJobsSubmitted);
     
     /**
-     * Invoked after a MR job is started.
-     * @param scriptId id of the script 
-     * @param assignedJobId the MR job id
+     * MapReduce ジョブが実行された後に呼び出されます。
+     *
+     * @param scriptId
+     *     スクリプトの ID。
+     * @param assignedJobId
+     *     MapReduce ジョブの ID。
      */
     public void jobStartedNotification(String scriptId, String assignedJobId);
     
     /**
-     * Invoked just after a MR job is completed successfully. 
-     * @param scriptId id of the script 
-     * @param jobStats the {@link JobStats} object associated with the MR job
+     * MapReduce ジョブが成功した直後に呼び出されます。
+     *
+     * @param scriptId
+     *     スクリプトの ID。
+     * @param jobStats
+     *     MapReduce ジョブに紐づく {@link JobStats} オブジェクト。
      */
     public void jobFinishedNotification(String scriptId, JobStats jobStats);
     
     /**
-     * Invoked when a MR job fails.
-     * @param scriptId id of the script 
-     * @param jobStats the {@link JobStats} object associated with the MR job
+     * MapReduce ジョブが失敗した時に呼び出されます。
+     *
+     * @param scriptId
+     *     スクリプトの ID。
+     * @param jobStats
+     *     MapReduce ジョブに紐づく {@link JobStats} オブジェクト。
      */
     public void jobFailedNotification(String scriptId, JobStats jobStats);
     
     /**
-     * Invoked just after an output is successfully written.
-     * @param scriptId id of the script
-     * @param outputStats the {@link OutputStats} object associated with the output
+     * 結果の出力が成功した直後に呼び出されます。
+     *
+     * @param scriptId
+     *     スクリプトの ID。
+     * @param outputStats
+     *     出力に紐づく {@link OutputStats} オブジェクト。
      */
     public void outputCompletedNotification(String scriptId, OutputStats outputStats);
     
     /**
-     * Invoked to update the execution progress. 
-     * @param scriptId id of the script
-     * @param progress the percentage of the execution progress
+     * 実行の進捗状況が更新された時に呼び出されます。
+     *
+     * @param scriptId
+     *     スクリプトの ID。
+     * @param progress
+     *     実行の進捗状況のパーセンテージ。
      */
     public void progressUpdatedNotification(String scriptId, int progress);
     
     /**
-     * Invoked just after all MR jobs spawned by the script are completed.
-     * @param scriptId id of the script
-     * @param numJobsSucceeded the total number of MR jobs succeeded
+     * スクリプトから生成された MapReduce ジョブがすべて完了した直後に呼び出されます。
+     *
+     * @param scriptId
+     *     スクリプトの ID。
+     * @param numJobsSucceeded
+     *     成功した MapReduce ジョブの数。
      */
     public void launchCompletedNotification(String scriptId, int numJobsSucceeded);
 }
