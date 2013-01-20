@@ -633,85 +633,107 @@ public class Pig {
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++ -->
 <section id="BoundScript-Object">
-<title>BoundScript.java Object</title>
+<title>BoundScript Object</title>
 <source>
 public class BoundScript {
     
     /**
-     * Run a pipeline on Hadoop.  
-     * If there are no stores in this pipeline then nothing will be run. 
-     * @return {@link PigStats}, null if there is no bound query to run.
+     * パイプラインを Hadoop 上で実行します。
+     * 束縛されたクエリがない時は、何も実行されません。
+     *
+     * @return
+     *     {@link PigStats}, または、束縛されたクエリがない時は null。
      * @throws IOException
      */
     public PigStats runSingle() throws IOException {...}
      
     /**
-     * Run a pipeline on Hadoop.  
-     * If there are no stores in this pipeline then nothing will be run.  
-     * @param prop Map of properties that Pig should set when running the script.
-     * This is intended for use with scripting languages that do not support
-     * the Properties object.
-     * @return {@link PigStats}, null if there is no bound query to run.
+     * パイプラインを Hadoop 上で実行します。
+     * 束縛されたクエリがない時は、何も実行されません。
+     *
+     * @param prop
+     *     スクリプトを実行する際に Pig が設定するプロパティのマップ。
+     *     This is intended for use with scripting languages that do not support
+     *     the Properties object.
+     * @return
+     *     {@link PigStats}, または、束縛されたクエリがない時は null。
      * @throws IOException
      */
     public PigStats runSingle(Properties prop) throws IOException {...}
     
     /**
-     * Run a pipeline on Hadoop.  
-     * If there are no stores in this pipeline then nothing will be run.  
-     * @param propfile File with properties that Pig should set when running the script.
-     * @return {@link PigStats}, null if there is no bound query to run.
+     * パイプラインを Hadoop 上で実行します。
+     * 束縛されたクエリがない時は、何も実行されません。
+     *
+     * @param propfile
+     *     スクリプトを実行する際に Pig が設定するプロパティを格納したファイル。
+     * @return
+     *     {@link PigStats}, または、束縛されたクエリがない時は null。
      * @throws IOException
      */
     public PigStats runSingle(String propfile) throws IOException {...}
 
     /**
-     * Run multiple instances of bound pipeline on Hadoop in parallel.  
-     * If there are no stores in this pipeline then nothing will be run.  
-     * Bind is called first with the list of maps of variables to bind. 
-     * @return a list of {@link PigStats}, one for each map of variables passed
-     * to bind.
+     * 複数のパイプラインを Hadoop 上で並列に実行します。
+     * 束縛されたクエリがない時は、何も実行されません。
+     * 変数セットのリストに対して bind メソッドが呼ばれていることを前提とします。
+     *
+     * @return
+     *     bind メソッドに渡されたそれぞれの変数セットのマップに対応する {@link PigStats} のリスト。
      * @throws IOException
      */    
     public List&lt;PigStats&gt; run() throws IOException {...}
     
     /**
-     * Run multiple instances of bound pipeline on Hadoop in parallel.
-     * @param prop Map of properties that Pig should set when running the script.
-     * This is intended for use with scripting languages that do not support
-     * the Properties object.
-     * @return a list of {@link PigStats}, one for each map of variables passed
-     * to bind.
+     * 複数のパイプラインを Hadoop 上で並列に実行します。
+     *
+     * @param prop
+     *     スクリプトを実行する際に Pig が設定するプロパティのマップ。
+     *     This is intended for use with scripting languages that do not support
+     *     the Properties object.
+     * @return
+     *     bind メソッドに渡されたそれぞれの変数セットのマップに対応する {@link PigStats} のリスト。
      * @throws IOException
      */
     public List&lt;PigStats&gt;  run(Properties prop) throws IOException {...}
     
     /**
-     * Run multiple instances of bound pipeline on Hadoop in parallel.
-     * @param propfile File with properties that Pig should set when running the script.
-     * @return a list of PigResults, one for each map of variables passed
-     * to bind.
+     * 複数のパイプラインを Hadoop 上で並列に実行します。
+     *
+     * @param propfile
+     *     スクリプトを実行する際に Pig が設定するプロパティを格納したファイル。
+     * @return
+     *     bind メソッドに渡されたそれぞれの変数セットのマップに対応する {@link PigStats} のリスト。
      * @throws IOException
      */
     public List&lt;PigStats&gt;  run(String propfile) throws IOException {...}
 
     /**
-     * Run illustrate for this pipeline.  Results will be printed to stdout.  
-     * @throws IOException if illustrate fails.
+     * パイプラインに対する ILLUSTRATE を実行します。
+     * 結果は標準出力に表示されます。
+     *
+     * @throws IOException
+     *     ILLUSTRATE が失敗した時。
      */
     public void illustrate() throws IOException {...}
 
     /**
-     * Explain this pipeline.  Results will be printed to stdout.
-     * @throws IOException if explain fails.
+     * パイプラインの実行計画を表示します。
+     * 結果は標準出力に表示されます。
+     *
+     * @throws IOException
+     *     EXPLAIN が失敗した時。
      */
     public void explain() throws IOException {...}
 
     /**
-     * Describe the schema of an alias in this pipeline.
-     * Results will be printed to stdout.
-     * @param alias to be described
-     * @throws IOException if describe fails.
+     * パイプライン中の別名のスキーマを表示します。
+     * 結果は標準出力に表示されます。
+     *
+     * @param alias
+     *     スキーマを表示する対象の別名。
+     * @throws IOException
+     *     DESCRIBE が失敗した時。
      */
     public void describe(String alias) throws IOException {...}
 
