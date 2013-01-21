@@ -854,95 +854,88 @@ public interface PigProgressNotificationListener extends java.util.EventListener
 
  <!-- ============================================ -->    
 <section id="embed-java">
-<title>Embedded Pig - Java </title>
+<title>埋め込み Pig - Java </title>
 
-<p>To enable control flow, you can embed Pig Latin statements and Pig commands in the Java programming language. </p>
+<p>フロー制御を行うため、 Pig Latin 文と Pig コマンドを Java プログラムに埋め込むことができます。</p>
 
-<p>Note that host languages and the languages of UDFs (included as part of the embedded Pig) are completely orthogonal. For example, a Pig Latin statement that registers a Java UDF may be embedded in Python, JavaScript, or Java. The exception to this rule is "combined" scripts – here the languages must match (see the <a href="udf.html#python-advanced">Advanced Topics for Python</a> and <a href="udf.html#js-advanced">Advanced Topics for JavaScript</a>). </p>
+<p>ホスト言語と、 埋め込み Pig に読み込む UDF の言語は、完全に直交する概念です。たとえば、 Java UDF を登録する Pig Latin 文は Python, JavaScript, Java のいずれにも埋め込めます。このルールの例外は複合スクリプトです。複合スクリプトでは、二つの言語は一致する必要があります (<a href="udf.html#python-advanced">Python の高度な話題</a>と <a href="udf.html#js-advanced">JavaScript の高度な話題</a>を見てください) 。</p>
 
 <section id="pigserver">
-<title>PigServer Interface</title>
-<p>Currently, <a href="http://pig.apache.org/docs/r0.9.0/api/org/apache/pig/PigServer.html">PigServer</a> is the main interface for embedding Pig in Java. PigServer can now be instantiated from multiple threads. (In the past, PigServer contained references to static data that prevented multiple instances of the object to be created from different threads within your application.) Please note that PigServer is NOT thread safe; the same object can't be shared across multiple threads. </p>
+<title>PigServer インタフェース</title>
+<p><a href="http://pig.apache.org/docs/r0.10.0/api/org/apache/pig/PigServer.html">PigServer</a> は Java 埋め込み Pig の中心となるインタフェースです。 PigServer は複数のスレッドからインスタンスできます (かつては、 PigServer が静的なデータを参照していたため、アプリケーション中の複数のスレッドから生成することができませんでした) 。 PigServer はスレッドセーフでは「ありません」。ひとつのオブジェクトを、スレッドをまたがって共有することはできません。</p>
 </section>
 
 <section>
-<title>Usage Examples</title>
+<title>使用例</title>
 <!-- ++++++++++++++++++++++++++++++++++ -->
-<p><strong>Local Mode</strong></p>
-<p>From your current working directory, compile the program. (Note that idlocal.class is written to your current working directory. Include “.” in the class path when you run the program.) </p>
+<p><strong>ローカルモード</strong></p>
+<p>idlocal.java - /etc/passwd ファイルからユーザ ID を抽出する Pig Latin 文を実行するプログラムです。まず、 /etc/passwd ファイルを作業ディレクトリにコピーしてください。</p>
+<source>
+import java.io.IOException;
+import org.apache.pig.PigServer;
+public class idlocal{ 
+    public static void main(String[] args) {
+        try {
+            PigServer pigServer = new PigServer("local");
+            runIdQuery(pigServer, "passwd");
+        }
+        catch(Exception e) {
+        }
+     }
+    public static void runIdQuery(PigServer pigServer, String inputFile) throws IOException {
+        pigServer.registerQuery("A = load '" + inputFile + "' using PigStorage(':');");
+        pigServer.registerQuery("B = foreach A generate $0 as id;");
+        pigServer.store("B", "id.out");
+    }
+}
+</source>
+
+<p>現在の作業ディレクトリでプログラムをコンパイルします (現在の作業ディレクトリに idlocal.class が出力されます。したがって、プログラムを実行する際には “.” をクラスパスに含めます) 。</p>
 <source>
 $ javac -cp pig.jar idlocal.java
 </source>
-<p> </p>
-<p>From your current working directory, run the program. To view the results, check the output file, id.out.</p>
+<p>現在の作業ディレクトリでプログラムを実行します。実行結果については、出力ファイル id.out を見てください。</p>
 <source>
 Unix:   $ java -cp pig.jar:. idlocal
 Cygwin: $ java –cp '.;pig.jar' idlocal
 </source>
 
-<p>idlocal.java - The sample code is based on Pig Latin statements that extract all user IDs from the /etc/passwd file. 
-Copy the /etc/passwd file to your local working directory.</p>
-<source>
-import java.io.IOException;
-import org.apache.pig.PigServer;
-public class idlocal{ 
-public static void main(String[] args) {
-try {
-    PigServer pigServer = new PigServer("local");
-    runIdQuery(pigServer, "passwd");
-    }
-    catch(Exception e) {
-    }
- }
-public static void runIdQuery(PigServer pigServer, String inputFile) throws IOException {
-    pigServer.registerQuery("A = load '" + inputFile + "' using PigStorage(':');");
-    pigServer.registerQuery("B = foreach A generate $0 as id;");
-    pigServer.store("B", "id.out");
- }
-}
-</source>
-<p> </p>
-
 <!-- ++++++++++++++++++++++++++++++++++ -->
-<p><strong>Mapreduce Mode</strong></p>
-<p>Point $HADOOPDIR to the directory that contains the hadoop-site.xml file. Example: 
-</p>
+<p><strong>Mapreduce モード</strong></p>
+<p>$HADOOPDIR が hadoop-site.xml が含まれるディレクトリを指すように設定します。</p>
 <source>
 $ export HADOOPDIR=/yourHADOOPsite/conf 
 </source>
-<p>From your current working directory, compile the program. (Note that idmapreduce.class is written to your current working directory. Include “.” in the class path when you run the program.)
-</p>
+<p>idmapreduce.java - /etc/passwd ファイルからユーザ ID を抽出する Pig Latin 文を実行するプログラムです。まず、 /etc/passwd ファイルを HDFS 上のホームディレクトリにコピーしてください。</p>
+<source>
+import java.io.IOException;
+import org.apache.pig.PigServer;
+public class idmapreduce{
+    public static void main(String[] args) {
+        try {
+            PigServer pigServer = new PigServer("mapreduce");
+            runIdQuery(pigServer, "passwd");
+        }
+        catch(Exception e) {
+        }
+    }
+    public static void runIdQuery(PigServer pigServer, String inputFile) throws IOException {
+        pigServer.registerQuery("A = load '" + inputFile + "' using PigStorage(':');")
+        pigServer.registerQuery("B = foreach A generate $0 as id;");
+        pigServer.store("B", "idout");
+    }
+}
+</source>
+<p>現在の作業ディレクトリでプログラムをコンパイルします (現在の作業ディレクトリに idmapreduce.class が出力されます。したがって、プログラムを実行する際には “.” をクラスパスに含めます) 。</p>
 <source>
 $ javac -cp pig.jar idmapreduce.java
 </source>
-<p></p>
-<p>From your current working directory, run the program. To view the results, check the idout directory on your Hadoop system. </p>
+<p>現在の作業ディレクトリでプログラムを実行します。実行結果については、 Hadoop 上の idout ディレクトリを見てください。</p>
 <source>
 Unix:   $ java -cp pig.jar:.:$HADOOPDIR idmapreduce
 Cygwin: $ java –cp '.;pig.jar;$HADOOPDIR' idmapreduce
 </source>
 
-<p>idmapreduce.java - The sample code is based on Pig Latin statements that extract all user IDs from the /etc/passwd file. 
-Copy the /etc/passwd file to your local working directory.</p>
-<source>
-import java.io.IOException;
-import org.apache.pig.PigServer;
-public class idmapreduce{
-   public static void main(String[] args) {
-   try {
-     PigServer pigServer = new PigServer("mapreduce");
-     runIdQuery(pigServer, "passwd");
-   }
-   catch(Exception e) {
-   }
-}
-public static void runIdQuery(PigServer pigServer, String inputFile) throws IOException {
-   pigServer.registerQuery("A = load '" + inputFile + "' using PigStorage(':');")
-   pigServer.registerQuery("B = foreach A generate $0 as id;");
-   pigServer.store("B", "idout");
-   }
-}
-</source>
 </section>
 </section>
 
