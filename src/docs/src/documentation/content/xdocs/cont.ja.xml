@@ -764,6 +764,8 @@ public abstract class PigStats {
 <section id="PigProgressNotificationListener">
 <title>PigProgressNotificationListener オブジェクト</title>
 <source>
+public interface PigProgressNotificationListener extends java.util.EventListener {
+
     /** 
      * スクリプトから生成された MapReduce ジョブが実行される直前に呼び出されます。
      *
