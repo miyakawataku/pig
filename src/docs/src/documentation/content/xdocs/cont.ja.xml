@@ -103,7 +103,7 @@ function main() {
 
 <source>
 # コンパイル: compile メソッドはパイプラインを表す Pig オブジェクトを戻します
-P = Pig.compile("""A = load '$in’; store A into '$out’;""")
+P = Pig.compile("""A = load '$in'; store A into '$out';""")
 </source>
 
 <p>コンパイルによって Pig オブジェクトを生成します。 Pig オブジェクトは未確定値を含むことができます。たとえば、入力ファイルの場所を確定しない状態のパラメータとしてパイプラインを作成することが考えられます。パラメータはドル記号で始まり、英数字・アンダースコアの連なりで構成します。パラメータの値は Pig オブジェクトの bind() メソッドを呼び出すことで束縛します。すべてのパラメータを束縛していない状態で Pig オブジェクトの run() メソッドを呼ぶとエラーになります。</p>
@@ -138,7 +138,7 @@ result = Q.runSingle()
 from org.apache.pig.scripting import Pig
 
 # コンパイル: compile メソッドはパイプラインを表す Pig オブジェクトを戻します
-P = Pig.compile("""A = load '$in’; store A into '$out’;""")
+P = Pig.compile("""A = load '$in'; store A into '$out';""")
 
 input = "original”
 output = "output”
@@ -170,7 +170,7 @@ in = "original”
 out = "output”
 
 # パラメータをローカル変数の値に暗黙的に束縛します
-result= Pig.compile("""A = load '$in’; store A into '$out’;""").bind().runSingle() 
+result= Pig.compile("""A = load '$in'; store A into '$out';""").bind().runSingle() 
 
 if result.isSuccessful():
     print "Pig job succeeded"
@@ -1110,12 +1110,12 @@ STORE Z into 'byage';
 DEFINE my_macro(A, sortkey) RETURNS void {     
       B = FILTER $A BY my_filter(*);     
       C = ORDER B BY $sortkey;
-      STORE C INTO ‘my_output’;  
+      STORE C INTO 'my_output';  
 };
 
 /* このマクロを展開するには、次のようにします */
 
-my_macro(alpha, ‘user’);
+my_macro(alpha, 'user');
 </source>
 
 <p>次の例では名前の衝突が起きます。 B という文字が関係の別名とユーザ定義のスキーマの双方に使われているためです。名前衝突を検出すると、 Pig は例外を投げます。</p>
@@ -1123,7 +1123,7 @@ my_macro(alpha, ‘user’);
 DEFINE my_macro(A, sortkey) RETURNS E {     
       B = FILTER $A BY my_filter(*);     
       C = ORDER B BY $sortkey;
-      D = LOAD ‘in’ as (B:bag{});
+      D = LOAD 'in' as (B:bag{});
       $E = FOREACH D GENERATE COUNT(B); 
 };
 </source>
@@ -1133,7 +1133,7 @@ DEFINE my_macro(A, sortkey) RETURNS E {
 -- A: 別名
 -- outfile: 出力先のパス (引用符でくくられた文字列)
 DEFINE my_macro1(A, outfile) RETURNS void {     
-       STORE $A INTO ‘$outfile’; 
+       STORE $A INTO '$outfile'; 
 };
 
 -- A: 別名
@@ -1142,11 +1142,11 @@ DEFINE my_macro1(A, outfile) RETURNS void {
 DEFINE my_macro2(A, sortkey, outfile) RETURNS void {     
       B = FILTER $A BY my_filter(*);     
       C = ORDER B BY $sortkey;
-      my_macro1(C, ‘$outfile’);
+      my_macro1(C, '$outfile');
    };
 
-   alpha = Load ‘input’ as (user, age, gpa);
-   my_macro2(alpha, ‘age’, ‘order_by_age.txt’);
+   alpha = Load 'input' as (user, age, gpa);
+   my_macro2(alpha, 'age', 'order_by_age.txt');
 </source>
 
 
