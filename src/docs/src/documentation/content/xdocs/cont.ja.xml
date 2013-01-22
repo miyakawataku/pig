@@ -942,17 +942,17 @@ Cygwin: $ java –cp '.;pig.jar;$HADOOPDIR' idmapreduce
 
  <!-- ============================================ -->    
    <section id="macros">
-   <title>Pig Macros</title> 
-   <p>Pig Latin supports the definition, expansion, and import of macros.</p>
+   <title>Pig マクロ</title> 
+   <p>Pig Latin ではマクロの定義・展開・インポートができます。</p>
 
   <!-- ========================== -->
   <section id="define-macros">
-   <title>DEFINE (macros)</title>
-   <p>Defines a Pig macro.</p>
+   <title>DEFINE (マクロ)</title>
+   <p>Pig のマクロを定義します。</p>
    
  <section>
-   <title>Syntax</title>
-   <p>Define Macro</p>
+   <title>文法</title>
+   <p>マクロ定義</p>
    <table>
       <tr> 
             <td>
@@ -960,7 +960,7 @@ Cygwin: $ java –cp '.;pig.jar;$HADOOPDIR' idmapreduce
             </td>
       </tr> 
    </table>
-    <p id="expand-macros">Expand Macro</p>
+    <p id="expand-macros">マクロ展開</p>
       <table>
       <tr> 
             <td>
@@ -971,14 +971,14 @@ Cygwin: $ java –cp '.;pig.jar;$HADOOPDIR' idmapreduce
  </section>   
    
 <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>macro_name</p>
             </td>
             <td>
-               <p>The name of the macro. Macro names are global.</p>
+               <p>マクロの名前。マクロの名前はグローバルです。</p>
             </td>
       </tr>
             <tr>
@@ -986,15 +986,15 @@ Cygwin: $ java –cp '.;pig.jar;$HADOOPDIR' idmapreduce
                <p>param</p>
             </td>
             <td>
-               <p>(optional) A comma-separated list of one or more parameters, including IN aliases (Pig relations), enclosed in parentheses, that are referenced in the Pig Latin fragment.</p>
-               <p>Unlike user defined functions (UDFs), which only allow quoted strings as its parameters, Pig macros support four types of parameters:</p>
+               <p>(オプショナル) カンマ区切りで括弧に括られた引数列です。 Pig の関係の別名を入力として指定できます。引数は Pig Latin 断片内で置き換えられます。</p>
+               <p>ユーザ定義関数 (UDF) と異なり、 Pig のマクロは次の型を引数として取ります:</p>
                <ul>
-               <li>alias (IDENTIFIER)</li>
-               <li>integer </li>
-               <li>float</li>
-               <li>string literal (quoted string)</li>
+               <li>別名 (識別子)</li>
+               <li>整数</li>
+               <li>浮動小数点数</li>
+               <li>文字列リテラル (引用符に括られた文字列)</li>
                </ul>
-               <p>Note that  type is NOT part of parameter definition. It is your responsibility to document the types of the parameters in a macro.</p>
+               <p>型は引数の定義に含まれません。マクロを書く人の責任で、引数の型をドキュメント化するべきです。</p>
             </td>
       </tr>
       <tr>
@@ -1002,7 +1002,7 @@ Cygwin: $ java –cp '.;pig.jar;$HADOOPDIR' idmapreduce
                <p>void</p>
             </td>
             <td>
-               <p>If the macro has no return alias, then void must be specified.</p>
+               <p>マクロに戻り値としての別名がなければ、 void を指定します。</p>
             </td>
       </tr>
             <tr>
@@ -1010,8 +1010,8 @@ Cygwin: $ java –cp '.;pig.jar;$HADOOPDIR' idmapreduce
                <p>alias</p>
             </td>
             <td>
-               <p>(optional) A comma-separated list of one or more return aliases (Pig relations) that are referenced in the Pig Latin fragment. The alias must exist in the macro in the form $&lt;alias&gt;.</p>
-               <p>If the macro has no return alias, then void must be specified.</p>
+               <p>(オプショナル) 1 つ以上の、 Pig Latin 断片中に出現する関係の別名の、カンマで区切られたリスト。別名はマクロ中で $&lt;alias&gt; という形式で出現する必要があります。</p>
+               <p>マクロに戻り値としての別名がなければ、 void を指定します。</p>
             </td>
       </tr>
       <tr>
@@ -1019,55 +1019,52 @@ Cygwin: $ java –cp '.;pig.jar;$HADOOPDIR' idmapreduce
                <p>pig_latin_fragment</p>
             </td>
             <td>
-               <p>One or more Pig Latin statements, enclosed in curly brackets.</p>
+               <p>1 つ以上の、中括弧で括られた Pig Latin 文。</p>
             </td>
       </tr>
     </table>
    </section>
     
    <section>
-   <title>Usage</title>
+   <title>用法</title>
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++ --> 
-   <p><strong>Macro Definition</strong></p>
-   <p>A macro definition can appear anywhere in a Pig script as long as it appears prior to the first use. A macro definition can include references to other macros as long as the referenced macros are defined prior to the macro definition. Recursive references are not allowed. </p>
+   <p><strong>マクロ定義</strong></p>
+   <p>マクロ定義は最初の使用箇所以前であれば Pig スクリプト中のどこにでも書けます。マクロ定義は、自身よりも前に定義された他のマクロを参照することができます。再帰的な参照はできません。</p>
    
-   <p>Note the following restrictions:</p>
+   <p>次の制限事項があります:</p>
    <ul>
-   <li>Macros are not allowed inside a <a href="basic.html#nested-block">FOREACH</a> nested block.</li>
-   <li>Macros can only contain <a href="start.html#pl-statements">Pig Latin statements</a>. The <a href="basic.html#register">REGISTER</a>  statement is not supported. The <a href="cmds.html#shell-cmds">shell commands</a> (used with Grunt) are not supported.</li>
+   <li>マクロはネストした <a href="basic.html#nested-block">FOREACH</a> 文のブロックの中では使えません。</li>
+   <li>マクロの中に書けるのは <a href="start.html#pl-statements">Pig Latin 文</a>だけです。 <a href="basic.html#register">REGISTER</a> 文は使えません。 ;Grunt で使われる<a href="cmds.html#shell-cmds">シェルコマンド</a>も使えません。</li>
    <li>Macros cannot include a user-defined schema that has a name collision with an alias in the macro.</li>
-   <li><a href="#Parameter-Sub">Parameter substitution</a> cannot be used inside of macros. Parameters should be explicitly passed to macros and parameter substitution used only at the top level.</li>
+   <li>マクロ中で<a href="#parameter-sub">パラメータ置換</a>はできません。マクロに対しては明示的に引数を渡す必要があります。パラメータ置換ができるのはトップレベルだけです。</li>
    </ul>
-   <p></p>
 
-<p>In this example the macro is named my_macro. Note that only aliases A and C are visible from the outside; alias B is not visible from the outside.</p>
+<p>次の例では my_macro という名前のマクロを作っています。マクロを外から見ると別名 A と C だけが見えます。別名 B は外からは見えません。</p>
 <source>
- DEFINE my_macro(A, sortkey) RETURNS C {
+DEFINE my_macro(A, sortkey) RETURNS C {
     B = FILTER $A BY my_filter(*);
     $C = ORDER B BY $sortkey;
 }
 </source>
-<p></p>
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++ -->
-<p><strong>Macro Expansion</strong></p>
+<p><strong>マクロの展開</strong></p>
 
-<p>A macro can be expanded inline using the macro expansion syntax. Note the following:</p>
+<p>マクロはマクロ展開構文を使ってインライン展開できます。次の点に注意してください:</p>
 <ul>
-<li>Any alias in the macro which isn't visible from the outside will be prefixed with a macro name and suffixed with an instance id to avoid namespace collision. </li>
-<li>Macro expansion is not a complete replacement for function calls. Recursive expansions are not supported. </li>
+<li>マクロ中にある外側から見えない別名は、衝突を防ぐためにマクロの名前と連番が前置されます。</li>
+<li>マクロ展開は完全な関数呼び出しとして使えるものではありません。再帰的展開はできません。</li>
 </ul>
-<p></p>
-<p>In this example my_macro (defined above) is expanded. Because alias B is not visible from the outside it is renamed macro_my_macro_B_0.</p>
+<p>次の例では my_macro (前の例で定義済み) が展開されます。別名 B は外側から見えないので、 macro_my_macro_B_0 という名前に置き換えられます。</p>
 
 <source>
-/* These statements ... */
+/* 展開前 */
 
 X = LOAD 'users' AS (user, address, phone);
 Y = my_macro(X, user);
 STORE Y into 'bar';
 
-/* Are expanded into these statements ... */
+/* 展開後 */
 
 X = LOAD 'users' AS (user, address, phone);
 macro_my_macro_B_0 = FILTER X BY my_filter(*);
@@ -1076,14 +1073,14 @@ STORE Y INTO 'output';
 </source>
 
 <!-- +++++++++++++++++++++++++++++++++++++++++++++++ -->
-<p><strong>Macro Import</strong></p>
-<p>A macro can be imported from another Pig script (see <a href="#import-macros">IMPORT (macros)</a>).</p>
+<p><strong>マクロのインポート</strong></p>
+<p>他の Pig スクリプト中のマクロをインポートすることもできます (<a href="#import-macros">IMPORT (マクロ)</a> を見てください) 。</p>
 </section> 
 
 
  <section>
- <title>Examples</title>
-<p>In this example no parameters are passed to the macro.</p>
+ <title>例</title>
+<p>次の例は引数なしのマクロです。</p>
 <source>
 DEFINE my_macro() returns B {
    D = LOAD 'data' AS (a0:int, a1:int, a2:int);   
@@ -1094,7 +1091,7 @@ X = my_macro();
 STORE X INTO 'output';
 </source>
 
-<p>In this example parameters are passed and returned.</p>
+<p>次の例では、引数を取って戻り値を戻しています。</p>
 <source>
 DEFINE group_and_count (A, group_key, reducers) RETURNS B {
    D = GROUP $A BY $group_key PARALLEL $reducers;
@@ -1108,7 +1105,7 @@ STORE Y into 'byuser';
 STORE Z into 'byage';
 </source>
 
-<p>In this example the macro does not have a return alias; thus, void must be specified.</p>
+<p>次の例では、マクロは別名を戻さないため、 void を指定しています。</p>
 <source>
 DEFINE my_macro(A, sortkey) RETURNS void {     
       B = FILTER $A BY my_filter(*);     
@@ -1116,33 +1113,32 @@ DEFINE my_macro(A, sortkey) RETURNS void {
       STORE C INTO ‘my_output’;  
 };
 
-/* To expand this macro, use the following */
+/* このマクロを展開するには、次のようにします */
 
 my_macro(alpha, ‘user’);
 </source>
 
-<p>
-In this example a name collision will occur. Here letter B is used as alias name and as name in user-defined schema. Pig will throw an exception when name collision is detected.</p>
+<p>次の例では名前の衝突が起きます。 B という文字が関係の別名とユーザ定義のスキーマの双方に使われているためです。名前衝突を検出すると、 Pig は例外を投げます。</p>
 <source>
 DEFINE my_macro(A, sortkey) RETURNS E {     
       B = FILTER $A BY my_filter(*);     
       C = ORDER B BY $sortkey;
       D = LOAD ‘in’ as (B:bag{});
-   $E = FOREACH D GENERATE COUNT(B); 
-   };
+      $E = FOREACH D GENERATE COUNT(B); 
+};
 </source>
 
-<p>This example demonstrates the importance of knowing parameter types before using them in a macro script. Notice that when pass parameter $outfile to my_macro1 inside  my_macro2, it must be quoted.</p>
+<p>次の例は、マクロを使う際に引数の型を知ることの重要性を示しています。 my_macro1 から my_macro2 を呼ぶ時に、引数 $outfile を引用符でくくっていることに注意してください。</p>
 <source>
--- A: an alias
--- outfile: output file path (quoted string)
+-- A: 別名
+-- outfile: 出力先のパス (引用符でくくられた文字列)
 DEFINE my_macro1(A, outfile) RETURNS void {     
        STORE $A INTO ‘$outfile’; 
-   };
+};
 
--- A: an alias
--- sortkey: column name (quoted string)
--- outfile: output file path (quoted string)
+-- A: 別名
+-- sortkey: 列名 (引用符でくくられた文字列)
+-- outfile: 出力先のパス (引用符でくくられた文字列)
 DEFINE my_macro2(A, sortkey, outfile) RETURNS void {     
       B = FILTER $A BY my_filter(*);     
       C = ORDER B BY $sortkey;
@@ -1154,7 +1150,7 @@ DEFINE my_macro2(A, sortkey, outfile) RETURNS void {
 </source>
 
 
-<p>In this example a macro (group_with_parallel) refers to another macro (foreach_count).</p>
+<p>次の例ではマクロ (group_with_parallel) が他のマクロ (foreach_count) を参照しています。</p>
 <source>
 DEFINE foreach_count(A, C) RETURNS B {
    $B = FOREACH $A GENERATE group, COUNT($C);
@@ -1165,13 +1161,13 @@ DEFINE group_with_parallel (A, group_key, reducers) RETURNS B {
    $B = foreach_count(C, $A);
 };
        
-/* These statements ... */
+/* 展開前 */
  
 X = LOAD 'users' AS (user, age, zip);
 Y = group_with_parallel (X, user, 23);
 STORE Y INTO 'byuser';
 
-/* Are expanded into these statements ... */
+/* 展開後 */
 
 X = LOAD 'users' AS (user, age, zip);
 macro_group_with_parallel_C_0 = GROUP X by (user) PARALLEL 23;
