@@ -1034,7 +1034,7 @@ Cygwin: $ java –cp '.;pig.jar;$HADOOPDIR' idmapreduce
    <p>次の制限事項があります:</p>
    <ul>
    <li>マクロはネストした <a href="basic.html#nested-block">FOREACH</a> 文のブロックの中では使えません。</li>
-   <li>マクロの中に書けるのは <a href="start.html#pl-statements">Pig Latin 文</a>だけです。 <a href="basic.html#register">REGISTER</a> 文は使えません。 ;Grunt で使われる<a href="cmds.html#shell-cmds">シェルコマンド</a>も使えません。</li>
+   <li>マクロの中に書けるのは <a href="start.html#pl-statements">Pig Latin 文</a>だけです。 <a href="basic.html#register">REGISTER</a> 文は使えません。 Grunt で使われる<a href="cmds.html#shell-cmds">シェルコマンド</a>も使えません。</li>
    <li>Macros cannot include a user-defined schema that has a name collision with an alias in the macro.</li>
    <li>マクロ中で<a href="#parameter-sub">パラメータ置換</a>はできません。マクロに対しては明示的に引数を渡す必要があります。パラメータ置換ができるのはトップレベルだけです。</li>
    </ul>
@@ -1181,10 +1181,10 @@ STORE Y INTO 'byuser';
    
   <!-- ========================== -->
    <section id="import-macros">
-   <title>IMPORT (macros)</title>   
-   <p>Import macros defined in a separate file.</p>
+   <title>IMPORT (マクロ)</title>   
+   <p>他のファイルに定義されたマクロをインポートします。</p>
     <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
       <tr> 
             <td>
@@ -1195,36 +1195,33 @@ STORE Y INTO 'byuser';
    </section>
      
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>file-with-macro</p>
             </td>
             <td>
-               <p>The name of a file (enclosed in single quotes) that contains one or more macro definitions; for example, 'my_macro.pig' or  'mypath/my_macro.pig'.</p>
-               <p></p>
-               <p>Macro names are global and all macros share the same name space. While the file can contain more than one macro definition, having two macros with the same name in your execution context will result in an error.</p>
-               <p></p>
-               <p>Files are imported based on either (1) the given file path or (2) the import path specified via the Pig property pig.import.search.path. If a file path is given, whether absolute or relative to the current directory (starting with . or ..), the import path will be ignored. </p>
-               <p></p>
+	       <p>1 つ以上のマクロ定義を含んだファイルの名前を単一引用符にくくって指定します。たとえば、 'my_macro.pig' や 'mypath/my_macro.pig' のようにします。</p>
+               <p>マクロ名はグローバルなので、すべてのマクロは同じ名前空間を共有します。ファイルには複数のマクロ定義が含められますが、実行コンテキスト中に同じ名前のマクロが 2 つあったら、エラーが発生します。</p>
+               <p>ファイルは (1) 与えられたファイルパス、 (2) Pig プロパティ pig.import.search.path に指定されたインポートパス、のいずれかを基点としてインポートされます。与えられたファイルパスが、絶対パスか、カレントディレクトリを基点とする相対パス (. か .. から始まる) だった場合、インポートパスは無視されます。</p>
             </td>
          </tr>
       </table>   
    </section>
       
    <section>
-   <title>Usage</title>
-   <p>Use the IMPORT command to import a macro defined in a separate file into your Pig script. </p>
-   <p>IMPORT adds the macro definitions to the Pig Latin namespace; these macros can then be invoked as if they were defined in the same file.</p>
-   <p>Macros can only contain Pig Latin statements; Grunt shell commands are not supported.</p>
+   <title>用法</title>
+   <p>IMPORT コマンドは、他のファイルに定義されたマクロを Pig スクリプトにインポートするために使います。</p>
+   <p>IMPORT はマクロ定義を Pig Latin の名前空間に追加します。インポートしたマクロは同じファイル中に定義されているのと同じように呼び出せます。</p>
+   <p>マクロ中で使えるのは Pig Latin 文だけです。 Grunt シェルのコマンドは使えません。</p>
    
-   <p>See also: <a href="#define-macros">DEFINE (macros)</a></p>
+   <p><a href="#define-macros">DEFINE (マクロ)</a> も見てください。</p>
      </section> 
      
    <section>
-   <title>Example</title>
-   <p>In this example, because a path is not given, Pig will use the import path specified in <code>pig.import.search.path</code>.</p>
+   <title>例</title>
+   <p>次の例では、パスが与えられていないので、 pig は <code>pig.import.search.path</code> で指定されたインポートパスを使います。</p>
 <source>
 /* myscript.pig */
 ...
