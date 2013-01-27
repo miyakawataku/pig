@@ -1034,7 +1034,7 @@ Cygwin: $ java -cp '.;pig.jar;$HADOOPDIR' idmapreduce
    <ul>
    <li>マクロはネストした <a href="basic.html#nested-block">FOREACH</a> 文のブロックの中では使えません。</li>
    <li>マクロの中に書けるのは <a href="start.html#pl-statements">Pig Latin 文</a>だけです。 <a href="basic.html#register">REGISTER</a> 文は使えません。 Grunt で使われる<a href="cmds.html#shell-cmds">シェルコマンド</a>も使えません。</li>
-   <li>Macros cannot include a user-defined schema that has a name collision with an alias in the macro.</li>
+   <li>マクロ定義の中では、マクロ中の関係の別名と同じ名前のフィールドを持つユーザ定義スキーマを定義することはできません。</li>
    <li>マクロ中で<a href="#parameter-sub">パラメータ置換</a>はできません。マクロに対しては明示的に引数を渡す必要があります。パラメータ置換ができるのはトップレベルだけです。</li>
    </ul>
 
