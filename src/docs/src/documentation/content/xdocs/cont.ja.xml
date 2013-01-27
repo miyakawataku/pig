@@ -1454,10 +1454,10 @@ IMPORT 'my_macro.pig';
   
     <!-- ++++++++++++++++++++++++++++++++++ --> 
      <section>
-   <title>Examples</title> 
+   <title>使用例</title> 
    <section>
-   <title>Specifying Parameters in the Command Line</title>
-   <p>Suppose we have a data file called 'mydata' and a pig script called 'myscript.pig'.</p>
+   <title>コマンドラインでパラメータを指定する</title>
+   <p>データファイル 'mydata' と Pig スクリプト 'myscript.pig' が次のような内容だとします。</p>
 
 <p>mydata </p>
 <source>
@@ -1472,7 +1472,7 @@ A = LOAD '$data' USING PigStorage() AS (f1:int, f2:int, f3:int);
 DUMP A;
 </source>
 
-<p>In this example the parameter (data) and the parameter value (mydata) are specified in the command line. If the parameter name in the command line (data) and the parameter name in the script ($data) do not match, the script will not run. If the value for the parameter (mydata) is not found, an error is generated.</p>
+<p>次の例では、パラメータ data にコマンドラインで値 mydata を指定しています。もしコマンドラインで指定したパラメータ名 data と、スクリプト中のパラメータ名 $data が一致しなかったら、このスクリプトは実行できません。パラメータで指定された値 (mydata) が見つからなかった場合、エラーが発生します。</p>
 <source>
 $ pig -param data=mydata myscript.pig
 
@@ -1484,8 +1484,8 @@ $ pig -param data=mydata myscript.pig
    
 <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section>
-   <title>Specifying parameters Using a Parameter File</title>
-   <p>Suppose we have a parameter file called 'myparams.'</p>
+   <title>パラメータファイルでパラメータを指定する</title>
+   <p>'myparams' という名前のパラメータファイルの内容が次のとおりだとします。</p>
 <source>
 # my parameters
 data1 = mydata1
@@ -1493,7 +1493,7 @@ cmd = `generate_name`
 </source>
 
    
-   <p>In this example the parameters and values are passed to the script using the parameter file.</p>
+   <p>次の例では、パラメータとそれに紐づく値をパラメータファイルを通じて指定しています。</p>
 <source>
 $ pig -param_file myparams script2.pig
 </source>
@@ -1502,44 +1502,44 @@ $ pig -param_file myparams script2.pig
  
  <!-- ++++++++++++++++++++++++++++++++++ -->   
    <section>
-   <title>Specifying Parameters Using the Declare Statement</title>
-   <p>In this example the command is executed and its stdout is used as the parameter value.</p>
+   <title>declare 文でパラメータを指定する</title>
+   <p>次の例では、コマンド (generate_date) を実行した結果の標準出力の内容をパラメータの値として使っています。</p>
 <source>
 %declare CMD `generate_date`;
 A = LOAD '/data/mydata/$CMD';
 B = FILTER A BY $0>'5';
 
-<em>etc ... </em>
+<em>以下続く ... </em>
 </source>
    
    </section>
 
 <!-- ++++++++++++++++++++++++++++++++++ -->    
    <section>
-   <title>Specifying Parameters Using the Default Statement</title>
-   <p>In this example the parameter (DATE) and value ('20090101') are specified in the Pig script using the default statement. If a value for DATE is not specified elsewhere, the default value 20090101 is used.</p>
+   <title>default 文でパラメータを指定する</title>
+   <p>次の例では、パラメータ DATE に、 Pig スクリプト中の default 文を使ってデフォルト値 '20090101' を指定しています。もし DATE の値が他の場所で指定されていなければ、デフォルト値 '20090101' が使われます。</p>
 <source>
 %default DATE '20090101';
 A = load '/data/mydata/$DATE';
 
-<em>etc ... </em>
+<em>以下続く ... </em>
 </source>
 
    </section>
    
    <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section>
-   <title>Specifying Parameter Values as a sequence of Characters</title>
-   <p>In this example the characters (in this case, Joe's URL) can be enclosed in single or double quotes, and quotes within the sequence of characters can be escaped. </p>
+   <title>文字列をパラメータの値として指定する</title>
+   <p>次の例のように、文字列 (ここでは「Joe's URL」) は単一引用符か二重引用符で括って指定できます。文字列中の引用符はエスケープできます。</p>
 <source>
 %declare DES 'Joe\'s URL';
 A = LOAD 'data' AS (name, description, url);
 B = FILTER A BY description == '$DES';
  
-<em>etc ... </em>
+<em>以下続く ... </em>
 </source>
    
-   <p>In this example single word values that don't use special characters (in this case, mydata) don't have to be enclosed in quotes.</p>
+   <p>次の例の「mydata」のように、特殊文字を含まず 1 語からなる値は、引用符に括る必要はありません。</p>
 <source>
 $ pig -param data=mydata myscript.pig
 </source>   
@@ -1547,14 +1547,14 @@ $ pig -param data=mydata myscript.pig
    
    <!-- ++++++++++++++++++++++++++++++++++ --> 
    <section>
-   <title>Specifying Parameter Values as a Command</title>
-   <p>In this example the command is enclosed in back ticks. First, the parameters mycmd and date are substituted when the declare statement is encountered. Then the resulting command is executed and its stdout is placed in the path before the load statement is run.</p>
+   <title>コマンドの結果をパラメータの値として指定する</title>
+   <p>次の例では、コマンドをバッククオートに括って指定しています。パラメータ mycmd と date は、 declare 文の中で置換されます。そして、展開結果のコマンドが実行され、 LOAD 文を実行する前にコマンドの標準出力がパス中で展開されます。</p>
 <source>
-%declare CMD '$mycmd $date';
+%declare CMD `$mycmd $date`;
 A = LOAD '/data/mydata/$CMD';
 B = FILTER A BY $0>'5';
  
-<em>etc ... </em>
+<em>以下続く ... </em>
 </source>
    </section>
    </section>
