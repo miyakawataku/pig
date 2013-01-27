@@ -28,7 +28,7 @@
    
 <p>制御構造を有効にするためには、 Pig Latin 文と Pig コマンドを Python か JavaScript などスクリプト言語に埋め込みます。埋め込み Pig は、 JDBC のようなコンパイル・バインド・実行のモデルを使います。 Python では、 Jython の JAR ファイルをクラスパスに含めます。 JavaScript では、 Rhino の JAR ファイルをクラスパスに含めます。</p>
 
-<p>埋め込み先のホスト言語と、埋め込み Pig が使う UDF の言語は完全に直行です。たとえば、 Python UDF を登録する Pig Latin 文は Python, JavaScript, Java のいずれにも組み込めます。例外は「複合」スクリプトで、この場合はホスト言語と UDF の言語が一致する必要があります (<a href="udf.html#python-advanced">Python の高度な話題</a> と <a href="udf.html#js-advanced">JavaScript の高度な話題</a> を見てください) 。</p>
+<p>埋め込み先のホスト言語と、埋め込み Pig が使う UDF の言語は完全に直交です。たとえば、 Python UDF を登録する Pig Latin 文は Python, JavaScript, Java のいずれにも組み込めます。例外は「複合」スクリプトで、この場合はホスト言語と UDF の言語が一致する必要があります (<a href="udf.html#python-advanced">Python の高度な話題</a> と <a href="udf.html#js-advanced">JavaScript の高度な話題</a> を見てください) 。</p>
 
 
 <!-- ============================================== -->
@@ -96,7 +96,6 @@ function main() {
 
 <p><strong>呼び出しプロセス</strong></p>
 
-<p>You invoke Pig in the host scripting language through an embedded <a href="#pig-Object">Pig object</a>. </p>  
 <p>ホスト言語から <a href="#pig-Object">Pig オブジェクト</a>を通じて Pig を呼び出します。</p>  
 
 <p><strong>コンパイル:</strong> compile は Pig クラスの静的関数です。パイプラインを定義する Pig Latin を引数に取ります:</p>
