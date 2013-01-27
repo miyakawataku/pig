@@ -1396,58 +1396,57 @@ IMPORT 'my_macro.pig';
    
    <!-- ++++++++++++++++++++++++++++++++++ -->
    <section>
-   <title>Usage</title>
-   <p>Parameter substitution enables you to write Pig scripts that include parameters and to supply values for these parameters at run time. For instance, suppose you have a job that needs to run every day using the current day's data. You can create a Pig script that includes a parameter for the date. Then, when you run this script you can specify or supply a value for the date parameter using one of the supported methods. </p>
+   <title>用法</title>
+   <p>パラメータ置換を使うことで、 Pig スクリプトにパラメータを含ませて、実行時に値を与えることができます。たとえば、当日の日付のデータを使うジョブを毎日走らせる必要がある場合を考えてみてください。この時、日付をパラメータとして取るスクリプトを書けば、サポートされているいずれかの方法で、当日の日付をパラメータの値に指定してスクリプトを実行することができます。</p>
    
    <section>
-   <title>Specifying Parameters </title>
-   <p>You can specify parameter names and parameter values as follows:</p>
+   <title>パラメータを指定する</title>
+   <p>パラメータ名とパラメータの値は次のように指定できます:</p>
    <ul>
       <li>
-         <p>As part of a command line.</p>
+         <p>コマンドライン中で指定する。</p>
       </li>
       <li>
-         <p>In parameter file, as part of a command line.</p>
+         <p>コマンドラインで指定したパラメータファイル中で指定する。</p>
       </li>
       <li>
-         <p>With the declare statement, as part of Pig script.</p>
+         <p>Pig スクリプト中の declare 文で指定する。</p>
       </li>
       <li>
-         <p>With default statement, as part of a Pig script.</p>
+         <p>Pig スクリプト中の default 文で指定する。</p>
       </li>
    </ul>
-   <p></p>
-   <p>Parameter substitution CANNOT be used inside of macros.  Parameters should be explicitly passed to macros and parameter substitution used only at the top level (see <a href="#define-macros">DEFINE (macros)</a>).</p>
+   <p>パラメータ置換はマクロの中では使えません。パラメータの値をマクロ中で使う場合は、トップレベルの呼び出しで明示的にパラメータ置換を行い、マクロに引数として渡す必要があります (<a href="#define-macros">DEFINE (マクロ)</a> を見てください) 。</p>
    </section>
    
    <section>
-   <title>Precedence</title>
-   <p>Precedence for parameters is as follows:</p>
+   <title>優先順位</title>
+   <p>パラメータの優先順位は次の通りです:</p>
    <ul>
       <li>
-         <p>Highest - parameters defined using the declare statement</p>
+         <p>最高 - declare 文で定義したパラメータ</p>
       </li>
       <li>
-         <p>Next - parameters defined in the command line</p>
+         <p>次点 - コマンドラインで指定したパラメータ</p>
       </li>
       <li>
-         <p>Lowest - parameters defined in a script</p>
+         <p>最低 - パラメータファイルで指定したパラメータ</p>
       </li>
    </ul>
    </section>
    
    <section>
-   <title>Processing Order and Precedence</title>
-   <p>Parameters are processed as follows:</p>
+   <title>処理順序と優先順位</title>
+   <p>パラメータは次のように処理されます:</p>
    <ul>
       <li>
-         <p>Command line parameters are scanned in the order they are specified on the command line. </p>
+         <p>コマンドラインで指定した順番でパラメータが読み込まれます。</p>
       </li>
       <li>
-         <p>Parameter files are scanned in the order they are specified on the command line. Within each file, the parameters are processed in the order they are listed. </p>
+         <p>コマンドラインで指定した順番でパラメータファイルが読み込まれます。それぞれのファイルについて、出現順にパラメータが処理されます。</p>
       </li>
       <li>
-         <p>Declare and default preprocessors statements are processed in the order they appear in the Pig script. </p>
+         <p>プリプロセッサ文の declare と default が、 Pig スクリプト中での出現順に処理されます。</p>
       </li>
    </ul>
    </section></section>
