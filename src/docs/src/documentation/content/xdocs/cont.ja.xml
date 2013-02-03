@@ -386,22 +386,11 @@ for i in range(1, 4):
 
 <section id="automated-pig-latin">
 <title>Pig Latin の自動生成</title>
-<p>多くのフレームワークは Pig Latin を自動生成します。たとえば、データロード時に適切な日付を設定するなどのためです。</p>
-
-<source>
-today = sys.argv[1]
-P = Pig.compile("""A = load 'fact' using HowlLoader();
-                   B = filter A by datestamp = '$date';
-                   ...
-                   store Z into 'aggregated' using HowlStorage('datestamp = $date');
-                """)
-P.bind({'date':today}).runSingle()
-</source>
-</section>
-
+<p>多くのフレームワークは Pig Latin を自動生成します。</p>
 
 <section>
 <title>条件付きコンパイル</title>
+
 <p>コード自動生成のユースケースの一つに、条件付きコンパイルがあります。たとえば、平日と週末で実行すべき処理が違うなどの場合です。</p>
 
 <source>
@@ -438,7 +427,7 @@ for i in [0, 1, 2]:
     ... # check result for each pipeline
 </source>
 </section>
-
+</section>
 </section> 
    
    
@@ -868,6 +857,16 @@ public interface PigProgressNotificationListener extends java.util.EventListener
 <title>使用例</title>
 <!-- ++++++++++++++++++++++++++++++++++ -->
 <p><strong>ローカルモード</strong></p>
+<p>現在の作業ディレクトリでプログラムをコンパイルします (現在の作業ディレクトリに idlocal.class が出力されます。したがって、プログラムを実行する際には “.” をクラスパスに含めます) 。</p>
+<source>
+$ javac -cp pig.jar idlocal.java
+</source>
+<p>現在の作業ディレクトリでプログラムを実行します。実行結果については、出力ファイル id.out を見てください。</p>
+<source>
+Unix:   $ java -cp pig.jar:. idlocal
+Cygwin: $ java -cp '.;pig.jar' idlocal
+</source>
+
 <p>idlocal.java - /etc/passwd ファイルからユーザ ID を抽出する Pig Latin 文を実行するプログラムです。まず、 /etc/passwd ファイルを作業ディレクトリにコピーしてください。</p>
 <source>
 import java.io.IOException;
@@ -880,7 +879,7 @@ public class idlocal{
         }
         catch(Exception e) {
         }
-     }
+    }
     public static void runIdQuery(PigServer pigServer, String inputFile) throws IOException {
         pigServer.registerQuery("A = load '" + inputFile + "' using PigStorage(':');");
         pigServer.registerQuery("B = foreach A generate $0 as id;");
@@ -889,15 +888,6 @@ public class idlocal{
 }
 </source>
 
-<p>現在の作業ディレクトリでプログラムをコンパイルします (現在の作業ディレクトリに idlocal.class が出力されます。したがって、プログラムを実行する際には “.” をクラスパスに含めます) 。</p>
-<source>
-$ javac -cp pig.jar idlocal.java
-</source>
-<p>現在の作業ディレクトリでプログラムを実行します。実行結果については、出力ファイル id.out を見てください。</p>
-<source>
-Unix:   $ java -cp pig.jar:. idlocal
-Cygwin: $ java -cp '.;pig.jar' idlocal
-</source>
 
 <!-- ++++++++++++++++++++++++++++++++++ -->
 <p><strong>Mapreduce モード</strong></p>
@@ -905,6 +895,16 @@ Cygwin: $ java -cp '.;pig.jar' idlocal
 <source>
 $ export HADOOPDIR=/yourHADOOPsite/conf 
 </source>
+<p>現在の作業ディレクトリでプログラムをコンパイルします (現在の作業ディレクトリに idmapreduce.class が出力されます。したがって、プログラムを実行する際には “.” をクラスパスに含めます) 。</p>
+<source>
+$ javac -cp pig.jar idmapreduce.java
+</source>
+<p>現在の作業ディレクトリでプログラムを実行します。実行結果については、 Hadoop 上の idout ディレクトリを見てください。</p>
+<source>
+Unix:   $ java -cp pig.jar:.:$HADOOPDIR idmapreduce
+Cygwin: $ java -cp '.;pig.jar;$HADOOPDIR' idmapreduce
+</source>
+
 <p>idmapreduce.java - /etc/passwd ファイルからユーザ ID を抽出する Pig Latin 文を実行するプログラムです。まず、 /etc/passwd ファイルを HDFS 上のホームディレクトリにコピーしてください。</p>
 <source>
 import java.io.IOException;
@@ -925,16 +925,6 @@ public class idmapreduce{
     }
 }
 </source>
-<p>現在の作業ディレクトリでプログラムをコンパイルします (現在の作業ディレクトリに idmapreduce.class が出力されます。したがって、プログラムを実行する際には “.” をクラスパスに含めます) 。</p>
-<source>
-$ javac -cp pig.jar idmapreduce.java
-</source>
-<p>現在の作業ディレクトリでプログラムを実行します。実行結果については、 Hadoop 上の idout ディレクトリを見てください。</p>
-<source>
-Unix:   $ java -cp pig.jar:.:$HADOOPDIR idmapreduce
-Cygwin: $ java -cp '.;pig.jar;$HADOOPDIR' idmapreduce
-</source>
-
 </section>
 </section>
 
