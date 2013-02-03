@@ -86,10 +86,10 @@ fs -ls file-y
 <!-- +++++++++++++++++++++++++++++++++++++++ -->
      <section id="sh">
    <title>sh</title>
-   <p>Invokes any sh shell command from within a Pig script or the Grunt shell.</p>
+   <p>Pig スクリプトか Grunt シェルから sh シェルのコマンドを実行します。</p>
    
    <section>
-   <title>Syntax </title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -99,7 +99,7 @@ fs -ls file-y
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
@@ -107,6 +107,7 @@ fs -ls file-y
             </td>
             <td>
                <p>The sh shell command.</p>
+               <p>sh シェルのコマンド。</p>
             </td>
          </tr>
                <tr>
@@ -114,7 +115,7 @@ fs -ls file-y
                <p>subcommand_parameters</p>
             </td>
             <td>
-               <p>The sh shell command parameters.</p>
+               <p>sh シェルのコマンドの引数。</p>
             </td>
          </tr>
    </table>
@@ -122,18 +123,15 @@ fs -ls file-y
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the sh command to invoke any sh shell command from within a Pig script or Grunt shell.</p>
+   <title>用法</title>
+   <p>sh コマンドは Pig スクリプトか Grunt シェルから sh シェルのコマンドを実行するために使います。</p>
    
-<p> 
- Note that only real programs can be run form the sh command. Commands such as cd are not programs 
- but part of the shell environment and as such cannot be executed unless the user invokes the shell explicitly, like "bash cd".
-</p>
+<p>sh コマンドで実行できるのは外部プログラムだけです。 cd のようなコマンドはプログラムではなくシェル環境の一部であるため、ユーザが明示的にシェルを起動しない限り実行できません。たとえば "bash -c cd" のようにです。</p>
    </section>
    
    <section>
-   <title>Example</title>
-   <p>In this example the ls command is invoked.</p>
+   <title>使用例</title>
+   <p>次の例では ls コマンドを実行しています。</p>
 <source>
 grunt> sh ls 
 bigdata.conf 
