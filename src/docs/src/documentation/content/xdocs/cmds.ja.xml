@@ -31,10 +31,10 @@
 <!-- +++++++++++++++++++++++++++++++++++++++ -->
       <section id="fs">
    <title>fs</title>
-   <p>Invokes any FsShell command from within a Pig script or the Grunt shell.</p>
+   <p>Pig スクリプトか Grunt シェルから FsShell コマンドを実行します。</p>
    
    <section>
-   <title>Syntax </title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -44,14 +44,14 @@
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
       <tr>
             <td>
                <p>subcommand</p>
             </td>
             <td>
-               <p>The FsShell command.</p>
+               <p>FsShell コマンド。</p>
             </td>
          </tr>
                <tr>
@@ -59,7 +59,7 @@
                <p>subcommand_parameters</p>
             </td>
             <td>
-               <p>The FsShell command parameters.</p>
+               <p>FsShell コマンドの引数。</p>
             </td>
          </tr>
    </table>
@@ -67,17 +67,13 @@
    </section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the fs command to invoke any FsShell command from within a Pig script or Grunt shell. 
-   The fs command greatly extends the set of supported file system commands and the capabilities
-   supported for existing commands such as ls that will now support globing. For a complete list of
-   FsShell commands, see 
-   <a href="http://hadoop.apache.org/common/docs/current/file_system_shell.html">File System Shell Guide</a></p>
+   <title>用法</title>
+   <p>fs コマンドは Pig スクリプトか Grunt シェルから FsShell コマンドを実行するために使います。 fs コマンドは多くのファイルシステムコマンドをサポートするようになりました。また、既存のコマンドも強化されています。たとえば ls はグロブをサポートするようになりました。 FsShell コマンドの完全なリストについては <a href="http://hadoop.apache.org/docs/r0.20.2/hdfs_shell.html">File System Shell Guide</a> を見てください。</p>
    </section>
    
    <section>
-   <title>Examples</title>
-   <p>In these examples a directory is created, a file is copied, a file is listed.</p>
+   <title>使用例</title>
+   <p>次の例では、ディレクトリを作り、ファイルをコピーし、ファイルを一覧しています。</p>
 <source>
 fs -mkdir /tmp
 fs -copyFromLocal file-x file-y
