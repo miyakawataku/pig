@@ -45,7 +45,7 @@ See http://forrest.apache.org/docs/linking.html for more info
     <funct label="組み込み関数"	href="func.html" />
     <udf label="ユーザ定義関数"  href="udf.html" />
     <control label="制御構造"	href="cont.html" />
-    <cmds label="Shell and Utililty Commands" href="cmds.html" />
+    <cmds label="シェルコマンドとユーティリティコマンド" href="cmds.html" />
     <perform label="Performance and Efficiency" href="perf.html" />
     <test label="Testing and Diagnostics" href="test.html" />
     <index label="Index" href="pig-index.html" />
