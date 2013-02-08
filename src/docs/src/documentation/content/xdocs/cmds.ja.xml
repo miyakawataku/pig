@@ -147,15 +147,15 @@ grunt>
  <!-- ======================================================== -->         
         
    <section id="utillity-cmds">
-   <title>Utility Commands</title>
+   <title>ユーティリティコマンド</title>
    
    <!-- +++++++++++++++++++++++++++++++++++++++ -->
   <section id="exec">
    <title>exec</title>
-   <p>Run a Pig script.</p>
+   <p>Pig スクリプトを実行します。</p>
    
    <section>
-   <title>Syntax</title>
+   <title>文法</title>
    <table>
        <tr>
             <td>
@@ -165,7 +165,7 @@ grunt>
    </table></section>
    
    <section>
-   <title>Terms</title>
+   <title>定義</title>
    <table>
     
         <tr>
@@ -173,7 +173,7 @@ grunt>
                <p>–param param_name = param_value</p>
             </td>
             <td>
-               <p>See <a href="cont.html#Parameter-Sub">Parameter Substitution</a>.</p>
+               <p><a href="cont.html#parameter-sub">パラメータ置換</a>を参照してください。</p>
             </td>
         </tr>
 
@@ -182,7 +182,7 @@ grunt>
                <p>–param_file file_name</p>
             </td>
             <td>
-               <p>See <a href="cont.html#Parameter-Sub">Parameter Substitution</a>. </p>
+               <p><a href="cont.html#parameter-sub">パラメータ置換</a>を参照してください。</p>
             </td>
         </tr>
    
@@ -191,7 +191,7 @@ grunt>
                <p>script</p>
             </td>
             <td>
-               <p>The name of a Pig script.</p>
+               <p>Pig スクリプトの名前。</p>
             </td>
          </tr>
          
@@ -199,15 +199,15 @@ grunt>
    </table></section>
    
    <section>
-   <title>Usage</title>
-   <p>Use the exec command to run a Pig script with no interaction between the script and the Grunt shell (batch mode). Aliases defined in the script are not available to the shell; however, the files produced as the output of the script and stored on the system are visible after the script is run. Aliases defined via the shell are not available to the script. </p>
-   <p>With the exec command, store statements will not trigger execution; rather, the entire script is parsed before execution starts. Unlike the run command, exec does not change the command history or remembers the handles used inside the script. Exec without any parameters can be used in scripts to force execution up to the point in the script where the exec occurs. </p>
-   <p id="exec-debug">For comparison, see the <a href="#run">run</a> command. Both the exec and run commands are useful for debugging because you can modify a Pig script in an editor and then rerun the script in the Grunt shell without leaving the shell. Also, both commands promote Pig script modularity as they allow you to reuse existing components.</p>
+   <title>用法</title>
+   <p>exec コマンドは Grunt シェルから非対話的に、つまりバッチモードで Pig スクリプトを実行するために使います。スクリプト中で定義した別名は、シェルからは見えません。しかし、スクリプトの出力として保存されたファイルは、スクリプトの実行が終わった後も、シェルからアクセスできます。シェルで定義した別名をスクリプト中から参照することはできません。</p>
+   <p>exec コマンドを使った場合、スクリプト中の STORE 文が読み込まれた所で、即座に処理が実行されるということはありません。スクリプト全体が読み込まれた後に、はじめて実行されます。 run コマンドとは異なり、 exec はコマンド履歴を変更しません。 or remembers the handles used inside the script. スクリプト中で、引数なしの exec コマンドを使った場合、そこまでの処理を強制的に実行します。</p>
+   <p id="exec-debug">比較のために <a href="#run">run</a> コマンドの解説も見てください。どちらのコマンドも、 Pig スクリプトをデバッグするのに役立ちます。 Grunt シェルを起動したまま Pig スクリプトをエディタで編集して、シェルからスクリプトを再実行できるからです。またどちらのコマンドも、 Pig スクリプトの部品としての再利用を可能とするので、モジュール性を高めるのに役立ちます。</p>
    </section>
    
    <section>
-   <title>Examples</title>
-   <p>In this example the script is displayed and run.</p>
+   <title>使用例</title>
+   <p>次の例では、スクリプトを表示して、その後に実行しています。</p>
 
 <source>
 grunt&gt; cat myscript.pig
@@ -221,7 +221,7 @@ grunt&gt; exec myscript.pig
 (holly,24,3.27)
 </source>
 
-   <p>In this example parameter substitution is used with the exec command.</p>
+   <p>次の例では、 exec コマンドでパラメータ置換を行なっています。</p>
 <source>
 grunt&gt; cat myscript.pig
 a = LOAD 'student' AS (name, age, gpa);
@@ -232,7 +232,7 @@ STORE b into '$out';
 grunt&gt; exec –param out=myoutput myscript.pig
 </source>
 
-      <p>In this example multiple parameters are specified.</p>
+      <p>次の例では、複数のパラメータを指定しています。</p>
 <source>
 grunt&gt; exec –param p1=myparam1 –param p2=myparam2 myscript.pig
 </source>
